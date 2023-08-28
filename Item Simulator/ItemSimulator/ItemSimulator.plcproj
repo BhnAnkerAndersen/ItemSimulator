@@ -79,6 +79,9 @@
     <Compile Include="POUs\TCP_IP\PRG_TCPIP.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\TimeStampRegistry\FBs\FB_SystemTime.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\TimeStampRegistry\PRG_ReadTime.TcPOU">
       <SubType>Code</SubType>
     </Compile>

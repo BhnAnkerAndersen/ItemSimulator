@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FB_SystemTime" Id="{f3c53bbb-3877-4acf-a898-caf544bcf94a}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_SystemTime
+VAR
+	fbSystemTime			: GETSYSTEMTIME;	//System time delta calculation
+	fbNTTime	 			: NT_GetTime;		//Local time on PLC timestamp
+    timeAsTimeStruct		: TIMESTRUCT;		//Converting time into timestruct
+	bBusy           		: BOOL;				//Checking block for busy	
+    bError          		: BOOL;				//Checking block for error
+    syncTimer       		: TON;				//Resetting time sync.
+END_VAR
+VAR_OUTPUT
+	
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Property Name="P_Time" Id="{38f2453a-65fa-4802-88a5-046459a69fa0}">
+      <Declaration><![CDATA[PROPERTY P_Time : STRING]]></Declaration>
+      <Get Name="Get" Id="{3f530999-62d4-4797-88dd-afdd2312eaeb}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[//Get local time from windows
+fbNTTime(
+	START:=syncTimer.Q,
+	TMOUT:=DEFAULT_ADS_TIMEOUT,
+	TIMESTR=>timeAsTimeStruct,
+	BUSY=>bBusy,
+	ERR=>bError);
+
+//Save time as String format
+P_Time:= SYSTEMTIME_TO_string(timeAsTimeStruct);
+
+
+syncTimer(IN:=NOT bBusy AND NOT bError, PT:=T#1MS);
+]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <LineIds Name="FB_SystemTime">
+      <LineId Id="9" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_SystemTime.P_Time.Get">
+      <LineId Id="5" Count="12" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

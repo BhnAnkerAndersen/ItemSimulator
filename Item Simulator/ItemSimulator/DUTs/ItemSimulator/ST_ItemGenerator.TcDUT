@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <DUT Name="ST_ItemGenerator" Id="{721f0260-6e55-4103-9d32-ded2b0beab35}">
+    <Declaration><![CDATA[TYPE ST_ItemGenerator :
+STRUCT
+	bEnableGenerator		:BOOL;
+	nNumberOfPulses			:UINT;
+	tTimeOnPulse			:TIME;
+	tTimeOffPulse			:TIME;
+	bOutput					:BOOL;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

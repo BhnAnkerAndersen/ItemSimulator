@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <GVL Name="GVL_ItemSimulator" Id="{e40ab862-033c-4d96-8e2d-9d2cda363078}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL
+	bSignalOut	AT %Q* 			:BOOL;
+	bSignalIn	AT %I* 			:BOOL;
+	bResetRegistry				:BOOL;
+END_VAR
+
+]]></Declaration>
+  </GVL>
+</TcPlcObject>

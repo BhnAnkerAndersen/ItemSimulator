@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <DUT Name="E_ItemGenerator" Id="{abef1e45-d8af-483f-b4da-8cd4b7762be8}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE E_ItemGenerator :
+(
+	Idle 						:= 0,
+	ItemGenerator1 				:= 1,
+	ItemGenerator2 				:= 2,
+	ItemGenerator3 				:= 3,
+	ItemGenerator4 				:= 4,
+	ItemGenerator5 				:= 5,
+	ItemGenerator6 				:= 6,
+	ItemGenerator7 				:= 7,
+	ItemGenerator8 				:= 8,
+	ItemGenerator9 				:= 9,
+	ItemGenerator10 			:= 10,
+	ItemGeneratorFromRegistry	:= 11
+	
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <Task Name="TCPTask" Id="{41e240b7-13c3-4f24-b3a8-2fa845fe414b}">
+    <!--CycleTime in micro seconds.-->
+    <CycleTime>2000</CycleTime>
+    <Priority>1</Priority>
+    <PouCall>
+      <Name>TCPCom</Name>
+    </PouCall>
+    <TaskFBGuid>{0ba123c1-64c6-4d6a-b64b-ba9f57c01924}</TaskFBGuid>
+    <Fb_init>{1d41a3dd-2922-4c39-ac23-755c173a3abf}</Fb_init>
+    <Fb_exit>{89f17df6-77c6-4057-a8fd-6cfa4cc8c991}</Fb_exit>
+    <CycleUpdate>{95a46fa5-0788-4413-b9cc-714bb3dedc85}</CycleUpdate>
+    <PostCycleUpdate>{799841ab-6540-41eb-a29f-3a85eb7a5832}</PostCycleUpdate>
+  </Task>
+</TcPlcObject>

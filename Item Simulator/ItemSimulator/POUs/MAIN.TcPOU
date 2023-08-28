@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="MAIN" Id="{4d940c54-4155-4073-8351-63edeb64b412}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM MAIN
+VAR
+END_VAR
+
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[PRG_Simulator();
+//PRG_CSVRead();
+//PRG_CSVWrite();
+
+PRG_ReadTime();
+
+//Reset commands
+GVL_ItemSimulator.bResetRegistry :=FALSE;
+GVL_Timestamp.bResetRegistry := FALSE;]]></ST>
+    </Implementation>
+    <LineIds Name="MAIN">
+      <LineId Id="40" Count="0" />
+      <LineId Id="62" Count="1" />
+      <LineId Id="68" Count="0" />
+      <LineId Id="74" Count="0" />
+      <LineId Id="79" Count="0" />
+      <LineId Id="55" Count="0" />
+      <LineId Id="54" Count="0" />
+      <LineId Id="73" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

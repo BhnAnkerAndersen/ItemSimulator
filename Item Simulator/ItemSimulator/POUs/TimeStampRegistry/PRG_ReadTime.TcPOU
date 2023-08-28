@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="PRG_ReadTime" Id="{41809a93-5b53-47f0-b8b5-05c700b2cea3}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM PRG_ReadTime
+VAR
+	fbSystemTimeTest		: GETSYSTEMTIME;
+	timeAsFileTimeCamera	: T_FILETIME;
+	timeAsFileTimeSensor	: T_FILETIME;
+    fbSystemTime 			: NT_GetTime;
+    timeAsTimeStruct		: TIMESTRUCT;
+    timeAsString			: STRING;
+	timeAsDT 				: DT;
+	bBusy           		: BOOL;
+    bError          		: BOOL;
+    nErrID          		: UDINT;
+    syncTimer       		: TON;
+ 
+	//Delta time in ms from Digital sensor to camera TCP
+	aDeltaTimeMS			: ARRAY[0..GVL_Constant.ITEM_ARRAY_SIZE] OF UDINT;
+	CameraTCPMS				: TIMESTRUCT;
+	DigitalSensorMS			: TIMESTRUCT;
+
+	//Digital input sensor
+	rDigitalSensorIn		: R_TRIG;
+	iDigitalSensor			: INT;
+	aDigitalSensorTime		: ARRAY[0..ITEM_ARRAY_SIZE] OF STRING;
+	iNDigitalSensor			: INT;
+
+	
+	//Camera TCP port
+	rTCPPortCamera		:R_TRIG;
+	iTCPPortCamera		:INT;
+	aTCPPortCameraTime	:ARRAY[0..ITEM_ARRAY_SIZE] OF STRING;
+	iNTCPCamera			:INT;
+END_VAR
+
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[//Get local time of windows
+fbSystemTime(
+	START:=syncTimer.Q,
+	TMOUT:=DEFAULT_ADS_TIMEOUT,
+	TIMESTR=>timeAsTimeStruct,
+	BUSY=>bBusy,
+	ERR=>bError);
+
+//Save time as String format
+timeAsString := SYSTEMTIME_TO_string(timeAsTimeStruct);
+
+
+syncTimer(IN:=NOT bBusy AND NOT bError, PT:=T#1MS);
+
+
+timeAsDT:= FILETIME_TO_DT(timeAsFileTimeSensor);
+
+
+//Call actions
+A_DigitalInputSignal();
+
+A_CameraTCPPortSignal();
+//A_PCTCPPortSignal();
+
+
+]]></ST>
+    </Implementation>
+    <Action Name="A_CameraTCPPortSignal" Id="{d80c8ca5-7ed2-4ea6-95b3-151df621bb7a}">
+      <Implementation>
+        <ST><![CDATA[rTCPPortCamera(CLK:=PRG_TCPIP.fbTcpCamera.ReadComplete.Q);
+
+IF rTCPPortCamera.Q THEN
+	aTCPPortCameraTime[iTCPPortCamera] := timeAsString;
+	fbSystemTimeTest(
+    	timeLoDW=>timeAsFileTimeCamera.dwLowDateTime,
+    	timeHiDW=>timeAsFileTimeCamera.dwHighDateTime);
+	//Calculate delta time
+	aDeltaTimeMS[iTCPPortCamera] :=  (F_CXSubTimeStamp(
+										nTimeStampHiDW_A:=timeAsFileTimeCamera.dwHighDateTime,
+										nTimeStampHiDW_B:=timeAsFileTimeSensor.dwHighDateTime,
+										nTimeStampLoDW_A:=timeAsFileTimeCamera.dwLowDateTime,
+										nTimeStampLoDW_B:=timeAsFileTimeSensor.dwLowDateTime)/1000);
+	iTCPPortCamera := iTCPPortCamera +1;
+END_IF
+
+IF GVL_Timestamp.bResetRegistry THEN
+	FOR iNTCPCamera := 0 TO GVL_Constant.ITEM_ARRAY_SIZE DO 
+		aTCPPortCameraTime[iNTCPCamera] := '';
+		aDeltaTimeMS[iNTCPCamera] := 0;
+	END_FOR
+	iTCPPortCamera := 0;
+END_IF
+
+
+
+]]></ST>
+      </Implementation>
+    </Action>
+    <Action Name="A_DigitalInputSignal" Id="{92127c4d-9996-4332-98a9-9928bfc52d4a}">
+      <Implementation>
+        <ST><![CDATA[rDigitalSensorIn(CLK:=GVL_ItemSimulator.bSignalIn);
+
+IF rDigitalSensorIn.Q THEN
+	aDigitalSensorTime[iDigitalSensor] := timeAsString;
+	fbSystemTimeTest(
+    	timeLoDW=>timeAsFileTimeSensor.dwLowDateTime,
+    	timeHiDW=>timeAsFileTimeSensor.dwHighDateTime);
+	iDigitalSensor := iDigitalSensor +1;
+END_IF
+
+IF GVL_Timestamp.bResetRegistry THEN
+	FOR iNDigitalSensor := 0 TO GVL_Constant.ITEM_ARRAY_SIZE DO 
+		aDigitalSensorTime[iNDigitalSensor] := '';
+	END_FOR
+	iDigitalSensor := 0;
+END_IF]]></ST>
+      </Implementation>
+    </Action>
+    <LineIds Name="PRG_ReadTime">
+      <LineId Id="98" Count="0" />
+      <LineId Id="102" Count="0" />
+      <LineId Id="170" Count="0" />
+      <LineId Id="169" Count="0" />
+      <LineId Id="171" Count="2" />
+      <LineId Id="158" Count="0" />
+      <LineId Id="103" Count="1" />
+      <LineId Id="219" Count="0" />
+      <LineId Id="167" Count="0" />
+      <LineId Id="105" Count="0" />
+      <LineId Id="213" Count="0" />
+      <LineId Id="223" Count="0" />
+      <LineId Id="230" Count="0" />
+      <LineId Id="215" Count="0" />
+      <LineId Id="157" Count="0" />
+      <LineId Id="106" Count="1" />
+      <LineId Id="152" Count="0" />
+      <LineId Id="108" Count="0" />
+      <LineId Id="153" Count="0" />
+      <LineId Id="109" Count="1" />
+      <LineId Id="62" Count="0" />
+    </LineIds>
+    <LineIds Name="PRG_ReadTime.A_CameraTCPPortSignal">
+      <LineId Id="2" Count="3" />
+      <LineId Id="22" Count="1" />
+      <LineId Id="14" Count="2" />
+      <LineId Id="24" Count="3" />
+      <LineId Id="6" Count="0" />
+      <LineId Id="1" Count="0" />
+      <LineId Id="8" Count="3" />
+      <LineId Id="17" Count="0" />
+      <LineId Id="12" Count="1" />
+      <LineId Id="7" Count="0" />
+      <LineId Id="19" Count="0" />
+      <LineId Id="18" Count="0" />
+      <LineId Id="20" Count="1" />
+    </LineIds>
+    <LineIds Name="PRG_ReadTime.A_DigitalInputSignal">
+      <LineId Id="1" Count="0" />
+      <LineId Id="3" Count="0" />
+      <LineId Id="2" Count="0" />
+      <LineId Id="4" Count="0" />
+      <LineId Id="15" Count="1" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="6" Count="0" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="8" Count="0" />
+      <LineId Id="7" Count="0" />
+      <LineId Id="11" Count="1" />
+      <LineId Id="9" Count="0" />
+      <LineId Id="13" Count="0" />
+      <LineId Id="10" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

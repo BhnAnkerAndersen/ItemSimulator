@@ -1,0 +1,451 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FB_ItemGenerator" Id="{eac0d150-9a09-4cac-8189-20042b570512}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_ItemGenerator
+VAR_INPUT
+	bStart				:BOOL;
+	bStop				:BOOL;
+	
+	stItemGen1			:ST_ItemGenerator;
+	stItemGen2			:ST_ItemGenerator;
+	stItemGen3			:ST_ItemGenerator;
+	stItemGen4			:ST_ItemGenerator;
+	stItemGen5			:ST_ItemGenerator;
+	stItemGen6			:ST_ItemGenerator;
+	stItemGen7			:ST_ItemGenerator;
+	stItemGen8			:ST_ItemGenerator;
+	stItemGen9			:ST_ItemGenerator;
+	stItemGen10			:ST_ItemGenerator;
+	stItemGenFromReg	:ST_ItemGenerator;
+	
+END_VAR
+VAR
+	//Item generators
+	fbItemGen1			:FB_ClockPulsNumber;
+	fbItemGen2			:FB_ClockPulsNumber;
+	fbItemGen3			:FB_ClockPulsNumber;
+	fbItemGen4			:FB_ClockPulsNumber;
+	fbItemGen5			:FB_ClockPulsNumber;
+	fbItemGen6			:FB_ClockPulsNumber;
+	fbItemGen7			:FB_ClockPulsNumber;
+	fbItemGen8			:FB_ClockPulsNumber;
+	fbItemGen9			:FB_ClockPulsNumber;
+	fbItemGen10			:FB_ClockPulsNumber;
+	fbItemGenFromReg	:FB_ClockPulsNumber;
+	
+	//Sequence
+	bInit				:BOOL := TRUE;
+	eState				:E_ItemGenerator;
+	
+END_VAR
+
+VAR_OUTPUT
+	bOutput				:BOOL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF bInit THEN
+	eState := E_ItemGenerator.Idle;
+	bInit := FALSE;
+END_IF
+
+
+CASE eState OF
+	
+	// Idle
+	E_ItemGenerator.Idle:
+	
+		// Reset generators
+		fbItemGen1(
+			bTrig := FALSE,
+			bStop := TRUE,
+			bPuls => bOutput);
+			
+		fbItemGen2(
+			bTrig := FALSE,
+			bStop := TRUE,
+			bPuls => bOutput);
+			
+		fbItemGen3(
+			bTrig := FALSE,
+			bStop := TRUE,
+			bPuls => bOutput);
+			
+		fbItemGen4(
+			bTrig := FALSE,
+			bStop := TRUE,
+			bPuls => bOutput);
+			
+		fbItemGen5(
+			bTrig := FALSE,
+			bStop := TRUE,
+			bPuls => bOutput);
+			
+		fbItemGen6(
+			bTrig := FALSE,
+			bStop := TRUE,
+			bPuls => bOutput);
+			
+		fbItemGen7(
+			bTrig := FALSE,
+			bStop := TRUE,
+			bPuls => bOutput);
+			
+		fbItemGen8(
+			bTrig := FALSE,
+			bStop := TRUE,
+			bPuls => bOutput);
+			
+		fbItemGen9(
+			bTrig := FALSE,
+			bStop := TRUE,
+			bPuls => bOutput);
+			
+		fbItemGen10(
+			bTrig := FALSE,
+			bStop := TRUE,
+			bPuls => bOutput);
+			
+		fbItemGenFromReg(
+			bTrig := FALSE,
+			bStop := TRUE,
+			bPuls => bOutput);
+	
+		IF bStart THEN
+			IF stItemGen1.bEnableGenerator THEN
+				eState := E_ItemGenerator.ItemGenerator1;
+			ELSE
+				eState := E_ItemGenerator.ItemGeneratorFromRegistry;
+			END_IF
+		END_IF
+		
+		
+		
+	// Item generator 1
+	E_ItemGenerator.ItemGenerator1:
+	
+		// If generator is enabled start the pulses
+		IF NOT bStop THEN 
+
+			fbItemGen1(
+				bTrig			:= stItemGen1.bEnableGenerator, 
+				bStop			:= FALSE,
+				uiNo 			:= stItemGen1.nNumberOfPulses,  
+				tPulsLengthOn 	:= stItemGen1.tTimeOnPulse,
+				tPulsLengthOff 	:= stItemGen1.tTimeOffPulse,
+				bPuls			=> bOutput);
+				
+			// When all pulses have been made, go to generator 2
+			IF fbItemGen1.uiCount >= (fbItemGen1.uiNo+1) THEN
+				eState := E_ItemGenerator.ItemGenerator2;
+			END_IF
+			
+		// If generator is not enabled, go to idle
+		ELSE
+			eState := E_ItemGenerator.Idle;
+		END_IF;
+		
+		
+		
+	// Item generator 2
+	E_ItemGenerator.ItemGenerator2:
+	
+		// If generator is enabled start the pulses
+		IF stItemGen2.bEnableGenerator AND NOT bStop THEN 
+
+			fbItemGen2(
+				bTrig			:= stItemGen2.bEnableGenerator, 
+				bStop			:= FALSE,
+				uiNo 			:= stItemGen2.nNumberOfPulses, 
+				tPulsLengthOn 	:= stItemGen2.tTimeOnPulse,
+				tPulsLengthOff	:= stItemGen2.tTimeOffPulse,
+				bPuls			=> bOutput);
+				
+			// When all pulses have been made, go to generator 3
+			IF fbItemGen2.uiCount >= (fbItemGen2.uiNo+1) THEN
+				eState := E_ItemGenerator.ItemGenerator3;
+			END_IF
+			
+		// If generator is not enabled, go to idle
+		ELSE
+			eState := E_ItemGenerator.Idle;
+		END_IF;
+		
+		
+		
+		
+	// Item generator 3
+	E_ItemGenerator.ItemGenerator3:
+	
+		// If generator is enabled start the pulses
+		IF stItemGen3.bEnableGenerator AND NOT bStop THEN 
+
+			fbItemGen3(
+				bTrig			:= stItemGen3.bEnableGenerator, 
+				bStop			:= FALSE,
+				uiNo 			:= stItemGen3.nNumberOfPulses, 
+				tPulsLengthOn 	:= stItemGen3.tTimeOnPulse,
+				tPulsLengthOff 	:= stItemGen3.tTimeOffPulse,
+				bPuls			=> bOutput);
+				
+			// When all pulses have been made, go to generator 4
+			IF fbItemGen3.uiCount >= (fbItemGen3.uiNo+1) THEN
+				eState := E_ItemGenerator.ItemGenerator4;
+			END_IF
+			
+		// If generator is not enabled, go to idle
+		ELSE
+			eState := E_ItemGenerator.Idle;
+		END_IF;
+		
+		
+	// Item generator 4
+	E_ItemGenerator.ItemGenerator4:
+	
+		// If generator is enabled start the pulses
+		IF stItemGen4.bEnableGenerator AND NOT bStop THEN 
+
+			fbItemGen4(
+				bTrig			:= stItemGen4.bEnableGenerator, 
+				bStop			:= FALSE,
+				uiNo 			:= stItemGen4.nNumberOfPulses, 
+				tPulsLengthOn 	:= stItemGen4.tTimeOnPulse,
+				tPulsLengthOff 	:= stItemGen4.tTimeOffPulse,
+				bPuls			=> bOutput);
+				
+			// When all pulses have been made, go to generator 5
+			IF fbItemGen4.uiCount >= (fbItemGen4.uiNo+1) THEN
+				eState := E_ItemGenerator.ItemGenerator5;
+			END_IF
+			
+		// If generator is not enabled, go to idle
+		ELSE
+			eState := E_ItemGenerator.Idle;
+		END_IF;
+		
+		
+	// Item generator 5
+	E_ItemGenerator.ItemGenerator5:
+	
+		// If generator is enabled start the pulses
+		IF stItemGen5.bEnableGenerator AND NOT bStop THEN 
+
+			fbItemGen5(
+				bTrig			:= stItemGen5.bEnableGenerator, 
+				bStop			:= FALSE,
+				uiNo 			:= stItemGen5.nNumberOfPulses, 
+				tPulsLengthOn 	:= stItemGen5.tTimeOnPulse,
+				tPulsLengthOff 	:= stItemGen5.tTimeOffPulse,
+				bPuls			=> bOutput);
+				
+			// When all pulses have been made, go to generator 6
+			IF fbItemGen5.uiCount >= (fbItemGen5.uiNo+1) THEN
+				eState := E_ItemGenerator.ItemGenerator6;
+			END_IF
+			
+		// If generator is not enabled, go to idle
+		ELSE
+			eState := E_ItemGenerator.Idle;
+		END_IF;
+		
+	
+	// Item generator 6
+	E_ItemGenerator.ItemGenerator6:
+	
+		// If generator is enabled start the pulses
+		IF stItemGen6.bEnableGenerator AND NOT bStop THEN 
+
+			fbItemGen6(
+				bTrig			:= stItemGen6.bEnableGenerator, 
+				bStop			:= FALSE,
+				uiNo 			:= stItemGen6.nNumberOfPulses, 
+				tPulsLengthOn 	:= stItemGen6.tTimeOnPulse,
+				tPulsLengthOff 	:= stItemGen6.tTimeOffPulse,
+				bPuls			=> bOutput);
+				
+			// When all pulses have been made, go to generator 7
+			IF fbItemGen6.uiCount >= (fbItemGen6.uiNo+1) THEN
+				eState := E_ItemGenerator.ItemGenerator7;
+			END_IF
+			
+		// If generator is not enabled, go to idle
+		ELSE
+			eState := E_ItemGenerator.Idle;
+		END_IF;
+		
+		
+	// Item generator 7
+	E_ItemGenerator.ItemGenerator7:
+	
+		// If generator is enabled start the pulses
+		IF stItemGen7.bEnableGenerator AND NOT bStop THEN 
+
+			fbItemGen7(
+				bTrig			:= stItemGen7.bEnableGenerator, 
+				bStop			:= FALSE,
+				uiNo 			:= stItemGen7.nNumberOfPulses, 
+				tPulsLengthOn 	:= stItemGen7.tTimeOnPulse,
+				tPulsLengthOff 	:= stItemGen7.tTimeOffPulse,
+				bPuls			=> bOutput);
+				
+			// When all pulses have been made, go to generator 8
+			IF fbItemGen7.uiCount >= (fbItemGen7.uiNo+1) THEN
+				eState := E_ItemGenerator.ItemGenerator8;
+			END_IF
+			
+		// If generator is not enabled, go to idle
+		ELSE
+			eState := E_ItemGenerator.Idle;
+		END_IF;
+		
+		
+	// Item generator 8
+	E_ItemGenerator.ItemGenerator8:
+	
+		// If generator is enabled start the pulses
+		IF stItemGen8.bEnableGenerator AND NOT bStop THEN 
+
+			fbItemGen8(
+				bTrig			:= stItemGen8.bEnableGenerator, 
+				bStop			:= FALSE,
+				uiNo 			:= stItemGen8.nNumberOfPulses, 
+				tPulsLengthOn 	:= stItemGen8.tTimeOnPulse,
+				tPulsLengthOff 	:= stItemGen8.tTimeOffPulse,
+				bPuls			=> bOutput);
+				
+			// When all pulses have been made, go to generator 9
+			IF fbItemGen8.uiCount >= (fbItemGen8.uiNo+1) THEN
+				eState := E_ItemGenerator.ItemGenerator9;
+			END_IF
+			
+		// If generator is not enabled, go to idle
+		ELSE
+			eState := E_ItemGenerator.Idle;
+		END_IF;
+		
+		
+	// Item generator 9
+	E_ItemGenerator.ItemGenerator9:
+	
+		// If generator is enabled start the pulses
+		IF stItemGen9.bEnableGenerator AND NOT bStop THEN 
+
+			fbItemGen9(
+				bTrig			:= stItemGen9.bEnableGenerator, 
+				bStop			:= FALSE,
+				uiNo 			:= stItemGen9.nNumberOfPulses, 
+				tPulsLengthOn 	:= stItemGen9.tTimeOnPulse,
+				tPulsLengthOff 	:= stItemGen9.tTimeOffPulse, 
+				bPuls			=> bOutput);
+				
+			// When all pulses have been made, go to generator 10
+			IF fbItemGen9.uiCount >= (fbItemGen9.uiNo+1) THEN
+				eState := E_ItemGenerator.ItemGenerator10;
+			END_IF
+			
+		// If generator is not enabled, go to idle
+		ELSE
+			eState := E_ItemGenerator.Idle;
+		END_IF;
+		
+		
+	// Item generator 10
+	E_ItemGenerator.ItemGenerator10:
+	
+		// If generator is enabled start the pulses
+		IF stItemGen10.bEnableGenerator AND NOT bStop THEN 
+
+			fbItemGen10(
+				bTrig			:= stItemGen10.bEnableGenerator, 
+				bStop			:= FALSE,
+				uiNo 			:= stItemGen10.nNumberOfPulses, 
+				tPulsLengthOn 	:= stItemGen10.tTimeOnPulse,
+				tPulsLengthOff 	:= stItemGen10.tTimeOffPulse, 
+				bPuls			=> bOutput);
+				
+			// When all pulses have been made, go to Idle
+			IF fbItemGen10.uiCount >= (fbItemGen10.uiNo+1) THEN
+				eState := E_ItemGenerator.Idle;
+			END_IF
+			
+		// If generator is not enabled, go to idle
+		ELSE
+			eState := E_ItemGenerator.Idle;
+		END_IF;
+		
+		
+	// Item generator from registry
+	E_ItemGenerator.ItemGeneratorFromRegistry:
+	
+		// If generator is enabled start the pulses
+		IF stItemGenFromReg.bEnableGenerator AND NOT bStop THEN 
+
+			fbItemGenFromReg(
+				bTrig			:= stItemGenFromReg.bEnableGenerator, 
+				bStop			:= FALSE,
+				uiNo 			:= stItemGenFromReg.nNumberOfPulses, 
+				tPulsLengthOn 	:= stItemGenFromReg.tTimeOnPulse,
+				tPulsLengthOff 	:= stItemGenFromReg.tTimeOffPulse, 
+				bPuls			=> bOutput);
+				
+			// When all pulses have been made, go to Idle
+			IF fbItemGenFromReg.uiCount >= (fbItemGenFromReg.uiNo+1) THEN
+				eState := E_ItemGenerator.Idle;
+			END_IF
+			
+		// If generator is not enabled, go to idle
+		ELSE
+			eState := E_ItemGenerator.Idle;
+		END_IF;
+		
+END_CASE
+bstart := FALSE;
+bStop := FALSE;
+]]></ST>
+    </Implementation>
+    <LineIds Name="FB_ItemGenerator">
+      <LineId Id="45" Count="15" />
+      <LineId Id="447" Count="0" />
+      <LineId Id="449" Count="2" />
+      <LineId Id="448" Count="0" />
+      <LineId Id="452" Count="0" />
+      <LineId Id="454" Count="2" />
+      <LineId Id="453" Count="0" />
+      <LineId Id="457" Count="0" />
+      <LineId Id="459" Count="2" />
+      <LineId Id="458" Count="0" />
+      <LineId Id="462" Count="0" />
+      <LineId Id="464" Count="2" />
+      <LineId Id="463" Count="0" />
+      <LineId Id="467" Count="0" />
+      <LineId Id="469" Count="2" />
+      <LineId Id="468" Count="0" />
+      <LineId Id="472" Count="0" />
+      <LineId Id="474" Count="2" />
+      <LineId Id="473" Count="0" />
+      <LineId Id="477" Count="0" />
+      <LineId Id="479" Count="2" />
+      <LineId Id="478" Count="0" />
+      <LineId Id="482" Count="0" />
+      <LineId Id="484" Count="2" />
+      <LineId Id="483" Count="0" />
+      <LineId Id="487" Count="0" />
+      <LineId Id="489" Count="2" />
+      <LineId Id="488" Count="0" />
+      <LineId Id="534" Count="0" />
+      <LineId Id="536" Count="2" />
+      <LineId Id="535" Count="0" />
+      <LineId Id="61" Count="1" />
+      <LineId Id="402" Count="0" />
+      <LineId Id="63" Count="0" />
+      <LineId Id="403" Count="2" />
+      <LineId Id="64" Count="254" />
+      <LineId Id="359" Count="1" />
+      <LineId Id="362" Count="21" />
+      <LineId Id="361" Count="0" />
+      <LineId Id="319" Count="2" />
+      <LineId Id="533" Count="0" />
+      <LineId Id="9" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,168 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="PRG_Simulator" Id="{5a8209ee-df9d-4945-b39e-82e246e4b7c3}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM PRG_Simulator
+VAR
+	bInit					:BOOL := TRUE;					//Initialize
+
+	fbItemGenerator			:FB_ItemGenerator;				//FB_ItemGenerator
+	fbItemRegister			:FB_ItemRegister;				//FB_ItemRegister
+
+	bStartGenerator			:BOOL;							// Start the generator
+	bStopGenerator			:BOOL;							// Stop the generator
+
+	bResetRegistry			:BOOL;							// Reset array registry
+
+	stItemGen1 				: ST_ItemGenerator;				// Structure of generators
+	stItemGen2 				: ST_ItemGenerator;
+	stItemGen3 				: ST_ItemGenerator;
+	stItemGen4 				: ST_ItemGenerator;
+	stItemGen5 				: ST_ItemGenerator;
+	stItemGen6 				: ST_ItemGenerator;
+	stItemGen7 				: ST_ItemGenerator;
+	stItemGen8 				: ST_ItemGenerator;
+	stItemGen9 				: ST_ItemGenerator;
+	stItemGen10 			: ST_ItemGenerator;
+	stItemGenFromReg		: ST_ItemGenerator;
+	
+	aItemOnTimeRegistry		: ARRAY[0..GVL_Constant.ITEM_ARRAY_SIZE] OF TIME;		// Array of on time registrys
+	aItemOffTimeRegistry	: ARRAY[0..GVL_Constant.ITEM_ARRAY_SIZE] OF TIME;		// Array of off time registrys
+	nTimeCount				: INT;							// Count of total rising edge registrys
+	osLoadOnTime			: F_TRIG;						// One shot load on time to generator
+	osLoadOffTime			: R_TRIG;						// OIne shot load off time to generator
+	i						: INT;							// Index container for array registrys
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[A_ItemGenerator();
+A_ItemRegistry();
+
+IF GVL_ItemSimulator.bResetRegistry AND NOT bResetRegistry THEN
+	bResetRegistry := TRUE;
+ELSE
+	bResetRegistry := FALSE;
+END_IF]]></ST>
+    </Implementation>
+    <Action Name="A_ItemGenerator" Id="{ea8d61fc-3f43-4c15-b430-7d59dc06e89a}">
+      <Implementation>
+        <ST><![CDATA[IF bInit THEN
+	bInit := FALSE;
+END_IF
+
+//Number of pulses from registry
+stItemGenFromReg.nNumberOfPulses := INT_TO_UINT(nTimeCount);
+
+//One shots for loading on and off time
+osLoadOnTime(CLK:=fbItemGenerator.bOutput);
+osLoadOffTime(CLK:=fbItemGenerator.bOutput);
+
+// Reset index
+IF bResetRegistry OR i > nTimeCount OR bStartGenerator THEN
+	i := 0;
+	stItemGenFromReg.tTimeOnPulse := aItemOnTimeRegistry[i];
+	stItemGenFromReg.tTimeOffPulse := aItemOffTimeRegistry[i+1];
+END_IF;
+
+//On bOutput falling edge
+IF osLoadOnTime.Q AND stItemGenFromReg.bEnableGenerator THEN
+	stItemGenFromReg.tTimeOnPulse := aItemOnTimeRegistry[i];
+END_IF
+
+// On bOutput rising edge
+IF osLoadOffTime.Q AND stItemGenFromReg.bEnableGenerator THEN
+	i := i + 1;
+	stItemGenFromReg.tTimeOffPulse := aItemOffTimeRegistry[i];
+END_IF
+
+
+
+
+
+//Call Item generator program
+fbItemGenerator(
+	bStart:=bStartGenerator,
+	bStop:=bStopGenerator,
+	stItemGen1:=stItemGen1,
+	stItemGen2:=stItemGen2,
+	stItemGen3:=stItemGen3,
+	stItemGen4:=stItemGen4,
+	stItemGen5:=stItemGen5,
+	stItemGen6:=stItemGen6,
+	stItemGen7:=stItemGen7,
+	stItemGen8:=stItemGen8,
+	stItemGen9:=stItemGen9,
+	stItemGen10:=stItemGen10,
+	stItemGenFromReg:=stItemGenFromReg,
+	bOutput=>GVL_ItemSimulator.bSignalOut);
+	
+	
+//Reset start/stop
+bStartGenerator := FALSE;
+bStopGenerator := FALSE;
+]]></ST>
+      </Implementation>
+    </Action>
+    <Action Name="A_ItemRegistry" Id="{912b5aaf-f7c8-4236-8ccf-b7629f092d69}">
+      <Implementation>
+        <ST><![CDATA[fbItemRegister(bSignal:=GVL_ItemSimulator.bSignalIn AND NOT fbItemGenerator.stItemGenFromReg.bEnableGenerator AND PRG_TCPIP.bConnectedCameraRead,
+	bReset:=bResetRegistry,
+	nTimeCount=>nTimeCount,
+	aItemOnTimeRegistry=>aItemOnTimeRegistry,
+	aItemOffTimeRegistry=>aItemOffTimeRegistry);
+	
+// Reset reset registry
+bResetRegistry := FALSE;
+]]></ST>
+      </Implementation>
+    </Action>
+    <LineIds Name="PRG_Simulator">
+      <LineId Id="506" Count="0" />
+      <LineId Id="502" Count="0" />
+      <LineId Id="547" Count="0" />
+      <LineId Id="540" Count="0" />
+      <LineId Id="548" Count="0" />
+      <LineId Id="550" Count="1" />
+      <LineId Id="549" Count="0" />
+    </LineIds>
+    <LineIds Name="PRG_Simulator.A_ItemGenerator">
+      <LineId Id="97" Count="0" />
+      <LineId Id="102" Count="0" />
+      <LineId Id="100" Count="0" />
+      <LineId Id="98" Count="0" />
+      <LineId Id="84" Count="0" />
+      <LineId Id="92" Count="0" />
+      <LineId Id="128" Count="0" />
+      <LineId Id="93" Count="0" />
+      <LineId Id="91" Count="0" />
+      <LineId Id="103" Count="0" />
+      <LineId Id="133" Count="5" />
+      <LineId Id="132" Count="0" />
+      <LineId Id="122" Count="0" />
+      <LineId Id="105" Count="0" />
+      <LineId Id="104" Count="0" />
+      <LineId Id="106" Count="1" />
+      <LineId Id="123" Count="0" />
+      <LineId Id="110" Count="0" />
+      <LineId Id="109" Count="0" />
+      <LineId Id="139" Count="0" />
+      <LineId Id="111" Count="1" />
+      <LineId Id="127" Count="0" />
+      <LineId Id="117" Count="0" />
+      <LineId Id="86" Count="0" />
+      <LineId Id="85" Count="0" />
+      <LineId Id="61" Count="14" />
+      <LineId Id="113" Count="0" />
+      <LineId Id="76" Count="5" />
+      <LineId Id="1" Count="0" />
+    </LineIds>
+    <LineIds Name="PRG_Simulator.A_ItemRegistry">
+      <LineId Id="1" Count="1" />
+      <LineId Id="6" Count="0" />
+      <LineId Id="3" Count="0" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="9" Count="0" />
+      <LineId Id="22" Count="0" />
+      <LineId Id="19" Count="0" />
+      <LineId Id="23" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

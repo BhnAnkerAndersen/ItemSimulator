@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FUN_GetTime" Id="{b63e8ad1-effa-4ffe-8d96-a16a0373355e}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION FUN_GetTime : STRING
+VAR_INPUT
+	stNtTime		:TIMESTRUCT;
+END_VAR
+VAR
+	sTimestamp		:STRING;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// Add hour to timestamp
+sTimestamp := '';
+IF stNtTime.wHour < 10 THEN
+	sTimestamp := CONCAT(sTimestamp,CONCAT('0', UINT_TO_STRING(stNtTime.wHour)));
+ELSE
+	sTimestamp := CONCAT(sTimestamp,UINT_TO_STRING(stNtTime.wHour));
+END_IF
+
+// Add min to timestamp
+sTimestamp := CONCAT(sTimestamp, ':');
+IF stNtTime.wMinute < 10 THEN
+	sTimestamp := CONCAT(sTimestamp,CONCAT('0', UINT_TO_STRING(stNtTime.wMinute)));
+ELSE
+	sTimestamp := CONCAT(sTimestamp,UINT_TO_STRING(stNtTime.wMinute));
+END_IF
+sTimestamp := CONCAT(sTimestamp, ':');
+
+// Add sec to timestamp
+IF stNtTime.wSecond < 10 THEN
+	sTimestamp := CONCAT(sTimestamp,CONCAT('0', UINT_TO_STRING(stNtTime.wSecond)));
+ELSE
+	sTimestamp := CONCAT(sTimestamp,UINT_TO_STRING(stNtTime.wSecond));
+END_IF
+
+// Return time
+FUN_GetTime := sTimestamp;]]></ST>
+    </Implementation>
+    <LineIds Name="FUN_GetTime">
+      <LineId Id="46" Count="0" />
+      <LineId Id="54" Count="0" />
+      <LineId Id="24" Count="4" />
+      <LineId Id="49" Count="0" />
+      <LineId Id="48" Count="0" />
+      <LineId Id="29" Count="6" />
+      <LineId Id="51" Count="0" />
+      <LineId Id="50" Count="0" />
+      <LineId Id="36" Count="3" />
+      <LineId Id="10" Count="0" />
+      <LineId Id="52" Count="0" />
+      <LineId Id="7" Count="0" />
+      <LineId Id="53" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

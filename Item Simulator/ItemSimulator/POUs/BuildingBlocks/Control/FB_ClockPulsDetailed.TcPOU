@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FB_ClockPulsDetailed" Id="{27639378-1dd8-4fbf-8e60-40c39d240a86}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_ClockPulsDetailed
+VAR_INPUT
+	bEnable				:BOOL;		// When TRUE a clock puls is generated. If set FALSE the bPuls output is always FALSE
+	tPulsLengthOn		:TIME;		// Time for on 
+	tPulsLengthOff		:TIME;		// Time for off											      
+END_VAR
+
+VAR_OUTPUT
+	bPuls				:BOOL;		// Clock Puls
+END_VAR
+
+VAR
+	fbTimer1			:TON;		// Internal timer
+	fbTimer2			:TON;		// Internal timer
+	tHalfPuls			:TIME;
+	bTimerOut			:BOOL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// Generate clock puls
+IF bEnable THEN
+	fbTimer1(IN:= NOT fbTimer2.Q , PT:= tPulsLengthOn, Q=>bTimerOut , ET=> );
+	fbTimer2(IN:= fbTimer1.Q, PT:= tPulsLengthOff, Q=> , ET=> );
+	// Start with postive edge when enabled
+	bPuls := NOT bTimerOut;	
+ELSE
+	fbTimer1(IN:=FALSE);
+	fbTimer2(IN:=FALSE);
+	bPuls := FALSE;
+END_IF
+
+
+]]></ST>
+    </Implementation>
+    <LineIds Name="FB_ClockPulsDetailed">
+      <LineId Id="33" Count="12" />
+      <LineId Id="9" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

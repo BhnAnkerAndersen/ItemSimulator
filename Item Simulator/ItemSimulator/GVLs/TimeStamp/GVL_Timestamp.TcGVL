@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <GVL Name="GVL_Timestamp" Id="{d776dcb5-ebee-4454-9af4-1be7ba2135b2}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL
+	bCameraOutSignal	AT %Q* 	:BOOL;
+	bResetRegistry				:BOOL;
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="PRG_TCPIP" Id="{e26f0609-c5dd-4c0e-bab1-8c4ef3547268}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM PRG_TCPIP 
+VAR	
+	bInit 						:BOOL := TRUE;
+	fbDisconnect				:FB_SocketClose;
+	
+	//TCP Camera Setup
+	fbTcpCamera					:FB_TCPIP;
+	bConnectCameraRead			:BOOL;	
+	bConnectCameraWrite			:BOOL;
+	aItemEANRegistry			:ARRAY[0..GVL_Constant.ITEM_ARRAY_SIZE] OF T_MaxString;
+	bResetEANRegistry			:BOOL;
+	fbConnectCameraRead			:FB_SocketConnect;
+	fbConnectCameraWrite		:FB_SocketConnect;
+	ReadCameraSocketHandler		:T_HSOCKET;
+	WriteCameraSocketHandler	:T_HSOCKET;
+	bConnectedCameraRead		:BOOL;
+	bConnectedCameraWrite		:BOOL;
+	rConnectedCameraWrite		:F_TRIG;
+	rConnectedCameraRead		:F_TRIG;
+
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF bInit THEN
+	//Disconnect TCP server according to the Socket handler given from fbConnect
+	fbDisconnect(hSocket:=ReadCameraSocketHandler);
+	fbDisconnect(hSocket:=WriteCameraSocketHandler);
+	bConnectedCameraRead := FALSE;
+	bConnectCameraRead := FALSE;
+	bConnectedCameraWrite := FALSE;
+	bConnectCameraWrite := FALSE;
+	fbConnectCameraRead(bExecute:=FALSE);
+	fbConnectCameraWrite(bExecute:=FALSE);
+	
+	bInit := FALSE;
+END_IF
+
+//Reset EAN Registry
+IF GVL_ItemSimulator.bResetRegistry AND NOT bResetEANRegistry THEN
+	bResetEANRegistry := TRUE;
+ELSE
+	bResetEANRegistry := FALSE;
+END_IF
+
+
+//Call connect camera read & write
+A_ConnectCameraRead();
+A_ConnectCameraWrite();
+
+	
+
+//TCP Camera function block call
+fbTcpCamera(
+	bNewItem:=GVL_ItemSimulator.bSignalIn,
+	bConnectedRead:=bConnectedCameraRead,
+	bConnectedWrite:=bConnectedCameraWrite,
+	bResetEANRegistry:=bResetEANRegistry,
+	ReadSocketHandler:=ReadCameraSocketHandler,
+	WriteSocketHandler:=WriteCameraSocketHandler,
+	aEANRegistry=>aItemEANRegistry);
+	
+
+]]></ST>
+    </Implementation>
+    <Action Name="A_ConnectCameraRead" Id="{3c65291b-4989-46fb-9e32-f7e04823868a}">
+      <Implementation>
+        <ST><![CDATA[//Connect to Read port
+IF bConnectCameraRead THEN
+	
+	//Disconnect write port
+	fbConnectCameraWrite(bExecute:=FALSE);
+	fbDisconnect(hSocket:=WriteCameraSocketHandler);
+	
+
+	//Connect read port
+	fbConnectCameraRead(
+		sRemoteHost:='10.12.5.10',
+		nRemotePort:=51236, 
+		bExecute:=TRUE,
+		tTimeout:=T#45S,
+		hSocket=>ReadCameraSocketHandler);
+END_IF
+
+rConnectedCameraRead(CLK:=fbConnectCameraRead.bBusy);
+
+IF rConnectedCameraRead.Q AND NOT fbConnectCameraRead.bError THEN
+	bConnectedCameraRead := TRUE;
+	bConnectedCameraWrite := FALSE;
+	bConnectCameraWrite := FALSE;
+	bConnectCameraRead := FALSE;
+END_IF
+]]></ST>
+      </Implementation>
+    </Action>
+    <Action Name="A_ConnectCameraWrite" Id="{a353aa78-29a2-4f82-bdaf-6b25f0db9b61}">
+      <Implementation>
+        <ST><![CDATA[//Connect to Write port
+IF bConnectCameraWrite THEN
+	
+	//Disconnect read port
+	fbConnectCameraRead(bExecute:=FALSE);
+	fbDisconnect(hSocket:=ReadCameraSocketHandler);
+	
+
+	//Connect write port
+	fbConnectCameraWrite(
+		sRemoteHost:='10.12.5.10',
+		nRemotePort:=51237, 
+		bExecute:=TRUE,
+		tTimeout:=T#45S,
+		hSocket=>WriteCameraSocketHandler);
+END_IF
+
+rConnectedCameraWrite(CLK:=fbConnectCameraWrite.bBusy);
+
+IF rConnectedCameraWrite.Q AND NOT fbConnectCameraWrite.bError THEN
+	bConnectedCameraWrite := TRUE;
+	bConnectedCameraRead := FALSE;
+	bConnectCameraWrite := FALSE;
+	bConnectCameraRead := FALSE;
+END_IF]]></ST>
+      </Implementation>
+    </Action>
+    <LineIds Name="PRG_TCPIP">
+      <LineId Id="317" Count="9" />
+      <LineId Id="442" Count="0" />
+      <LineId Id="328" Count="1" />
+      <LineId Id="436" Count="5" />
+      <LineId Id="435" Count="0" />
+      <LineId Id="336" Count="16" />
+      <LineId Id="370" Count="0" />
+      <LineId Id="372" Count="0" />
+      <LineId Id="434" Count="0" />
+    </LineIds>
+    <LineIds Name="PRG_TCPIP.A_ConnectCameraRead">
+      <LineId Id="2" Count="1" />
+      <LineId Id="22" Count="0" />
+      <LineId Id="17" Count="0" />
+      <LineId Id="27" Count="0" />
+      <LineId Id="21" Count="0" />
+      <LineId Id="25" Count="0" />
+      <LineId Id="23" Count="0" />
+      <LineId Id="19" Count="0" />
+      <LineId Id="4" Count="6" />
+      <LineId Id="16" Count="0" />
+      <LineId Id="15" Count="0" />
+      <LineId Id="11" Count="2" />
+      <LineId Id="26" Count="0" />
+      <LineId Id="24" Count="0" />
+      <LineId Id="29" Count="0" />
+      <LineId Id="1" Count="0" />
+      <LineId Id="28" Count="0" />
+    </LineIds>
+    <LineIds Name="PRG_TCPIP.A_ConnectCameraWrite">
+      <LineId Id="2" Count="1" />
+      <LineId Id="17" Count="0" />
+      <LineId Id="20" Count="0" />
+      <LineId Id="24" Count="0" />
+      <LineId Id="19" Count="0" />
+      <LineId Id="23" Count="0" />
+      <LineId Id="21" Count="0" />
+      <LineId Id="18" Count="0" />
+      <LineId Id="4" Count="6" />
+      <LineId Id="16" Count="0" />
+      <LineId Id="15" Count="0" />
+      <LineId Id="11" Count="2" />
+      <LineId Id="22" Count="0" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="25" Count="0" />
+      <LineId Id="1" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

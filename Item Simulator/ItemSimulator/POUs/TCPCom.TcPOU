@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="TCPCom" Id="{fb9fad86-a609-4e23-8150-11d22b07403a}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM TCPCom
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[PRG_TCPIP();
+
+]]></ST>
+    </Implementation>
+    <LineIds Name="TCPCom">
+      <LineId Id="5" Count="0" />
+      <LineId Id="10" Count="0" />
+      <LineId Id="9" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

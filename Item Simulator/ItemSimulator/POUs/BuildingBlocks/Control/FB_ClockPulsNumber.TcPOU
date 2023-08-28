@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FB_ClockPulsNumber" Id="{1276cecb-ee2e-4e43-8dc3-a4ac602dfb68}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_ClockPulsNumber
+VAR_INPUT
+	bTrig				:BOOL;					// On a rising edge, uiNo of puls are generated
+	bStop				:BOOL;					// Stop and reset pulses
+	uiNo				:UINT;					// Number of pulses to be generated when bTrig is set high
+	tPulsLengthOn 		:TIME;
+	tPulsLengthOff 		:TIME;
+END_VAR
+VAR_OUTPUT
+	bPuls				:BOOL;					// Output puls
+END_VAR
+VAR
+	osTrig				:R_TRIG;				// One shot trigger for start of pulses
+	osPuls				:R_TRIG;				// One shot trigger for output puls
+	uiCount				:UINT;					// Reset puls count
+	fbStart				:SR;					// Set/Reset for reset to main zone.
+	fbClockPulsDetailed :FB_ClockPulsDetailed;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+
+// Wait	for trig signal
+osTrig(CLK:= bTrig, Q=> );
+
+// Set start signal
+fbStart(SET1:= osTrig.Q, RESET:= (uiCount > uiNo) OR bStop, Q1=> );
+
+// Reset start signal
+IF fbStart.RESET THEN
+	uiCount := 0;
+END_IF
+
+// Generate clock puls
+fbClockPulsDetailed(bEnable:= fbStart.Q1 AND NOT bStop, tPulsLengthOn := tPulsLengthOn, tPulsLengthOff:= tPulsLengthOff, bPuls=>);
+
+// Count number of output pulses
+osPuls(CLK:= fbClockPulsDetailed.bPuls, Q=> );
+IF osPuls.Q THEN
+	uiCount := uiCount + 1;
+END_IF
+
+// Set output puls
+IF uiCount <= uiNo THEN
+	bPuls := fbClockPulsDetailed.bPuls;
+ELSE
+	bPuls := FALSE;
+END_IF
+
+
+]]></ST>
+    </Implementation>
+    <LineIds Name="FB_ClockPulsNumber">
+      <LineId Id="3" Count="13" />
+      <LineId Id="56" Count="0" />
+      <LineId Id="18" Count="14" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <Itf Name="I_TCPConnection" Id="{0ace17ab-569c-47d9-bcab-d23482e2d148}">
+    <Declaration><![CDATA[INTERFACE I_TCPConnection
+]]></Declaration>
+    <Property Name="P_IsSocketConnected" Id="{d87bbbf7-3f5a-4a81-aad6-e9e703e217c1}">
+      <Declaration><![CDATA[PROPERTY P_IsSocketConnected : BOOL]]></Declaration>
+      <Get Name="Get" Id="{039ec537-bdb4-403c-aae4-49763b68c516}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+      <Set Name="Set" Id="{56a1fef3-630d-4c53-b77a-2c6d258750f5}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Set>
+    </Property>
+    <Property Name="P_RemoteHost" Id="{11687807-e6cd-4f90-87a9-93cac02fd3fe}">
+      <Declaration><![CDATA[PROPERTY P_RemoteHost : STRING]]></Declaration>
+      <Set Name="Set" Id="{61672120-fac8-4656-bb9e-bea93be3bf29}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Set>
+    </Property>
+    <Property Name="P_RemotePort" Id="{eecfef4d-5d5c-4d2f-bfa7-e80fd224761f}">
+      <Declaration><![CDATA[PROPERTY P_RemotePort : UDINT]]></Declaration>
+      <Set Name="Set" Id="{81f644cb-ee80-458d-a8f4-729667cd776a}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Set>
+    </Property>
+    <Property Name="P_Socket" Id="{b986dc34-338e-4213-8b1c-b7dcf6b61f82}">
+      <Declaration><![CDATA[PROPERTY P_Socket : T_HSOCKET]]></Declaration>
+      <Set Name="Set" Id="{4a7b606d-60c6-4b0e-bf33-7ec86cef64c5}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Set>
+    </Property>
+    <Property Name="P_SocketConnect" Id="{6875862d-d1c0-41fe-b2d5-c4b0ba576157}">
+      <Declaration><![CDATA[PROPERTY P_SocketConnect : BOOL]]></Declaration>
+      <Get Name="Get" Id="{7b410fa7-439e-4d7b-8bb9-822a95974068}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+      <Set Name="Set" Id="{900f865c-ac06-4dca-aeb6-81190b44d87b}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Set>
+    </Property>
+    <Property Name="P_TimeOut" Id="{84bdb836-3cb1-435e-9f2c-44aa3ef9a220}">
+      <Declaration><![CDATA[PROPERTY P_TimeOut : TIME]]></Declaration>
+      <Set Name="Set" Id="{83de0139-56e0-4490-83af-74cd276aac9f}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Set>
+    </Property>
+  </Itf>
+</TcPlcObject>

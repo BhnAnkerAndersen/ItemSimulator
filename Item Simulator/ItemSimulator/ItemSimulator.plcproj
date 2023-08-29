@@ -23,6 +23,12 @@
     <Compile Include="DUTs\ItemSimulator\ST_ItemGenerator.TcDUT">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DUTs\TCP\I_TCPConnection.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\TCP\ST_TCPConnect.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="GlobalTextList.TcGTLO">
       <SubType>Code</SubType>
     </Compile>
@@ -73,6 +79,9 @@
     <Compile Include="POUs\TCPCom.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\TCP_IP\FBs\FB_ReadTCP.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\TCP_IP\FBs\FB_TCPIP.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -103,6 +112,7 @@
   <ItemGroup>
     <Folder Include="DUTs" />
     <Folder Include="DUTs\ItemSimulator" />
+    <Folder Include="DUTs\TCP" />
     <Folder Include="GVLs" />
     <Folder Include="GVLs\ItemSimulator" />
     <Folder Include="GVLs\TimeStamp" />

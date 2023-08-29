@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <POU Name="FB_TCPIP" Id="{8a1361cc-b4d0-445e-95d0-5145c7c9d975}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK FB_TCPIP
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_TCPIP IMPLEMENTS I_TCPConnection
 VAR_INPUT
 	bNewItem				:BOOL;
 	bConnectedRead			:BOOL;
@@ -26,6 +26,10 @@ VAR
 	tRefreshRead			:FB_ClockPulsDetailed;
 	WriteSignal				:F_TRIG;
 	i						:INT;
+	
+	
+	bReadSocketIsConnected	:BOOL;
+	bWriteSocketIsConnected	:BOOL;
 END_VAR
 
 ]]></Declaration>
@@ -50,7 +54,7 @@ IF PRG_Simulator.bStartGenerator OR PRG_Simulator.bStopGenerator OR (PRG_Simulat
 	bResetEANRegistry:=FALSE;
 END_IF
 
-
+bReadSocketIsConnected := ConnectToReadSocket.bReadSocketIsConnected;
 
 
 
@@ -110,6 +114,33 @@ END_IF;
 ]]></ST>
       </Implementation>
     </Action>
+    <Method Name="ConnectToWriteSocket" Id="{62e8bb86-74c6-43ef-8a05-a273e912ad1b}">
+      <Declaration><![CDATA[METHOD PUBLIC ConnectToWriteSocket : BOOL
+VAR_INPUT
+	bConnectToWriteSocket	:BOOL;
+	sRemoteHost				:STRING;
+	nRemotePort				:INT;
+	bExecute				:BOOL;
+	tTimeout 				:TIME;
+	hSocket 				:T_HSOCKET;
+END_VAR
+VAR
+	bWriteSocketIsConnected	:BOOL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="WriteToTCPSocket" Id="{796f152f-baf6-47c9-a7c2-d34cdf6deef6}">
+      <Declaration><![CDATA[METHOD PUBLIC WriteToTCPSocket : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
     <LineIds Name="FB_TCPIP">
       <LineId Id="526" Count="3" />
       <LineId Id="559" Count="0" />
@@ -141,6 +172,12 @@ END_IF;
       <LineId Id="2" Count="18" />
       <LineId Id="22" Count="1" />
       <LineId Id="1" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_TCPIP.ConnectToWriteSocket">
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_TCPIP.WriteToTCPSocket">
+      <LineId Id="5" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>

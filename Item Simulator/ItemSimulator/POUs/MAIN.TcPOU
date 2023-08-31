@@ -7,10 +7,13 @@ END_VAR
 
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[PRG_Simulator();
+      <ST><![CDATA[
 //PRG_CSVRead();
 //PRG_CSVWrite();
 
+//Call Programs
+PRG_Simulator();
+PRG_TCPIP();
 PRG_ReadTime();
 
 //Reset commands
@@ -20,6 +23,8 @@ GVL_Timestamp.bResetRegistry := FALSE;]]></ST>
     <LineIds Name="MAIN">
       <LineId Id="40" Count="0" />
       <LineId Id="62" Count="1" />
+      <LineId Id="85" Count="1" />
+      <LineId Id="84" Count="0" />
       <LineId Id="68" Count="0" />
       <LineId Id="74" Count="0" />
       <LineId Id="79" Count="0" />

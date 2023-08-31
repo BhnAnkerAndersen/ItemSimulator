@@ -54,20 +54,20 @@
 		</System>
 		<Plc>
 			<Project GUID="{921AB191-9460-4D4F-B79D-2E5B7263E7DB}" Name="ItemSimulator" PrjFilePath="ItemSimulator\ItemSimulator.plcproj" TmcFilePath="ItemSimulator\ItemSimulator.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="ItemSimulator\ItemSimulator.tmc" TmcHash="{5282B0BF-B75E-A074-42C9-402B6C81D988}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="ItemSimulator\ItemSimulator.tmc" TmcHash="{F4B915AD-9487-594D-EAB0-FDF023B54F20}">
 					<Name>ItemSimulator Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
-					<Vars VarGrpType="1">
-						<Name>TCPTask Inputs</Name>
-						<Var>
-							<Name>GVL_ItemSimulator.bSignalIn</Name>
-							<Type>BOOL</Type>
-						</Var>
-					</Vars>
 					<Vars VarGrpType="2" AreaNo="1">
 						<Name>TCPTask Outputs</Name>
 						<Var>
 							<Name>GVL_ItemSimulator.bSignalOut</Name>
+							<Type>BOOL</Type>
+						</Var>
+					</Vars>
+					<Vars VarGrpType="1" ContextId="1" AreaNo="16">
+						<Name>PlcTask Inputs</Name>
+						<Var>
+							<Name>GVL_ItemSimulator.bSignalIn</Name>
 							<Type>BOOL</Type>
 						</Var>
 					</Vars>
@@ -117,6 +117,9 @@
 				</AddressInfo>
 				<Image Id="4" AddrType="9" ImageType="3">
 					<Name>Image</Name>
+				</Image>
+				<Image Id="1" AddrType="10" ImageType="3">
+					<Name>Image-2</Name>
 				</Image>
 				<Box Id="1" BoxType="9099">
 					<Name>Term 1 (EK1101)</Name>
@@ -1320,7 +1323,7 @@
 	<Mappings>
 		<OwnerA Name="TIPC^ItemSimulator^ItemSimulator Instance">
 			<OwnerB Name="TIID^Device 5 (EtherCAT)^Term 1 (EK1101)^Term 2 (EL1018)">
-				<Link VarA="TCPTask Inputs^GVL_ItemSimulator.bSignalIn" VarB="Channel 1^Input"/>
+				<Link VarA="PlcTask Inputs^GVL_ItemSimulator.bSignalIn" VarB="Channel 1^Input"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 5 (EtherCAT)^Term 1 (EK1101)^Term 3 (EL2008)">
 				<Link VarA="TCPTask Outputs^GVL_ItemSimulator.bSignalOut" VarB="Channel 1^Output"/>

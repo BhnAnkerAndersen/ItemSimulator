@@ -103,7 +103,7 @@ bStopGenerator := FALSE;
     </Action>
     <Action Name="A_ItemRegistry" Id="{912b5aaf-f7c8-4236-8ccf-b7629f092d69}">
       <Implementation>
-        <ST><![CDATA[fbItemRegister(bSignal:=GVL_ItemSimulator.bSignalIn AND NOT fbItemGenerator.stItemGenFromReg.bEnableGenerator AND PRG_TCPIP.bConnectedCameraRead,
+        <ST><![CDATA[fbItemRegister(bSignal:=GVL_ItemSimulator.bSignalIn AND NOT fbItemGenerator.stItemGenFromReg.bEnableGenerator AND PRG_TCPIP.fbReadFromCameraTCP.bIsConnected,
 	bReset:=bResetRegistry,
 	nTimeCount=>nTimeCount,
 	aItemOnTimeRegistry=>aItemOnTimeRegistry,

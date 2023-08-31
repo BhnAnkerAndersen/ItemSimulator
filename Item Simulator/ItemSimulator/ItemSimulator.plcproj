@@ -23,10 +23,7 @@
     <Compile Include="DUTs\ItemSimulator\ST_ItemGenerator.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\TCP\I_TCPConnection.TcIO">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="DUTs\TCP\ST_TCPConnect.TcDUT">
+    <Compile Include="DUTs\TCP\ST_TCPConnection.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="GlobalTextList.TcGTLO">
@@ -82,7 +79,7 @@
     <Compile Include="POUs\TCP_IP\FBs\FB_ReadTCP.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\TCP_IP\FBs\FB_TCPIP.TcPOU">
+    <Compile Include="POUs\TCP_IP\FBs\FB_WriteTCP.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\TCP_IP\PRG_TCPIP.TcPOU">

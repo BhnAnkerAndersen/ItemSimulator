@@ -1,13 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <POU Name="FB_ReadTCP" Id="{aac96250-2e96-4f28-bc14-e6734eab24a4}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK FB_ReadTCP IMPLEMENTS I_TCPConnection
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_ReadTCP 
 VAR_INPUT
+	stTCPConnection		:ST_TCPConnection;
 END_VAR
 VAR_OUTPUT
 END_VAR
+VAR_IN_OUT
+END_VAR
 VAR
-	stSocket				:ST_TCPConnect;
+	bReadComplete		:BOOL;
+	bIsConnected		:BOOL;
+	bResetEANRegistry	:BOOL;
+	hSocket				:T_HSOCKET;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -23,31 +29,27 @@ VAR
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[//Connect to Read port
-IF stSocket.bSocketConnect THEN
-	
-	//Disconnect write port
-	//fbConnectCameraWrite(bExecute:=FALSE);
-	//fbDisconnect(hSocket:=WriteCameraSocketHandler);
-	
+        <ST><![CDATA[IF stTCPConnection.bSocketConnect THEN
 
 	//Connect read port
 	fbConnectSocket(
-		sRemoteHost:=stSocket.sRemoteHost,
-		nRemotePort:=stSocket.nRemotePort, 
+		sRemoteHost:=stTCPConnection.sRemoteHost,
+		nRemotePort:=stTCPConnection.nRemotePort, 
 		bExecute:=TRUE,
-		tTimeout:=stSocket.tTimeOut,
-		hSocket=>stSocket.hSocket);
+		tTimeout:=stTCPConnection.tTimeOut,
+		hSocket=>hSocket);
+	ELSE
+		//Disconnect read port
+		fbConnectSocket(bExecute:=FALSE);
+		fbDisconnect(hSocket:=hSocket);
+		bIsConnected := FALSE;
 END_IF
-
-
 
 rConnectedSocket(CLK:=fbConnectSocket.bBusy);
 
 IF rConnectedSocket.Q AND NOT fbConnectSocket.bError THEN
-	stSocket.bIsSocketConnected := TRUE;
+	bIsConnected := TRUE;
 END_IF
-
 
 ]]></ST>
       </Implementation>
@@ -56,153 +58,89 @@ END_IF
       <Declaration><![CDATA[METHOD PUBLIC M_ReadFromTCPSocket : BOOL
 VAR_INPUT
 END_VAR
+VAR_OUTPUT
+	aEANRegistry		:ARRAY[0..GVL_Constant.ITEM_ARRAY_SIZE] OF T_MaxString;
+END_VAR
+VAR
+	tRefreshRead		:FB_ClockPulsDetailed;
+	fbSocketRecive		:FB_SocketReceive;
+	rReadComplete		:R_TRIG;
+	aReadBytes			:ARRAY[0..1023] OF BYTE;
+	sReadString			:T_MaxString;
+	iRead				:UINT;
+	i					:INT;
+END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[]]></ST>
+        <ST><![CDATA[IF bIsConnected THEN
+
+	//Refresh read timer
+	tRefreshRead(bEnable:=TRUE, tPulsLengthOn:=T#2MS, tPulsLengthOff:=T#2MS);
+	
+	fbSocketRecive(
+		hSocket:=hSocket, 
+		cbLen:=SIZEOF(aReadBytes),
+		pDest:=ADR(aReadBytes),
+		bExecute:=tRefreshRead.bPuls);
+		
+	rReadComplete(CLK:=fbSocketRecive.nRecBytes > 0);
+	
+	
+	//If byte read, copy into string.
+	IF rReadComplete.Q THEN
+		MEMCPY(destAddr:=ADR(sReadString), srcAddr:=ADR(aReadBytes),n:=fbSocketRecive.nRecBytes);
+		aEANRegistry[iRead] := sReadString;
+		MEMSET(destAddr:=ADR(aReadBytes),fillByte:=0, n:=fbSocketRecive.nRecBytes);
+		MEMSET(destAddr:=ADR(sReadString),fillByte:=0, n:=fbSocketRecive.nRecBytes);
+		iRead:=iRead+1;
+		bReadComplete:=TRUE;
+	ELSE
+		bReadComplete:=FALSE;
+	END_IF
+END_IF
+
+
+//Reset registry of EAN strings
+IF PRG_Simulator.bStartGenerator OR PRG_Simulator.bStopGenerator OR (PRG_Simulator.i > PRG_Simulator.nTimeCount) OR stTCPConnection.bReset THEN
+	FOR i := 0 TO GVL_Constant.ITEM_ARRAY_SIZE DO 
+		aEANRegistry[i] := '';
+	END_FOR
+
+	iRead := 0;
+	MEMSET(destAddr:=ADR(aReadBytes),fillByte:=0, n:=fbSocketRecive.nRecBytes);
+	MEMSET(destAddr:=ADR(sReadString),fillByte:=0, n:=fbSocketRecive.nRecBytes);	
+	
+	
+	//Reset commands
+	stTCPConnection.bReset:=FALSE;
+END_IF
+
+]]></ST>
       </Implementation>
     </Method>
-    <Property Name="P_IsSocketConnected" Id="{30b43c05-6180-4688-b484-4e59bae6480a}">
-      <Declaration><![CDATA[PROPERTY P_IsSocketConnected : BOOL]]></Declaration>
-      <Get Name="Get" Id="{99010b18-a64f-4506-8e67-a51cc4c200e9}">
-        <Declaration><![CDATA[VAR
-	
-END_VAR
-]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[]]></ST>
-        </Implementation>
-      </Get>
-      <Set Name="Set" Id="{a7347b42-efb2-4537-a466-d08a6a22cfc3}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[]]></ST>
-        </Implementation>
-      </Set>
-    </Property>
-    <Property Name="P_RemoteHost" Id="{0a54385a-1ba7-4920-85e5-d69bc7fac37e}">
-      <Declaration><![CDATA[{warning 'add property implementation'}
-PROPERTY P_RemoteHost : STRING
-]]></Declaration>
-      <Set Name="Set" Id="{a188af8b-61e6-446c-8d21-2e54afb172f7}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[]]></ST>
-        </Implementation>
-      </Set>
-    </Property>
-    <Property Name="P_RemotePort" Id="{16cdea48-752b-40d7-88aa-b28111d6156c}">
-      <Declaration><![CDATA[{warning 'add property implementation'}
-PROPERTY P_RemotePort : UDINT
-]]></Declaration>
-      <Set Name="Set" Id="{719243ac-4108-4ec5-a1fe-45d44a7036e5}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[]]></ST>
-        </Implementation>
-      </Set>
-    </Property>
-    <Property Name="P_Socket" Id="{47792871-dedc-4c2b-af87-c39f20b55d53}">
-      <Declaration><![CDATA[{warning 'add property implementation'}
-PROPERTY P_Socket : Tc2_TcpIp.T_HSOCKET
-]]></Declaration>
-      <Get Name="Get" Id="{0c5e6124-5b30-4015-b5af-1e67258fa798}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[]]></ST>
-        </Implementation>
-      </Get>
-      <Set Name="Set" Id="{274925d2-ce0d-4068-b61d-37e908b1463b}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[]]></ST>
-        </Implementation>
-      </Set>
-    </Property>
-    <Property Name="P_SocketConnect" Id="{29e2e19f-2f5f-40b7-93f1-567da2a88a2e}">
-      <Declaration><![CDATA[{warning 'add property implementation'}
-PROPERTY P_SocketConnect : BOOL
-]]></Declaration>
-      <Get Name="Get" Id="{c699cc8e-a6fa-4261-aaa0-7282f1a3ef69}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[]]></ST>
-        </Implementation>
-      </Get>
-      <Set Name="Set" Id="{e2b9e9ea-6c6a-4156-8cc9-c97f8bd9dbba}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[]]></ST>
-        </Implementation>
-      </Set>
-    </Property>
-    <Property Name="P_TimeOut" Id="{174084e0-0071-468c-ad95-d571b43e93e3}">
-      <Declaration><![CDATA[{warning 'add property implementation'}
-PROPERTY P_TimeOut : TIME
-]]></Declaration>
-      <Set Name="Set" Id="{bf3b42e6-ebbf-419a-9b08-d4299a31ca54}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[]]></ST>
-        </Implementation>
-      </Set>
-    </Property>
     <LineIds Name="FB_ReadTCP">
       <LineId Id="9" Count="0" />
       <LineId Id="17" Count="0" />
     </LineIds>
     <LineIds Name="FB_ReadTCP.M_ConnectToReadSocket">
-      <LineId Id="51" Count="14" />
-      <LineId Id="47" Count="3" />
-      <LineId Id="19" Count="3" />
-      <LineId Id="26" Count="0" />
-      <LineId Id="28" Count="1" />
+      <LineId Id="52" Count="0" />
+      <LineId Id="77" Count="7" />
+      <LineId Id="94" Count="5" />
+      <LineId Id="102" Count="4" />
+      <LineId Id="108" Count="0" />
+      <LineId Id="29" Count="0" />
       <LineId Id="5" Count="0" />
     </LineIds>
     <LineIds Name="FB_ReadTCP.M_ReadFromTCPSocket">
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_ReadTCP.P_IsSocketConnected.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_ReadTCP.P_IsSocketConnected.Set">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_ReadTCP.P_RemoteHost.Set">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_ReadTCP.P_RemotePort.Set">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_ReadTCP.P_Socket.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_ReadTCP.P_Socket.Set">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_ReadTCP.P_SocketConnect.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_ReadTCP.P_SocketConnect.Set">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_ReadTCP.P_TimeOut.Set">
-      <LineId Id="2" Count="0" />
+      <LineId Id="12" Count="20" />
+      <LineId Id="45" Count="0" />
+      <LineId Id="33" Count="0" />
+      <LineId Id="50" Count="1" />
+      <LineId Id="54" Count="2" />
+      <LineId Id="88" Count="12" />
+      <LineId Id="71" Count="0" />
+      <LineId Id="44" Count="0" />
+      <LineId Id="43" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>

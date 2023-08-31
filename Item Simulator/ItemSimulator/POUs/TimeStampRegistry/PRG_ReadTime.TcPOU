@@ -2,8 +2,7 @@
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <POU Name="PRG_ReadTime" Id="{41809a93-5b53-47f0-b8b5-05c700b2cea3}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM PRG_ReadTime
-VAR
- 
+VAR 
 	//Delta time in ms from Digital sensor to camera TCP
 	aDeltaTimeMS			: ARRAY[0..GVL_Constant.ITEM_ARRAY_SIZE] OF UDINT;
 
@@ -41,7 +40,7 @@ SavedCameraTime:=SaveCameraTCPTime();
 SavedSensorTime:=SaveSensorTime();
 
 //Trigger of camera tcp read complete. Uses same as camera as this is the last one to receive
-rDeltaTrig(CLK:=PRG_TCPIP.fbTcpCamera.ReadComplete.Q);
+rDeltaTrig(CLK:=PRG_TCPIP.fbReadFromCameraTCP.bReadComplete);
 
 IF rDeltaTrig.Q THEN
 	
@@ -75,10 +74,10 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[//Trigger of camera tcp read complete
-rTCPPortCamera(CLK:=PRG_TCPIP.fbTcpCamera.ReadComplete.Q);
+rTCPPortCamera(CLK:=PRG_TCPIP.fbReadFromCameraTCP.bReadComplete);
 
 IF rTCPPortCamera.Q THEN
-	aTCPPortCameraTime[iTCPPortCamera] := fbGetCameraTime.P_Time;
+	aTCPPortCameraTime[iTCPPortCamera] := fbGetCameraTime.M_SystemTimeToString();
 	
 	fbGetCameraTime.fbSystemTime(timeLoDW=>SaveCameraTCPTime.dwLowDateTime,
     							 timeHiDW=>SaveCameraTCPTime.dwHighDateTime);
@@ -113,7 +112,7 @@ END_VAR
 rDigitalSensorIn(CLK:=GVL_ItemSimulator.bSignalIn);
 
 IF rDigitalSensorIn.Q THEN
-	aDigitalSensorTime[iDigitalSensor] := fbGetSensorTime.P_Time;
+	aDigitalSensorTime[iDigitalSensor] := fbGetSensorTime.M_SystemTimeToString();
 	
 	fbGetSensorTime.fbSystemTime(timeLoDW=>SaveSensorTime.dwLowDateTime,
     							 timeHiDW=>SaveSensorTime.dwHighDateTime);

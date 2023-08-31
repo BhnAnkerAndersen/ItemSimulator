@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FB_WriteTCP" Id="{2823f21e-401f-4604-9aa6-b1a50011eeab}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_WriteTCP 
+VAR_INPUT
+	stTCPConnection		:ST_TCPConnection;
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+	bWriteComplete		:BOOL;
+	bIsConnected		:BOOL;
+	bResetEANRegistry	:BOOL;
+	hSocket				:T_HSOCKET;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[M_ConnectToWriteSocket();
+M_WriteToTCPSocket();
+
+]]></ST>
+    </Implementation>
+    <Method Name="M_ConnectToWriteSocket" Id="{557e8243-1977-4606-ad48-f5307e923e58}">
+      <Declaration><![CDATA[METHOD PUBLIC M_ConnectToWriteSocket : BOOL
+VAR
+	fbConnectSocket			:FB_SocketConnect;
+	fbDisconnect			:FB_SocketClose;
+	rConnectedSocket		:F_TRIG;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF stTCPConnection.bSocketConnect THEN
+	
+	//Connect write port
+	fbConnectSocket(
+		sRemoteHost:=stTCPConnection.sRemoteHost,
+		nRemotePort:=stTCPConnection.nRemotePort, 
+		bExecute:=TRUE,
+		tTimeout:=stTCPConnection.tTimeOut,
+		hSocket=>hSocket);
+	ELSE
+		//Disconnect write port
+		fbConnectSocket(bExecute:=FALSE);
+		fbDisconnect(hSocket:=hSocket);
+		bIsConnected := FALSE;
+END_IF
+
+
+
+rConnectedSocket(CLK:=fbConnectSocket.bBusy);
+
+IF rConnectedSocket.Q AND NOT fbConnectSocket.bError THEN
+	bIsConnected := TRUE;
+END_IF
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_WriteToTCPSocket" Id="{fe4cd308-e1a2-4f53-89b7-e22d2f505176}">
+      <Declaration><![CDATA[METHOD PUBLIC M_WriteToTCPSocket : BOOL
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+	aEANRegistry		:ARRAY[0..GVL_Constant.ITEM_ARRAY_SIZE] OF T_MaxString;
+END_VAR
+VAR
+	fbSocketSend		:FB_SocketSend;
+	rWriteComplete		:R_TRIG;
+	aWriteBytes			:ARRAY[0..1023] OF BYTE;
+	iWrite				:UINT;
+	WriteSignal			:F_TRIG;
+	nWriteLen			:UDINT;
+	i					:INT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF bIsConnected THEN	
+	//Falling edge of item generator
+	WriteSignal(CLK:=GVL_ItemSimulator.bSignalOut);
+	
+	IF WriteSignal.Q THEN
+		//Get length of string written
+		nWriteLen := INT_TO_UDINT(LEN(STR:=aEANRegistry[iWrite]));
+	
+		//Copy string into array of bytes
+		MEMCPY(destAddr:=ADR(aWriteBytes),srcAddr:=ADR(aEANRegistry[iWrite]),n:=nWriteLen);
+		iWrite := iWrite + 1;
+	END_IF
+		
+	//Write byte array to TCP server
+	fbSocketSend(
+		hSocket:=hSocket, 
+		cbLen:=nWriteLen,
+		pSrc:=ADR(aWriteBytes),
+		bExecute:=WriteSignal.Q AND PRG_Simulator.stItemGenFromReg.bEnableGenerator);
+END_IF;
+
+
+//Reset registry of EAN strings
+IF PRG_Simulator.bStartGenerator OR PRG_Simulator.bStopGenerator OR (PRG_Simulator.i > PRG_Simulator.nTimeCount) OR bResetEANRegistry THEN
+	FOR i := 0 TO GVL_Constant.ITEM_ARRAY_SIZE DO 
+		aEANRegistry[i] := '';
+	END_FOR
+
+	iWrite := 0;	
+	
+	//Reset Command
+	bResetEANRegistry := FALSE;
+END_IF
+]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="FB_WriteTCP">
+      <LineId Id="36" Count="0" />
+      <LineId Id="17" Count="0" />
+      <LineId Id="39" Count="0" />
+      <LineId Id="38" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_WriteTCP.M_ConnectToWriteSocket">
+      <LineId Id="52" Count="1" />
+      <LineId Id="59" Count="6" />
+      <LineId Id="100" Count="0" />
+      <LineId Id="103" Count="1" />
+      <LineId Id="101" Count="0" />
+      <LineId Id="105" Count="0" />
+      <LineId Id="47" Count="3" />
+      <LineId Id="19" Count="3" />
+      <LineId Id="26" Count="0" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_WriteTCP.M_WriteToTCPSocket">
+      <LineId Id="55" Count="20" />
+      <LineId Id="79" Count="7" />
+      <LineId Id="96" Count="0" />
+      <LineId Id="98" Count="1" />
+      <LineId Id="93" Count="0" />
+      <LineId Id="43" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

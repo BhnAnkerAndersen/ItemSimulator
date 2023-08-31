@@ -16,7 +16,7 @@
                       <l n="VisualElemMemberList" t="VisualElemMemberCollection" cet="VisualElemMember">
                         <o>
                           <v n="Id">1186196937L</v>
-                          <v n="Value">"PRG_Simulator.stItemGen1.bEnableGenerator"</v>
+                          <v n="Value">"PRG_Simulator.fbItemGenerator.aStItemGen[1].bEnableGenerator"</v>
                         </o>
                       </l>
                     </o>
@@ -1829,7 +1829,7 @@
                       <l n="VisualElemMemberList" t="VisualElemMemberCollection" cet="VisualElemMember">
                         <o>
                           <v n="Id">1186196937L</v>
-                          <v n="Value">"PRG_Simulator.stItemGen2.bEnableGenerator"</v>
+                          <v n="Value">"PRG_Simulator.fbItemGenerator.aStItemGen[2].bEnableGenerator"</v>
                         </o>
                       </l>
                     </o>
@@ -3276,7 +3276,7 @@
                       <l n="VisualElemMemberList" t="VisualElemMemberCollection" cet="VisualElemMember">
                         <o>
                           <v n="Id">1186196937L</v>
-                          <v n="Value">"PRG_Simulator.stItemGen3.bEnableGenerator"</v>
+                          <v n="Value">"PRG_Simulator.fbItemGenerator.aStItemGen[3].bEnableGenerator"</v>
                         </o>
                       </l>
                     </o>
@@ -4723,7 +4723,7 @@
                       <l n="VisualElemMemberList" t="VisualElemMemberCollection" cet="VisualElemMember">
                         <o>
                           <v n="Id">1186196937L</v>
-                          <v n="Value">"PRG_Simulator.stItemGen4.bEnableGenerator"</v>
+                          <v n="Value">"PRG_Simulator.fbItemGenerator.aStItemGen[4].bEnableGenerator"</v>
                         </o>
                       </l>
                     </o>
@@ -6170,7 +6170,7 @@
                       <l n="VisualElemMemberList" t="VisualElemMemberCollection" cet="VisualElemMember">
                         <o>
                           <v n="Id">1186196937L</v>
-                          <v n="Value">"PRG_Simulator.stItemGen5.bEnableGenerator"</v>
+                          <v n="Value">"PRG_Simulator.fbItemGenerator.aStItemGen[5].bEnableGenerator"</v>
                         </o>
                       </l>
                     </o>
@@ -7617,7 +7617,7 @@
                       <l n="VisualElemMemberList" t="VisualElemMemberCollection" cet="VisualElemMember">
                         <o>
                           <v n="Id">1186196937L</v>
-                          <v n="Value">"PRG_Simulator.stItemGen6.bEnableGenerator"</v>
+                          <v n="Value">"PRG_Simulator.fbItemGenerator.aStItemGen[6].bEnableGenerator"</v>
                         </o>
                       </l>
                     </o>
@@ -9064,7 +9064,7 @@
                       <l n="VisualElemMemberList" t="VisualElemMemberCollection" cet="VisualElemMember">
                         <o>
                           <v n="Id">1186196937L</v>
-                          <v n="Value">"PRG_Simulator.stItemGen7.bEnableGenerator"</v>
+                          <v n="Value">"PRG_Simulator.fbItemGenerator.aStItemGen[7].bEnableGenerator"</v>
                         </o>
                       </l>
                     </o>
@@ -10511,7 +10511,7 @@
                       <l n="VisualElemMemberList" t="VisualElemMemberCollection" cet="VisualElemMember">
                         <o>
                           <v n="Id">1186196937L</v>
-                          <v n="Value">"PRG_Simulator.stItemGen8.bEnableGenerator"</v>
+                          <v n="Value">"PRG_Simulator.fbItemGenerator.aStItemGen[8].bEnableGenerator"</v>
                         </o>
                       </l>
                     </o>
@@ -11958,7 +11958,7 @@
                       <l n="VisualElemMemberList" t="VisualElemMemberCollection" cet="VisualElemMember">
                         <o>
                           <v n="Id">1186196937L</v>
-                          <v n="Value">"PRG_Simulator.stItemGen9.bEnableGenerator"</v>
+                          <v n="Value">"PRG_Simulator.fbItemGenerator.aStItemGen[9].bEnableGenerator"</v>
                         </o>
                       </l>
                     </o>
@@ -13405,7 +13405,7 @@
                       <l n="VisualElemMemberList" t="VisualElemMemberCollection" cet="VisualElemMember">
                         <o>
                           <v n="Id">1186196937L</v>
-                          <v n="Value">"PRG_Simulator.stItemGen10.bEnableGenerator"</v>
+                          <v n="Value">"PRG_Simulator.fbItemGenerator.aStItemGen[10].bEnableGenerator"</v>
                         </o>
                       </l>
                     </o>
@@ -16120,7 +16120,7 @@
                       <l n="VisualElemMemberList" t="VisualElemMemberCollection" cet="VisualElemMember">
                         <o>
                           <v n="Id">1186196937L</v>
-                          <v n="Value">"PRG_Simulator.stItemGenFromReg.bEnableGenerator"</v>
+                          <v n="Value">"PRG_Simulator.fbItemGenerator.stItemGenFromReg.bEnableGenerator"</v>
                         </o>
                       </l>
                     </o>

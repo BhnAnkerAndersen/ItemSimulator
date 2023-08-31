@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <DUT Name="ST_TCPConnection_HMI_Status" Id="{a398a78d-1809-4dea-8951-d89129f51908}">
+    <Declaration><![CDATA[TYPE ST_TCPConnection_HMI_Status :
+STRUCT
+	bCameraReadSocketIsConnected	:BOOL;
+	bHlzWriteSocketIsConnected		:BOOL;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

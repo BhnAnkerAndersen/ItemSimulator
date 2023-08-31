@@ -54,30 +54,42 @@
 		</System>
 		<Plc>
 			<Project GUID="{921AB191-9460-4D4F-B79D-2E5B7263E7DB}" Name="ItemSimulator" PrjFilePath="ItemSimulator\ItemSimulator.plcproj" TmcFilePath="ItemSimulator\ItemSimulator.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="ItemSimulator\ItemSimulator.tmc" TmcHash="{B8AB6657-516C-BB90-7263-CD0EFA60CC6C}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="ItemSimulator\ItemSimulator.tmc" TmcHash="{FF5F65CF-4C79-A6B4-0321-DC953767B9C8}">
 					<Name>ItemSimulator Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="2" AreaNo="1">
 						<Name>TCPTask Outputs</Name>
 						<Var>
-							<Name>GVL_ItemSimulator.bSignalOut</Name>
+							<Name>GVL_IO.stItemSimulator.bSignalOut</Name>
 							<Type>BOOL</Type>
 						</Var>
 					</Vars>
 					<Vars VarGrpType="1" ContextId="1" AreaNo="16">
 						<Name>PlcTask Inputs</Name>
 						<Var>
-							<Name>GVL_ItemSimulator.bSignalIn</Name>
+							<Name>GVL_IO.stItemSimulator.bSignalIn</Name>
 							<Type>BOOL</Type>
 						</Var>
 					</Vars>
 					<Vars VarGrpType="2" ContextId="1" AreaNo="17">
 						<Name>PlcTask Outputs</Name>
 						<Var>
-							<Name>GVL_Timestamp.bCameraOutSignal</Name>
+							<Name>GVL_IO.stTimestamp.bCameraOutSignal</Name>
 							<Type>BOOL</Type>
 						</Var>
 					</Vars>
+					<UnrestoredVarLinks ImportTime="2023-08-31T10:25:44">
+						<OwnerA Name="OutputSrc" Prefix="TIPC^ItemSimulator^ItemSimulator Instance" Type="2">
+							<OwnerB Name="TIID^Device 5 (EtherCAT)^Term 1 (EK1101)^Term 3 (EL2008)">
+								<Link VarA="GVL_ItemSimulator.bSignalOut" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="Channel 1^Output" Size="1" RestoreInfo="ANotFound"/>
+							</OwnerB>
+						</OwnerA>
+						<OwnerA Name="InputDst" Prefix="TIPC^ItemSimulator^ItemSimulator Instance" Type="1">
+							<OwnerB Name="TIID^Device 5 (EtherCAT)^Term 1 (EK1101)^Term 2 (EL1018)">
+								<Link VarA="GVL_ItemSimulator.bSignalIn" TypeA="BOOL" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="Channel 1^Input" Size="1" RestoreInfo="ANotFound"/>
+							</OwnerB>
+						</OwnerA>
+					</UnrestoredVarLinks>
 					<Contexts>
 						<Context>
 							<Id NeedCalleeCall="true">0</Id>
@@ -117,9 +129,6 @@
 				</AddressInfo>
 				<Image Id="4" AddrType="9" ImageType="3">
 					<Name>Image</Name>
-				</Image>
-				<Image Id="1" AddrType="10" ImageType="3">
-					<Name>Image-2</Name>
 				</Image>
 				<Box Id="1" BoxType="9099">
 					<Name>Term 1 (EK1101)</Name>
@@ -1320,14 +1329,4 @@
 			</Device>
 		</Io>
 	</Project>
-	<Mappings>
-		<OwnerA Name="TIPC^ItemSimulator^ItemSimulator Instance">
-			<OwnerB Name="TIID^Device 5 (EtherCAT)^Term 1 (EK1101)^Term 2 (EL1018)">
-				<Link VarA="PlcTask Inputs^GVL_ItemSimulator.bSignalIn" VarB="Channel 1^Input"/>
-			</OwnerB>
-			<OwnerB Name="TIID^Device 5 (EtherCAT)^Term 1 (EK1101)^Term 3 (EL2008)">
-				<Link VarA="TCPTask Outputs^GVL_ItemSimulator.bSignalOut" VarB="Channel 1^Output"/>
-			</OwnerB>
-		</OwnerA>
-	</Mappings>
 </TcSmProject>

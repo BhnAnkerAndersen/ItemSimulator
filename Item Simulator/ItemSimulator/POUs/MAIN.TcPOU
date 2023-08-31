@@ -15,9 +15,7 @@ END_VAR
 PRG_Simulator();
 PRG_ReadTime();
 
-//Reset commands
-GVL_ItemSimulator.bResetRegistry :=FALSE;
-GVL_Timestamp.bResetRegistry := FALSE;]]></ST>
+]]></ST>
     </Implementation>
     <LineIds Name="MAIN">
       <LineId Id="40" Count="0" />
@@ -26,9 +24,7 @@ GVL_Timestamp.bResetRegistry := FALSE;]]></ST>
       <LineId Id="84" Count="0" />
       <LineId Id="74" Count="0" />
       <LineId Id="79" Count="0" />
-      <LineId Id="55" Count="0" />
-      <LineId Id="54" Count="0" />
-      <LineId Id="73" Count="0" />
+      <LineId Id="87" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>

@@ -1627,7 +1627,7 @@
                   <v>OnMouseDown</v>
                   <a cet="STSnippetInputAction">
                     <o>
-                      <v n="STSnippet">"PRG_Simulator.bStartGenerator := TRUE;"</v>
+                      <v n="STSnippet">"GVL_HMI.stItemSimulator.bStartGenerator := TRUE;"</v>
                     </o>
                   </a>
                 </d>
@@ -1810,7 +1810,7 @@
                   <v>OnMouseDown</v>
                   <a cet="STSnippetInputAction">
                     <o>
-                      <v n="STSnippet">"PRG_Simulator.bStopGenerator := TRUE;"</v>
+                      <v n="STSnippet">"GVL_HMI.stItemSimulator.bStopGenerator := TRUE;"</v>
                     </o>
                   </a>
                 </d>
@@ -17264,22 +17264,7 @@
                 <l n="UserManagementAccessRights" t="ArrayList" />
               </o>
               <o>
-                <a n="ConfiguredComplexInputs" cet="ComplexInput">
-                  <o>
-                    <n n="DescriptionTree" />
-                    <o n="VisualElemMemberList" t="VisualElemMemberList">
-                      <l n="VisualElemMemberList" t="VisualElemMemberCollection" cet="VisualElemMember">
-                        <o>
-                          <v n="Id">1186196937L</v>
-                          <v n="Value">"GVL_ItemSimulator.bResetRegistry"</v>
-                        </o>
-                      </l>
-                    </o>
-                    <v n="SignatureName">"Visu_ToggleInput"</v>
-                    <v n="Name">"Toggle"</v>
-                    <v n="Description">"Configure the toggling of a Boolean variable"</v>
-                  </o>
-                </a>
+                <a n="ConfiguredComplexInputs" et="ComplexInput" />
                 <l n="Elements" t="ArrayList" />
                 <n n="VisualElementDescription" />
                 <o n="VisualElemMemberList" t="VisualElemMemberList">
@@ -17446,7 +17431,15 @@
                 <v n="VisualElementIdentifier">"GenElemInst_212"</v>
                 <n n="VisualElementOfflinePaintCommands" />
                 <n n="VisualElementFrameInformation" />
-                <d n="VisualElementInputActions" t="Hashtable" />
+                <d n="VisualElementInputActions" t="Hashtable" ckt="String" cvt="IInputAction[]">
+                  <v>OnMouseDown</v>
+                  <a cet="STSnippetInputAction">
+                    <o>
+                      <v n="STSnippet">"GVL_HMI.stItemSimulator.bResetRegistry := TRUE;
+GVL_HMI.stTCPConnection.bResetRegistry := TRUE;"</v>
+                    </o>
+                  </a>
+                </d>
                 <v n="VisualElementIdentification">{744857a3-d559-40dd-9946-b4db5ab68816}</v>
                 <v n="VisualElementOwningObjectGuid">{0fccc92e-fff4-4187-a53b-4c3eb227158a}</v>
                 <a n="LMGuids" et="Guid" />
@@ -18235,7 +18228,7 @@
                   <v>OnMouseDown</v>
                   <a cet="STSnippetInputAction">
                     <o>
-                      <v n="STSnippet">"PRG_TCPIP.bConnectToReadSocket := TRUE;"</v>
+                      <v n="STSnippet">"GVL_HMI.stTCPConnectionCmd.bReadSocketConnect := TRUE;"</v>
                     </o>
                   </a>
                 </d>
@@ -18418,7 +18411,7 @@
                   <v>OnMouseDown</v>
                   <a cet="STSnippetInputAction">
                     <o>
-                      <v n="STSnippet">"PRG_TCPIP.bConnectToWriteSocket := TRUE;"</v>
+                      <v n="STSnippet">"GVL_HMI.stTCPConnectionCmd.bWriteSocketConnect := TRUE;"</v>
                     </o>
                   </a>
                 </d>
@@ -18695,7 +18688,7 @@
                     </o>
                     <o>
                       <v n="Id">1999528970L</v>
-                      <v n="Value">"PRG_TCPIP.bConnectedCameraRead"</v>
+                      <v n="Value">"GVL_HMI.stTCPConnectionStatus.bHlzWriteSocketIsConnected"</v>
                     </o>
                     <o>
                       <v n="Id">3719097617L</v>
@@ -18864,7 +18857,7 @@
                     </o>
                     <o>
                       <v n="Id">1999528970L</v>
-                      <v n="Value">"PRG_TCPIP.bConnectedCameraWrite"</v>
+                      <v n="Value">"GVL_HMI.stTCPConnectionStatus.bHlzWriteSocketIsConnected"</v>
                     </o>
                     <o>
                       <v n="Id">3719097617L</v>
@@ -19174,6 +19167,7 @@
         <Type n="Guid">System.Guid</Type>
         <Type n="Hashtable">System.Collections.Hashtable</Type>
         <Type n="HotkeyConfiguration">{6b108d46-58af-4e41-a3f4-174d8f160cc4}</Type>
+        <Type n="IInputAction[]">_3S.CoDeSys.VisualElem.IInputAction[], VisualElem, Version=3.5.13.0, Culture=neutral, PublicKeyToken=null</Type>
         <Type n="InputBoxInputAction">{e8e7e747-f76f-4dee-ab1c-b9637e41ac26}</Type>
         <Type n="InputBoxInputAction[]">_3S.CoDeSys.VisualElem.InputBoxInputAction[], VisualElem.plugin, Version=3.5.13.32, Culture=neutral, PublicKeyToken=null</Type>
         <Type n="Int16">System.Int16</Type>

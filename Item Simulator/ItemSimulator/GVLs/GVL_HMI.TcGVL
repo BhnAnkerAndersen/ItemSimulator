@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <GVL Name="GVL_HMI" Id="{95052761-25d1-4e56-92a7-1835d4ef6c77}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL
+	
+	//Commands
+	stItemSimulatorCmd		:ST_ItemSimulator_HMI_CMD;
+	stTCPConnectionCmd		:ST_TCPConnection_HMI_CMD;
+	stTimestampCmd			:ST_Timestamp_HMI_CMD;
+	
+	
+	//Status
+	stItemSimulatorStatus	:ST_ItemSimulator_HMI_Status;
+	stTCPConnectionStatus	:ST_TCPConnection_HMI_Status;
+	stTimestampStatus		:ST_Timestamp_HMI_Status;
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

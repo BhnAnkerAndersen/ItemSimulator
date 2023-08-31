@@ -4,9 +4,11 @@
     <Declaration><![CDATA[PROGRAM PRG_TCPIP 
 VAR	
 	bInit 						:BOOL := TRUE;
+	bReset						:BOOL;
 	
 	fbReadFromCameraTCP			:FB_ReadTCP;
 	bConnectToReadSocket		:BOOL;
+	
 	
 	fbWriteToHLZ				:FB_WriteTCP;
 	bConnectToWriteSocket		:BOOL;
@@ -18,9 +20,15 @@ IF bInit THEN
 	bInit := FALSE;
 END_IF
 
-//Call Methods
+//Set Commands
+M_SetCommands();
+
+//Call Functions
 M_ReadCameraTCP();
 M_WriteToHlzTCP();
+
+//Reset Commands
+M_ResetCommands();
 ]]></ST>
     </Implementation>
     <Method Name="M_ReadCameraTCP" Id="{c95fd805-970b-4ceb-80e0-471b56be01fb}">
@@ -37,12 +45,48 @@ stTCPConnection.sRemoteHost := '10.12.5.10';
 stTCPConnection.nRemotePort := 51236;
 stTCPConnection.tTimeOut := T#45S;
 stTCPConnection.bSocketConnect := bConnectToReadSocket;
-stTCPConnection.bReset := GVL_ItemSimulator.bResetRegistry;
+stTCPConnection.bReset := bReset;
 
 
 //Call Read TCP
 fbReadFromCameraTCP(stTCPConnection:=stTCPConnection);
 
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_ResetCommands" Id="{4909ebb6-41b3-4481-8814-8f18702a5ce4}">
+      <Declaration><![CDATA[METHOD PRIVATE M_ResetCommands
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[//Reset Commands
+GVL_HMI.stTCPConnectionCmd.bResetRegistry := FALSE;
+GVL_HMI.stTCPConnectionCmd.bReadSocketConnect := FALSE;
+GVL_HMI.stTCPConnectionCmd.bWriteSocketConnect := FALSE;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_SetCommands" Id="{196dfadf-eb46-41ac-ad30-bb686f47c03f}">
+      <Declaration><![CDATA[METHOD PRIVATE M_SetCommands
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[//Set Commands
+bReset 					:= GVL_HMI.stTCPConnectionCmd.bResetRegistry;
+bConnectToReadSocket 	:= GVL_HMI.stTCPConnectionCmd.bReadSocketConnect;
+bConnectToWriteSocket	:= GVL_HMI.stTCPConnectionCmd.bWriteSocketConnect;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_StatusHMI" Id="{99d3b423-fcff-4e92-81ee-1fa5237a663d}">
+      <Declaration><![CDATA[METHOD PUBLIC M_StatusHMI
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[//Status to HMI
+GVL_HMI.stTCPConnectionStatus.bCameraReadSocketIsConnected := fbReadFromCameraTCP.bIsConnected;
+GVL_HMI.stTCPConnectionStatus.bHlzWriteSocketIsConnected := fbWriteToHLZ.bIsConnected;
 ]]></ST>
       </Implementation>
     </Method>
@@ -60,7 +104,7 @@ stTCPConnection.sRemoteHost := '10.12.5.10';
 stTCPConnection.nRemotePort := 51236;
 stTCPConnection.tTimeOut := T#45S;
 stTCPConnection.bSocketConnect := bConnectToWriteSocket;
-stTCPConnection.bReset := GVL_ItemSimulator.bResetRegistry;
+stTCPConnection.bReset := bReset;
 
 
 //Call Write TCP
@@ -73,10 +117,16 @@ fbWriteToHLZ(stTCPConnection:=stTCPConnection);
       <LineId Id="469" Count="0" />
       <LineId Id="317" Count="0" />
       <LineId Id="328" Count="1" />
+      <LineId Id="477" Count="0" />
+      <LineId Id="476" Count="0" />
+      <LineId Id="478" Count="0" />
       <LineId Id="436" Count="0" />
       <LineId Id="464" Count="0" />
       <LineId Id="452" Count="0" />
       <LineId Id="468" Count="0" />
+      <LineId Id="480" Count="0" />
+      <LineId Id="479" Count="0" />
+      <LineId Id="481" Count="0" />
       <LineId Id="434" Count="0" />
     </LineIds>
     <LineIds Name="PRG_TCPIP.M_ReadCameraTCP">
@@ -86,6 +136,18 @@ fbWriteToHLZ(stTCPConnection:=stTCPConnection);
       <LineId Id="5" Count="0" />
       <LineId Id="20" Count="0" />
       <LineId Id="23" Count="0" />
+    </LineIds>
+    <LineIds Name="PRG_TCPIP.M_ResetCommands">
+      <LineId Id="6" Count="2" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="PRG_TCPIP.M_SetCommands">
+      <LineId Id="7" Count="2" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="PRG_TCPIP.M_StatusHMI">
+      <LineId Id="8" Count="0" />
+      <LineId Id="5" Count="2" />
     </LineIds>
     <LineIds Name="PRG_TCPIP.M_WriteToHlzTCP">
       <LineId Id="6" Count="10" />

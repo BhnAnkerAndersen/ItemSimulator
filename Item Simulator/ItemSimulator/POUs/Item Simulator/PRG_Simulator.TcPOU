@@ -19,15 +19,16 @@ VAR
 	i						:INT;													// Index container for array registrys
 END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[M_ItemGenerator();
+      <ST><![CDATA[//Set commands
+M_SetCommands();
+
+//Call functions
+M_ItemGenerator();
 M_ItemRegistry();
 
-
-IF GVL_ItemSimulator.bResetRegistry AND NOT bResetRegistry THEN
-	bResetRegistry := TRUE;
-ELSE
-	bResetRegistry := FALSE;
-END_IF]]></ST>
+//Reset commands
+M_ResetCommands();
+	]]></ST>
     </Implementation>
     <Method Name="M_ItemGenerator" Id="{0532369e-a262-4ae7-9b9a-e275b4ec1e2c}">
       <Declaration><![CDATA[METHOD PUBLIC M_ItemGenerator
@@ -79,7 +80,7 @@ fbItemGenerator(
 	bStop:=bStopGenerator,
 	aStItemGen:=aStItemGen,
 	stItemGenFromReg:=stItemGenFromReg,
-	bSignalOutput=>GVL_ItemSimulator.bSignalOut);
+	bSignalOutput=>GVL_IO.stItemSimulator.bSignalOut);
 	
 	
 //Reset start/stop
@@ -96,7 +97,7 @@ VAR
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[fbItemRegister(bSignal:=GVL_ItemSimulator.bSignalIn AND NOT fbItemGenerator.stItemGenFromReg.bEnableGenerator AND PRG_TCPIP.fbReadFromCameraTCP.bIsConnected,
+        <ST><![CDATA[fbItemRegister(bSignal:=GVL_IO.stItemSimulator.bSignalIn AND NOT fbItemGenerator.stItemGenFromReg.bEnableGenerator AND PRG_TCPIP.fbReadFromCameraTCP.bIsConnected,
 	bReset:=bResetRegistry,
 	nTimeCount=>nTimeCount,
 	aItemOnTimeRegistry=>aItemOnTimeRegistry,
@@ -107,14 +108,47 @@ bResetRegistry := FALSE;
 ]]></ST>
       </Implementation>
     </Method>
+    <Method Name="M_ResetCommands" Id="{dd7499ec-66b6-4c1c-a590-62e4735b9acd}">
+      <Declaration><![CDATA[METHOD PRIVATE M_ResetCommands
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[//Reset Commands
+GVL_HMI.stItemSimulatorCmd.bResetRegistry := FALSE;
+GVL_HMI.stItemSimulatorCmd.bStartGenerator := FALSE;
+GVL_HMI.stItemSimulatorCmd.bStopGenerator := FALSE;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_SetCommands" Id="{de319756-4e48-4c70-b7b9-ae5ae0198a13}">
+      <Declaration><![CDATA[METHOD PRIVATE M_SetCommands
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[//Set Commands
+bResetRegistry 	:= GVL_HMI.stItemSimulatorCmd.bResetRegistry;
+bStartGenerator	:= GVL_HMI.stItemSimulatorCmd.bStartGenerator;
+bStopGenerator 	:= GVL_HMI.stItemSimulatorCmd.bStopGenerator;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_StatusHMI" Id="{a7a20761-9c59-42df-90a0-7c614d655621}">
+      <Declaration><![CDATA[METHOD PUBLIC M_StatusHMI
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
     <LineIds Name="PRG_Simulator">
+      <LineId Id="596" Count="2" />
+      <LineId Id="592" Count="0" />
       <LineId Id="506" Count="0" />
       <LineId Id="502" Count="0" />
-      <LineId Id="585" Count="0" />
-      <LineId Id="547" Count="0" />
-      <LineId Id="540" Count="0" />
-      <LineId Id="548" Count="0" />
-      <LineId Id="550" Count="1" />
+      <LineId Id="600" Count="0" />
+      <LineId Id="599" Count="0" />
+      <LineId Id="601" Count="0" />
       <LineId Id="549" Count="0" />
     </LineIds>
     <LineIds Name="PRG_Simulator.M_ItemGenerator">
@@ -123,6 +157,17 @@ bResetRegistry := FALSE;
     </LineIds>
     <LineIds Name="PRG_Simulator.M_ItemRegistry">
       <LineId Id="11" Count="7" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="PRG_Simulator.M_ResetCommands">
+      <LineId Id="6" Count="2" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="PRG_Simulator.M_SetCommands">
+      <LineId Id="6" Count="2" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="PRG_Simulator.M_StatusHMI">
       <LineId Id="5" Count="0" />
     </LineIds>
   </POU>

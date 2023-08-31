@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <DUT Name="ST_ItemSimulator_HMI_CMD" Id="{eec62c8b-e8e6-40cc-903c-26e3b05989e9}">
+    <Declaration><![CDATA[TYPE ST_ItemSimulator_HMI_CMD :
+STRUCT
+	bResetRegistry				:BOOL;
+	bStartGenerator				:BOOL;
+	bStopGenerator				:BOOL;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

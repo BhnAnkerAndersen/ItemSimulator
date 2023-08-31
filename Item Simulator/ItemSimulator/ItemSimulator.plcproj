@@ -20,10 +20,37 @@
     <Compile Include="DUTs\ItemSimulator\E_ItemGenerator.TcDUT">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DUTs\ItemSimulator\ST_ItemSimulator_HMI_CMD.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\ItemSimulator\ST_ItemSimulator_HMI_Status.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\ItemSimulator\ST_ItemSimulator_IO.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="DUTs\ItemSimulator\ST_ItemGenerator.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DUTs\TCP\ST_TCPConnection.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\TCP\ST_TCPConnection_HMI_CMD.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\TCP\ST_TCPConnection_HMI_Status.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\TCP\ST_TCPConnection_IO.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\TimeStamp\ST_Timestamp_HMI_CMD.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\TimeStamp\ST_Timestamp_HMI_Status.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\TimeStamp\ST_Timestamp_IO.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="GlobalTextList.TcGTLO">
@@ -32,11 +59,11 @@
     <Compile Include="GVLs\GVL_Constant.TcGVL">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="GVLs\ItemSimulator\GVL_ItemSimulator.TcGVL">
+    <Compile Include="GVLs\GVL_HMI.TcGVL">
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
     </Compile>
-    <Compile Include="GVLs\TimeStamp\GVL_Timestamp.TcGVL">
+    <Compile Include="GVLs\GVL_IO.TcGVL">
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
     </Compile>
@@ -109,10 +136,9 @@
   <ItemGroup>
     <Folder Include="DUTs" />
     <Folder Include="DUTs\ItemSimulator" />
+    <Folder Include="DUTs\TimeStamp" />
     <Folder Include="DUTs\TCP" />
     <Folder Include="GVLs" />
-    <Folder Include="GVLs\ItemSimulator" />
-    <Folder Include="GVLs\TimeStamp" />
     <Folder Include="POUs\Item Simulator" />
     <Folder Include="POUs\BuildingBlocks" />
     <Folder Include="POUs\BuildingBlocks\Control" />

@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <DUT Name="ST_Timestamp_IO" Id="{a73c00dc-eeb5-40a2-8765-dc4aec1a594a}">
+    <Declaration><![CDATA[TYPE ST_Timestamp_IO :
+STRUCT
+	bCameraOutSignal	AT %Q* 	:BOOL;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

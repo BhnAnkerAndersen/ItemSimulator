@@ -75,7 +75,7 @@ END_VAR
       <Implementation>
         <ST><![CDATA[IF bIsConnected THEN	
 	//Falling edge of item generator
-	WriteSignal(CLK:=GVL_ItemSimulator.bSignalOut);
+	WriteSignal(CLK:=GVL_IO.stItemSimulator.bSignalOut);
 	
 	IF WriteSignal.Q THEN
 		//Get length of string written

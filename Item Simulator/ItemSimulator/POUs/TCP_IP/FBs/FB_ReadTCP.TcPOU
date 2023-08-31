@@ -112,7 +112,7 @@ IF PRG_Simulator.bStartGenerator OR PRG_Simulator.bStopGenerator OR (PRG_Simulat
 	
 	
 	//Reset commands
-	stTCPConnection.bReset:=FALSE;
+	stTCPConnection.bReset :=FALSE;
 END_IF
 
 ]]></ST>

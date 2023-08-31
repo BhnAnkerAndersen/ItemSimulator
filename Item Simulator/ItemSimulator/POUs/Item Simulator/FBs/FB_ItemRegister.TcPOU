@@ -9,6 +9,7 @@ END_VAR
 VAR_OUTPUT
 	aItemOnTimeRegistry		: ARRAY[0..GVL_Constant.ITEM_ARRAY_SIZE] OF TIME;
 	aItemOffTimeRegistry	: ARRAY[0..GVL_Constant.ITEM_ARRAY_SIZE] OF TIME;
+	
 	nTimeCount				: INT;
 END_VAR
 VAR
@@ -20,8 +21,6 @@ VAR
 	tReadTimeOff			: TIME;
 	osReadOffTime			: R_TRIG;
 	
-	
-	
 	i						: INT;
 END_VAR
 ]]></Declaration>
@@ -32,25 +31,54 @@ ELSE
 	tTimeOFF(IN:=TRUE, PT:=T#5S, ET=>tReadTimeOff);
 END_IF;
 
+//Write on time to array
+M_ReadOnTime();
 
-osReadOnTime(CLK:=bSignal);
+//Write off time to array
+M_ReadOffTime();
+
+//Reset array for time registry
+M_ResetTimeRegistry();]]></ST>
+    </Implementation>
+    <Method Name="M_ReadOffTime" Id="{0dd02e9a-9bb9-495a-8635-92fa2193c059}">
+      <Declaration><![CDATA[//On R_Trig of Signal
+METHOD PUBLIC M_ReadOffTime
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[osReadOffTime(CLK:=bSignal);
+
+IF osReadOffTime.Q THEN
+	aItemOffTimeRegistry[nTimeCount] := tReadTimeOff;
+	tTimeOff(IN:=FALSE);
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_ReadOnTime" Id="{5f071343-b7ea-4d4c-8e55-b7e89db6d0ee}">
+      <Declaration><![CDATA[//On F_Trig of Signal
+METHOD PUBLIC M_ReadOnTime
+VAR_INPUT
+END_VAR
+VAR
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[osReadOnTime(CLK:=bSignal);
 
 IF osReadOnTime.Q THEN
 	aItemOnTimeRegistry[nTimeCount] := tReadTimeOn;
 	nTimeCount := nTimeCount +1;
 	tTimeOn(IN:=FALSE);
-END_IF
-
-
-osReadOffTime(CLK:=bSignal);
-
-IF osReadOffTime.Q THEN
-	aItemOffTimeRegistry[nTimeCount] := tReadTimeOff;
-	tTimeOff(IN:=FALSE);
-END_IF
-
-
-IF bReset THEN
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_ResetTimeRegistry" Id="{aec981ff-8120-4b14-9fab-616a1f61d830}">
+      <Declaration><![CDATA[METHOD PUBLIC M_ResetTimeRegistry
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF bReset THEN
 	tTimeOFF(IN:=FALSE);
 	tTimeOn(IN:=FALSE);
 	
@@ -63,41 +91,35 @@ IF bReset THEN
 	bReset := FALSE;
 END_IF
 ]]></ST>
-    </Implementation>
+      </Implementation>
+    </Method>
     <LineIds Name="FB_ItemRegister">
       <LineId Id="109" Count="0" />
       <LineId Id="135" Count="0" />
       <LineId Id="49" Count="0" />
       <LineId Id="134" Count="0" />
       <LineId Id="110" Count="0" />
+      <LineId Id="171" Count="0" />
       <LineId Id="26" Count="0" />
       <LineId Id="31" Count="0" />
-      <LineId Id="30" Count="0" />
-      <LineId Id="34" Count="0" />
-      <LineId Id="33" Count="0" />
-      <LineId Id="35" Count="0" />
-      <LineId Id="82" Count="0" />
-      <LineId Id="37" Count="0" />
-      <LineId Id="36" Count="0" />
-      <LineId Id="60" Count="0" />
-      <LineId Id="53" Count="0" />
-      <LineId Id="52" Count="0" />
-      <LineId Id="54" Count="0" />
-      <LineId Id="56" Count="0" />
-      <LineId Id="58" Count="1" />
-      <LineId Id="42" Count="0" />
-      <LineId Id="62" Count="0" />
+      <LineId Id="175" Count="0" />
+      <LineId Id="174" Count="0" />
+      <LineId Id="170" Count="0" />
+      <LineId Id="173" Count="0" />
       <LineId Id="61" Count="0" />
-      <LineId Id="41" Count="0" />
-      <LineId Id="64" Count="0" />
-      <LineId Id="66" Count="0" />
-      <LineId Id="73" Count="2" />
-      <LineId Id="78" Count="0" />
-      <LineId Id="76" Count="0" />
-      <LineId Id="80" Count="1" />
-      <LineId Id="70" Count="0" />
-      <LineId Id="65" Count="0" />
       <LineId Id="29" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_ItemRegister.M_ReadOffTime">
+      <LineId Id="6" Count="4" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_ItemRegister.M_ReadOnTime">
+      <LineId Id="14" Count="5" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_ItemRegister.M_ResetTimeRegistry">
+      <LineId Id="6" Count="11" />
+      <LineId Id="5" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>

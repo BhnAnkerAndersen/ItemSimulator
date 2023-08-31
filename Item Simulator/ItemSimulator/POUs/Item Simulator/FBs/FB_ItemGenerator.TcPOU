@@ -35,12 +35,27 @@ VAR_OUTPUT
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[IF bInit THEN
+      <ST><![CDATA[//Init
+IF bInit THEN
 	eState := E_ItemGenerator.Idle;
 	bInit := FALSE;
 END_IF
 
+//Call item generator cases
+M_GeneratorCases();
 
+//Reset Commands
+bstart := FALSE;
+bStop := FALSE;
+]]></ST>
+    </Implementation>
+    <Method Name="M_GeneratorCases" Id="{61ba97f2-018e-4651-86db-7fb76b4696d8}">
+      <Declaration><![CDATA[METHOD PUBLIC M_GeneratorCases
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
 CASE eState OF
 	
 	// Idle
@@ -389,54 +404,23 @@ CASE eState OF
 			eState := E_ItemGenerator.Idle;
 		END_IF;
 		
-END_CASE
-bstart := FALSE;
-bStop := FALSE;
-]]></ST>
-    </Implementation>
+END_CASE]]></ST>
+      </Implementation>
+    </Method>
     <LineIds Name="FB_ItemGenerator">
-      <LineId Id="45" Count="15" />
-      <LineId Id="447" Count="0" />
-      <LineId Id="449" Count="2" />
-      <LineId Id="448" Count="0" />
-      <LineId Id="452" Count="0" />
-      <LineId Id="454" Count="2" />
-      <LineId Id="453" Count="0" />
-      <LineId Id="457" Count="0" />
-      <LineId Id="459" Count="2" />
-      <LineId Id="458" Count="0" />
-      <LineId Id="462" Count="0" />
-      <LineId Id="464" Count="2" />
-      <LineId Id="463" Count="0" />
-      <LineId Id="467" Count="0" />
-      <LineId Id="469" Count="2" />
-      <LineId Id="468" Count="0" />
-      <LineId Id="472" Count="0" />
-      <LineId Id="474" Count="2" />
-      <LineId Id="473" Count="0" />
-      <LineId Id="477" Count="0" />
-      <LineId Id="479" Count="2" />
-      <LineId Id="478" Count="0" />
-      <LineId Id="482" Count="0" />
-      <LineId Id="484" Count="2" />
-      <LineId Id="483" Count="0" />
-      <LineId Id="487" Count="0" />
-      <LineId Id="489" Count="2" />
-      <LineId Id="488" Count="0" />
-      <LineId Id="534" Count="0" />
-      <LineId Id="536" Count="2" />
-      <LineId Id="535" Count="0" />
-      <LineId Id="61" Count="1" />
-      <LineId Id="402" Count="0" />
-      <LineId Id="63" Count="0" />
-      <LineId Id="403" Count="2" />
-      <LineId Id="64" Count="254" />
-      <LineId Id="359" Count="1" />
-      <LineId Id="362" Count="21" />
-      <LineId Id="361" Count="0" />
-      <LineId Id="319" Count="2" />
+      <LineId Id="586" Count="0" />
+      <LineId Id="45" Count="4" />
+      <LineId Id="583" Count="0" />
+      <LineId Id="320" Count="0" />
+      <LineId Id="585" Count="0" />
+      <LineId Id="584" Count="0" />
+      <LineId Id="321" Count="0" />
       <LineId Id="533" Count="0" />
       <LineId Id="9" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_ItemGenerator.M_GeneratorCases">
+      <LineId Id="6" Count="348" />
+      <LineId Id="5" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>

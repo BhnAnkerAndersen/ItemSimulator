@@ -6,16 +6,7 @@ VAR_INPUT
 	bStart				:BOOL;
 	bStop				:BOOL;
 	
-	stItemGen1			:ST_ItemGenerator;
-	stItemGen2			:ST_ItemGenerator;
-	stItemGen3			:ST_ItemGenerator;
-	stItemGen4			:ST_ItemGenerator;
-	stItemGen5			:ST_ItemGenerator;
-	stItemGen6			:ST_ItemGenerator;
-	stItemGen7			:ST_ItemGenerator;
-	stItemGen8			:ST_ItemGenerator;
-	stItemGen9			:ST_ItemGenerator;
-	stItemGen10			:ST_ItemGenerator;
+	aStItemGen			:ARRAY[1..10] OF ST_ItemGenerator;
 	stItemGenFromReg	:ST_ItemGenerator;
 	
 END_VAR
@@ -40,7 +31,7 @@ VAR
 END_VAR
 
 VAR_OUTPUT
-	bOutput				:BOOL;
+	bSignalOutput		:BOOL;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -59,60 +50,60 @@ CASE eState OF
 		fbItemGen1(
 			bTrig := FALSE,
 			bStop := TRUE,
-			bPuls => bOutput);
+			bPuls => bSignalOutput);
 			
 		fbItemGen2(
 			bTrig := FALSE,
 			bStop := TRUE,
-			bPuls => bOutput);
+			bPuls => bSignalOutput);
 			
 		fbItemGen3(
 			bTrig := FALSE,
 			bStop := TRUE,
-			bPuls => bOutput);
+			bPuls => bSignalOutput);
 			
 		fbItemGen4(
 			bTrig := FALSE,
 			bStop := TRUE,
-			bPuls => bOutput);
+			bPuls => bSignalOutput);
 			
 		fbItemGen5(
 			bTrig := FALSE,
 			bStop := TRUE,
-			bPuls => bOutput);
+			bPuls => bSignalOutput);
 			
 		fbItemGen6(
 			bTrig := FALSE,
 			bStop := TRUE,
-			bPuls => bOutput);
+			bPuls => bSignalOutput);
 			
 		fbItemGen7(
 			bTrig := FALSE,
 			bStop := TRUE,
-			bPuls => bOutput);
+			bPuls => bSignalOutput);
 			
 		fbItemGen8(
 			bTrig := FALSE,
 			bStop := TRUE,
-			bPuls => bOutput);
+			bPuls => bSignalOutput);
 			
 		fbItemGen9(
 			bTrig := FALSE,
 			bStop := TRUE,
-			bPuls => bOutput);
+			bPuls => bSignalOutput);
 			
 		fbItemGen10(
 			bTrig := FALSE,
 			bStop := TRUE,
-			bPuls => bOutput);
+			bPuls => bSignalOutput);
 			
 		fbItemGenFromReg(
 			bTrig := FALSE,
 			bStop := TRUE,
-			bPuls => bOutput);
+			bPuls => bSignalOutput);
 	
 		IF bStart THEN
-			IF stItemGen1.bEnableGenerator THEN
+			IF aStItemGen[1].bEnableGenerator THEN
 				eState := E_ItemGenerator.ItemGenerator1;
 			ELSE
 				eState := E_ItemGenerator.ItemGeneratorFromRegistry;
@@ -128,12 +119,12 @@ CASE eState OF
 		IF NOT bStop THEN 
 
 			fbItemGen1(
-				bTrig			:= stItemGen1.bEnableGenerator, 
+				bTrig			:= aStItemGen[1].bEnableGenerator, 
 				bStop			:= FALSE,
-				uiNo 			:= stItemGen1.nNumberOfPulses,  
-				tPulsLengthOn 	:= stItemGen1.tTimeOnPulse,
-				tPulsLengthOff 	:= stItemGen1.tTimeOffPulse,
-				bPuls			=> bOutput);
+				uiNo 			:= aStItemGen[1].nNumberOfPulses,  
+				tPulsLengthOn 	:= aStItemGen[1].tTimeOnPulse,
+				tPulsLengthOff 	:= aStItemGen[1].tTimeOffPulse,
+				bPuls			=> bSignalOutput);
 				
 			// When all pulses have been made, go to generator 2
 			IF fbItemGen1.uiCount >= (fbItemGen1.uiNo+1) THEN
@@ -151,15 +142,15 @@ CASE eState OF
 	E_ItemGenerator.ItemGenerator2:
 	
 		// If generator is enabled start the pulses
-		IF stItemGen2.bEnableGenerator AND NOT bStop THEN 
+		IF aStItemGen[2].bEnableGenerator AND NOT bStop THEN 
 
 			fbItemGen2(
-				bTrig			:= stItemGen2.bEnableGenerator, 
+				bTrig			:= aStItemGen[2].bEnableGenerator, 
 				bStop			:= FALSE,
-				uiNo 			:= stItemGen2.nNumberOfPulses, 
-				tPulsLengthOn 	:= stItemGen2.tTimeOnPulse,
-				tPulsLengthOff	:= stItemGen2.tTimeOffPulse,
-				bPuls			=> bOutput);
+				uiNo 			:= aStItemGen[2].nNumberOfPulses, 
+				tPulsLengthOn 	:= aStItemGen[2].tTimeOnPulse,
+				tPulsLengthOff	:= aStItemGen[2].tTimeOffPulse,
+				bPuls			=> bSignalOutput);
 				
 			// When all pulses have been made, go to generator 3
 			IF fbItemGen2.uiCount >= (fbItemGen2.uiNo+1) THEN
@@ -178,15 +169,15 @@ CASE eState OF
 	E_ItemGenerator.ItemGenerator3:
 	
 		// If generator is enabled start the pulses
-		IF stItemGen3.bEnableGenerator AND NOT bStop THEN 
+		IF astItemGen[3].bEnableGenerator AND NOT bStop THEN 
 
 			fbItemGen3(
-				bTrig			:= stItemGen3.bEnableGenerator, 
+				bTrig			:= aStItemGen[3].bEnableGenerator, 
 				bStop			:= FALSE,
-				uiNo 			:= stItemGen3.nNumberOfPulses, 
-				tPulsLengthOn 	:= stItemGen3.tTimeOnPulse,
-				tPulsLengthOff 	:= stItemGen3.tTimeOffPulse,
-				bPuls			=> bOutput);
+				uiNo 			:= aStItemGen[3].nNumberOfPulses, 
+				tPulsLengthOn 	:= aStItemGen[3].tTimeOnPulse,
+				tPulsLengthOff 	:= aStItemGen[3].tTimeOffPulse,
+				bPuls			=> bSignalOutput);
 				
 			// When all pulses have been made, go to generator 4
 			IF fbItemGen3.uiCount >= (fbItemGen3.uiNo+1) THEN
@@ -203,15 +194,15 @@ CASE eState OF
 	E_ItemGenerator.ItemGenerator4:
 	
 		// If generator is enabled start the pulses
-		IF stItemGen4.bEnableGenerator AND NOT bStop THEN 
+		IF aStItemGen[4].bEnableGenerator AND NOT bStop THEN 
 
 			fbItemGen4(
-				bTrig			:= stItemGen4.bEnableGenerator, 
+				bTrig			:= aStItemGen[4].bEnableGenerator, 
 				bStop			:= FALSE,
-				uiNo 			:= stItemGen4.nNumberOfPulses, 
-				tPulsLengthOn 	:= stItemGen4.tTimeOnPulse,
-				tPulsLengthOff 	:= stItemGen4.tTimeOffPulse,
-				bPuls			=> bOutput);
+				uiNo 			:= aStItemGen[4].nNumberOfPulses, 
+				tPulsLengthOn 	:= aStItemGen[4].tTimeOnPulse,
+				tPulsLengthOff 	:= aStItemGen[4].tTimeOffPulse,
+				bPuls			=> bSignalOutput);
 				
 			// When all pulses have been made, go to generator 5
 			IF fbItemGen4.uiCount >= (fbItemGen4.uiNo+1) THEN
@@ -228,15 +219,15 @@ CASE eState OF
 	E_ItemGenerator.ItemGenerator5:
 	
 		// If generator is enabled start the pulses
-		IF stItemGen5.bEnableGenerator AND NOT bStop THEN 
+		IF aStItemGen[5].bEnableGenerator AND NOT bStop THEN 
 
 			fbItemGen5(
-				bTrig			:= stItemGen5.bEnableGenerator, 
+				bTrig			:= aStItemGen[5].bEnableGenerator, 
 				bStop			:= FALSE,
-				uiNo 			:= stItemGen5.nNumberOfPulses, 
-				tPulsLengthOn 	:= stItemGen5.tTimeOnPulse,
-				tPulsLengthOff 	:= stItemGen5.tTimeOffPulse,
-				bPuls			=> bOutput);
+				uiNo 			:= aStItemGen[5].nNumberOfPulses, 
+				tPulsLengthOn 	:= aStItemGen[5].tTimeOnPulse,
+				tPulsLengthOff 	:= aStItemGen[5].tTimeOffPulse,
+				bPuls			=> bSignalOutput);
 				
 			// When all pulses have been made, go to generator 6
 			IF fbItemGen5.uiCount >= (fbItemGen5.uiNo+1) THEN
@@ -253,15 +244,15 @@ CASE eState OF
 	E_ItemGenerator.ItemGenerator6:
 	
 		// If generator is enabled start the pulses
-		IF stItemGen6.bEnableGenerator AND NOT bStop THEN 
+		IF aStItemGen[6].bEnableGenerator AND NOT bStop THEN 
 
 			fbItemGen6(
-				bTrig			:= stItemGen6.bEnableGenerator, 
+				bTrig			:= aStItemGen[6].bEnableGenerator, 
 				bStop			:= FALSE,
-				uiNo 			:= stItemGen6.nNumberOfPulses, 
-				tPulsLengthOn 	:= stItemGen6.tTimeOnPulse,
-				tPulsLengthOff 	:= stItemGen6.tTimeOffPulse,
-				bPuls			=> bOutput);
+				uiNo 			:= aStItemGen[6].nNumberOfPulses, 
+				tPulsLengthOn 	:= aStItemGen[6].tTimeOnPulse,
+				tPulsLengthOff 	:= aStItemGen[6].tTimeOffPulse,
+				bPuls			=> bSignalOutput);
 				
 			// When all pulses have been made, go to generator 7
 			IF fbItemGen6.uiCount >= (fbItemGen6.uiNo+1) THEN
@@ -278,15 +269,15 @@ CASE eState OF
 	E_ItemGenerator.ItemGenerator7:
 	
 		// If generator is enabled start the pulses
-		IF stItemGen7.bEnableGenerator AND NOT bStop THEN 
+		IF aStItemGen[7].bEnableGenerator AND NOT bStop THEN 
 
 			fbItemGen7(
-				bTrig			:= stItemGen7.bEnableGenerator, 
+				bTrig			:= aStItemGen[7].bEnableGenerator, 
 				bStop			:= FALSE,
-				uiNo 			:= stItemGen7.nNumberOfPulses, 
-				tPulsLengthOn 	:= stItemGen7.tTimeOnPulse,
-				tPulsLengthOff 	:= stItemGen7.tTimeOffPulse,
-				bPuls			=> bOutput);
+				uiNo 			:= aStItemGen[7].nNumberOfPulses, 
+				tPulsLengthOn 	:= aStItemGen[7].tTimeOnPulse,
+				tPulsLengthOff 	:= aStItemGen[7].tTimeOffPulse,
+				bPuls			=> bSignalOutput);
 				
 			// When all pulses have been made, go to generator 8
 			IF fbItemGen7.uiCount >= (fbItemGen7.uiNo+1) THEN
@@ -303,15 +294,15 @@ CASE eState OF
 	E_ItemGenerator.ItemGenerator8:
 	
 		// If generator is enabled start the pulses
-		IF stItemGen8.bEnableGenerator AND NOT bStop THEN 
+		IF aStItemGen[8].bEnableGenerator AND NOT bStop THEN 
 
 			fbItemGen8(
-				bTrig			:= stItemGen8.bEnableGenerator, 
+				bTrig			:= aStItemGen[8].bEnableGenerator, 
 				bStop			:= FALSE,
-				uiNo 			:= stItemGen8.nNumberOfPulses, 
-				tPulsLengthOn 	:= stItemGen8.tTimeOnPulse,
-				tPulsLengthOff 	:= stItemGen8.tTimeOffPulse,
-				bPuls			=> bOutput);
+				uiNo 			:= aStItemGen[8].nNumberOfPulses, 
+				tPulsLengthOn 	:= aStItemGen[8].tTimeOnPulse,
+				tPulsLengthOff 	:= aStItemGen[8].tTimeOffPulse,
+				bPuls			=> bSignalOutput);
 				
 			// When all pulses have been made, go to generator 9
 			IF fbItemGen8.uiCount >= (fbItemGen8.uiNo+1) THEN
@@ -328,15 +319,15 @@ CASE eState OF
 	E_ItemGenerator.ItemGenerator9:
 	
 		// If generator is enabled start the pulses
-		IF stItemGen9.bEnableGenerator AND NOT bStop THEN 
+		IF aStItemGen[9].bEnableGenerator AND NOT bStop THEN 
 
 			fbItemGen9(
-				bTrig			:= stItemGen9.bEnableGenerator, 
+				bTrig			:= aStItemGen[9].bEnableGenerator, 
 				bStop			:= FALSE,
-				uiNo 			:= stItemGen9.nNumberOfPulses, 
-				tPulsLengthOn 	:= stItemGen9.tTimeOnPulse,
-				tPulsLengthOff 	:= stItemGen9.tTimeOffPulse, 
-				bPuls			=> bOutput);
+				uiNo 			:= aStItemGen[9].nNumberOfPulses, 
+				tPulsLengthOn 	:= aStItemGen[9].tTimeOnPulse,
+				tPulsLengthOff 	:= aStItemGen[9].tTimeOffPulse, 
+				bPuls			=> bSignalOutput);
 				
 			// When all pulses have been made, go to generator 10
 			IF fbItemGen9.uiCount >= (fbItemGen9.uiNo+1) THEN
@@ -353,15 +344,15 @@ CASE eState OF
 	E_ItemGenerator.ItemGenerator10:
 	
 		// If generator is enabled start the pulses
-		IF stItemGen10.bEnableGenerator AND NOT bStop THEN 
+		IF aStItemGen[10].bEnableGenerator AND NOT bStop THEN 
 
 			fbItemGen10(
-				bTrig			:= stItemGen10.bEnableGenerator, 
+				bTrig			:= aStItemGen[10].bEnableGenerator, 
 				bStop			:= FALSE,
-				uiNo 			:= stItemGen10.nNumberOfPulses, 
-				tPulsLengthOn 	:= stItemGen10.tTimeOnPulse,
-				tPulsLengthOff 	:= stItemGen10.tTimeOffPulse, 
-				bPuls			=> bOutput);
+				uiNo 			:= aStItemGen[10].nNumberOfPulses, 
+				tPulsLengthOn 	:= aStItemGen[10].tTimeOnPulse,
+				tPulsLengthOff 	:= aStItemGen[10].tTimeOffPulse, 
+				bPuls			=> bSignalOutput);
 				
 			// When all pulses have been made, go to Idle
 			IF fbItemGen10.uiCount >= (fbItemGen10.uiNo+1) THEN
@@ -386,7 +377,7 @@ CASE eState OF
 				uiNo 			:= stItemGenFromReg.nNumberOfPulses, 
 				tPulsLengthOn 	:= stItemGenFromReg.tTimeOnPulse,
 				tPulsLengthOff 	:= stItemGenFromReg.tTimeOffPulse, 
-				bPuls			=> bOutput);
+				bPuls			=> bSignalOutput);
 				
 			// When all pulses have been made, go to Idle
 			IF fbItemGenFromReg.uiCount >= (fbItemGenFromReg.uiNo+1) THEN

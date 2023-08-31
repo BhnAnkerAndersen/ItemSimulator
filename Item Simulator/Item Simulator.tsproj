@@ -54,7 +54,7 @@
 		</System>
 		<Plc>
 			<Project GUID="{921AB191-9460-4D4F-B79D-2E5B7263E7DB}" Name="ItemSimulator" PrjFilePath="ItemSimulator\ItemSimulator.plcproj" TmcFilePath="ItemSimulator\ItemSimulator.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="ItemSimulator\ItemSimulator.tmc" TmcHash="{F4B915AD-9487-594D-EAB0-FDF023B54F20}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="ItemSimulator\ItemSimulator.tmc" TmcHash="{17C3CA33-93AF-E5C7-8D8F-5A22BB76749D}">
 					<Name>ItemSimulator Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="2" AreaNo="1">

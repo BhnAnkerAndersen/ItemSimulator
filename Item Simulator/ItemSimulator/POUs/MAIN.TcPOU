@@ -13,7 +13,6 @@ END_VAR
 
 //Call Programs
 PRG_Simulator();
-PRG_TCPIP();
 PRG_ReadTime();
 
 //Reset commands
@@ -25,7 +24,6 @@ GVL_Timestamp.bResetRegistry := FALSE;]]></ST>
       <LineId Id="62" Count="1" />
       <LineId Id="85" Count="1" />
       <LineId Id="84" Count="0" />
-      <LineId Id="68" Count="0" />
       <LineId Id="74" Count="0" />
       <LineId Id="79" Count="0" />
       <LineId Id="55" Count="0" />

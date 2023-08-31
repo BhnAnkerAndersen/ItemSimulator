@@ -91,7 +91,7 @@ END_VAR
 		hSocket:=hSocket, 
 		cbLen:=nWriteLen,
 		pSrc:=ADR(aWriteBytes),
-		bExecute:=WriteSignal.Q AND PRG_Simulator.stItemGenFromReg.bEnableGenerator);
+		bExecute:=WriteSignal.Q AND PRG_Simulator.fbItemGenerator.stItemGenFromReg.bEnableGenerator);
 END_IF;
 
 

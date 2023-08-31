@@ -130,6 +130,9 @@
 				<Image Id="4" AddrType="9" ImageType="3">
 					<Name>Image</Name>
 				</Image>
+				<Image Id="1" AddrType="10" ImageType="3">
+					<Name>Image-2</Name>
+				</Image>
 				<Box Id="1" BoxType="9099">
 					<Name>Term 1 (EK1101)</Name>
 					<ImageId>1000</ImageId>
@@ -1329,4 +1332,14 @@
 			</Device>
 		</Io>
 	</Project>
+	<Mappings>
+		<OwnerA Name="TIPC^ItemSimulator^ItemSimulator Instance">
+			<OwnerB Name="TIID^Device 5 (EtherCAT)^Term 1 (EK1101)^Term 2 (EL1018)">
+				<Link VarA="PlcTask Inputs^GVL_IO.stItemSimulator.bSignalIn" VarB="Channel 1^Input"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 5 (EtherCAT)^Term 1 (EK1101)^Term 3 (EL2008)">
+				<Link VarA="TCPTask Outputs^GVL_IO.stItemSimulator.bSignalOut" VarB="Channel 1^Output"/>
+			</OwnerB>
+		</OwnerA>
+	</Mappings>
 </TcSmProject>

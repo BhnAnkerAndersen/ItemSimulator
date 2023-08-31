@@ -6,11 +6,13 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[PRG_TCPIP();
+      <ST><![CDATA[//Call programs
+PRG_TCPIP();
 
 ]]></ST>
     </Implementation>
     <LineIds Name="TCPCom">
+      <LineId Id="15" Count="0" />
       <LineId Id="5" Count="0" />
       <LineId Id="14" Count="0" />
       <LineId Id="9" Count="0" />

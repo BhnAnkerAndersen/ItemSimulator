@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FB_AcceptTCP" Id="{689663a5-455a-48ee-a140-0c6ca4007826}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_AcceptTCP
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="M_SocketAccept" Id="{20c1851f-05ee-4536-98d4-083ac4e68a01}">
+      <Declaration><![CDATA[METHOD PUBLIC M_SocketAccept
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_SocketListen" Id="{66c732dc-ca30-4c0e-b95f-3a2e2248d25d}">
+      <Declaration><![CDATA[METHOD PUBLIC M_SocketListen
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="FB_AcceptTCP">
+      <LineId Id="9" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_AcceptTCP.M_SocketAccept">
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_AcceptTCP.M_SocketListen">
+      <LineId Id="5" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

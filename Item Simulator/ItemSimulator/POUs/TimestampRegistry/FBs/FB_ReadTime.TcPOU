@@ -1,11 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
-  <POU Name="PRG_ReadTime" Id="{41809a93-5b53-47f0-b8b5-05c700b2cea3}" SpecialFunc="None">
-    <Declaration><![CDATA[PROGRAM PRG_ReadTime
-VAR 
+  <POU Name="FB_ReadTime" Id="{5faed61f-a29b-4c44-ac5a-b7ed64021721}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_ReadTime
+VAR_INPUT
 	bReset 					:BOOL;	
 	bSignalIn				:BOOL;
-
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+	
 	//Delta time in ms from Digital sensor to camera TCP
 	aDeltaTimeMS			: ARRAY[0..GVL_Constant.ITEM_ARRAY_SIZE] OF UDINT;
 
@@ -14,24 +18,13 @@ VAR
 	
 	//Camera TCP port
 	aTCPPortCameraTime		:ARRAY[0..ITEM_ARRAY_SIZE] OF STRING;
-	
 END_VAR
-
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[//IO
-bSignalIn := GVL_IO.stItemSimulator.bSignalIn;
-
-//Set Commands
-M_SetCommands();
-
-//Call Functions
+      <ST><![CDATA[//Call Functions
 M_SaveSensorTime();
 M_SaveCameraTCPTime();
-M_CalculateDeltaTime();
-
-//Reset Commands
-M_ResetCommands();]]></ST>
+M_CalculateDeltaTime();]]></ST>
     </Implementation>
     <Method Name="M_CalculateDeltaTime" Id="{a5129a3c-0d36-4a82-bf14-e117a70e330a}">
       <Declaration><![CDATA[METHOD PUBLIC M_CalculateDeltaTime
@@ -71,16 +64,6 @@ IF bReset THEN
 END_IF
 
 ]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="M_ResetCommands" Id="{74db0409-a38e-4eee-b70a-2501178068c0}">
-      <Declaration><![CDATA[METHOD PRIVATE M_ResetCommands
-VAR_INPUT
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[//Reset Commands
-GVL_HMI.stTimestampCmd.bResetRegistry := FALSE;]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_SaveCameraTCPTime" Id="{9f3cdf40-e788-4c90-aed5-163aedc53860}">
@@ -149,30 +132,11 @@ IF bReset THEN
 END_IF]]></ST>
       </Implementation>
     </Method>
-    <Method Name="M_SetCommands" Id="{51730a3a-dc77-4efb-ad56-60c19693c631}">
-      <Declaration><![CDATA[METHOD PRIVATE M_SetCommands
-VAR_INPUT
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[//Set Commands
-bReset := GVL_HMI.stTimestampCmd.bResetRegistry;]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="M_StatusHMI" Id="{07c83b8d-d512-478b-acd0-c9301802f0e4}">
-      <Declaration><![CDATA[METHOD PUBLIC M_StatusHMI
-VAR_INPUT
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[]]></ST>
-      </Implementation>
-    </Method>
-    <LineIds Name="PRG_ReadTime">
-      <LineId Id="321" Count="11" />
-      <LineId Id="296" Count="0" />
+    <LineIds Name="FB_ReadTime">
+      <LineId Id="10" Count="2" />
+      <LineId Id="9" Count="0" />
     </LineIds>
-    <LineIds Name="PRG_ReadTime.M_CalculateDeltaTime">
+    <LineIds Name="FB_ReadTime.M_CalculateDeltaTime">
       <LineId Id="39" Count="0" />
       <LineId Id="25" Count="0" />
       <LineId Id="27" Count="0" />
@@ -188,11 +152,7 @@ END_VAR
       <LineId Id="34" Count="4" />
       <LineId Id="28" Count="0" />
     </LineIds>
-    <LineIds Name="PRG_ReadTime.M_ResetCommands">
-      <LineId Id="6" Count="0" />
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="PRG_ReadTime.M_SaveCameraTCPTime">
+    <LineIds Name="FB_ReadTime.M_SaveCameraTCPTime">
       <LineId Id="33" Count="0" />
       <LineId Id="6" Count="4" />
       <LineId Id="36" Count="0" />
@@ -203,7 +163,7 @@ END_VAR
       <LineId Id="26" Count="5" />
       <LineId Id="5" Count="0" />
     </LineIds>
-    <LineIds Name="PRG_ReadTime.M_SaveSensorTime">
+    <LineIds Name="FB_ReadTime.M_SaveSensorTime">
       <LineId Id="22" Count="0" />
       <LineId Id="6" Count="3" />
       <LineId Id="25" Count="0" />
@@ -213,13 +173,6 @@ END_VAR
       <LineId Id="13" Count="1" />
       <LineId Id="23" Count="0" />
       <LineId Id="15" Count="5" />
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="PRG_ReadTime.M_SetCommands">
-      <LineId Id="6" Count="0" />
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="PRG_ReadTime.M_StatusHMI">
       <LineId Id="5" Count="0" />
     </LineIds>
   </POU>

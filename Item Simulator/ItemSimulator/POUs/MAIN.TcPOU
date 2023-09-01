@@ -13,7 +13,7 @@ END_VAR
 
 //Call Programs
 PRG_Simulator();
-PRG_ReadTime();
+PRG_TimestampRegistry();
 
 ]]></ST>
     </Implementation>

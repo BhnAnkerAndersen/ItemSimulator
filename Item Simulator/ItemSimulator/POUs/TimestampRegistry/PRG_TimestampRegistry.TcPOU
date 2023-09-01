@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="PRG_TimestampRegistry" Id="{41809a93-5b53-47f0-b8b5-05c700b2cea3}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM PRG_TimestampRegistry
+VAR 
+	fbReadTime				:FB_ReadTime;	
+	bSignalIn				:BOOL;
+	bReset					:BOOL;
+END_VAR
+
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[//Set Commands
+M_SetCommands();
+
+
+//Call read time
+fbReadTime(bReset := bReset,
+		   bSignalIn := bSignalIn);
+
+
+//Reset Commands
+M_ResetCommands();]]></ST>
+    </Implementation>
+    <Method Name="M_ResetCommands" Id="{74db0409-a38e-4eee-b70a-2501178068c0}">
+      <Declaration><![CDATA[METHOD PRIVATE M_ResetCommands
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[//Reset Commands
+GVL_HMI.stTimestampCmd.bResetRegistry := FALSE;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_SetCommands" Id="{51730a3a-dc77-4efb-ad56-60c19693c631}">
+      <Declaration><![CDATA[METHOD PRIVATE M_SetCommands
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[//Set Commands
+bReset := GVL_HMI.stTimestampCmd.bResetRegistry;
+bSignalIn := GVL_IO.stItemSimulator.bSignalIn;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_StatusHMI" Id="{07c83b8d-d512-478b-acd0-c9301802f0e4}">
+      <Declaration><![CDATA[METHOD PUBLIC M_StatusHMI
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="PRG_TimestampRegistry">
+      <LineId Id="367" Count="0" />
+      <LineId Id="372" Count="0" />
+      <LineId Id="374" Count="0" />
+      <LineId Id="373" Count="0" />
+      <LineId Id="371" Count="0" />
+      <LineId Id="368" Count="0" />
+      <LineId Id="325" Count="0" />
+      <LineId Id="330" Count="2" />
+      <LineId Id="296" Count="0" />
+    </LineIds>
+    <LineIds Name="PRG_TimestampRegistry.M_ResetCommands">
+      <LineId Id="6" Count="0" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="PRG_TimestampRegistry.M_SetCommands">
+      <LineId Id="11" Count="2" />
+    </LineIds>
+    <LineIds Name="PRG_TimestampRegistry.M_StatusHMI">
+      <LineId Id="5" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

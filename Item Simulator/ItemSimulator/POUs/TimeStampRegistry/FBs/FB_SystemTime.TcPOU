@@ -15,10 +15,10 @@ VAR_OUTPUT
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[M_SystemTimeToString();]]></ST>
+      <ST><![CDATA[M_GetSystemTimeToString();]]></ST>
     </Implementation>
-    <Method Name="M_SystemTimeToString" Id="{85c8db4c-d844-4c38-8ee1-ac82915e19ae}">
-      <Declaration><![CDATA[METHOD PUBLIC M_SystemTimeToString : String
+    <Method Name="M_GetSystemTimeToString" Id="{85c8db4c-d844-4c38-8ee1-ac82915e19ae}">
+      <Declaration><![CDATA[METHOD PUBLIC M_GetSystemTimeToString : String
 VAR_INPUT
 END_VAR
 ]]></Declaration>
@@ -31,7 +31,7 @@ END_VAR
 	ERR=>bError);
 
 //Save time as String format
-M_SystemTimeToString := SYSTEMTIME_TO_string(timeAsTimeStruct);
+M_GetSystemTimeToString := SYSTEMTIME_TO_string(timeAsTimeStruct);
 
 
 syncTimer(IN:=NOT bBusy AND NOT bError, PT:=T#1MS);]]></ST>
@@ -40,7 +40,7 @@ syncTimer(IN:=NOT bBusy AND NOT bError, PT:=T#1MS);]]></ST>
     <LineIds Name="FB_SystemTime">
       <LineId Id="9" Count="0" />
     </LineIds>
-    <LineIds Name="FB_SystemTime.M_SystemTimeToString">
+    <LineIds Name="FB_SystemTime.M_GetSystemTimeToString">
       <LineId Id="6" Count="10" />
       <LineId Id="5" Count="0" />
     </LineIds>

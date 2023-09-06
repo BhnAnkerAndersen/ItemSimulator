@@ -17431,7 +17431,7 @@
                 <v n="VisualElementIdentifier">"GenElemInst_212"</v>
                 <n n="VisualElementOfflinePaintCommands" />
                 <n n="VisualElementFrameInformation" />
-                <d n="VisualElementInputActions" t="Hashtable" ckt="String" cvt="IInputAction[]">
+                <d n="VisualElementInputActions" t="Hashtable" ckt="String" cvt="STSnippetInputAction[]">
                   <v>OnMouseDown</v>
                   <a cet="STSnippetInputAction">
                     <o>
@@ -17964,7 +17964,7 @@ GVL_HMI.stTCPConnection.bResetRegistry := TRUE;"</v>
                     </o>
                     <o>
                       <v n="Id">72808681L</v>
-                      <v n="Value">"PRG_TCPIP.aItemEANRegistry"</v>
+                      <v n="Value">"GVL_HMI.stTCPConnectionStatus.aEANRegistry"</v>
                     </o>
                     <o>
                       <v n="Id">1636817830L</v>
@@ -17972,19 +17972,19 @@ GVL_HMI.stTCPConnection.bResetRegistry := TRUE;"</v>
                     </o>
                     <o>
                       <v n="Id">3854506369L</v>
-                      <v n="Value">"PRG_TCPIP.aItemEANRegistry[INDEX]"</v>
+                      <v n="Value">"GVL_HMI.stTCPConnectionStatus.aEANRegistry[INDEX]"</v>
                     </o>
                     <o>
                       <v n="Id">2232123230L</v>
-                      <v n="Value">"EAN String From Registry"</v>
+                      <v n="Value">"EAN From Registry"</v>
                     </o>
                     <o>
                       <v n="Id">2685023577L</v>
-                      <v n="Value">"PRG_TCPIP.aItemEANRegistry[INDEX]"</v>
+                      <v n="Value">"GVL_HMI.stTCPConnectionStatus.aEANRegistry[INDEX]"</v>
                     </o>
                     <o>
                       <v n="Id">4036189354L</v>
-                      <v n="Value" t="Int16">200</v>
+                      <v n="Value">200</v>
                     </o>
                     <o>
                       <v n="Id">3669839856L</v>
@@ -18009,7 +18009,7 @@ GVL_HMI.stTCPConnection.bResetRegistry := TRUE;"</v>
                     <o>
                       <v n="Id">3234392039L</v>
                       <o n="Value" t="DataVariableInformation">
-                        <v n="DataArrayType">"ARRAY [0..10000] OF T_MaxString"</v>
+                        <v n="DataArrayType">"ARRAY [0..GVL_Constant.ITEM_ARRAY_SIZE] OF T_MaxString"</v>
                         <v n="ColumnCount">1</v>
                         <v n="RowCount">10001</v>
                         <v n="FirstColumnIndex">0</v>
@@ -18018,10 +18018,15 @@ GVL_HMI.stTCPConnection.bResetRegistry := TRUE;"</v>
                           <v>String</v>
                         </a>
                         <a n="ColumnNames" cet="String">
-                          <v>PRG_TCPIP.aItemEANRegistry[INDEX]</v>
+                          <v>GVL_HMI.stTCPConnectionStatus.aEANRegistry[INDEX]</v>
                         </a>
                         <v n="BaseType">true</v>
-                        <n n="Bounds" />
+                        <a n="Bounds" cet="ArrayBound">
+                          <o>
+                            <v n="Identifier">"GVL_Constant.ITEM_ARRAY_SIZE"</v>
+                            <v n="Value">10000</v>
+                          </o>
+                        </a>
                         <v n="ArrayType" t="EArrayType">OneDimensional</v>
                       </o>
                     </o>
@@ -18031,7 +18036,7 @@ GVL_HMI.stTCPConnection.bResetRegistry := TRUE;"</v>
                     </o>
                     <o>
                       <v n="Id">3736079596L</v>
-                      <v n="Value">"146"</v>
+                      <v n="Value">"490"</v>
                     </o>
                     <o>
                       <v n="Id">129931535L</v>
@@ -18688,7 +18693,7 @@ GVL_HMI.stTCPConnection.bResetRegistry := TRUE;"</v>
                     </o>
                     <o>
                       <v n="Id">1999528970L</v>
-                      <v n="Value">"GVL_HMI.stTCPConnectionStatus.bHlzWriteSocketIsConnected"</v>
+                      <v n="Value">"GVL_HMI.stTCPConnectionStatus.bCameraReadSocketIsConnected"</v>
                     </o>
                     <o>
                       <v n="Id">3719097617L</v>
@@ -19146,6 +19151,7 @@ GVL_HMI.stTCPConnection.bResetRegistry := TRUE;"</v>
         </o>
       </Data>
       <TypeList>
+        <Type n="ArrayBound">{ef0fabca-c7d4-4f23-8350-10fa7b208ac1}</Type>
         <Type n="ArrayList">System.Collections.ArrayList</Type>
         <Type n="BackgroundSettings">{1038f12c-dd4b-4f96-87a3-a350fe8f3552}</Type>
         <Type n="BasicTypeNode">{f7e1e748-ea0f-4fcb-b563-94837ee17e8d}</Type>
@@ -19167,7 +19173,6 @@ GVL_HMI.stTCPConnection.bResetRegistry := TRUE;"</v>
         <Type n="Guid">System.Guid</Type>
         <Type n="Hashtable">System.Collections.Hashtable</Type>
         <Type n="HotkeyConfiguration">{6b108d46-58af-4e41-a3f4-174d8f160cc4}</Type>
-        <Type n="IInputAction[]">_3S.CoDeSys.VisualElem.IInputAction[], VisualElem, Version=3.5.13.0, Culture=neutral, PublicKeyToken=null</Type>
         <Type n="InputBoxInputAction">{e8e7e747-f76f-4dee-ab1c-b9637e41ac26}</Type>
         <Type n="InputBoxInputAction[]">_3S.CoDeSys.VisualElem.InputBoxInputAction[], VisualElem.plugin, Version=3.5.13.32, Culture=neutral, PublicKeyToken=null</Type>
         <Type n="Int16">System.Int16</Type>

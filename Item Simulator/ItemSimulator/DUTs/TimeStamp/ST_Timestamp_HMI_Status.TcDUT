@@ -3,6 +3,12 @@
   <DUT Name="ST_Timestamp_HMI_Status" Id="{cf7da172-0bb7-491a-81cd-893e4a30bf97}">
     <Declaration><![CDATA[TYPE ST_Timestamp_HMI_Status :
 STRUCT
+	//Delta time in ms from Digital sensor to camera TCP
+	aDeltaTimeMS			:ARRAY[0..GVL_Constant.ITEM_ARRAY_SIZE] OF UDINT;
+	//Digital input sensor
+	aDigitalSensorTime		:ARRAY[0..ITEM_ARRAY_SIZE] OF STRING;
+	//Camera TCP port
+	aTCPPortCameraTime		:ARRAY[0..ITEM_ARRAY_SIZE] OF STRING;
 END_STRUCT
 END_TYPE
 ]]></Declaration>

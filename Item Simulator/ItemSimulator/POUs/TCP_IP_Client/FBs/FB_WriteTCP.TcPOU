@@ -4,19 +4,24 @@
     <Declaration><![CDATA[FUNCTION_BLOCK FB_WriteTCP 
 VAR_INPUT
 	stTCPConnection		:ST_TCPConnection;
+	aEANRegistry		:ARRAY[0..GVL_Constant.ITEM_ARRAY_SIZE] OF T_MaxString;
 END_VAR
 VAR_OUTPUT
+	bIsConnected		:BOOL;
 END_VAR
 VAR
 	bWriteComplete		:BOOL;
-	bIsConnected		:BOOL;
 	bResetEANRegistry	:BOOL;
 	hSocket				:T_HSOCKET;
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[M_ConnectToWriteSocket();
-M_WriteToTCPSocket();
+
+IF bIsConnected THEN
+	M_WriteToTCPSocket();
+END_IF
+
 
 ]]></ST>
     </Implementation>
@@ -60,7 +65,6 @@ END_IF
 VAR_INPUT
 END_VAR
 VAR_OUTPUT
-	aEANRegistry		:ARRAY[0..GVL_Constant.ITEM_ARRAY_SIZE] OF T_MaxString;
 END_VAR
 VAR
 	fbSocketSend		:FB_SocketSend;
@@ -111,6 +115,9 @@ END_IF
     </Method>
     <LineIds Name="FB_WriteTCP">
       <LineId Id="36" Count="0" />
+      <LineId Id="53" Count="0" />
+      <LineId Id="52" Count="0" />
+      <LineId Id="54" Count="1" />
       <LineId Id="17" Count="0" />
       <LineId Id="39" Count="0" />
       <LineId Id="38" Count="0" />

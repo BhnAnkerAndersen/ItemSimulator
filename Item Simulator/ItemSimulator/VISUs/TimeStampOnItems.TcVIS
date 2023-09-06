@@ -396,7 +396,7 @@
                     </o>
                     <o>
                       <v n="Id">72808681L</v>
-                      <v n="Value">"PRG_TimestampRegistry.aDigitalSensorTime"</v>
+                      <v n="Value">"GVL_HMI.stTimestampStatus.aDigitalSensorTime"</v>
                     </o>
                     <o>
                       <v n="Id">1636817830L</v>
@@ -404,7 +404,7 @@
                     </o>
                     <o>
                       <v n="Id">3854506369L</v>
-                      <v n="Value">"PRG_TimestampRegistry.aDigitalSensorTime[INDEX]"</v>
+                      <v n="Value">"GVL_HMI.stTimestampStatus.aDigitalSensorTime[INDEX]"</v>
                     </o>
                     <o>
                       <v n="Id">2232123230L</v>
@@ -412,7 +412,7 @@
                     </o>
                     <o>
                       <v n="Id">2685023577L</v>
-                      <v n="Value">"PRG_TimestampRegistry.aDigitalSensorTime[INDEX]"</v>
+                      <v n="Value">"GVL_HMI.stTimestampStatus.aDigitalSensorTime[INDEX]"</v>
                     </o>
                     <o>
                       <v n="Id">4036189354L</v>
@@ -450,7 +450,7 @@
                           <v>String</v>
                         </a>
                         <a n="ColumnNames" cet="String">
-                          <v>PRG_ReadTime.aDigitalSensorTime[INDEX]</v>
+                          <v>GVL_HMI.stTimestampStatus.aDigitalSensorTime[INDEX]</v>
                         </a>
                         <v n="BaseType">true</v>
                         <a n="Bounds" cet="ArrayBound">
@@ -645,7 +645,7 @@
                     </o>
                     <o>
                       <v n="Id">357335551L</v>
-                      <v n="Value">36</v>
+                      <v n="Value">35</v>
                     </o>
                     <o>
                       <v n="Id">2422045748L</v>
@@ -881,7 +881,7 @@
                     </o>
                     <o>
                       <v n="Id">72808681L</v>
-                      <v n="Value">"PRG_TimestampRegistry.aTCPPortCameraTime"</v>
+                      <v n="Value">"GVL_HMI.stTimestampStatus.aTCPPortCameraTime"</v>
                     </o>
                     <o>
                       <v n="Id">1636817830L</v>
@@ -889,7 +889,7 @@
                     </o>
                     <o>
                       <v n="Id">3854506369L</v>
-                      <v n="Value">"PRG_TimestampRegistry.aTCPPortCameraTime[INDEX]"</v>
+                      <v n="Value">"GVL_HMI.stTimestampStatus.aTCPPortCameraTime[INDEX]"</v>
                     </o>
                     <o>
                       <v n="Id">2232123230L</v>
@@ -897,11 +897,11 @@
                     </o>
                     <o>
                       <v n="Id">2685023577L</v>
-                      <v n="Value">"PRG_TimestampRegistry.aTCPPortCameraTime[INDEX]"</v>
+                      <v n="Value">"GVL_HMI.stTimestampStatus.aTCPPortCameraTime[INDEX]"</v>
                     </o>
                     <o>
                       <v n="Id">4036189354L</v>
-                      <v n="Value">201</v>
+                      <v n="Value">200</v>
                     </o>
                     <o>
                       <v n="Id">3669839856L</v>
@@ -935,7 +935,7 @@
                           <v>String</v>
                         </a>
                         <a n="ColumnNames" cet="String">
-                          <v>PRG_ReadTime.aTCPPortCameraTime[INDEX]</v>
+                          <v>GVL_HMI.stTimestampStatus.aTCPPortCameraTime[INDEX]</v>
                         </a>
                         <v n="BaseType">true</v>
                         <a n="Bounds" cet="ArrayBound">
@@ -1735,7 +1735,7 @@
                     </o>
                     <o>
                       <v n="Id">72808681L</v>
-                      <v n="Value">"PRG_TimestampRegistry.aDeltaTimeMS"</v>
+                      <v n="Value">"GVL_HMI.stTimestampStatus.aDeltaTimeMS"</v>
                     </o>
                     <o>
                       <v n="Id">1636615684L</v>
@@ -1753,7 +1753,7 @@
                           <v>UDInt</v>
                         </a>
                         <a n="ColumnNames" cet="String">
-                          <v>PRG_ReadTime.aDeltaTimeMS[INDEX]</v>
+                          <v>GVL_HMI.stTimestampStatus.aDeltaTimeMS[INDEX]</v>
                         </a>
                         <v n="BaseType">true</v>
                         <a n="Bounds" cet="ArrayBound">
@@ -1771,7 +1771,7 @@
                     </o>
                     <o>
                       <v n="Id">3854506369L</v>
-                      <v n="Value">"PRG_TimestampRegistry.aDeltaTimeMS[INDEX]"</v>
+                      <v n="Value">"GVL_HMI.stTimestampStatus.aDeltaTimeMS[INDEX]"</v>
                     </o>
                     <o>
                       <v n="Id">2232123230L</v>
@@ -1779,11 +1779,11 @@
                     </o>
                     <o>
                       <v n="Id">2685023577L</v>
-                      <v n="Value">"PRG_TimestampRegistry.aDeltaTimeMS[INDEX]"</v>
+                      <v n="Value">"GVL_HMI.stTimestampStatus.aDeltaTimeMS[INDEX]"</v>
                     </o>
                     <o>
                       <v n="Id">4036189354L</v>
-                      <v n="Value">203</v>
+                      <v n="Value">201</v>
                     </o>
                     <o>
                       <v n="Id">3669839856L</v>

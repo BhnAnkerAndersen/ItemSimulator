@@ -32,20 +32,15 @@ ELSE
 END_IF;
 
 //Write on time to array
-M_ReadOnTime();
+A_ReadOnTime();
 
 //Write off time to array
-M_ReadOffTime();
+A_ReadOffTime();
 
 //Reset array for time registry
-M_ResetTimeRegistry();]]></ST>
+A_ResetTimeRegistry();]]></ST>
     </Implementation>
-    <Method Name="M_ReadOffTime" Id="{0dd02e9a-9bb9-495a-8635-92fa2193c059}">
-      <Declaration><![CDATA[//On R_Trig of Signal
-METHOD PUBLIC M_ReadOffTime
-VAR_INPUT
-END_VAR
-]]></Declaration>
+    <Action Name="A_ReadOffTime" Id="{ff391b2f-3597-46da-8b7e-507b7d1c93da}">
       <Implementation>
         <ST><![CDATA[osReadOffTime(CLK:=bSignal);
 
@@ -54,14 +49,8 @@ IF osReadOffTime.Q THEN
 	tTimeOff(IN:=FALSE);
 END_IF]]></ST>
       </Implementation>
-    </Method>
-    <Method Name="M_ReadOnTime" Id="{5f071343-b7ea-4d4c-8e55-b7e89db6d0ee}">
-      <Declaration><![CDATA[//On F_Trig of Signal
-METHOD PUBLIC M_ReadOnTime
-VAR_INPUT
-END_VAR
-VAR
-END_VAR]]></Declaration>
+    </Action>
+    <Action Name="A_ReadOnTime" Id="{eb2f8284-7412-4acb-8aef-a2da25440bbd}">
       <Implementation>
         <ST><![CDATA[osReadOnTime(CLK:=bSignal);
 
@@ -71,12 +60,8 @@ IF osReadOnTime.Q THEN
 	tTimeOn(IN:=FALSE);
 END_IF]]></ST>
       </Implementation>
-    </Method>
-    <Method Name="M_ResetTimeRegistry" Id="{aec981ff-8120-4b14-9fab-616a1f61d830}">
-      <Declaration><![CDATA[METHOD PUBLIC M_ResetTimeRegistry
-VAR_INPUT
-END_VAR
-]]></Declaration>
+    </Action>
+    <Action Name="A_ResetTimeRegistry" Id="{a95330c9-9324-4e41-9095-d3b44e55e574}">
       <Implementation>
         <ST><![CDATA[IF bReset THEN
 	tTimeOFF(IN:=FALSE);
@@ -92,7 +77,7 @@ END_VAR
 END_IF
 ]]></ST>
       </Implementation>
-    </Method>
+    </Action>
     <LineIds Name="FB_ItemRegister">
       <LineId Id="109" Count="0" />
       <LineId Id="135" Count="0" />
@@ -109,17 +94,17 @@ END_IF
       <LineId Id="61" Count="0" />
       <LineId Id="29" Count="0" />
     </LineIds>
-    <LineIds Name="FB_ItemRegister.M_ReadOffTime">
-      <LineId Id="6" Count="4" />
-      <LineId Id="5" Count="0" />
+    <LineIds Name="FB_ItemRegister.A_ReadOffTime">
+      <LineId Id="2" Count="4" />
+      <LineId Id="1" Count="0" />
     </LineIds>
-    <LineIds Name="FB_ItemRegister.M_ReadOnTime">
-      <LineId Id="14" Count="5" />
-      <LineId Id="5" Count="0" />
+    <LineIds Name="FB_ItemRegister.A_ReadOnTime">
+      <LineId Id="2" Count="5" />
+      <LineId Id="1" Count="0" />
     </LineIds>
-    <LineIds Name="FB_ItemRegister.M_ResetTimeRegistry">
-      <LineId Id="6" Count="11" />
-      <LineId Id="5" Count="0" />
+    <LineIds Name="FB_ItemRegister.A_ResetTimeRegistry">
+      <LineId Id="2" Count="11" />
+      <LineId Id="1" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>

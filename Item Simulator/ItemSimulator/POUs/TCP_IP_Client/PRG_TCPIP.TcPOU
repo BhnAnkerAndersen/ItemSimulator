@@ -6,10 +6,11 @@ VAR
 	bInit 						:BOOL := TRUE;
 	bReset						:BOOL;
 	
+	stReadTCP					:ST_TCPConnection;
 	fbReadFromCameraTCP			:FB_ReadTCP;
 	bConnectToReadSocket		:BOOL;
 	
-	
+	stWriteTCP					:ST_TCPConnection;
 	fbWriteToHLZ				:FB_WriteTCP;
 	bConnectToWriteSocket		:BOOL;
 END_VAR
@@ -20,138 +21,75 @@ IF bInit THEN
 	bInit := FALSE;
 END_IF
 
-//Set Commands
-M_SetCommands();
 
-//Call Functions
-M_ReadCameraTCP();
-M_WriteToHlzTCP();
+A_ReadFromCamera();
+A_WriteToHlz();
+
 
 //Reset Commands
-M_ResetCommands();
-]]></ST>
-    </Implementation>
-    <Method Name="M_ReadCameraTCP" Id="{c95fd805-970b-4ceb-80e0-471b56be01fb}">
-      <Declaration><![CDATA[METHOD PUBLIC M_ReadCameraTCP : BOOL
-VAR_INPUT
-END_VAR
-VAR
-	stTCPConnection				:ST_TCPConnection;
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[//Initialize Read TCP
-stTCPConnection.sRemoteHost := '10.12.5.10';
-stTCPConnection.nRemotePort := 51236;
-stTCPConnection.tTimeOut := T#45S;
-stTCPConnection.bSocketConnect := bConnectToReadSocket;
-stTCPConnection.bReset := bReset;
-
-
-//Call Read TCP
-fbReadFromCameraTCP(stTCPConnection:=stTCPConnection);
-
-]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="M_ResetCommands" Id="{4909ebb6-41b3-4481-8814-8f18702a5ce4}">
-      <Declaration><![CDATA[METHOD PRIVATE M_ResetCommands
-VAR_INPUT
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[//Reset Commands
 GVL_HMI.stTCPConnectionCmd.bResetRegistry := FALSE;
 GVL_HMI.stTCPConnectionCmd.bReadSocketConnect := FALSE;
-GVL_HMI.stTCPConnectionCmd.bWriteSocketConnect := FALSE;]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="M_SetCommands" Id="{196dfadf-eb46-41ac-ad30-bb686f47c03f}">
-      <Declaration><![CDATA[METHOD PRIVATE M_SetCommands
-VAR_INPUT
-END_VAR
-]]></Declaration>
+GVL_HMI.stTCPConnectionCmd.bWriteSocketConnect := FALSE;
+]]></ST>
+    </Implementation>
+    <Action Name="A_ReadFromCamera" Id="{fa2fa6f9-072d-42cf-9835-c8d01007dda3}">
       <Implementation>
-        <ST><![CDATA[//Set Commands
-bReset 					:= GVL_HMI.stTCPConnectionCmd.bResetRegistry;
-bConnectToReadSocket 	:= GVL_HMI.stTCPConnectionCmd.bReadSocketConnect;
-bConnectToWriteSocket	:= GVL_HMI.stTCPConnectionCmd.bWriteSocketConnect;]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="M_StatusHMI" Id="{99d3b423-fcff-4e92-81ee-1fa5237a663d}">
-      <Declaration><![CDATA[METHOD PUBLIC M_StatusHMI
-VAR_INPUT
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[//Status to HMI
-GVL_HMI.stTCPConnectionStatus.bCameraReadSocketIsConnected := fbReadFromCameraTCP.bIsConnected;
-GVL_HMI.stTCPConnectionStatus.bHlzWriteSocketIsConnected := fbWriteToHLZ.bIsConnected;
+        <ST><![CDATA[//Initialize Read TCP
+stReadTCP.sRemoteHost := '10.12.5.10';
+stReadTCP.nRemotePort := 51236;
+stReadTCP.tTimeOut := T#45S;
+stReadTCP.bSocketConnect := GVL_HMI.stTCPConnectionCmd.bReadSocketConnect;
+stReadTCP.bReset := GVL_HMI.stTCPConnectionCmd.bResetRegistry;
+
+//Call Read TCP
+fbReadFromCameraTCP(
+	stTCPConnection:=stReadTCP,
+	aEANRegistry=>GVL_HMI.stTCPConnectionStatus.aEANRegistry,
+	bIsConnected=>GVL_HMI.stTCPConnectionStatus.bCameraReadSocketIsConnected);
 ]]></ST>
       </Implementation>
-    </Method>
-    <Method Name="M_WriteToHlzTCP" Id="{b613047a-ae2a-4d62-a218-edbd1edcce5b}">
-      <Declaration><![CDATA[METHOD PUBLIC M_WriteToHlzTCP : BOOL
-VAR_INPUT
-END_VAR
-VAR
-	stTCPConnection				:ST_TCPConnection;
-END_VAR
-]]></Declaration>
+    </Action>
+    <Action Name="A_WriteToHlz" Id="{029a87b5-d519-4d88-b685-d7af7eb27bad}">
       <Implementation>
         <ST><![CDATA[//Initialize Write TCP
-stTCPConnection.sRemoteHost := '10.12.5.10';
-stTCPConnection.nRemotePort := 51236;
-stTCPConnection.tTimeOut := T#45S;
-stTCPConnection.bSocketConnect := bConnectToWriteSocket;
-stTCPConnection.bReset := bReset;
+stWriteTCP.sRemoteHost := '10.12.5.10';
+stWriteTCP.nRemotePort := 51237;
+stWriteTCP.tTimeOut := T#45S;
+stWriteTCP.bSocketConnect := GVL_HMI.stTCPConnectionCmd.bWriteSocketConnect;
+stWriteTCP.bReset := GVL_HMI.stTCPConnectionCmd.bResetRegistry;
 
 
 //Call Write TCP
-fbWriteToHLZ(stTCPConnection:=stTCPConnection);
+fbWriteToHLZ(
+	aEANRegistry:=fbReadFromCameraTCP.aEANRegistry,
+	stTCPConnection:=stWriteTCP,
+	bIsConnected=>GVL_HMI.stTCPConnectionStatus.bHlzWriteSocketIsConnected);
+
 
 ]]></ST>
       </Implementation>
-    </Method>
+    </Action>
     <LineIds Name="PRG_TCPIP">
       <LineId Id="469" Count="0" />
       <LineId Id="317" Count="0" />
       <LineId Id="328" Count="1" />
-      <LineId Id="477" Count="0" />
-      <LineId Id="476" Count="0" />
       <LineId Id="478" Count="0" />
-      <LineId Id="436" Count="0" />
-      <LineId Id="464" Count="0" />
-      <LineId Id="452" Count="0" />
-      <LineId Id="468" Count="0" />
+      <LineId Id="503" Count="0" />
+      <LineId Id="519" Count="0" />
+      <LineId Id="538" Count="0" />
+      <LineId Id="515" Count="0" />
       <LineId Id="480" Count="0" />
-      <LineId Id="479" Count="0" />
-      <LineId Id="481" Count="0" />
-      <LineId Id="434" Count="0" />
+      <LineId Id="512" Count="2" />
+      <LineId Id="494" Count="0" />
+      <LineId Id="496" Count="0" />
     </LineIds>
-    <LineIds Name="PRG_TCPIP.M_ReadCameraTCP">
-      <LineId Id="10" Count="4" />
-      <LineId Id="18" Count="0" />
-      <LineId Id="15" Count="2" />
-      <LineId Id="5" Count="0" />
-      <LineId Id="20" Count="0" />
-      <LineId Id="23" Count="0" />
+    <LineIds Name="PRG_TCPIP.A_ReadFromCamera">
+      <LineId Id="2" Count="11" />
+      <LineId Id="1" Count="0" />
     </LineIds>
-    <LineIds Name="PRG_TCPIP.M_ResetCommands">
-      <LineId Id="6" Count="2" />
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="PRG_TCPIP.M_SetCommands">
-      <LineId Id="7" Count="2" />
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="PRG_TCPIP.M_StatusHMI">
-      <LineId Id="8" Count="0" />
-      <LineId Id="5" Count="2" />
-    </LineIds>
-    <LineIds Name="PRG_TCPIP.M_WriteToHlzTCP">
-      <LineId Id="6" Count="10" />
-      <LineId Id="5" Count="0" />
+    <LineIds Name="PRG_TCPIP.A_WriteToHlz">
+      <LineId Id="2" Count="14" />
+      <LineId Id="1" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>

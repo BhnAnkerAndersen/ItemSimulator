@@ -6,19 +6,24 @@ VAR_INPUT
 	stTCPConnection		:ST_TCPConnection;
 END_VAR
 VAR_OUTPUT
+	aEANRegistry		:ARRAY[0..GVL_Constant.ITEM_ARRAY_SIZE] OF T_MaxString;
+	bIsConnected		:BOOL;
 END_VAR
 VAR_IN_OUT
 END_VAR
 VAR
 	bReadComplete		:BOOL;
-	bIsConnected		:BOOL;
 	bResetEANRegistry	:BOOL;
 	hSocket				:T_HSOCKET;
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[M_ConnectToReadSocket();
-M_ReadFromTCPSocket();]]></ST>
+
+IF bIsConnected THEN
+	M_ReadFromTCPSocket();
+END_IF
+]]></ST>
     </Implementation>
     <Method Name="M_ConnectToReadSocket" Id="{10049190-eaf5-43fa-af39-f43dabc13dd5}">
       <Declaration><![CDATA[METHOD PUBLIC M_ConnectToReadSocket : BOOL
@@ -59,7 +64,6 @@ END_IF
 VAR_INPUT
 END_VAR
 VAR_OUTPUT
-	aEANRegistry		:ARRAY[0..GVL_Constant.ITEM_ARRAY_SIZE] OF T_MaxString;
 END_VAR
 VAR
 	tRefreshRead		:FB_ClockPulsDetailed;
@@ -120,6 +124,9 @@ END_IF
     </Method>
     <LineIds Name="FB_ReadTCP">
       <LineId Id="9" Count="0" />
+      <LineId Id="33" Count="0" />
+      <LineId Id="32" Count="0" />
+      <LineId Id="34" Count="1" />
       <LineId Id="17" Count="0" />
     </LineIds>
     <LineIds Name="FB_ReadTCP.M_ConnectToReadSocket">

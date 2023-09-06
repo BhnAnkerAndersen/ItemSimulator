@@ -7,17 +7,14 @@ VAR_INPUT
 	bSignalIn				:BOOL;
 END_VAR
 VAR_OUTPUT
-END_VAR
-VAR
-	
 	//Delta time in ms from Digital sensor to camera TCP
-	aDeltaTimeMS			: ARRAY[0..GVL_Constant.ITEM_ARRAY_SIZE] OF UDINT;
-
+	aDeltaTimeMS			:ARRAY[0..GVL_Constant.ITEM_ARRAY_SIZE] OF UDINT;
 	//Digital input sensor
-	aDigitalSensorTime		: ARRAY[0..ITEM_ARRAY_SIZE] OF STRING;
-	
+	aDigitalSensorTime		:ARRAY[0..ITEM_ARRAY_SIZE] OF STRING;
 	//Camera TCP port
 	aTCPPortCameraTime		:ARRAY[0..ITEM_ARRAY_SIZE] OF STRING;
+END_VAR
+VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -80,7 +77,7 @@ END_VAR
 rTCPPortCamera(CLK:=PRG_TCPIP.fbReadFromCameraTCP.bReadComplete);
 
 IF rTCPPortCamera.Q THEN
-	aTCPPortCameraTime[iTCPPortCamera] := fbGetCameraTime.M_SystemTimeToString();
+	aTCPPortCameraTime[iTCPPortCamera] := fbGetCameraTime.M_GetSystemTimeToString();
 	
 	fbGetCameraTime.fbSystemTime(timeLoDW=>M_SaveCameraTCPTime.dwLowDateTime,
     							 timeHiDW=>M_SaveCameraTCPTime.dwHighDateTime);
@@ -115,7 +112,7 @@ END_VAR
 rDigitalSensorIn(CLK:=bSignalIn);
 
 IF rDigitalSensorIn.Q THEN
-	aDigitalSensorTime[iDigitalSensor] := fbGetSensorTime.M_SystemTimeToString();
+	aDigitalSensorTime[iDigitalSensor] := fbGetSensorTime.M_GetSystemTimeToString();
 	
 	fbGetSensorTime.fbSystemTime(timeLoDW=>M_SaveSensorTime.dwLowDateTime,
     							 timeHiDW=>M_SaveSensorTime.dwHighDateTime);
@@ -153,14 +150,7 @@ END_IF]]></ST>
       <LineId Id="28" Count="0" />
     </LineIds>
     <LineIds Name="FB_ReadTime.M_SaveCameraTCPTime">
-      <LineId Id="33" Count="0" />
-      <LineId Id="6" Count="4" />
-      <LineId Id="36" Count="0" />
-      <LineId Id="12" Count="0" />
-      <LineId Id="18" Count="2" />
-      <LineId Id="34" Count="0" />
-      <LineId Id="21" Count="3" />
-      <LineId Id="26" Count="5" />
+      <LineId Id="44" Count="21" />
       <LineId Id="5" Count="0" />
     </LineIds>
     <LineIds Name="FB_ReadTime.M_SaveSensorTime">

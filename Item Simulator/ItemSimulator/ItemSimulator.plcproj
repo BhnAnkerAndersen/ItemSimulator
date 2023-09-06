@@ -118,9 +118,6 @@
     <Compile Include="POUs\TCP_IP_Client\PRG_TCPIP.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\TCP_IP_Server\FBs\FB_AcceptTCP.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="POUs\TimestampRegistry\FBs\FB_ReadTime.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -160,7 +157,6 @@
     <Folder Include="POUs\CSVFile" />
     <Folder Include="POUs\0_TestUnit" />
     <Folder Include="POUs\TCP_IP_Server" />
-    <Folder Include="POUs\TCP_IP_Server\FBs" />
     <Folder Include="POUs\TimestampRegistry" />
     <Folder Include="POUs\TCP_IP_Client" />
     <Folder Include="POUs\TCP_IP_Client\FBs" />

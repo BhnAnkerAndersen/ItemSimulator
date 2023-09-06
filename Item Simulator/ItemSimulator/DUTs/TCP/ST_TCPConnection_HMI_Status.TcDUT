@@ -5,6 +5,8 @@
 STRUCT
 	bCameraReadSocketIsConnected	:BOOL;
 	bHlzWriteSocketIsConnected		:BOOL;
+	
+	aEANRegistry					:ARRAY[0..GVL_Constant.ITEM_ARRAY_SIZE] OF T_MaxString;
 END_STRUCT
 END_TYPE
 ]]></Declaration>

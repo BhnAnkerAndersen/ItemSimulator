@@ -10,29 +10,34 @@ VAR_OUTPUT
 	bIsConnected		:BOOL;
 END_VAR
 VAR
+	fbConnectSocket		:FB_SocketConnect;
+	fbDisconnect		:FB_SocketClose;
+	rConnectedSocket	:F_TRIG;
+	fbSocketSend		:FB_SocketSend;
+	rWriteComplete		:R_TRIG;
+	aWriteBytes			:ARRAY[0..1023] OF BYTE;
+	iWrite				:UINT;
+	WriteSignal			:F_TRIG;
+	nWriteLen			:UDINT;
+	i					:INT;
+
 	bWriteComplete		:BOOL;
 	bResetEANRegistry	:BOOL;
 	hSocket				:T_HSOCKET;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[M_ConnectToWriteSocket();
+      <ST><![CDATA[
+A_ConnectToWriteSocket();
 
 IF bIsConnected THEN
-	M_WriteToTCPSocket();
+	A_WriteToTCPSocket();
 END_IF
 
 
 ]]></ST>
     </Implementation>
-    <Method Name="M_ConnectToWriteSocket" Id="{557e8243-1977-4606-ad48-f5307e923e58}">
-      <Declaration><![CDATA[METHOD PUBLIC M_ConnectToWriteSocket : BOOL
-VAR
-	fbConnectSocket			:FB_SocketConnect;
-	fbDisconnect			:FB_SocketClose;
-	rConnectedSocket		:F_TRIG;
-END_VAR
-]]></Declaration>
+    <Action Name="A_ConnectToWriteSocket" Id="{9184a013-1471-41e3-b622-1eef6260e719}">
       <Implementation>
         <ST><![CDATA[IF stTCPConnection.bSocketConnect THEN
 	
@@ -59,23 +64,8 @@ IF rConnectedSocket.Q AND NOT fbConnectSocket.bError THEN
 END_IF
 ]]></ST>
       </Implementation>
-    </Method>
-    <Method Name="M_WriteToTCPSocket" Id="{fe4cd308-e1a2-4f53-89b7-e22d2f505176}">
-      <Declaration><![CDATA[METHOD PUBLIC M_WriteToTCPSocket : BOOL
-VAR_INPUT
-END_VAR
-VAR_OUTPUT
-END_VAR
-VAR
-	fbSocketSend		:FB_SocketSend;
-	rWriteComplete		:R_TRIG;
-	aWriteBytes			:ARRAY[0..1023] OF BYTE;
-	iWrite				:UINT;
-	WriteSignal			:F_TRIG;
-	nWriteLen			:UDINT;
-	i					:INT;
-END_VAR
-]]></Declaration>
+    </Action>
+    <Action Name="A_WriteToTCPSocket" Id="{6ac199b7-4bab-4dab-a6e9-4e6425fd1242}">
       <Implementation>
         <ST><![CDATA[IF bIsConnected THEN	
 	//Falling edge of item generator
@@ -112,8 +102,9 @@ IF PRG_Simulator.bStartGenerator OR PRG_Simulator.bStopGenerator OR (PRG_Simulat
 END_IF
 ]]></ST>
       </Implementation>
-    </Method>
+    </Action>
     <LineIds Name="FB_WriteTCP">
+      <LineId Id="71" Count="0" />
       <LineId Id="36" Count="0" />
       <LineId Id="53" Count="0" />
       <LineId Id="52" Count="0" />
@@ -122,25 +113,13 @@ END_IF
       <LineId Id="39" Count="0" />
       <LineId Id="38" Count="0" />
     </LineIds>
-    <LineIds Name="FB_WriteTCP.M_ConnectToWriteSocket">
-      <LineId Id="52" Count="1" />
-      <LineId Id="59" Count="6" />
-      <LineId Id="100" Count="0" />
-      <LineId Id="103" Count="1" />
-      <LineId Id="101" Count="0" />
-      <LineId Id="105" Count="0" />
-      <LineId Id="47" Count="3" />
-      <LineId Id="19" Count="3" />
-      <LineId Id="26" Count="0" />
-      <LineId Id="5" Count="0" />
+    <LineIds Name="FB_WriteTCP.A_ConnectToWriteSocket">
+      <LineId Id="2" Count="22" />
+      <LineId Id="1" Count="0" />
     </LineIds>
-    <LineIds Name="FB_WriteTCP.M_WriteToTCPSocket">
-      <LineId Id="55" Count="20" />
-      <LineId Id="79" Count="7" />
-      <LineId Id="96" Count="0" />
-      <LineId Id="98" Count="1" />
-      <LineId Id="93" Count="0" />
-      <LineId Id="43" Count="0" />
+    <LineIds Name="FB_WriteTCP.A_WriteToTCPSocket">
+      <LineId Id="2" Count="32" />
+      <LineId Id="1" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>

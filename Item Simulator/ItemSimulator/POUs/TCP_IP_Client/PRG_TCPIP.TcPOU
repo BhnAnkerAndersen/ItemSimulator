@@ -28,8 +28,14 @@ A_WriteToHlz();
 
 //Reset Commands
 GVL_HMI.stTCPConnectionCmd.bResetRegistry := FALSE;
-GVL_HMI.stTCPConnectionCmd.bReadSocketConnect := FALSE;
-GVL_HMI.stTCPConnectionCmd.bWriteSocketConnect := FALSE;
+
+
+IF GVL_HMI.stTCPConnectionCmd.bWriteSocketConnect THEN
+	GVL_HMI.stTCPConnectionCmd.bReadSocketConnect := FALSE;
+	
+ELSIF GVL_HMI.stTCPConnectionCmd.bReadSocketConnect THEN
+	GVL_HMI.stTCPConnectionCmd.bWriteSocketConnect := FALSE;
+END_IF;
 ]]></ST>
     </Implementation>
     <Action Name="A_ReadFromCamera" Id="{fa2fa6f9-072d-42cf-9835-c8d01007dda3}">
@@ -79,8 +85,14 @@ fbWriteToHLZ(
       <LineId Id="538" Count="0" />
       <LineId Id="515" Count="0" />
       <LineId Id="480" Count="0" />
-      <LineId Id="512" Count="2" />
-      <LineId Id="494" Count="0" />
+      <LineId Id="512" Count="1" />
+      <LineId Id="545" Count="0" />
+      <LineId Id="542" Count="0" />
+      <LineId Id="539" Count="0" />
+      <LineId Id="514" Count="0" />
+      <LineId Id="546" Count="0" />
+      <LineId Id="543" Count="1" />
+      <LineId Id="540" Count="0" />
       <LineId Id="496" Count="0" />
     </LineIds>
     <LineIds Name="PRG_TCPIP.A_ReadFromCamera">

@@ -12,27 +12,32 @@ END_VAR
 VAR_IN_OUT
 END_VAR
 VAR
+	fbConnectSocket		:FB_SocketConnect;
+	fbDisconnect		:FB_SocketClose;
+	rConnectedSocket	:F_TRIG;
+	tRefreshRead		:FB_ClockPulsDetailed;
+	fbSocketRecive		:FB_SocketReceive;
+	rReadComplete		:R_TRIG;
+	aReadBytes			:ARRAY[0..1023] OF BYTE;
+	sReadString			:T_MaxString;
+	iRead				:UINT;
+	i					:INT;
+
 	bReadComplete		:BOOL;
 	bResetEANRegistry	:BOOL;
 	hSocket				:T_HSOCKET;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[M_ConnectToReadSocket();
+      <ST><![CDATA[
+A_ConnectToReadSocket();
 
 IF bIsConnected THEN
-	M_ReadFromTCPSocket();
+	A_ReadFromTCPSocket();
 END_IF
 ]]></ST>
     </Implementation>
-    <Method Name="M_ConnectToReadSocket" Id="{10049190-eaf5-43fa-af39-f43dabc13dd5}">
-      <Declaration><![CDATA[METHOD PUBLIC M_ConnectToReadSocket : BOOL
-VAR
-	fbConnectSocket			:FB_SocketConnect;
-	fbDisconnect			:FB_SocketClose;
-	rConnectedSocket		:F_TRIG;
-END_VAR
-]]></Declaration>
+    <Action Name="A_ConnectToReadSocket" Id="{1e5e4340-eed2-4558-a157-bc81a0804adb}">
       <Implementation>
         <ST><![CDATA[IF stTCPConnection.bSocketConnect THEN
 
@@ -58,23 +63,8 @@ END_IF
 
 ]]></ST>
       </Implementation>
-    </Method>
-    <Method Name="M_ReadFromTCPSocket" Id="{e8584c8b-984b-472a-b75c-f2e4a276366b}">
-      <Declaration><![CDATA[METHOD PUBLIC M_ReadFromTCPSocket : BOOL
-VAR_INPUT
-END_VAR
-VAR_OUTPUT
-END_VAR
-VAR
-	tRefreshRead		:FB_ClockPulsDetailed;
-	fbSocketRecive		:FB_SocketReceive;
-	rReadComplete		:R_TRIG;
-	aReadBytes			:ARRAY[0..1023] OF BYTE;
-	sReadString			:T_MaxString;
-	iRead				:UINT;
-	i					:INT;
-END_VAR
-]]></Declaration>
+    </Action>
+    <Action Name="A_ReadFromTCPSocket" Id="{edba4541-df43-47d7-b9a2-8ceebf2c598d}">
       <Implementation>
         <ST><![CDATA[IF bIsConnected THEN
 
@@ -121,33 +111,22 @@ END_IF
 
 ]]></ST>
       </Implementation>
-    </Method>
+    </Action>
     <LineIds Name="FB_ReadTCP">
+      <LineId Id="50" Count="0" />
       <LineId Id="9" Count="0" />
       <LineId Id="33" Count="0" />
       <LineId Id="32" Count="0" />
       <LineId Id="34" Count="1" />
       <LineId Id="17" Count="0" />
     </LineIds>
-    <LineIds Name="FB_ReadTCP.M_ConnectToReadSocket">
-      <LineId Id="52" Count="0" />
-      <LineId Id="77" Count="7" />
-      <LineId Id="94" Count="5" />
-      <LineId Id="102" Count="4" />
-      <LineId Id="108" Count="0" />
-      <LineId Id="29" Count="0" />
-      <LineId Id="5" Count="0" />
+    <LineIds Name="FB_ReadTCP.A_ConnectToReadSocket">
+      <LineId Id="2" Count="21" />
+      <LineId Id="1" Count="0" />
     </LineIds>
-    <LineIds Name="FB_ReadTCP.M_ReadFromTCPSocket">
-      <LineId Id="12" Count="20" />
-      <LineId Id="45" Count="0" />
-      <LineId Id="33" Count="0" />
-      <LineId Id="50" Count="1" />
-      <LineId Id="54" Count="2" />
-      <LineId Id="88" Count="12" />
-      <LineId Id="71" Count="0" />
-      <LineId Id="44" Count="0" />
-      <LineId Id="43" Count="0" />
+    <LineIds Name="FB_ReadTCP.A_ReadFromTCPSocket">
+      <LineId Id="2" Count="42" />
+      <LineId Id="1" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>

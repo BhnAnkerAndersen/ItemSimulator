@@ -76,31 +76,37 @@
     <Compile Include="POUs\0_TestUnit\TimeStampRegistry\FB_TimestampRegistryTest.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\BuildingBlocks\Control\FB_ClockPulsDetailed.TcPOU">
+    <Compile Include="POUs\Building_Blocks\Control\FB_ClockPulsDetailed.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\CSVFile\PRG_CSVRead.TcPOU">
+    <Compile Include="POUs\CSV_File\PRG_CSVRead.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\CSVFile\PRG_CSVWrite.TcPOU">
+    <Compile Include="POUs\CSV_File\PRG_CSVWrite.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Item Simulator\FBs\FB_ItemGenerator.TcPOU">
+    <Compile Include="POUs\IO_Link_Master\FB_ColourSensor.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Item Simulator\FBs\FB_ItemRegister.TcPOU">
+    <Compile Include="POUs\IO_Link_Master\PRG_IO_Link_Master.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Item Simulator\PRG_Simulator.TcPOU">
+    <Compile Include="POUs\Item_Simulator\FBs\FB_ItemGenerator.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\BuildingBlocks\Control\FB_ClockPulsNumber.TcPOU">
+    <Compile Include="POUs\Item_Simulator\FBs\FB_ItemRegister.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\BuildingBlocks\StringFunctions\FUN_GetDate.TcPOU">
+    <Compile Include="POUs\Item_Simulator\PRG_Simulator.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\BuildingBlocks\StringFunctions\FUN_GetTime.TcPOU">
+    <Compile Include="POUs\Building_Blocks\Control\FB_ClockPulsNumber.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Building_Blocks\StringFunctions\FUN_GetDate.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Building_Blocks\StringFunctions\FUN_GetTime.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\MAIN.TcPOU">
@@ -118,13 +124,13 @@
     <Compile Include="POUs\TCP_IP_Client\PRG_TCPIP.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\TimestampRegistry\FBs\FB_ReadTime.TcPOU">
+    <Compile Include="POUs\Timestamp_Registry\FBs\FB_ReadTime.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\TimestampRegistry\FBs\FB_SystemTime.TcPOU">
+    <Compile Include="POUs\Timestamp_Registry\FBs\FB_SystemTime.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\TimestampRegistry\PRG_TimestampRegistry.TcPOU">
+    <Compile Include="POUs\Timestamp_Registry\PRG_TimestampRegistry.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="TCPTask.TcTTO">
@@ -149,22 +155,30 @@
     <Folder Include="DUTs\TCP" />
     <Folder Include="GVLs" />
     <Folder Include="POUs\0_TestUnit\TimeStampRegistry" />
-    <Folder Include="POUs\Item Simulator" />
-    <Folder Include="POUs\BuildingBlocks" />
-    <Folder Include="POUs\BuildingBlocks\Control" />
-    <Folder Include="POUs\BuildingBlocks\StringFunctions" />
-    <Folder Include="POUs\Item Simulator\FBs" />
-    <Folder Include="POUs\CSVFile" />
+    <Folder Include="POUs\Item_Simulator" />
+    <Folder Include="POUs\Building_Blocks" />
+    <Folder Include="POUs\Building_Blocks\Control" />
+    <Folder Include="POUs\Building_Blocks\StringFunctions" />
+    <Folder Include="POUs\Item_Simulator\FBs" />
+    <Folder Include="POUs\CSV_File" />
     <Folder Include="POUs\0_TestUnit" />
-    <Folder Include="POUs\TCP_IP_Server" />
-    <Folder Include="POUs\TimestampRegistry" />
+    <Folder Include="POUs\IO_Link_Master" />
+    <Folder Include="POUs\Timestamp_Registry" />
     <Folder Include="POUs\TCP_IP_Client" />
     <Folder Include="POUs\TCP_IP_Client\FBs" />
-    <Folder Include="POUs\TimestampRegistry\FBs" />
+    <Folder Include="POUs\Timestamp_Registry\FBs" />
     <Folder Include="VISUs" />
     <Folder Include="POUs" />
   </ItemGroup>
   <ItemGroup>
+    <PlaceholderReference Include="IOLBase">
+      <DefaultResolution>IO-Link Base, * (IO-Link)</DefaultResolution>
+      <Namespace>IOLBase</Namespace>
+    </PlaceholderReference>
+    <PlaceholderReference Include="SICK_IOL_Color">
+      <DefaultResolution>SICK_IOL_Color, * (SICK AG)</DefaultResolution>
+      <Namespace>SICK_IOL_Color</Namespace>
+    </PlaceholderReference>
     <PlaceholderReference Include="System_VisuElemMeter">
       <DefaultResolution>VisuElemMeter, 3.5.13.0 (System)</DefaultResolution>
       <Namespace>VisuElemMeter</Namespace>

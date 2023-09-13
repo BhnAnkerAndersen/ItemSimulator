@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="PRG_IO_Link_Master" Id="{56aa628f-13d5-4975-a6d4-9d393fe72c7e}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM PRG_IO_Link_Master
+VAR
+	fbColorSensor			:FB_ColourSensor;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[fbColorSensor();]]></ST>
+    </Implementation>
+    <LineIds Name="PRG_IO_Link_Master">
+      <LineId Id="5" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

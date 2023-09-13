@@ -62,7 +62,7 @@ rConnectedSocket(CLK:=fbConnectSocket.bBusy);
 IF rConnectedSocket.Q AND NOT fbConnectSocket.bError THEN
 	bIsConnected := TRUE;
 END_IF
-]]></ST>
+ ]]></ST>
       </Implementation>
     </Action>
     <Action Name="A_WriteToTCPSocket" Id="{6ac199b7-4bab-4dab-a6e9-4e6425fd1242}">

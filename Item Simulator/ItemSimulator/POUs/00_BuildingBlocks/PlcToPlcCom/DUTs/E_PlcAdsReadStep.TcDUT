@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <DUT Name="E_PlcAdsReadStep" Id="{a7660441-8717-4658-838f-34596e9640d4}">
+    <Declaration><![CDATA[//********************************************************************************
+// E_PlcAdsReadStep
+// ------------------------------------------------------------------------------- 
+//
+//	V2.00.00, HHL
+// Baseline HST V1.01 10/4-16 (Valla V2.36)
+//********************************************************************************
+TYPE E_PlcAdsReadStep :
+(
+	eReset 				:= 0,		// Init
+	eGetSymbolInfo 		:= 1,		// Get symbol infos
+	eGetRemoteInfo 		:= 2,		// Get info (Index-Group/Offset)
+	eWaitRemoteInfo 	:= 3,		// Wait for remote info
+	eGetInfoError 		:= 4,		// Get info failed
+	eIdle 				:= 10,		// Idle
+	eRead 				:= 11,		// Read data
+	eWaitReadDone 		:= 12,		// Wait read finished
+	eWaitBeforeNextRead := 13, 		// Wait before next read
+	eReadError 			:= 99		// Read failed
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

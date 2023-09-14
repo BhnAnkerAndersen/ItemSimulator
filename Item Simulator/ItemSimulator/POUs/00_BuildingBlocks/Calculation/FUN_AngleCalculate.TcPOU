@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FUN_AngleCalculate" Id="{255901f6-cdec-456a-849f-5491aa70db28}" SpecialFunc="None">
+    <Declaration><![CDATA[//********************************************************************************
+// FUN_AngleCalculate.
+// -------------------------------------------------------------------------------
+// This function calculates the angle between two coordinate points.
+// Angle when moving from stCoor1 to stCoor2 (Exit angle for stCoor1, Entry angle for stCoor2) 
+// The output angle is defined as plus/minus 180 degrees. 
+//	
+// Version:
+//			- V1.00.00	HHL, 26/11-2019
+//********************************************************************************
+FUNCTION FUN_AngleCalculate : LREAL
+VAR_IN_OUT
+END_VAR
+VAR_INPUT
+	stCoor1			:ST_Coordinate;			// Coordinates from previous motion command line (If known)
+	stCoor2			:ST_Coordinate;			// Coordinates from active line
+END_VAR
+VAR
+	rTheta			:LREAL;					// [pm 180 deg] Angle when moving from stCoor1 to stCoor2 (Exit angle for stCoor1, Entry angle for stCoor2) 
+	bError			:BOOL;					// True if error occured during determination of angle
+	rX_Leg			:LREAL;					// Displacement in x-axis between x-pos from stCoor1 and stCoor2
+	rY_Leg			:LREAL;					// Displacement in y-axis between y-pos from stCoor1 and stCoor2
+END_VAR
+
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// Angle (Theta) must be calculated from two positions. 
+// Calculate the two "legs" formed by the triangle of postion from stCoor1 and stCoor2 
+rX_Leg := stCoor2.rPosX - stCoor1.rPosX;
+rY_Leg := stCoor2.rPosY - stCoor1.rPosY;
+
+// Calculate angle "Theta"
+IF rX_Leg = 0 OR rY_Leg = 0 THEN
+	// Theta is a parallel line to either x-axis or y-axis
+	IF rX_Leg = 0 AND rY_Leg > 0 THEN
+		// Theta is parallel to positive direction on y-axis
+		rTheta := 90.0;
+	ELSIF rX_Leg = 0 AND rY_Leg < 0 THEN
+		// Theta is parallel to negative direction on y-axis
+		rTheta := -90.0;
+	ELSIF rX_Leg > 0 AND rY_Leg = 0 THEN
+		// Theta is parallel to positive direction on x-axis
+		rTheta := 0.0;
+	ELSIF rX_Leg < 0 AND rY_Leg = 0 THEN
+		// Theta is parallel to negative direction on x-axis
+		rTheta := 180.0;
+	ELSIF rX_Leg = 0 AND rY_Leg = 0 THEN
+		// Special case where both stCoor1 and stCoor2 have the same coordinates (Should not happen).
+		bError := TRUE;
+	END_IF	
+ELSE
+	// Calculate angle "Theta" from position in stCoor1 and stCoor2	 
+	IF stCoor1.rPosX <= stCoor2.rPosX AND stCoor1.rPosY <= stCoor2.rPosY THEN
+		// I. Quadrant	
+		// Location of stCoor2 in regards to stCoor1 as center
+		IF rX_Leg <> 0 THEN
+			rTheta := RAD_TO_DEG(ATAN(rY_Leg/rX_Leg));
+		ELSIF rX_Leg = 0 THEN
+			IF rY_Leg > 0 THEN
+				rTheta := 90.0;
+			ELSIF rY_Leg = 0 THEN
+				// Special case where both stCoor1 and stCoor2 have the same coordinates (Should not happen).
+				bError := TRUE;
+			END_IF
+		END_IF
+	ELSIF stCoor1.rPosX > stCoor2.rPosX AND stCoor1.rPosY <= stCoor2.rPosY THEN 	
+		// II. Quadrant	
+		// Location of stCoor2 in regards to stCoor1 as centers
+		IF rY_Leg <> 0 THEN
+			rTheta := RAD_TO_DEG(ATAN(rY_Leg/rX_Leg)) + 180;
+		ELSIF rY_Leg = 0 THEN
+			IF rX_Leg > 0 THEN
+				rTheta := 0.0;
+			ELSE
+				rTheta := -180.0;
+			END_IF
+		END_IF
+	ELSIF stCoor1.rPosX > stCoor2.rPosX AND stCoor1.rPosY > stCoor2.rPosY THEN 	
+		// III. Quadrant	
+		// Location of stCoor2 in regards to stCoor1 as center
+		rTheta := -1*(180 - RAD_TO_DEG(ATAN(rY_Leg/rX_Leg)));
+	ELSIF stCoor1.rPosX < stCoor2.rPosX AND stCoor1.rPosY > stCoor2.rPosY THEN 	
+		// IV. Quadrant	
+		// Location of stCoor2 in regards to stCoor1 as center
+		rTheta := RAD_TO_DEG(ATAN(rY_Leg/rX_Leg));
+	END_IF	
+END_IF
+
+// Return result
+IF NOT bError THEN
+	// No error => Return result.
+	FUN_AngleCalculate := rTheta;
+ELSE
+	// Error => Return error value
+	FUN_AngleCalculate := -999.0;
+END_IF
+
+]]></ST>
+    </Implementation>
+    <LineIds Name="FUN_AngleCalculate">
+      <LineId Id="93" Count="59" />
+      <LineId Id="51" Count="0" />
+      <LineId Id="154" Count="1" />
+      <LineId Id="163" Count="0" />
+      <LineId Id="167" Count="0" />
+      <LineId Id="157" Count="0" />
+      <LineId Id="164" Count="1" />
+      <LineId Id="168" Count="0" />
+      <LineId Id="166" Count="0" />
+      <LineId Id="156" Count="0" />
+      <LineId Id="153" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

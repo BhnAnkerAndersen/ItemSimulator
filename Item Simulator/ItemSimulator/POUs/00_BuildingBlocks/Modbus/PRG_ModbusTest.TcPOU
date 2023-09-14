@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="PRG_ModbusTest" Id="{e325ca49-fd54-4936-bce4-96a1102c65e7}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM PRG_ModbusTest
+VAR
+	// General	
+	bInit					:BOOL := TRUE;
+	nForIndex				:INT;
+	
+	bTestCyclicRead			:BOOL;
+	bTestStop				:BOOL;
+	bTestReset				:BOOL;
+	
+	// Modbus
+	fbModbus				:FB_ModbusRtuMaster;
+	fbModbusBusy			:BOOL;
+	fbModbusError			:BOOL;
+	
+	// Frequency inverters
+	aVFD					:ARRAY[1..cNoOfUnits] OF ST_Modbus_Unit; 	
+END_VAR
+VAR CONSTANT
+	cNoOfUnits				:INT:= 2;
+	cNoOfParam				:INT:= 4;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+// Initialization
+//-------------------------------------------	
+IF bInit THEN	
+	// VFD address 
+	aVFD[1].nAddr := 2;
+	aVFD[2].nAddr := 3;
+	// Parameters to be read in each VFD
+	FOR nForIndex := 1 TO cNoOfUnits BY 1 DO
+		aVFD[nForIndex].aParam[1].nMemAddr 		:= 1610;	 				 // [W] Power (Value back is in W and not kW)
+		aVFD[nForIndex].aParam[1].nQuantity 	:= 4;						 // Bytes
+		aVFD[nForIndex].aParam[1].fConvFactor 	:= 10.0; 				     // Conversion index 1 => Conversion factor 10
+		aVFD[nForIndex].aParam[1].eDataType 	:= E_Modbus_DataType.eInt32; // Int32
+		
+		aVFD[nForIndex].aParam[2].nMemAddr 		:= 1612;					// [V] Motor voltage
+		aVFD[nForIndex].aParam[2].nQuantity 	:= 2;						// Bytes -> 2 bytes
+		aVFD[nForIndex].aParam[2].fConvFactor 	:= 0.1; 					// Conversion index -1 => Conversion factor 0.1
+		aVFD[nForIndex].aParam[2].eDataType 	:= E_Modbus_DataType.eInt16;// Int16 
+		
+		aVFD[nForIndex].aParam[3].nMemAddr 		:= 1613;					// [Hz] Frequency
+		aVFD[nForIndex].aParam[3].nQuantity 	:= 2;						// Bytes
+		aVFD[nForIndex].aParam[3].fConvFactor 	:= 0.1; 					// Conversion index -1 => Conversion factor 0.1
+		aVFD[nForIndex].aParam[3].eDataType 	:= E_Modbus_DataType.eInt16;// Int16 
+		
+		aVFD[nForIndex].aParam[4].nMemAddr 		:= 1614;					// [A] Motor current 
+		aVFD[nForIndex].aParam[4].nQuantity 	:= 4;						// Bytes
+		aVFD[nForIndex].aParam[4].fConvFactor 	:= 0.01;				 	// Conversion index -2 => Conversion factor 0.01
+		aVFD[nForIndex].aParam[4].eDataType 	:= E_Modbus_DataType.eInt32;// Int32
+	END_FOR
+	bInit := FALSE;
+END_IF
+
+
+// Update function block that handles modbus communication
+//-------------------------------------------	
+fbModbus(
+	pUnit:= ADR(aVFD),
+	nNoOfUnits := cNoOfUnits,
+	nNoOfParam := cNoOfParam,
+	bBusy => fbModbusBusy,
+	bError => fbModbusError);
+
+	
+// Commands	
+//-------------------------------------------		
+// Test/Start cyclic read of data
+IF bTestCyclicRead THEN
+	fbModbus.M_CmdCyclicRead();
+	bTestCyclicRead := FALSE;
+END_IF
+
+// Stop cyclic read of data
+IF bTestStop THEN
+	fbModbus.M_CmdStop();
+	bTestStop := FALSE;
+END_IF
+
+// Reset of error
+IF bTestReset THEN
+	fbModbus.M_CmdReset();
+	bTestReset := FALSE;
+END_IF
+
+	
+// Results (Read outs)
+//-------------------------------------
+// VFD 1
+//aVFD[1].aParam[1].aDataValue;		// [W] Power
+//aVFD[1].aParam[2].aDataValue;		// [V] Motor voltage
+//aVFD[1].aParam[3].aDataValue;		// [Hz] Frequency
+//aVFD[1].aParam[4].aDataValue;		// [A] Motor current 
+
+// VFD 2
+//aVFD[2].aParam[1].aDataValue;		// [W] Power
+//aVFD[2].aParam[2].aDataValue;		// [V] Motor voltage
+//aVFD[2].aParam[3].aDataValue;		// [Hz] Frequency
+//aVFD[2].aParam[4].aDataValue;		// [A] Motor current 	
+
+	
+	]]></ST>
+    </Implementation>
+    <LineIds Name="PRG_ModbusTest">
+      <LineId Id="161" Count="0" />
+      <LineId Id="42" Count="0" />
+      <LineId Id="449" Count="0" />
+      <LineId Id="150" Count="0" />
+      <LineId Id="209" Count="0" />
+      <LineId Id="211" Count="0" />
+      <LineId Id="283" Count="0" />
+      <LineId Id="208" Count="0" />
+      <LineId Id="274" Count="0" />
+      <LineId Id="153" Count="1" />
+      <LineId Id="289" Count="0" />
+      <LineId Id="416" Count="1" />
+      <LineId Id="158" Count="0" />
+      <LineId Id="277" Count="0" />
+      <LineId Id="290" Count="0" />
+      <LineId Id="418" Count="0" />
+      <LineId Id="420" Count="0" />
+      <LineId Id="339" Count="1" />
+      <LineId Id="278" Count="0" />
+      <LineId Id="422" Count="0" />
+      <LineId Id="421" Count="0" />
+      <LineId Id="446" Count="0" />
+      <LineId Id="279" Count="0" />
+      <LineId Id="291" Count="0" />
+      <LineId Id="423" Count="0" />
+      <LineId Id="275" Count="0" />
+      <LineId Id="151" Count="1" />
+      <LineId Id="462" Count="0" />
+      <LineId Id="450" Count="1" />
+      <LineId Id="514" Count="0" />
+      <LineId Id="384" Count="0" />
+      <LineId Id="455" Count="2" />
+      <LineId Id="465" Count="1" />
+      <LineId Id="517" Count="0" />
+      <LineId Id="516" Count="0" />
+      <LineId Id="515" Count="0" />
+      <LineId Id="467" Count="0" />
+      <LineId Id="472" Count="0" />
+      <LineId Id="460" Count="0" />
+      <LineId Id="476" Count="0" />
+      <LineId Id="473" Count="1" />
+      <LineId Id="478" Count="0" />
+      <LineId Id="481" Count="3" />
+      <LineId Id="480" Count="0" />
+      <LineId Id="487" Count="4" />
+      <LineId Id="479" Count="0" />
+      <LineId Id="477" Count="0" />
+      <LineId Id="385" Count="0" />
+      <LineId Id="503" Count="0" />
+      <LineId Id="512" Count="1" />
+      <LineId Id="504" Count="3" />
+      <LineId Id="540" Count="0" />
+      <LineId Id="508" Count="3" />
+      <LineId Id="461" Count="0" />
+      <LineId Id="458" Count="0" />
+      <LineId Id="54" Count="0" />
+      <LineId Id="459" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

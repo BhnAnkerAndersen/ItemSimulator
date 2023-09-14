@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FUN_InsideHysteresis360" Id="{87050e55-6a88-4571-b4a1-ec1f003085b4}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION FUN_InsideHysteresis360 : BOOL
+VAR_INPUT
+	rAct		:REAL;			// Actual value
+	rSp			:REAL;			// Setpoint value
+	rHys		:REAL;			// Hysteresis	
+END_VAR
+VAR
+	bInside		:BOOL;			// True if actual value is within setpoint plus minus hysteresis value
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+
+// Determine if value is close to loop back point at 360 Deg. 
+IF (rSp+rHys) > 360.0000 OR (rSp-rHys) < 0.0000 THEN
+	// SP is close to switch
+	IF (rSp+rHys) > 360.0000 THEN
+		// High limit is above 360 deg
+		IF (rAct >= (rSp-rHys)) OR (rAct <= (rSp+rHys-360)) THEN
+ 			bInside := TRUE;
+		ELSE
+			bInside := FALSE;
+		END_IF
+	ELSE 
+		IF (rAct <= (rSp+rHys)) OR (rAct >= (360+(rSP-rHys))) THEN 
+			bInside := TRUE;
+		ELSE
+			bInside := FALSE;
+		END_IF
+	END_IF
+ELSE
+	// SP is not close to 0 or 360 deg.
+	bInside := FUN_InsideHysteresis(rAct:= rAct, rSp:= rSp, rHys:= rHys);
+END_IF
+
+// Set return value
+FUN_InsideHysteresis360 := bInside;]]></ST>
+    </Implementation>
+    <LineIds Name="FUN_InsideHysteresis360">
+      <LineId Id="33" Count="2" />
+      <LineId Id="39" Count="1" />
+      <LineId Id="58" Count="0" />
+      <LineId Id="62" Count="0" />
+      <LineId Id="85" Count="1" />
+      <LineId Id="93" Count="1" />
+      <LineId Id="87" Count="0" />
+      <LineId Id="89" Count="0" />
+      <LineId Id="96" Count="0" />
+      <LineId Id="91" Count="0" />
+      <LineId Id="95" Count="0" />
+      <LineId Id="97" Count="2" />
+      <LineId Id="54" Count="3" />
+      <LineId Id="22" Count="0" />
+      <LineId Id="21" Count="0" />
+      <LineId Id="23" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

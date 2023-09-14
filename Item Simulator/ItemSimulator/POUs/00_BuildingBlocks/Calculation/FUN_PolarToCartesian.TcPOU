@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FUN_PolarToCartesian" Id="{689aba0c-50b6-4c5c-90a1-c84e82e7ff61}" SpecialFunc="None">
+    <Declaration><![CDATA[//********************************************************************************
+// FUN_PolarToCartesian.
+// -------------------------------------------------------------------------------
+// This function calculates the cartesian X and Y coordinates from the 
+// polar coordinates r and theta.
+//	
+// Version:
+//			- V1.00.00	HHL, 01/04-2021
+//********************************************************************************
+FUNCTION FUN_PolarToCartesian : BOOL
+VAR_IN_OUT
+END_VAR
+VAR_INPUT
+	fRadius			:REAL;			// Radius for polar coordinate
+	fAngle			:REAL;			// [deg] Angle for polar coordinate 
+END_VAR
+VAR_OUTPUT
+	fX				:REAL;			// X-axis coordinate
+	fY				:REAL;			// Y-axis coordinate	
+END_VAR
+
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+// Calculate cartesian coordinates from polar coordinates
+fX := LREAL_TO_REAL(fRadius * COS(DEG_TO_RAD(fAngle)));
+fY := LREAL_TO_REAL(fRadius * SIN(DEG_TO_RAD(fAngle)));
+]]></ST>
+    </Implementation>
+    <LineIds Name="FUN_PolarToCartesian">
+      <LineId Id="200" Count="0" />
+      <LineId Id="198" Count="0" />
+      <LineId Id="166" Count="0" />
+      <LineId Id="156" Count="0" />
+      <LineId Id="153" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FUN_ConvFourByteToUdint32" Id="{aa4b6529-dde3-4214-a3a7-3f4237e6ebd6}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION FUN_ConvFourByteToUdint32 : UDINT
+VAR_INPUT
+	nValue1		:BYTE;				// Input Byte no 1
+	nValue2		:BYTE;				// Input Byte no 2
+	nValue3		:BYTE;				// Input Byte no 3
+	nValue4		:BYTE;				// Input Byte no 4
+END_VAR
+VAR
+	uData		:U_Convert_UDINT32;	// Data variable used for conversion
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+// Save input bytes in data union
+uData.arrByte[1] := nValue1;
+uData.arrByte[2] := nValue2;
+uData.arrByte[3] := nValue3;
+uData.arrByte[4] := nValue4;
+
+// Return value
+FUN_ConvFourByteToUdint32 := uData.nValue;
+]]></ST>
+    </Implementation>
+    <LineIds Name="FUN_ConvFourByteToUdint32">
+      <LineId Id="53" Count="3" />
+      <LineId Id="62" Count="1" />
+      <LineId Id="57" Count="1" />
+      <LineId Id="16" Count="0" />
+      <LineId Id="64" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

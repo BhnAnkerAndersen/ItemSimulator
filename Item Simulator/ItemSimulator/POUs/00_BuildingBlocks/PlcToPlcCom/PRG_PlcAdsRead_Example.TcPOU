@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="PRG_PlcAdsRead_Example" Id="{b278ba41-3215-425e-afcd-41e74b1c8e3b}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM PRG_PlcAdsRead_Example
+VAR
+	fbPlcToPlc		:FB_PlcAdsRead;			// Function block that reads a struct from a remote PLC
+	stDataToPlc		:ST_ComTest;			// Data to be read from remote PLC (same type of struct must be implemented on remote PLC)
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+// Call FB that reads struct on remote PLC
+fbPlcToPlc(
+	sRemoteNetId:= '192.168.1.3.1.1', 			// AMS net id on remote PLC
+	uiRemoteAmsPort:= 851, 
+	sSymbolName:= 'GVL_Interface.stData', 		// Symbol name on remote PLC
+	dwAddress:= ADR(stDataToPlc), 				// Addres where data from remote PLC must be stored
+	udiLength:= SIZEOF(stDataToPlc), 			// Size of data that is rad
+	tReadInterval:= T#1S, 
+	tReadTimeout:= T#2S, 
+	bEnable:= , 
+	bStartRead:= , 
+	bLinkOk=> , 
+	bError=> , 
+	eErrorStep=> , 
+	udiErrorId=> );
+]]></ST>
+    </Implementation>
+    <LineIds Name="PRG_PlcAdsRead_Example">
+      <LineId Id="7" Count="0" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="9" Count="8" />
+      <LineId Id="19" Count="3" />
+      <LineId Id="8" Count="0" />
+      <LineId Id="29" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

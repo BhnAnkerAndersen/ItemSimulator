@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FUN_InsideHysteresis180pm" Id="{9a104c4a-e96b-418f-b021-f2783c4a176d}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION FUN_InsideHysteresis180pm : BOOL
+VAR_INPUT
+	rAct		:REAL;			// [pm 180 deg] Actual value
+	rSp			:REAL;			// [pm 180 deg] Setpoint value
+	rHys		:REAL;			// [deg] Hysteresis	
+END_VAR
+VAR
+	bInside		:BOOL;			// True if actual value is within setpoint plus minus hysteresis value
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+
+
+
+// Check z-axis angle
+bInside := FALSE;
+// Find out if angle is close to switch between 180 and -179.9999 deg.
+IF (rSp+rHys) > 180.0000 OR (rSp-rHys) < -179.9999 THEN
+	// SP is close to switch
+	IF rSp > 0 AND rAct >= (rSp-rHys) AND rAct <= 180.0000 THEN
+		// Positive setpoint and actual position inside positve hysteresis area
+		bInside := TRUE;
+	ELSIF rSp > 0 AND rAct <= (-179.9999 + rHys -(180-rSp)) AND rAct >= -179.9999 THEN
+		// Positive setpoint and actual position inside negative hysteresis area
+		bInside := TRUE;
+	ELSIF  rSp < 0 AND (rAct <= (rSp+rHys)) AND rAct >= -179.9999 THEN
+		// Negative setpoint and actual position inside negative hysteresis area
+		bInside := TRUE;
+	ELSIF rSp < 0 AND rAct >= (180- rHys + (179.9999+rSp)) AND rAct <= 180.0000 THEN
+		// Negative setpoint and actual position inside positive hysteresis area
+		bInside := TRUE;
+	END_IF 
+ELSE
+	// SP is not close to switch angle
+	bInside := FUN_InsideHysteresis(rAct:= rAct, rSp:= rSp, rHys:= rHys);
+END_IF
+
+// Set return value
+FUN_InsideHysteresis180pm := bInside;
+]]></ST>
+    </Implementation>
+    <LineIds Name="FUN_InsideHysteresis180pm">
+      <LineId Id="17" Count="0" />
+      <LineId Id="22" Count="0" />
+      <LineId Id="26" Count="2" />
+      <LineId Id="53" Count="0" />
+      <LineId Id="7" Count="0" />
+      <LineId Id="31" Count="0" />
+      <LineId Id="34" Count="0" />
+      <LineId Id="37" Count="0" />
+      <LineId Id="39" Count="1" />
+      <LineId Id="50" Count="1" />
+      <LineId Id="48" Count="0" />
+      <LineId Id="41" Count="5" />
+      <LineId Id="38" Count="0" />
+      <LineId Id="32" Count="0" />
+      <LineId Id="35" Count="1" />
+      <LineId Id="33" Count="0" />
+      <LineId Id="54" Count="1" />
+      <LineId Id="57" Count="0" />
+      <LineId Id="29" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

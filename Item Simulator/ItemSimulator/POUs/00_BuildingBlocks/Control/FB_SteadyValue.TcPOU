@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FB_SteadyValue" Id="{0afcb653-0584-4de8-b2be-f13b9e412413}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_SteadyValue
+VAR_INPUT
+	fValue			:REAL;			// Actual value
+	fHys			:REAL;			// Hysteresis for acceptance of steady value
+	tDelay			:TIME;			// Time where value must be steady
+	bLoopBackOn		:BOOL;			// If set true, it is assumed that value will loop back to zero. E.g. at 360 deg.
+	fLoopBackLow	:REAL;			// If the input decreases to this value, loop back to fLoopBackHigh occurs
+	fLoopBackHigh	:REAL;			// If the input increases to this value, loop back to fLoopBackLow occurs
+END_VAR
+VAR_OUTPUT
+	bSteady			:BOOL;			// True if value is steady (only changing inside hysteresis)
+END_VAR
+VAR
+	bInit			:BOOL:= TRUE;	// True at start of first scan, False otherwise
+	fLoopBackLimit	:REAL;
+	bLoopBackDetect	:BOOL;
+	fValueHigh		:REAL;		
+	fValueLow		:REAL;
+	fValueOld		:REAL;			// This value is updated to the actual value whenever value is outside of hysteresis
+	bDelayOn		:BOOL;
+	tonDelay		:TON;			// Timer for steady value
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// Initialization
+IF bInit THEN
+	fValueOld := fValue;
+	bDelayOn := FALSE;
+	bInit := FALSE;
+END_IF
+
+// Determine value +- hysteresis is within reach of loop back
+IF bLoopBackOn THEN
+	// Loop back is enabled => check if old value is close to loop back points
+	IF ((fValueOld + fHys) >= fLoopBackHigh) OR ((fValueOld - fHys) <= fLoopBackLow) THEN
+		// Old value is close to loop back.
+		IF ((fValueOld + fHys) >= fLoopBackHigh) THEN
+			// Old value is close to loop back high
+			fLoopBackLimit := fLoopBackLow + ((fValueOld + fHys) - fLoopBackHigh);
+			IF ((fValue <= fLoopBackLimit) OR (fValue >= (fValueOld-fHys))) THEN
+				// Inside range
+				bDelayOn := TRUE;	
+			ELSE
+				// Outside of range
+				bDelayOn := FALSE;
+				fValueOld := fValue;
+			END_IF
+		ELSE
+			// Old value is close to loop back low
+			fLoopBackLimit := fLoopBackHigh + ((fValueOld - fHys) - fLoopBackLow);
+			IF ((fValue >= fLoopBackLimit) OR (fValue <= (fValueOld+fHys))) THEN
+				// Inside range
+				bDelayOn := TRUE;	
+			ELSE
+				// Outside of range
+				bDelayOn := FALSE;
+				fValueOld := fValue;
+			END_IF
+		END_IF
+	ELSE
+		// Not close to loop points. Use "normal" limits
+		fValueHigh := fValueOld + fHys;
+		fValueLow := fValueOld - fHys;
+		IF (fValue >= fValueLow) AND (fValue <= fValueHigh) THEN
+			// Inside range
+			bDelayOn := TRUE;
+		ELSE
+			// Outside of range
+			bDelayOn := FALSE;
+			fValueOld := fValue;
+		END_IF
+	END_IF
+ELSE
+	// Loop back not enabled. Use "normal" limits
+	fValueHigh := fValueOld + fHys;
+	fValueLow := fValueOld - fHys;
+	IF (fValue >= fValueLow) AND (fValue <= fValueHigh) THEN
+		// Inside range
+		bDelayOn := TRUE;
+	ELSE
+		// Outside of range
+		bDelayOn := FALSE;
+		fValueOld := fValue;
+	END_IF	
+END_IF
+
+// Set steady value
+tonDelay(IN:= bDelayOn, PT:= tDelay, Q=> bSteady, ET=> );
+]]></ST>
+    </Implementation>
+    <LineIds Name="FB_SteadyValue">
+      <LineId Id="42" Count="0" />
+      <LineId Id="23" Count="0" />
+      <LineId Id="41" Count="0" />
+      <LineId Id="48" Count="0" />
+      <LineId Id="39" Count="1" />
+      <LineId Id="70" Count="0" />
+      <LineId Id="68" Count="1" />
+      <LineId Id="135" Count="0" />
+      <LineId Id="92" Count="0" />
+      <LineId Id="136" Count="0" />
+      <LineId Id="94" Count="0" />
+      <LineId Id="152" Count="0" />
+      <LineId Id="96" Count="0" />
+      <LineId Id="138" Count="1" />
+      <LineId Id="146" Count="0" />
+      <LineId Id="141" Count="0" />
+      <LineId Id="147" Count="1" />
+      <LineId Id="142" Count="0" />
+      <LineId Id="140" Count="0" />
+      <LineId Id="98" Count="0" />
+      <LineId Id="149" Count="0" />
+      <LineId Id="99" Count="0" />
+      <LineId Id="155" Count="0" />
+      <LineId Id="157" Count="5" />
+      <LineId Id="154" Count="0" />
+      <LineId Id="97" Count="0" />
+      <LineId Id="100" Count="0" />
+      <LineId Id="133" Count="0" />
+      <LineId Id="101" Count="1" />
+      <LineId Id="104" Count="6" />
+      <LineId Id="103" Count="0" />
+      <LineId Id="95" Count="0" />
+      <LineId Id="89" Count="0" />
+      <LineId Id="134" Count="0" />
+      <LineId Id="124" Count="8" />
+      <LineId Id="120" Count="1" />
+      <LineId Id="50" Count="0" />
+      <LineId Id="43" Count="0" />
+      <LineId Id="46" Count="0" />
+      <LineId Id="9" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FUN_LookUpTable" Id="{0aa229a5-6e7f-4881-9b72-414fd034a9c1}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION FUN_LookUpTable : REAL
+VAR_INPUT
+	iNumberOfPoints			:INT;						(* Specifies the number of points in the loopup table. Min 2 and max 10 *)
+	rInput					:REAL;						(* Input value to look up table *)
+	arrAxisX				:ARRAY[1..10] OF REAL;		(* Definition of lookup table, points on x-axis, Min 2 and max 10 *)
+	arrAxisY				:ARRAY[1..10] OF REAL;		(* Definition of lookup table, points on y-axis, Min 2 and max 10 *)
+END_VAR
+VAR
+	rOutput					:REAL;						(* Look up table output value *)
+	bError					:BOOL;						(* TRUE if number of input points are nonvalid *)
+	bMakeLookUp				:BOOL;						(* FALSE if input value is outside min and max values on x-axis. Output is saturated *)
+	bIndexHighFound			:BOOL;						(* TRUE when the high index is found *)
+	iIndexHigh				:INT;						(* Holds the high index value on the lookup table for  the input value *)
+	iIndexLow				:INT;						(* Holds the low index value on the lookup table for the input value*)
+	iIndex					:INT;						(* index counter *)
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+(* Check if number of points are valid *)
+IF iNumberOfPoints < 2 OR iNumberOfPoints > 10 THEN
+	bError := TRUE;
+ELSE
+	bError := FALSE;
+END_IF
+
+(* Check input value, is it within the x-axis min and max points. If yes then make calculation,
+    if no then saturate to min and max values											 *)
+IF rInput >= arrAxisX[iNumberOfPoints] THEN
+	rOutput := arrAxisY[iNumberOfPoints];
+ELSIF rInput <= arrAxisX[1] THEN
+	rOutput := arrAxisY[1];
+ELSE
+	bMakeLookUp := TRUE;
+END_IF
+
+
+(* Find high and low index for input value *)
+IF bMakeLookUp AND NOT bError THEN
+
+	(* While loop findes high index *)
+	iIndex := 1;
+	WHILE NOT bIndexHighFound AND iIndex <= iNumberOfPoints DO
+		IF rInput <= arrAxisX[iIndex] THEN
+			iIndexHigh := iIndex;
+			bIndexHighFound := TRUE;
+		END_IF
+		iIndex := iIndex +1;
+	END_WHILE
+	iIndexLow := iIndexHigh - 1;
+
+	(* Make interpolation between high and low value *)
+	rOutput := FUN_Interpolation(rInput, arrAxisX[iIndexLow], arrAxisY[iIndexLow], arrAxisX[iIndexHigh], arrAxisY[iIndexHigh]);
+
+	(* Clean up before next run *)
+	bIndexHighFound := FALSE;
+	bMakeLookUp := FALSE;
+END_IF
+
+FUN_LookUpTable := rOutput;]]></ST>
+    </Implementation>
+    <LineIds Name="FUN_LookUpTable">
+      <LineId Id="19" Count="38" />
+      <LineId Id="7" Count="0" />
+      <LineId Id="59" Count="0" />
+      <LineId Id="58" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

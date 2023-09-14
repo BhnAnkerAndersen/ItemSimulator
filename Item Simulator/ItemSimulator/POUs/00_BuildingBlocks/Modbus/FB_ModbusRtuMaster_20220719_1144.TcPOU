@@ -1,0 +1,464 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FB_ModbusRtuMaster_20220719_1144" Id="{f4a3e31e-9680-4181-b8a3-27ad3ee816f9}" SpecialFunc="None">
+    <Declaration><![CDATA[// FB_ModbusMaster
+//------------------------------------------------------ 
+// This FB must be called in a 2 ms task and in every scan
+// Test with Danfoss FC301 shows that up to approximately 46 registers can be read pr. sec.
+// Test was done with baud 115200. 
+FUNCTION_BLOCK FB_ModbusRtuMaster_20220719_1144
+VAR_INPUT
+	pUnit					:POINTER TO ARRAY[1..cNoOfUnitsMax] OF ST_Modbus_Unit;
+	nNoOfUnits				:INT;			// Number of modbus units. Maximum value is 20.					
+	nNoOfParam				:INT;			// Number of modbus parameters to be read from unit. Maximum value is determined by ST_Modbus_Unit. 
+END_VAR
+VAR_OUTPUT
+	bBusy					:BOOL;			// True while command is beeing executed
+	bError					:BOOL;			// True if an error occured during execution of a command
+END_VAR
+VAR
+	// Commands
+	bCmdCyclicRead			:BOOL;			// Command for cyclic reading of parameter registers
+	bCmdStop				:BOOL;			// Command for stop
+	bCmdReset				:BOOL;			// Command for reset of active errors
+	
+	// General	
+	bInit					:BOOL := TRUE;	// True at the start of false scan, false otherwise
+	nReadCount				:INT;			// Counts the number of succesfull read operations
+	nValueTempInt16			:INT;			// Value used in conversion from byte data to actual data value
+	nValueTempInt32			:DINT;			// Value used in conversion from byte data to actual data value
+	
+	// Statemachine
+	eStep					:E_ModbusRtuMaster_State;	// State
+	eStepPrevious				:E_ModbusRtuMaster_State;	// State from previous scan
+	eStatePrevious			:E_ModbusRtuMaster_State;	// Previous state
+	nStepSecCount			:UDINT;						// Counts number of seconds without state transitions
+	wStateSecOld			:WORD;						// Seconds value from NtTime from previous scan	
+	eStepEntry				:BOOL;						// True in one scan when a new state is entered
+	arrStateLog				:ARRAY[0..19] OF ST_ModbusRtuMaster_StateLogEntry; // Log that contains the last xx states
+	
+	// Modbus master
+	fbModBusMaster			:ModbusRtuMaster_KL6x22B;	// Modbus master functions
+	bReadExe				:BOOL;						// On rising edge reading is started
+	bReadBusy				:BOOL;						// True while modbus master reads register on unit
+	bReadError				:BOOL;						// True if read error occured
+	eReadErrorID			:MODBUS_ERRORS;				// Modbus error ID
+	nReadNoOfBytes			:UINT;						// Nunber of bytes read in read cycle
+
+	// Units
+	nUnitActive				:INT;						// Active unit in cyclic read
+	nParamActive			:INT;						// Active parameter in cyclic read
+END_VAR
+VAR CONSTANT
+	cNoOfUnitsMax			:INT:= 20;					// Maximum number of units for modbus master
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+// Initialization	
+IF bInit THEN	
+	bInit := FALSE;
+END_IF
+
+
+// Update fb for modbus communication
+IF eStep >= E_ModbusRtuMaster_State.eReadPre AND eStep <= E_ModbusRtuMaster_State.eReadPost THEN
+	fbModbusMaster.ReadRegs(
+		UnitID:= pUnit^[nUnitActive].nAddr, 
+		Quantity:= pUnit^[nUnitActive].aParam[nParamActive].nQuantity, 
+		MBAddr:= (pUnit^[nUnitActive].aParam[nParamActive].nMemAddr*10)-1, 
+		cbLength:= pUnit^[nUnitActive].aParam[nParamActive].nQuantity*2, 
+		pMemoryAddr:= ADR(pUnit^[nUnitActive].aParam[nParamActive].aDataStorage), 
+		Execute:= bReadExe, 
+		Timeout:= T#2S, 
+		BUSY=> bReadBusy, 
+		Error=> bReadError, 
+		ErrorId=> eReadErrorID, 
+		cbRead=> nReadNoOfBytes);	
+END_IF
+
+	
+// State machine
+//----------------------------------------
+// Check for new state entry
+IF eStep <> eStepPrevious THEN
+	// New state, Set entry flag
+	eStepEntry := TRUE;
+	eStatePrevious := eStepPrevious;
+ELSE
+	// Same state as last scan, remove entry flag
+	eStepEntry := FALSE;
+END_IF
+// Update state log
+A_StateLog();
+// Reset "old" state to present value
+eStepPrevious := eStep;
+	
+
+CASE eStep OF
+E_ModbusRtuMaster_State.eReset:
+	eStep := E_ModbusRtuMaster_State.eIdle;	
+
+
+E_ModbusRtuMaster_State.eIdle:
+	// Entry
+	IF eStepEntry THEN
+		A_ResetAllCmd();
+		bBusy 	:= FALSE;
+		bError	:= FALSE;
+		bReadExe := FALSE;
+	END_IF
+	// Wait for command
+	IF bCmdCyclicRead THEN
+		bBusy	 := TRUE;
+		bReadExe := FALSE;
+		bCmdCyclicRead := FALSE;
+		nUnitActive := 1;
+		nParamActive := 1;
+		eStep := E_ModbusRtuMaster_State.eReadPre;
+	END_IF
+		
+	
+E_ModbusRtuMaster_State.eReadPre:
+	// Send request for reading of hold register
+	bReadExe := TRUE;
+	//IF bReadBusy THEN
+		eStep := E_ModbusRtuMaster_State.eReadPost;
+	//END_IF	 
+	
+	
+E_ModbusRtuMaster_State.eReadPost:
+	// Wait for answer back
+	IF NOT bReadBusy THEN
+		IF NOT bReadError THEN
+			// Successfull read
+			nReadCount := nReadCount + 1;
+			// Convert return data to value
+			IF pUnit^[nUnitActive].aParam[nParamActive].eDataType = E_Modbus_DataType.eInt16 THEN
+				nValueTempInt16 := FUN_ConvTwoByteToInt16(
+									nValue1:= pUnit^[nUnitActive].aParam[nParamActive].aDataStorage[1],
+									nValue2:= pUnit^[nUnitActive].aParam[nParamActive].aDataStorage[2]);
+				pUnit^[nUnitActive].aParam[nParamActive].aDataValue := INT_TO_REAL(nValueTempInt16) * pUnit^[nUnitActive].aParam[nParamActive].fConvFactor;				
+			ELSIF pUnit^[nUnitActive].aParam[nParamActive].eDataType = E_Modbus_DataType.eInt32 THEN
+				nValueTempInt32 := FUN_ConvFourByteToInt32(
+									nValue1:= pUnit^[nUnitActive].aParam[nParamActive].aDataStorage[3],
+									nValue2:= pUnit^[nUnitActive].aParam[nParamActive].aDataStorage[4],
+									nValue3:= pUnit^[nUnitActive].aParam[nParamActive].aDataStorage[1],
+									nValue4:= pUnit^[nUnitActive].aParam[nParamActive].aDataStorage[2]);
+				pUnit^[nUnitActive].aParam[nParamActive].aDataValue := DINT_TO_REAL(nValueTempInt32) * pUnit^[nUnitActive].aParam[nParamActive].fConvFactor; 
+			END_IF
+			// Determine next step
+			IF NOT bCmdStop THEN
+				// Update setting to next parameter (and unit if this was the last parameter)
+				nParamActive := nParamActive + 1;
+				IF nParamActive > nNoOfParam THEN
+					// All parameters read from unit. Change to next unit
+					nParamActive := 1;
+					IF nUnitActive >= nNoOfUnits THEN
+						// Loop back to first unit in array
+						nUnitActive := 1;
+					ELSE
+						// Take next unit in array
+						nUnitActive := nUnitActive + 1;
+					END_IF		
+				END_IF
+				// Go back and start reading the next parameter
+				bReadExe := FALSE;
+				eStep := E_ModbusRtuMaster_State.eReadPre;
+			ELSE
+				// Stop cyclic reading of hold registers
+				eStep := E_ModbusRtuMaster_State.eIdle;
+			END_IF
+		ELSE
+			// Error occured
+			eStep := E_ModbusRtuMaster_State.eError;	
+		END_IF	
+	END_IF
+
+	
+E_ModbusRtuMaster_State.eError:
+	// Entry
+	IF eStepEntry THEN
+		A_ResetAllCmd();
+		bBusy := FALSE;
+		bError := TRUE;	
+	END_IF
+	// Wait for reset
+	IF bCmdReset THEN
+		bCmdReset := FALSE;
+		eStep := E_ModbusRtuMaster_State.eIdle;	
+	END_IF
+END_CASE ]]></ST>
+    </Implementation>
+    <Action Name="A_ResetAllCmd" Id="{de91ea5b-9af5-4155-8716-25a7ac46af59}">
+      <Implementation>
+        <ST><![CDATA[// Reset all commands
+bCmdCyclicRead := FALSE;
+bCmdStop  := FALSE;
+bCmdReset := FALSE;]]></ST>
+      </Implementation>
+    </Action>
+    <Action Name="A_StateLog" Id="{c3a36a14-cd90-452d-bbb6-5e856df67a74}">
+      <Implementation>
+        <ST><![CDATA[// Action: State log
+//---------------------------------------------------------------
+// The code below implements a simple state log in RAM. The purpose of the log
+// is to give the developer a state history when debugging.
+
+// Seconds counter
+//-----------------------------------------------
+IF wStateSecOld <> GVL_System.stNtTime.wSecond THEN
+	// New second => Update counter
+	IF nStepSecCount >= 4294967294 THEN
+		nStepSecCount := 0;
+	END_IF
+	nStepSecCount := nStepSecCount + 1;
+END_IF  
+wStateSecOld := GVL_System.stNtTime.wSecond;
+
+// Update time in active state
+//-----------------------------------------------
+arrStateLog[0].iSecCount := nStepSecCount;
+
+// Update Stringer state log
+//-----------------------------------------------
+IF 	(eStep <> eStepPrevious) THEN
+	// New state transition has occured => make new entry in the state log
+	// Start with shift in log (FIFO)
+	MEMMOVE(
+		destAddr:= ADR(arrStateLog[1]), 
+		srcAddr:= ADR(arrStateLog[0]), 
+		n:= (SIZEOF(arrStateLog) - SIZEOF(arrStateLog[0]))); 
+		
+	// Add new entry to start of log
+	arrStateLog[0].eStep 		:= eStep; 
+	arrStateLog[0].sTimeEntry 	:= FUN_GetTimestamp(GVL_System.stNtTime);
+	arrStateLog[0].iSecCount 	:= 0;
+	
+	// Reset seconds counter
+	nStepSecCount := 0;
+END_IF
+]]></ST>
+      </Implementation>
+    </Action>
+    <Method Name="M_CmdCyclicRead" Id="{8c32ddc6-e6d3-4579-b446-9d5de7bd47a2}">
+      <Declaration><![CDATA[METHOD M_CmdCyclicRead : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
+// Check if it is a valid command
+IF eStep = E_ModbusRtuMaster_State.eIdle THEN
+	// Valid command
+	bCmdCyclicRead := TRUE;
+END_IF
+
+// Return result for acceptance of command
+IF bCmdCyclicRead THEN
+	M_CmdCyclicRead := TRUE;
+ELSE
+	M_CmdCyclicRead := FALSE;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_CmdReset" Id="{167b96fa-1c68-4ff2-a7e7-b0426bc47e86}">
+      <Declaration><![CDATA[METHOD M_CmdReset : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
+// Check if it is a valid command
+IF eStep = E_ModbusRtuMaster_State.eError THEN
+	// Valid command
+	bCmdReset := TRUE;
+END_IF
+
+// Return result for acceptance of command
+IF bCmdReset THEN
+	M_CmdReset := TRUE;
+ELSE
+	M_CmdReset := FALSE;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_CmdStop" Id="{f828ba3f-ff1c-431a-8cec-52e5138afa41}">
+      <Declaration><![CDATA[METHOD M_CmdStop : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
+// Check if it is a valid command
+IF eStep > E_ModbusRtuMaster_State.eIdle AND eStep < E_ModbusRtuMaster_State.eError THEN
+	// Valid command
+	bCmdStop := TRUE;
+END_IF
+
+// Return result for acceptance of command
+IF bCmdStop THEN
+	M_CmdStop := TRUE;
+ELSE
+	M_CmdStop := FALSE;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="FB_ModbusRtuMaster_20220719_1144">
+      <LineId Id="161" Count="0" />
+      <LineId Id="42" Count="0" />
+      <LineId Id="150" Count="2" />
+      <LineId Id="455" Count="0" />
+      <LineId Id="167" Count="0" />
+      <LineId Id="398" Count="0" />
+      <LineId Id="530" Count="0" />
+      <LineId Id="588" Count="10" />
+      <LineId Id="586" Count="0" />
+      <LineId Id="531" Count="0" />
+      <LineId Id="482" Count="0" />
+      <LineId Id="385" Count="0" />
+      <LineId Id="485" Count="14" />
+      <LineId Id="483" Count="1" />
+      <LineId Id="45" Count="0" />
+      <LineId Id="456" Count="0" />
+      <LineId Id="534" Count="0" />
+      <LineId Id="533" Count="0" />
+      <LineId Id="532" Count="0" />
+      <LineId Id="63" Count="0" />
+      <LineId Id="503" Count="1" />
+      <LineId Id="515" Count="0" />
+      <LineId Id="507" Count="1" />
+      <LineId Id="582" Count="0" />
+      <LineId Id="502" Count="0" />
+      <LineId Id="65" Count="0" />
+      <LineId Id="165" Count="0" />
+      <LineId Id="467" Count="0" />
+      <LineId Id="458" Count="0" />
+      <LineId Id="513" Count="0" />
+      <LineId Id="510" Count="0" />
+      <LineId Id="509" Count="0" />
+      <LineId Id="66" Count="0" />
+      <LineId Id="166" Count="0" />
+      <LineId Id="56" Count="0" />
+      <LineId Id="511" Count="0" />
+      <LineId Id="77" Count="0" />
+      <LineId Id="459" Count="0" />
+      <LineId Id="89" Count="0" />
+      <LineId Id="584" Count="0" />
+      <LineId Id="169" Count="0" />
+      <LineId Id="585" Count="0" />
+      <LineId Id="125" Count="0" />
+      <LineId Id="512" Count="0" />
+      <LineId Id="126" Count="0" />
+      <LineId Id="457" Count="0" />
+      <LineId Id="129" Count="1" />
+      <LineId Id="222" Count="0" />
+      <LineId Id="133" Count="0" />
+      <LineId Id="295" Count="0" />
+      <LineId Id="347" Count="0" />
+      <LineId Id="428" Count="2" />
+      <LineId Id="426" Count="0" />
+      <LineId Id="424" Count="0" />
+      <LineId Id="349" Count="4" />
+      <LineId Id="296" Count="0" />
+      <LineId Id="299" Count="0" />
+      <LineId Id="294" Count="0" />
+      <LineId Id="235" Count="0" />
+      <LineId Id="140" Count="2" />
+      <LineId Id="215" Count="0" />
+      <LineId Id="223" Count="0" />
+      <LineId Id="216" Count="0" />
+      <LineId Id="224" Count="0" />
+      <LineId Id="218" Count="0" />
+      <LineId Id="220" Count="0" />
+      <LineId Id="225" Count="0" />
+      <LineId Id="221" Count="0" />
+      <LineId Id="219" Count="0" />
+      <LineId Id="144" Count="0" />
+      <LineId Id="461" Count="0" />
+      <LineId Id="583" Count="0" />
+      <LineId Id="460" Count="0" />
+      <LineId Id="236" Count="0" />
+      <LineId Id="238" Count="0" />
+      <LineId Id="240" Count="0" />
+      <LineId Id="239" Count="0" />
+      <LineId Id="134" Count="0" />
+      <LineId Id="226" Count="0" />
+      <LineId Id="135" Count="1" />
+      <LineId Id="131" Count="0" />
+      <LineId Id="529" Count="0" />
+      <LineId Id="227" Count="0" />
+      <LineId Id="145" Count="0" />
+      <LineId Id="517" Count="2" />
+      <LineId Id="522" Count="0" />
+      <LineId Id="521" Count="0" />
+      <LineId Id="516" Count="0" />
+      <LineId Id="524" Count="1" />
+      <LineId Id="528" Count="0" />
+      <LineId Id="526" Count="1" />
+      <LineId Id="54" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_ModbusRtuMaster_20220719_1144.A_ResetAllCmd">
+      <LineId Id="4" Count="0" />
+      <LineId Id="2" Count="1" />
+      <LineId Id="1" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_ModbusRtuMaster_20220719_1144.A_StateLog">
+      <LineId Id="44" Count="0" />
+      <LineId Id="42" Count="0" />
+      <LineId Id="45" Count="0" />
+      <LineId Id="47" Count="0" />
+      <LineId Id="43" Count="0" />
+      <LineId Id="2" Count="8" />
+      <LineId Id="1" Count="0" />
+      <LineId Id="59" Count="0" />
+      <LineId Id="58" Count="0" />
+      <LineId Id="66" Count="0" />
+      <LineId Id="60" Count="0" />
+      <LineId Id="12" Count="3" />
+      <LineId Id="18" Count="5" />
+      <LineId Id="52" Count="0" />
+      <LineId Id="24" Count="0" />
+      <LineId Id="26" Count="0" />
+      <LineId Id="53" Count="4" />
+      <LineId Id="41" Count="0" />
+      <LineId Id="11" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_ModbusRtuMaster_20220719_1144.M_CmdCyclicRead">
+      <LineId Id="6" Count="0" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="7" Count="1" />
+      <LineId Id="10" Count="0" />
+      <LineId Id="9" Count="0" />
+      <LineId Id="12" Count="0" />
+      <LineId Id="11" Count="0" />
+      <LineId Id="13" Count="1" />
+      <LineId Id="16" Count="1" />
+      <LineId Id="15" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_ModbusRtuMaster_20220719_1144.M_CmdReset">
+      <LineId Id="6" Count="0" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="7" Count="1" />
+      <LineId Id="10" Count="0" />
+      <LineId Id="9" Count="0" />
+      <LineId Id="12" Count="0" />
+      <LineId Id="11" Count="0" />
+      <LineId Id="13" Count="1" />
+      <LineId Id="16" Count="1" />
+      <LineId Id="15" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_ModbusRtuMaster_20220719_1144.M_CmdStop">
+      <LineId Id="6" Count="0" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="7" Count="1" />
+      <LineId Id="10" Count="0" />
+      <LineId Id="9" Count="0" />
+      <LineId Id="12" Count="0" />
+      <LineId Id="11" Count="0" />
+      <LineId Id="13" Count="1" />
+      <LineId Id="16" Count="1" />
+      <LineId Id="15" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

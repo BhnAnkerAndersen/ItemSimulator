@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FB_EK1101_Check" Id="{16faa1b7-2b49-4fe0-ae92-ed243aa5d060}" SpecialFunc="None">
+    <Declaration><![CDATA[//********************************************************************************
+// FB_EK1101_Check
+// -------------------------------------------------------------------------------
+//  This FB checks the status for an EtherCAT coupler
+//
+//  V2.00.01, HHL, nState is moved to input (Due to project structure)
+//	V2.00.00, HHL, Baseline Unknown, 24/08-2016
+//********************************************************************************
+FUNCTION_BLOCK FB_EK1101_Check
+VAR_INPUT
+	nState					:UINT;			// ID switch number input
+END_VAR
+VAR_OUTPUT
+	bSlaveError				:BOOL;			// On if slave has error
+	sSlaveState				:STRING(80);	// State description
+END_VAR
+VAR
+	iAlive					:INT;			// FB alive counter	
+
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+// Alive counter.
+iAlive:=iAlive+1;
+
+// Initialize slate state
+sSlaveState:='';
+
+// State
+IF nState > 0 THEN
+	
+	bSlaveError:=TRUE;
+	
+	IF nState = 1 THEN
+		sSlaveState:=' Slave in "INIT" state';
+	END_IF
+	
+	IF nState = 1 THEN
+		sSlaveState:=' Slave in "INIT" state';
+	END_IF
+	
+	IF nState = 2 THEN
+		sSlaveState:=' Slave in "PREOP" state';
+	END_IF
+	
+	IF nState = 3 THEN
+		sSlaveState:=' Slave in "BOOT" state';
+	END_IF
+	
+	IF nState = 4 THEN
+		sSlaveState:=' Slave in "SAFEOP" state';
+	END_IF
+	
+	IF nState = 8 THEN
+		sSlaveState:=' Slave in "OPERATIONEL" state';
+		bSlaveError := FALSE;
+	END_IF
+	
+	IF nState > 8 THEN
+		sSlaveState:=' Slave in "ERROR" state and NOT operationel';
+	END_IF
+ELSE
+	sSlaveState:= 'No connection to coupler.';
+	bSlaveError:= TRUE;
+END_IF
+
+//***********************************  State info:
+//
+(*
+0x___1 = Slave in 'INIT' state
+0x___2 = Slave in 'PREOP' state
+0x___3 = Slave in 'BOOT' state
+0x___4 = Slave in 'SAFEOP' state
+0x___8 = Slave in 'OP' state
+0x001_ = Slave signals error
+0x002_ = Invalid vendorId, productCode... read
+0x004_ = Initialization error occurred
+0x008_ = Slave disabled
+0x010_ = Slave not present
+0x020_ = Slave signals link error
+0x040_ = Slave signals missing link
+0x080_ = Slave signals unexpected link
+0x100_ = Communication port A
+0x200_ = Communication port B
+0x400_ = Communication port C
+0x800_ = Communication port D
+*)]]></ST>
+    </Implementation>
+    <LineIds Name="FB_EK1101_Check">
+      <LineId Id="3" Count="33" />
+      <LineId Id="102" Count="0" />
+      <LineId Id="44" Count="4" />
+      <LineId Id="53" Count="2" />
+      <LineId Id="57" Count="21" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FB_FirstOrderLowPass" Id="{3f589e47-1523-40d1-b722-e3564637e584}" SpecialFunc="None">
+    <Declaration><![CDATA[//********************************************************************************
+// FB_FirstOrderLowPass.
+// -------------------------------------------------------------------------------
+// This FB implements a first order low pass filter after the equation:
+// 					Y[n] = Alpha x Y[n-1]  +  Beta X[n]
+// The FB must be called in every scan when used. Input values for frequency and
+// cut-off frequency can be changed during filtration without reset of the filtered
+// output value.
+//
+// Version:
+//			- V1.00.00	HHL, 26/11-2019
+//********************************************************************************
+FUNCTION_BLOCK FB_FirstOrderLowPass
+VAR_INPUT
+	rSampleFrequency	:REAL;			// Sample time for algorithm in Hz
+	rCutOffFrequency	:REAL;			// Cut off frequency for filter in Hz 	
+	rXn					:REAL;			// Input value before filtration
+	bReset				:BOOL;			// Filter memory is reset on a rising edge. Output is reset to zero
+END_VAR
+
+VAR_OUTPUT
+	rYn					:REAL;			// Output value after filtration
+END_VAR
+
+VAR
+	osReset				:R_TRIG;		// One shot for reset of filter
+	rFrequencyRatio		:REAL;			// Frequency ration for determination of Beta value
+	rAlpha				:REAL;			// Alpha value for first order filter
+	rBeta				:REAL;			// Beta value for first order filter
+	rSampleFrequencyOld	:REAL;			// Input setting from previous scan for sample time for algorithm in Hz
+	rCutOffFrequencyOld	:REAL;			// Input setting from previous scan for cut off frequency for filter in Hz 
+END_VAR
+
+
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// Check if filter has been reset
+osReset(CLK:= bReset, Q=> );
+
+// Check if settings have chaged
+IF (rSampleFrequency <> rSampleFrequencyOld) OR (rCutOffFrequency <> rCutOffFrequencyOld) OR osReset.Q THEN
+	// Settings have changed => Calculate Alpha and Beta again
+	rFrequencyRatio := rSampleFrequency/rCutOffFrequency;
+	rBeta := LREAL_TO_REAL(1/(2*PI*rFrequencyRatio));
+	rAlpha := 1 - rBeta;
+	
+	// Update "old" values
+	rSampleFrequencyOld := rSampleFrequency;
+	rCutOffFrequencyOld := rCutOffFrequency;
+	
+	// If reset was activated, then reset output value
+	IF osReset.Q THEN
+		rYn := 0;
+	END_IF
+END_IF
+
+// Calculate filtered value
+rYn := rAlpha*rYn + rBeta*rXn;]]></ST>
+    </Implementation>
+    <LineIds Name="FB_FirstOrderLowPass">
+      <LineId Id="105" Count="0" />
+      <LineId Id="107" Count="0" />
+      <LineId Id="106" Count="0" />
+      <LineId Id="59" Count="0" />
+      <LineId Id="62" Count="1" />
+      <LineId Id="66" Count="2" />
+      <LineId Id="74" Count="3" />
+      <LineId Id="108" Count="4" />
+      <LineId Id="64" Count="0" />
+      <LineId Id="73" Count="0" />
+      <LineId Id="60" Count="0" />
+      <LineId Id="9" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

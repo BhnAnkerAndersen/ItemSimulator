@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FUN_GetTimestampWithMs" Id="{97361e3e-2f08-4889-9e3e-5e647b319e27}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION FUN_GetTimestampWithMs : STRING
+VAR_INPUT
+	stNtTime		:TIMESTRUCT;				// Timestruct with present time
+END_VAR
+VAR
+	sTimestamp		:STRING;					// String to contain timestamp text
+	sMiliSec		:STRING;					// Miliseconds in timestamp
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// Add data
+//sTimeStamp := FUN_GetDate(stNtTime);
+
+// Add time
+//sTimestamp := CONCAT(sTimeStamp, ',');
+//sTimestamp := CONCAT(sTimeStamp, FUN_GetTime(stNtTime));
+
+// Get mili seconds value 
+sMiliSec := '';
+sMiliSec := UINT_TO_STRING(stNtTime.wMilliseconds);
+IF stNtTime.wMilliseconds < 100 THEN
+	sMiliSec := CONCAT(sMiliSec, '0');
+	IF stNtTime.wMilliseconds < 10 THEN
+		sMiliSec := CONCAT(sMiliSec, '0');
+	END_IF
+END_IF		
+
+// Create and set timestamp
+sTimeStamp := FUN_GetTimestamp(stNtTime);
+sTimeStamp := CONCAT(STR1:= sTimeStamp, STR2:= '.'); 
+sTimeStamp := CONCAT(STR1:= sTimeStamp, STR2:= sMiliSec); 
+	
+// Return time stamp
+FUN_GetTimestampWithMs := sTimestamp;
+]]></ST>
+    </Implementation>
+    <LineIds Name="FUN_GetTimestampWithMs">
+      <LineId Id="57" Count="5" />
+      <LineId Id="80" Count="0" />
+      <LineId Id="83" Count="8" />
+      <LineId Id="97" Count="0" />
+      <LineId Id="96" Count="0" />
+      <LineId Id="92" Count="2" />
+      <LineId Id="81" Count="0" />
+      <LineId Id="72" Count="0" />
+      <LineId Id="64" Count="0" />
+      <LineId Id="7" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

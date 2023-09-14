@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FB_RangeSupervision" Id="{a733a93c-3ef2-4879-86b3-1668d6e323d7}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_RangeSupervision
+VAR_INPUT
+	fIn		:REAL;			// Input value
+END_VAR
+VAR_OUTPUT
+	bHiHi	:BOOL;			
+	bHi		:BOOL;			
+	bLo		:BOOL;			
+	bLoLo	:BOOL;				
+END_VAR
+VAR
+	// Inputs from method config
+	fHiHi	:REAL;			// Alarm limit high
+	fHi		:REAL;			// Warning limit high
+	fLo		:REAL;			// Warning limit low
+	fLoLo	:REAL;			// Alarm limit low
+	
+	tHiHi	:TIME;			// Time to activation of high alarm
+	tHi		:TIME;			// Time to activation of high warning
+	tLo		:TIME;			// Time to activation of low warning
+	tLoLo	:TIME;			// Time to activation of low alarm
+	
+	// Delays
+	tonHiHi	:TON;
+	tonHi	:TON;
+	tonLo	:TON;
+	tonLoLo	:TON;
+		
+	// Before delay is applied for output signal
+	bValueHiHi	:BOOL;			
+	bValueHi	:BOOL;			
+	bValueLo	:BOOL;			
+	bValueLoLo	:BOOL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+// Warning limits
+FUN_RangeOutside(
+	fValue:= fIn, 
+	fLimitHigh:= fHi, 
+	fLimitLow:= fLo, 
+	bHigh=> bValueHi, 
+	bLow=> bValueLo);
+
+// Alarm limits
+FUN_RangeOutside(
+	fValue:= fIn, 
+	fLimitHigh:= fHiHi, 
+	fLimitLow:= fLoLo, 
+	bHigh=> bValueHiHi, 
+	bLow=> bValueLoLo);	
+	
+// Delays
+tonHiHi(IN:= bValueHiHi, PT:= tHiHi, Q=> bHiHi);
+tonHi(IN:= bValueHi, PT:= tHi, Q=> bHi);
+tonLo(IN:= bValueLo, PT:= tLo, Q=> bLo );
+tonLoLo(IN:= bValueLoLo, PT:= tLoLo, Q=> bLoLo);
+
+]]></ST>
+    </Implementation>
+    <Method Name="M_Config" Id="{07df390f-91bf-4114-b50f-6cc07f16cc8b}">
+      <Declaration><![CDATA[METHOD M_Config : BOOL
+VAR_INPUT
+	fHiHi	:REAL;			// Alarm limit high
+	fHi		:REAL;			// Warning limit high
+	fLo		:REAL;			// Warning limit low
+	fLoLo	:REAL;			// Alarm limit low
+	tHiHi	:TIME;			// Time to activation of high alarm
+	tHi		:TIME;			// Time to activation of high warning
+	tLo		:TIME;			// Time to activation of low warning
+	tLoLo	:TIME;			// Time to activation of low alarm
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// Range limits
+THIS^.fHiHi := fHiHi;
+THIS^.fHi 	:= fHi;
+THIS^.fLo 	:= fLo;
+THIS^.fLoLo := fLoLo;
+
+// Delay before alarm or warning is set 
+THIS^.tHiHi := tHiHi;			
+THIS^.tHi 	:= tHi;			
+THIS^.tLo 	:= tLo;			
+THIS^.tLoLo := tLoLo;			]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="FB_RangeSupervision">
+      <LineId Id="16" Count="0" />
+      <LineId Id="54" Count="0" />
+      <LineId Id="56" Count="4" />
+      <LineId Id="55" Count="0" />
+      <LineId Id="61" Count="0" />
+      <LineId Id="63" Count="5" />
+      <LineId Id="42" Count="0" />
+      <LineId Id="62" Count="0" />
+      <LineId Id="43" Count="1" />
+      <LineId Id="51" Count="2" />
+      <LineId Id="17" Count="0" />
+      <LineId Id="9" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_RangeSupervision.M_Config">
+      <LineId Id="19" Count="0" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="11" Count="2" />
+      <LineId Id="20" Count="0" />
+      <LineId Id="15" Count="3" />
+      <LineId Id="14" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

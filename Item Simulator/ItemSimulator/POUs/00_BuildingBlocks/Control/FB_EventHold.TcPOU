@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FB_EventHold" Id="{3e5acfe3-af83-49c0-9dd9-63ecf11498d6}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_EventHold
+VAR_INPUT
+	bEvent		:BOOL;
+END_VAR
+VAR_OUTPUT
+	bEventHold	:BOOL;
+END_VAR
+VAR
+	osTrig		:R_TRIG;
+	srEvent		:SR;
+	tonHold		:TON;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+// One shot trigger for event
+osTrig(CLK:= bEvent, Q=> );
+
+// Remember that event has been activated, and hold it untill reset
+srEvent(
+	SET1:= osTrig.Q, 
+	RESET:= tonHold.Q, Q1=> );
+
+// Reset after xx MS
+tonHold(IN:= srEvent.Q1, PT:= T#500MS, Q=> , ET=> );
+
+// Set Event Hold
+bEventHold := srEvent.Q1;
+]]></ST>
+    </Implementation>
+    <LineIds Name="FB_EventHold">
+      <LineId Id="24" Count="0" />
+      <LineId Id="13" Count="0" />
+      <LineId Id="9" Count="0" />
+      <LineId Id="25" Count="0" />
+      <LineId Id="19" Count="0" />
+      <LineId Id="18" Count="0" />
+      <LineId Id="20" Count="1" />
+      <LineId Id="26" Count="0" />
+      <LineId Id="23" Count="0" />
+      <LineId Id="15" Count="0" />
+      <LineId Id="40" Count="0" />
+      <LineId Id="39" Count="0" />
+      <LineId Id="41" Count="0" />
+      <LineId Id="14" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

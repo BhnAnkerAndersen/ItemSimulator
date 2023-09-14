@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FB_SeperateFileAndPathName" Id="{3bb7c6be-00c4-4233-b6b0-8ab3a16908cb}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_SeperateFileAndPathName
+VAR_INPUT
+	sPathAndFileName	:STRING(255);	// String with path and file name
+END_VAR
+VAR_OUTPUT
+	sFileName			:STRING(80);	// String with file name
+	sPathName			:STRING(175);	// String with path name
+	bError				:BOOL;			// True if error occured during determination of file and path name
+END_VAR
+VAR
+	iLength				:INT;			// Length of string that is examined
+	iPos				:INT;			// Charactor position used to seperate file name from string
+	iSize				:INT;			// Size of a string
+	sTemp				:STRING;		// Temporary string
+	iForIndex			:INT;			// Index used in for-loops
+	bSeperatorFound		:BOOL;			// True if charator for folder seperator was found in input string
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+// Initialize flag for seperator found
+bSeperatorFound := FALSE;
+
+// Search through string and find the last "\" charactor
+iLength := LEN(sPathAndFileName);
+FOR iForIndex := 1 TO iLength BY 1 DO
+	IF MID(sPathAndFileName,1,iForIndex) = '\' THEN
+		iPos := iForIndex;
+		bSeperatorFound := TRUE;
+	END_IF
+END_FOR
+
+IF bSeperatorFound THEN
+	// Set file name
+	iSize := iLength - iPos;
+	sFileName := RIGHT(sPathAndFileName,iSize);
+	
+	// Set path name
+	sPathName := LEFT(sPathAndFileName,iPos);
+	
+	// Reset error flag
+	bError := FALSE;
+ELSE
+	// Set error flag
+	bError := TRUE;
+END_IF
+]]></ST>
+    </Implementation>
+    <LineIds Name="FB_SeperateFileAndPathName">
+      <LineId Id="31" Count="2" />
+      <LineId Id="11" Count="0" />
+      <LineId Id="7" Count="0" />
+      <LineId Id="15" Count="0" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="17" Count="0" />
+      <LineId Id="20" Count="0" />
+      <LineId Id="30" Count="0" />
+      <LineId Id="21" Count="0" />
+      <LineId Id="18" Count="0" />
+      <LineId Id="41" Count="0" />
+      <LineId Id="23" Count="0" />
+      <LineId Id="22" Count="0" />
+      <LineId Id="36" Count="0" />
+      <LineId Id="34" Count="0" />
+      <LineId Id="38" Count="0" />
+      <LineId Id="37" Count="0" />
+      <LineId Id="39" Count="0" />
+      <LineId Id="46" Count="2" />
+      <LineId Id="42" Count="1" />
+      <LineId Id="45" Count="0" />
+      <LineId Id="44" Count="0" />
+      <LineId Id="40" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
-  <POU Name="FUN_GetDate" Id="{bf6aa70b-bdbb-4696-b6bd-f7d538139467}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION FUN_GetDate : STRING
+  <POU Name="FUN_GetDateWithoutSeperator" Id="{73d3b13c-8d95-4475-b4fc-81ea9ff6c2c7}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION FUN_GetDateWithoutSeperator : STRING
 VAR_INPUT
 	stNtTime		:TIMESTRUCT;
 END_VAR
@@ -15,14 +15,12 @@ sDate := '';
 
 // Add year to string
 sDate := UINT_TO_STRING(stNtTime.wYear);
-sDate := CONCAT(sDate,'-');
 
 // Add month to string
 IF stNtTime.wMonth < 10 THEN
 	sDate := CONCAT(sDate,'0');
 END_IF
 sDate := CONCAT(sDate,UINT_TO_STRING(stNtTime.wMonth));
-sDate := CONCAT(sDate,'-');
 
 // Add day to string
 IF stNtTime.wDay < 10 THEN
@@ -31,10 +29,21 @@ END_IF
 sDate := CONCAT(sDate,UINT_TO_STRING(stNtTime.wDay));
 
 // Return result
-FUN_GetDate := sDate;]]></ST>
+FUN_GetDateWithoutSeperator := sDate;]]></ST>
     </Implementation>
-    <LineIds Name="FUN_GetDate">
-      <LineId Id="55" Count="20" />
+    <LineIds Name="FUN_GetDateWithoutSeperator">
+      <LineId Id="16" Count="1" />
+      <LineId Id="32" Count="0" />
+      <LineId Id="31" Count="0" />
+      <LineId Id="18" Count="0" />
+      <LineId Id="34" Count="0" />
+      <LineId Id="33" Count="0" />
+      <LineId Id="19" Count="3" />
+      <LineId Id="36" Count="0" />
+      <LineId Id="35" Count="0" />
+      <LineId Id="23" Count="3" />
+      <LineId Id="37" Count="0" />
+      <LineId Id="7" Count="0" />
       <LineId Id="38" Count="0" />
     </LineIds>
   </POU>

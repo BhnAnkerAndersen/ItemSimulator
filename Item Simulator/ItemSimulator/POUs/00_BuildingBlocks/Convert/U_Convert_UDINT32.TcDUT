@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <DUT Name="U_Convert_UDINT32" Id="{ef136247-0211-4106-92f2-2d517c91549e}">
+    <Declaration><![CDATA[TYPE U_Convert_UDINT32 :
+UNION
+	nValue		:UDINT;
+	arrByte		:ARRAY[1..4] OF BYTE;
+END_UNION
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

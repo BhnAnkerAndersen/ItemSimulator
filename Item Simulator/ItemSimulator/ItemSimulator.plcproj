@@ -70,13 +70,239 @@
     <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\0_TestUnit\TEST.TcPOU">
+    <Compile Include="POUs\00_BuildingBlocks\ByteFunc\FUN_GetHighByte.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\0_TestUnit\TimeStampRegistry\FB_TimestampRegistryTest.TcPOU">
+    <Compile Include="POUs\00_BuildingBlocks\ByteFunc\FUN_GetLowByte.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Building_Blocks\Control\FB_ClockPulsDetailed.TcPOU">
+    <Compile Include="POUs\00_BuildingBlocks\Calculation\FB_FirstOrderLowPass.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\00_BuildingBlocks\Calculation\FUN_AngleCalculate.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\00_BuildingBlocks\Calculation\FUN_AngleChange.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\00_BuildingBlocks\Calculation\FUN_CartesianToPolar.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\00_BuildingBlocks\Calculation\FUN_Interpolation.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\00_BuildingBlocks\Calculation\FUN_LookUpTable.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\00_BuildingBlocks\Calculation\FUN_MinMaxSumAvg_6Reals.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\00_BuildingBlocks\Calculation\FUN_PolarToCartesian.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\00_BuildingBlocks\Calculation\FUN_Saturation.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\00_BuildingBlocks\Calculation\FUN_SaturationPointer.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\00_BuildingBlocks\Calculation\FUN_SaturationPointer_Int.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\00_BuildingBlocks\Calculation\FUN_SaturationPointer_UInt.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\00_BuildingBlocks\Calculation\FUN_Saturation_Int.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\00_BuildingBlocks\Calculation\FUN_Scale.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\00_BuildingBlocks\Calculation\ST_Coordinate.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\00_BuildingBlocks\Control\FB_AliveCheck.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\00_BuildingBlocks\Control\FB_ClockPuls.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\00_BuildingBlocks\Control\FB_ClockPulsDetailed.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\00_BuildingBlocks\Control\FB_ClockPulsNumber.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\00_BuildingBlocks\Control\FB_EventHold.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\00_BuildingBlocks\Control\FB_FormatStringExtended.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\00_BuildingBlocks\Control\FB_Queue.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\00_BuildingBlocks\Control\FB_RampLimiter.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\00_BuildingBlocks\Control\FB_RangeSupervision.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\00_BuildingBlocks\Control\FB_SignalDead.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\00_BuildingBlocks\Control\FB_SteadyValue.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\00_BuildingBlocks\Control\FUN_InPos.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\00_BuildingBlocks\Control\FUN_InsideHysteresis.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\00_BuildingBlocks\Control\FUN_InsideHysteresis180pm.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\00_BuildingBlocks\Control\FUN_InsideHysteresis360.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\00_BuildingBlocks\Control\FUN_RangeInside.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\00_BuildingBlocks\Control\FUN_RangeOutside.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\00_BuildingBlocks\Convert\FUN_ConvFourByteToInt32.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\00_BuildingBlocks\Convert\FUN_ConvFourByteToReal32.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\00_BuildingBlocks\Convert\FUN_ConvFourByteToUdint32.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\00_BuildingBlocks\Convert\FUN_ConvReal32ToFourByte.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\00_BuildingBlocks\Convert\FUN_ConvTwoByteToInt16.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\00_BuildingBlocks\Convert\FUN_ConvTwoByteToUInt16.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\00_BuildingBlocks\Convert\U_Convert_INT16.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\00_BuildingBlocks\Convert\U_Convert_INT32.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\00_BuildingBlocks\Convert\U_Convert_REAL32.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\00_BuildingBlocks\Convert\U_Convert_UDINT32.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\00_BuildingBlocks\Convert\U_Convert_UINT16.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\00_BuildingBlocks\Convert\U_Convert_USINT.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\00_BuildingBlocks\EtherCAT\FB_EK1101_Check.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\00_BuildingBlocks\EtherCAT\FB_HardwareCheck.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\00_BuildingBlocks\File\DUTs\E_FileHandler_State.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\00_BuildingBlocks\File\FB_FileHandler.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\00_BuildingBlocks\Modbus\DUTs\E_ModbusRtuMaster_State.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\00_BuildingBlocks\Modbus\DUTs\E_Modbus_DataType.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\00_BuildingBlocks\Modbus\DUTs\ST_ModbusRtuMaster_StateLogEntry.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\00_BuildingBlocks\Modbus\DUTs\ST_Modbus_Parameter.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\00_BuildingBlocks\Modbus\DUTs\ST_Modbus_Unit.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\00_BuildingBlocks\Modbus\FB_ModbusRtuMaster.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\00_BuildingBlocks\Modbus\FB_ModbusRtuMaster_20220719_1144.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\00_BuildingBlocks\Modbus\PRG_ModbusTest.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\00_BuildingBlocks\PlcToPlcCom\DUTs\ADS_ErrorCodes.TcTLO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\00_BuildingBlocks\PlcToPlcCom\DUTs\E_PlcAdsReadStep.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\00_BuildingBlocks\PlcToPlcCom\DUTs\ST_ComTest.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\00_BuildingBlocks\PlcToPlcCom\DUTs\ST_PlcAdsReadHmi.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\00_BuildingBlocks\PlcToPlcCom\FB_PlcAdsRead.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\00_BuildingBlocks\PlcToPlcCom\PRG_PlcAdsRead_Example.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\00_BuildingBlocks\PlcToPlcCom\VIZU_PlcAdsRead.TcVIS">
+      <SubType>Code</SubType>
+      <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
+    </Compile>
+    <Compile Include="POUs\00_BuildingBlocks\StringFunctions\FB_SeperateFileAndPathName.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\00_BuildingBlocks\StringFunctions\FUN_AddValuleToString.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\00_BuildingBlocks\StringFunctions\FUN_GetDateWithoutSeperator.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\00_BuildingBlocks\StringFunctions\FUN_GetDateWithUnderscore.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\00_BuildingBlocks\StringFunctions\FUN_GetDate.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\00_BuildingBlocks\StringFunctions\FUN_GetTimestamp.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\00_BuildingBlocks\StringFunctions\FUN_GetTimestampWithMs.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\00_BuildingBlocks\StringFunctions\FUN_GetTime.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\00_BuildingBlocks\StringFunctions\FUN_RealToString.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\00_BuildingBlocks\StringFunctions\FUN_ReplaceDotWithComma.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\00_BuildingBlocks\StringFunctions\F_Replace.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\01_TestUnit\TEST.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\01_TestUnit\TimeStampRegistry\FB_TimestampRegistryTest.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\CSV_File\PRG_CSVRead.TcPOU">
@@ -98,15 +324,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Item_Simulator\PRG_Simulator.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Building_Blocks\Control\FB_ClockPulsNumber.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Building_Blocks\StringFunctions\FUN_GetDate.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Building_Blocks\StringFunctions\FUN_GetTime.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\MAIN.TcPOU">
@@ -154,14 +371,24 @@
     <Folder Include="DUTs\TimeStamp" />
     <Folder Include="DUTs\TCP" />
     <Folder Include="GVLs" />
-    <Folder Include="POUs\0_TestUnit\TimeStampRegistry" />
+    <Folder Include="POUs\00_BuildingBlocks" />
+    <Folder Include="POUs\00_BuildingBlocks\ByteFunc" />
+    <Folder Include="POUs\00_BuildingBlocks\Calculation" />
+    <Folder Include="POUs\00_BuildingBlocks\Control" />
+    <Folder Include="POUs\00_BuildingBlocks\Convert" />
+    <Folder Include="POUs\00_BuildingBlocks\EtherCAT" />
+    <Folder Include="POUs\00_BuildingBlocks\File" />
+    <Folder Include="POUs\00_BuildingBlocks\File\DUTs" />
+    <Folder Include="POUs\00_BuildingBlocks\Modbus" />
+    <Folder Include="POUs\00_BuildingBlocks\Modbus\DUTs" />
+    <Folder Include="POUs\00_BuildingBlocks\PlcToPlcCom" />
+    <Folder Include="POUs\00_BuildingBlocks\PlcToPlcCom\DUTs" />
+    <Folder Include="POUs\00_BuildingBlocks\StringFunctions" />
+    <Folder Include="POUs\01_TestUnit\TimeStampRegistry" />
     <Folder Include="POUs\Item_Simulator" />
-    <Folder Include="POUs\Building_Blocks" />
-    <Folder Include="POUs\Building_Blocks\Control" />
-    <Folder Include="POUs\Building_Blocks\StringFunctions" />
     <Folder Include="POUs\Item_Simulator\FBs" />
     <Folder Include="POUs\CSV_File" />
-    <Folder Include="POUs\0_TestUnit" />
+    <Folder Include="POUs\01_TestUnit" />
     <Folder Include="POUs\IO_Link_Master" />
     <Folder Include="POUs\Timestamp_Registry" />
     <Folder Include="POUs\TCP_IP_Client" />

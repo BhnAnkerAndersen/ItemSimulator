@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FUN_AddValuleToString" Id="{977a6f7c-d993-4d95-9b61-b9120a1bc4b3}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION FUN_AddValuleToString : STRING(490)
+VAR_INPUT
+	sString		:STRING(490);	// String where value is to be added
+	rValue		:LREAL;			// Value to be added to string
+	iNoOfDec	:INT;			// Number of decimals to be presented in the string
+END_VAR
+VAR
+	sSeperator	:STRING(80);	// Seperator
+	sValue		:STRING(80);	// String version of value
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+// Create string for value
+sValue := FUN_RealToString(rValue:= rValue, iNoOfDec:= iNoOfDec);
+
+// Replace "." character with "," character (special Elvstrøm request)
+sValue := FUN_ReplaceDotWithComma(sStringIn:= sValue);
+
+// Add seperator to string
+sSeperator := ';';
+CONCAT2(pSrcString1:= ADR(sString), pSrcString2:= ADR(sSeperator), pDstString:= ADR(sString), nDstSize:= 490);
+
+// Add value to string
+CONCAT2(pSrcString1:= ADR(sString), pSrcString2:= ADR(sValue), pDstString:= ADR(sString), nDstSize:= 490);
+
+// Return string
+FUN_AddValuleToString := sString;
+]]></ST>
+    </Implementation>
+    <LineIds Name="FUN_AddValuleToString">
+      <LineId Id="32" Count="5" />
+      <LineId Id="64" Count="1" />
+      <LineId Id="82" Count="0" />
+      <LineId Id="75" Count="0" />
+      <LineId Id="67" Count="1" />
+      <LineId Id="85" Count="0" />
+      <LineId Id="70" Count="1" />
+      <LineId Id="61" Count="0" />
+      <LineId Id="59" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

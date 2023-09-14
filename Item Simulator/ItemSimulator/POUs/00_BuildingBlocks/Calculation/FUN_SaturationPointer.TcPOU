@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FUN_SaturationPointer" Id="{a51d62b0-6c97-46ab-a0b8-a92f8478fa0f}" SpecialFunc="None">
+    <Declaration><![CDATA[/// Saturation. Limits the value to a minimum and maximum value
+FUNCTION FUN_SaturationPointer : REAL
+VAR_INPUT
+	pValue			:POINTER TO REAL;	// Value				
+	fMin			:REAL;				// Saturation min value
+	fMax			:REAL;				// Saturation max value
+END_VAR
+VAR_OUTPUT
+	bSaturation		:BOOL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[bSaturation := FALSE;
+IF pValue^ < fMin THEN
+	pValue^ := fMin;
+	bSaturation := TRUE;
+ELSIF pValue^ > fMax THEN
+	pValue^ := fMax;
+	bSaturation := TRUE;
+END_IF ]]></ST>
+    </Implementation>
+    <LineIds Name="FUN_SaturationPointer">
+      <LineId Id="42" Count="0" />
+      <LineId Id="3" Count="0" />
+      <LineId Id="28" Count="0" />
+      <LineId Id="43" Count="0" />
+      <LineId Id="29" Count="0" />
+      <LineId Id="31" Count="0" />
+      <LineId Id="44" Count="0" />
+      <LineId Id="30" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

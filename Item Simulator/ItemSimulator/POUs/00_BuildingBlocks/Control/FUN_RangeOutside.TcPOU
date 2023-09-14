@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FUN_RangeOutside" Id="{9517141a-21c8-4fa0-943b-f38964dbf8f3}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION FUN_RangeOutside : BOOL
+VAR_INPUT
+	fValue		:REAL;			// Actual value
+	fLimitHigh	:REAL;			// High limit for range
+	fLimitLow	:REAL;			// Low limit for range
+END_VAR
+VAR_OUTPUT
+	bHigh		:BOOL;			// True if value is greater than rLimitHigh
+	bLow		:BOOL;			// True if value is lower than rLimitLow	
+END_VAR
+VAR
+	bOutside	:BOOL;			// True if value is outside of range
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+// Compare actual value with range
+IF fValue < fLimitLow OR fValue > fLimitHigh THEN
+	// Outside range
+	bOutside := TRUE;
+	IF fValue > fLimitHigh THEN
+		bHigh := TRUE;
+		bLow := FALSE;
+	ELSE
+		bHigh := FALSE;
+		bLow := TRUE;
+	END_IF
+ELSE
+	// Inside of range
+	bOutside := FALSE;
+END_IF
+
+// Set return value
+FUN_RangeOutside := bOutside;]]></ST>
+    </Implementation>
+    <LineIds Name="FUN_RangeOutside">
+      <LineId Id="18" Count="0" />
+      <LineId Id="12" Count="0" />
+      <LineId Id="7" Count="0" />
+      <LineId Id="19" Count="0" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="34" Count="0" />
+      <LineId Id="39" Count="0" />
+      <LineId Id="43" Count="0" />
+      <LineId Id="41" Count="1" />
+      <LineId Id="44" Count="0" />
+      <LineId Id="40" Count="0" />
+      <LineId Id="16" Count="0" />
+      <LineId Id="20" Count="0" />
+      <LineId Id="17" Count="0" />
+      <LineId Id="15" Count="0" />
+      <LineId Id="22" Count="0" />
+      <LineId Id="21" Count="0" />
+      <LineId Id="23" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FUN_CartesianToPolar" Id="{d48ff7a6-2ca5-42ac-b609-bbcc969cc5c6}" SpecialFunc="None">
+    <Declaration><![CDATA[//********************************************************************************
+// FUN_Cartesian to polar.
+// -------------------------------------------------------------------------------
+// This function calculates the polar coordinates r and theta from
+// the cartesian X and Y coordinates. 
+//	
+// Version:
+//			- V1.01	HHL, 11/05-2022
+//********************************************************************************
+FUNCTION FUN_CartesianToPolar : LREAL
+VAR_IN_OUT
+END_VAR
+VAR_INPUT
+	fX				:REAL;			// X-axis coordinate
+	fY				:REAL;			// Y-axis coordinate
+END_VAR
+VAR_OUTPUT
+	fRadius			:REAL;			// Radius for polar coordinate
+	fAngle			:REAL;			// [deg] Angle for polar coordinate 
+END_VAR
+VAR
+	bError			:BOOL;			// True if error occured during determination of angle
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+// Calculate polar coordinates from cartesian coordinates
+//-----------------------------------------
+
+// Calculate radius
+fRadius := LREAL_TO_REAL(SQRT((EXPT(fX,2) + EXPT(fY,2))));
+
+// Calculate angle
+IF fX <> 0 THEN 
+	// Calculate angle 
+	IF 0 <= fX AND 0 <= fY THEN
+		// I. Quadrant	
+		IF fX <> 0 THEN
+			fAngle := LREAL_TO_REAL(RAD_TO_DEG(ATAN(fY/fX)));
+		ELSIF fX = 0 THEN
+			IF fY > 0 THEN
+				fAngle := 90.0;
+			ELSIF fY = 0 THEN
+				// Special case where both fX and fY are zero.
+				bError := TRUE;
+			END_IF
+		END_IF
+	ELSIF 0 > fX AND 0 <= fY THEN 	
+		// II. Quadrant	
+		IF fY <> 0 THEN
+			fAngle := LREAL_TO_REAL(RAD_TO_DEG(ATAN(fY/fX)) + 180);
+		ELSIF fY = 0 THEN
+			IF fX > 0 THEN
+				fAngle := 0.0;
+			ELSE
+				fAngle := -180.0;
+			END_IF
+		END_IF
+	ELSIF 0 > fX AND 0 > fY THEN 	
+		// III. Quadrant	
+		fAngle := -1*(180 - LREAL_TO_REAL(RAD_TO_DEG(ATAN(fY/fX))));
+	ELSIF 0 < fX AND 0 > fY THEN 	
+		// IV. Quadrant	
+		fAngle := LREAL_TO_REAL(RAD_TO_DEG(ATAN(fY/fX)));
+	END_IF	
+ELSE
+	// X-axis coordinate is zero 
+	IF fY = 0 THEN
+		fAngle  := 0.0;		
+	ELSIF fY > 0 THEN
+		fAngle  := 90.0;
+	ELSE
+ 		fAngle  := -90.0;
+	END_IF
+END_IF
+
+
+]]></ST>
+    </Implementation>
+    <LineIds Name="FUN_CartesianToPolar">
+      <LineId Id="200" Count="0" />
+      <LineId Id="198" Count="0" />
+      <LineId Id="292" Count="1" />
+      <LineId Id="291" Count="0" />
+      <LineId Id="166" Count="0" />
+      <LineId Id="296" Count="0" />
+      <LineId Id="295" Count="0" />
+      <LineId Id="208" Count="0" />
+      <LineId Id="255" Count="2" />
+      <LineId Id="259" Count="11" />
+      <LineId Id="272" Count="10" />
+      <LineId Id="284" Count="2" />
+      <LineId Id="288" Count="0" />
+      <LineId Id="249" Count="0" />
+      <LineId Id="209" Count="0" />
+      <LineId Id="218" Count="0" />
+      <LineId Id="210" Count="0" />
+      <LineId Id="220" Count="0" />
+      <LineId Id="219" Count="0" />
+      <LineId Id="212" Count="0" />
+      <LineId Id="216" Count="1" />
+      <LineId Id="213" Count="0" />
+      <LineId Id="211" Count="0" />
+      <LineId Id="203" Count="0" />
+      <LineId Id="202" Count="0" />
+      <LineId Id="153" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

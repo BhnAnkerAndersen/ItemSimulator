@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FUN_RangeInside" Id="{ded1f48b-970d-49da-b792-61844bbae406}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION FUN_RangeInside : BOOL
+VAR_INPUT
+	fValue		:LREAL;			// Actual value
+	fLimitHigh	:LREAL;			// High limit for range
+	fLimitLow	:LREAL;			// Low limit for range
+END_VAR
+VAR
+	bInside		:BOOL;			// True if value is inside range
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+// Compare actual value with range
+IF fValue >= fLimitLow AND fValue <= fLimitHigh THEN
+	// Inside range
+	bInside := TRUE;
+ELSE
+	// Outside of range
+	bInside := FALSE;
+END_IF
+
+// Set return value
+FUN_RangeInside := bInside;]]></ST>
+    </Implementation>
+    <LineIds Name="FUN_RangeInside">
+      <LineId Id="18" Count="0" />
+      <LineId Id="12" Count="0" />
+      <LineId Id="7" Count="0" />
+      <LineId Id="19" Count="0" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="16" Count="0" />
+      <LineId Id="20" Count="0" />
+      <LineId Id="17" Count="0" />
+      <LineId Id="15" Count="0" />
+      <LineId Id="22" Count="0" />
+      <LineId Id="21" Count="0" />
+      <LineId Id="23" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

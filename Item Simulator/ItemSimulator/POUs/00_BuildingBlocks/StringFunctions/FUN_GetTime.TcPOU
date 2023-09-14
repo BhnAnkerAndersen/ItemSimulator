@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
-  <POU Name="FUN_GetTime" Id="{b63e8ad1-effa-4ffe-8d96-a16a0373355e}" SpecialFunc="None">
+  <POU Name="FUN_GetTime" Id="{1cef7a0a-cc8d-49b8-a3b6-852210576a61}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION FUN_GetTime : STRING
 VAR_INPUT
 	stNtTime		:TIMESTRUCT;

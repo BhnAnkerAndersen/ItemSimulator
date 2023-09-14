@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FB_AliveCheck" Id="{6dfb98db-96cf-450f-88c9-4ebe2fb89c5f}" SpecialFunc="None">
+    <Declaration><![CDATA[//********************************************************************************
+// FB_AliveCheck
+// -------------------------------------------------------------------------------
+// This function block is used to check if an alive signal is present. An alive signal
+// is assumed to be a clock puls. An alarm is set if the clock puls is missing or frozen. 
+// 
+// Version:
+//			- V1.00.00	HHL, 08/08-2019
+//********************************************************************************
+FUNCTION_BLOCK FB_AliveCheck
+VAR_INPUT
+	bEnable				:BOOL;			// When true alive check is performed
+	bSignal				:BOOL;			// Alive signal
+	tStartDelay			:TIME;			// Time from boot to activation of check 
+	tTimeout			:TIME;			// Time untill timeout occurs when alive signal is lost
+	bReset				:BOOL;			// Reset of alarm
+END_VAR
+VAR_OUTPUT
+	bAlarm				:BOOL;			// True if alive signal was lost			
+END_VAR
+VAR
+	tonStartUpDelay		:TON;			// Delay from boot to start of check
+	bAlive				:BOOL;			// Set true when alive signal is received
+	osAlive				:R_TRIG;		// One shot for rising edge on alive bit
+	tonAliveTO			:TON;			// Timeout for missing alive signal
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+// Initialize alive signal to false
+bAlive := FALSE;
+// Check for rising edge on input sinal (clock puls signal from external device)
+osAlive(CLK:= bSignal, Q=> );
+IF osAlive.Q THEN
+	// Alive puls is registered, set alive flag => Reset timer for alarm
+	bAlive := TRUE;
+END_IF
+
+// Update startup timer (boot) 
+tonStartUpDelay(IN:= TRUE, PT:= tStartDelay, Q=> , ET=> );
+
+// Check for timeout and set alam signal
+tonAliveTO(IN:= bEnable AND NOT bAlive AND tonStartUpDelay.Q, PT:= tTimeout, Q=> , ET=> );
+IF tonAliveTO.Q THEN
+	// Timeout, Alive signal is missing => set alarm
+	bAlarm := TRUE;
+ELSE 
+	// Auto reset
+	bAlarm := FALSE;
+END_IF
+
+IF ((NOT bEnable AND bAlarm) OR bReset) THEN
+	// Reset 
+	bAlarm := FALSE;
+END_IF
+
+]]></ST>
+    </Implementation>
+    <LineIds Name="FB_AliveCheck">
+      <LineId Id="27" Count="0" />
+      <LineId Id="67" Count="0" />
+      <LineId Id="32" Count="0" />
+      <LineId Id="69" Count="0" />
+      <LineId Id="33" Count="4" />
+      <LineId Id="72" Count="0" />
+      <LineId Id="71" Count="0" />
+      <LineId Id="38" Count="0" />
+      <LineId Id="73" Count="0" />
+      <LineId Id="46" Count="0" />
+      <LineId Id="39" Count="1" />
+      <LineId Id="74" Count="0" />
+      <LineId Id="41" Count="0" />
+      <LineId Id="102" Count="0" />
+      <LineId Id="105" Count="0" />
+      <LineId Id="103" Count="1" />
+      <LineId Id="106" Count="0" />
+      <LineId Id="42" Count="0" />
+      <LineId Id="75" Count="0" />
+      <LineId Id="43" Count="1" />
+      <LineId Id="28" Count="0" />
+      <LineId Id="9" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

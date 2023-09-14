@@ -1,0 +1,272 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FB_PlcAdsRead" Id="{b9af19ee-ca25-4d15-82d9-fcf37266971c}" SpecialFunc="None">
+    <Declaration><![CDATA[//**************************************************************************
+// FB_PlcAdsRead
+// -------------------------------------------------------------------------
+// This FB reads the content of a variable or struct from a remote PLC. The
+// FB is usefull when data needs to be exchaged between two PLC's. The FB only
+// reads the content from the other PLC, it does NOT write any variables. Hence
+// the same FB will need to be implemented on other PLC, which then reads the
+// commands/variables that needs to be sent.  
+//
+// Version
+//		- V1.00.00	HHL, 21/08-2019
+//**************************************************************************
+FUNCTION_BLOCK FB_PlcAdsRead
+VAR_INPUT
+	sRemoteNetId 		:STRING; 			// Remote plc NetId
+	uiRemoteAmsPort 	:UINT := 851; 		// Ams port 
+	sSymbolName 		:STRING := '';		// Symbol name on remote PLC
+	dwAddress 			:PVOID; 			// Variable address at local system. Name must be the same at remote
+	udiLength 			:UDINT; 			// Variable length at local system. Name must be the same at remote
+	tReadInterval 		:TIME := T#1S; 		// Read interval
+	tReadTimeout 		:TIME := T#2S; 		// Read timeout
+	
+	bEnable 			:BOOL := TRUE; 		// Enable communication
+	bStartRead			:BOOL;				// Force Start Read  Started
+END_VAR
+VAR_OUTPUT
+	bLinkOk 			:BOOL; 				// Link to remote plc is ok
+	bError 				:BOOL; 				// Connection error
+	
+	eErrorStep 			:E_PlcAdsReadStep; 	// Error step
+	udiErrorId 			:UDINT; 			// Error id (ads)
+END_VAR
+VAR
+	bEntry 				:BOOL;
+	udiHandle 			:UDINT; 			// Handel
+	sSymbolNameEdge 	:STRING;
+	
+	eStep, eStepEdge 	:E_PlcAdsReadStep;
+	stHmi 				:ST_PlcAdsReadHmi; 	// Hmi data
+	
+	fbAdsRdWrt 			:ADSRDWRT;
+	fbAdsRead 			:ADSREAD;
+	fbInitRetry 		:TON; 				// Delay before retry
+	fbReadInterval 		:TON; 				// Read interval timer
+	osStartReadADS		:R_TRIG;			// os Start Read ADS Data
+	// Force Start Read Started
+	bForceStartRead: BOOL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[osStartReadADS(CLK:=bStartRead , Q=> );
+
+IF osStartReadADS.Q THEN
+	bForceStartRead:=TRUE;
+END_IF
+
+bEntry := eStepEdge<>eStep;
+eStepEdge := eStep;
+
+
+CASE eStep OF
+	//-----------------------------
+	// Init
+	E_PlcAdsReadStep.eReset:	
+		fbAdsRdWrt.WRTRD := FALSE;	
+		fbAdsRead.READ := FALSE;
+		
+		bLinkOk := FALSE;
+		bError := FALSE;
+		udiErrorId := 0;
+		eErrorStep := E_PlcAdsReadStep.eReset;
+
+		eStep := E_PlcAdsReadStep.eGetRemoteInfo;	
+	
+	//-----------------------------
+	// Get info (Index-Group/Offset)
+	E_PlcAdsReadStep.eGetRemoteInfo:
+		IF bEntry THEN
+			fbAdsRdWrt.WRTRD := TRUE;
+		END_IF
+		
+		IF fbAdsRdWrt.BUSY THEN
+			//Read started
+			eStep := E_PlcAdsReadStep.eWaitRemoteInfo;
+		END_IF
+	
+	//-----------------------------
+	// Wait for remote info
+	E_PlcAdsReadStep.eWaitRemoteInfo:
+		IF NOT fbAdsRdWrt.BUSY THEN
+			IF NOT fbAdsRdWrt.ERR THEN
+				//Get remote info ok
+				sSymbolNameEdge := sSymbolName;
+				IF bEnable OR bForceStartRead THEN
+					eStep := E_PlcAdsReadStep.eRead;
+					bForceStartRead:=FALSE;
+				ELSE
+					eStep := E_PlcAdsReadStep.eIdle;
+				END_IF
+			ELSE
+				//Get remote info failed
+				eErrorStep := eStep;
+				udiErrorId := fbAdsRdWrt.ERRID;
+				
+				eStep := E_PlcAdsReadStep.eGetInfoError;
+			END_IF
+		END_IF
+	
+	//-----------------------------
+	// Get info failed
+	E_PlcAdsReadStep.eGetInfoError:		
+		IF fbInitRetry.Q THEN
+			//Retry
+			eStep := E_PlcAdsReadStep.eReset;
+		END_IF
+		
+	//-----------------------------
+	// Idle
+	E_PlcAdsReadStep.eIdle:		
+		IF bEntry THEN
+			fbAdsRead.READ := FALSE;
+		END_IF
+		
+		IF bEnable OR bForceStartRead THEN
+			IF FIND(STR1:=sSymbolName, STR2:=sSymbolNameEdge)=1 THEN
+				//Symbol has'nt changed
+				eStep := E_PlcAdsReadStep.eRead;
+				bForceStartRead:=FALSE;
+			ELSE
+				eStep := E_PlcAdsReadStep.eReset;
+			END_IF
+			
+		END_IF
+	
+	//-----------------------------
+	// Read data
+	E_PlcAdsReadStep.eRead:	
+		IF bEntry THEN
+			//Start read
+			fbAdsRead.READ := TRUE;
+			eErrorStep := E_PlcAdsReadStep.eIdle;
+			udiErrorId := 0;
+		END_IF
+		
+		IF fbAdsRead.BUSY THEN
+			//Read started
+			eStep := E_PlcAdsReadStep.eWaitReadDone;
+		END_IF
+	
+	//-----------------------------
+	// Wait read finished
+	E_PlcAdsReadStep.eWaitReadDone:
+		IF NOT fbAdsRead.BUSY THEN
+			stHmi.udiS_ReadCount := stHmi.udiS_ReadCount + 1;
+			IF NOT fbAdsRead.ERR THEN
+				bLinkOk := TRUE;
+				eStep := E_PlcAdsReadStep.eWaitBeforeNextRead;
+			ELSE
+				bLinkOk := FALSE;
+				eStep := E_PlcAdsReadStep.eReadError;
+			END_IF
+		END_IF
+	
+	//-----------------------------	
+	// Wait before next read
+	E_PlcAdsReadStep.eWaitBeforeNextRead:
+		IF bEntry THEN
+			fbAdsRead.READ := FALSE;
+		END_IF
+		
+		IF fbReadInterval.Q THEN
+			eStep := E_PlcAdsReadStep.eRead;
+		END_IF
+	
+	//-----------------------------
+	// Read failed
+	E_PlcAdsReadStep.eReadError:
+		IF bEntry THEN
+			//Get remote info failed
+			eErrorStep := eStep;
+			udiErrorId := fbAdsRead.ERRID;
+			stHmi.udiS_ReadErrors := stHmi.udiS_ReadErrors + 1;
+		END_IF
+		
+		IF fbInitRetry.Q THEN
+			// Try to init
+			eStep := E_PlcAdsReadStep.eReset;
+		END_IF
+ELSE
+	eStep := E_PlcAdsReadStep.eReset;
+END_CASE
+
+//Timers
+fbReadInterval(IN:=NOT fbReadInterval.Q, PT:=tReadInterval);
+IF fbReadInterval.Q AND (eStep=E_PlcAdsReadStep.eRead OR eStep=E_PlcAdsReadStep.eWaitReadDone) THEN
+	//Read interval error
+	stHmi.udiS_ReadIntervalErrors := stHmi.udiS_ReadIntervalErrors + 1;
+END_IF
+fbInitRetry(IN:=eStep=E_PlcAdsReadStep.eGetInfoError OR eStep=E_PlcAdsReadStep.eReadError, PT:=T#10S);
+
+//Init
+IF stHmi.bC_Init THEN
+	eStep := E_PlcAdsReadStep.eReset;
+	stHmi.bC_Init := FALSE;
+END_IF
+
+//Calls
+fbAdsRdWrt(
+	NETID:=sRemoteNetId, 
+	PORT:=uiRemoteAmsPort, 
+	IDXGRP:=16#F003, //GET_SYMHANDLE_BYNAME
+	IDXOFFS:= 16#0000, 
+	WRITELEN:= SIZEOF(sSymbolName),
+	READLEN:= SIZEOF(udiHandle), 
+	SRCADDR:= ADR(sSymbolName),
+	DESTADDR:= ADR(udiHandle), 
+	WRTRD:= , 
+	TMOUT:=DEFAULT_ADS_TIMEOUT, 
+	BUSY=> , 
+	ERR=> , 
+	ERRID=> );
+
+fbAdsRead(
+	NETID:= sRemoteNetId,
+	PORT:= uiRemoteAmsPort,
+	IDXGRP:= 16#F005, // READ_/WRITE_SYMVAL_BYHANDLE
+	IDXOFFS:= udiHandle,
+	LEN:= udiLength,
+	DESTADDR:= dwAddress,
+	READ:= ,
+	TMOUT:= tReadTimeout,
+	BUSY=> ,
+	ERR=> ,
+	ERRID=> );
+	
+A_HMI();
+]]></ST>
+    </Implementation>
+    <Action Name="A_HMI" Id="{5250e90e-619c-4104-b465-6f17c1c0f36f}">
+      <Implementation>
+        <ST><![CDATA[stHmi.sRemoteId := sRemoteNetId;
+stHmi.sRemoteSymbol := sSymbolName;
+stHmi.bS_Enable := bEnable;
+stHmi.bS_LinkOk := bLinkOk;
+stHmi.bS_Error := bError;
+stHmi.eS_Step := eStep;
+stHmi.eS_ErrorStep := eErrorStep;
+stHmi.udiS_ErrorId := udiErrorId;
+]]></ST>
+      </Implementation>
+    </Action>
+    <LineIds Name="FB_PlcAdsRead">
+      <LineId Id="228" Count="3" />
+      <LineId Id="225" Count="1" />
+      <LineId Id="3" Count="0" />
+      <LineId Id="224" Count="0" />
+      <LineId Id="4" Count="35" />
+      <LineId Id="235" Count="0" />
+      <LineId Id="40" Count="30" />
+      <LineId Id="234" Count="0" />
+      <LineId Id="71" Count="108" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_PlcAdsRead.A_HMI">
+      <LineId Id="2" Count="7" />
+      <LineId Id="1" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

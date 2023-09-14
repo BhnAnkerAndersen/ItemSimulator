@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FUN_ConvReal32ToFourByte" Id="{3f23e518-52ca-464a-aab3-d37d20bdebfd}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION FUN_ConvReal32ToFourByte : BOOL
+VAR_INPUT
+	fValue		:REAL;				// Data variable used for conversion
+END_VAR
+VAR_OUTPUT
+	nValue1		:BYTE;				// Output Byte no 1
+	nValue2		:BYTE;				// Output Byte no 2
+	nValue3		:BYTE;				// OUtput Byte no 3
+	nValue4		:BYTE;				// Output Byte no 4
+END_VAR
+VAR
+	uData		:U_Convert_REAL32;	// Data variable used for conversion
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// Save input bytes in data union
+uData.fValue := fValue;
+nValue1 := uData.arrByte[1];
+nValue2 := uData.arrByte[2];
+nValue3 := uData.arrByte[3];
+nValue4 := uData.arrByte[4];
+
+]]></ST>
+    </Implementation>
+    <LineIds Name="FUN_ConvReal32ToFourByte">
+      <LineId Id="54" Count="0" />
+      <LineId Id="117" Count="0" />
+      <LineId Id="55" Count="0" />
+      <LineId Id="63" Count="0" />
+      <LineId Id="90" Count="1" />
+      <LineId Id="16" Count="0" />
+      <LineId Id="64" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

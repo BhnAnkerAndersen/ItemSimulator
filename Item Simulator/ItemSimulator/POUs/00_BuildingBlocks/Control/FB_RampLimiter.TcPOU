@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FB_RampLimiter" Id="{55a22290-744d-4370-9dc7-c2eb294e5e23}" SpecialFunc="None">
+    <Declaration><![CDATA[// Ramp function able to ramp in an analog output to an analog input with a given stepsize pr second*)
+FUNCTION_BLOCK FB_RampLimiter //Last update: 2016-02-08/ELB
+VAR_INPUT
+	bEnable				: BOOL;	//Enabling of the ramp. When set FALSE the output is equal to input
+	fAI					: REAL;	//Analog input
+	fStepSizePrSec		: REAL;	//Size of the step AO is incremented or decremented with pr second
+END_VAR
+VAR_OUTPUT
+	fAO					: REAL; //Analog output
+	bError				: BOOL;	//Error
+END_VAR
+VAR
+	fStepSizePrScan		: REAL; //Size of the step AO is incremented or decremented with
+	fScanCycleTime_s	: REAL;	//Scan cycle time in s
+	fbGetCurTaskIdx 	: GETCURTASKINDEX; //Get current task
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+// Get current task ID and calculate scan time in sec and step size pr scan
+fbGetCurTaskIdx();  
+fScanCycleTime_s := UDINT_TO_REAL(_TaskInfo[fbGetCurTaskIdx.index].CycleTime)/10000000; //Find scan time in s
+fStepSizePrScan := ABS(fStepSizePrSec*fScanCycleTime_s); //nStepSizePrScanCycle
+
+// Check results. nStepSizePrScan and ScanCycleTime_ms must both be bigger than 0
+bERROR := NOT(fStepSizePrScan>0) OR NOT(fScanCycleTime_s>0); 
+
+
+IF NOT bERROR AND bEnable = TRUE THEN
+		
+	IF fAO<fAI THEN
+		fAO:=fAO+fStepSizePrScan;		//Incremate AO
+		IF fAO>fAI THEN 				//AO can not become bigger than AI
+			fAO:=fAI;
+		END_IF
+	END_IF
+		
+	IF fAO>fAI THEN
+		fAO:=fAO-fStepSizePrScan;		//Decremate AO
+		IF fAO<fAI THEN 				//AO can not become smaller than AI
+			fAO:=fAI; 
+		END_IF 	
+	END_IF
+		
+ELSE
+	fAO:=fAI;							//If the ramp function is disablet AO=AI no ramp
+END_IF]]></ST>
+    </Implementation>
+    <Method Name="M_SetOutput" Id="{a282d4fc-69ff-420d-9a45-438f14cfa155}">
+      <Declaration><![CDATA[METHOD M_SetOutput : BOOL
+VAR_INPUT
+	fValue		:REAL;			// Set output value (output jumps to this value)		
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
+fAO := fValue;]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="FB_RampLimiter">
+      <LineId Id="62" Count="1" />
+      <LineId Id="66" Count="0" />
+      <LineId Id="4" Count="0" />
+      <LineId Id="6" Count="0" />
+      <LineId Id="65" Count="0" />
+      <LineId Id="7" Count="1" />
+      <LineId Id="83" Count="0" />
+      <LineId Id="9" Count="18" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_RampLimiter.M_SetOutput">
+      <LineId Id="7" Count="0" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

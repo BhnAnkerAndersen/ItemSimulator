@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FB_HardwareCheck" Id="{606a9042-93ac-4657-9c33-8ed44b7d267b}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_HardwareCheck
+VAR_INPUT
+	nState					: UINT; // Status input from terminal
+	bAlarmIn				: BOOL; // If this is active, dont check alarm status for next terminal
+END_VAR
+VAR_OUTPUT
+	bAlarm					: BOOL; // Active alarm on terminal
+END_VAR
+VAR
+	nOperationState			: UINT := 8; // Terminal is in normal operation
+END_VAR	
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// Only check for alarms if no alarms is present in last terminal, and the machine is in IO mode for hardware
+IF GVL_Hmi.stHw.stSta.eIfSource = E_System_IfSources.IO THEN
+	IF bAlarmIn = FALSE THEN
+		// Check if terminal status == 8 (Operation)
+		IF nState <> nOperationState THEN
+			bAlarm := TRUE;
+		ELSE
+			bAlarm := FALSE;
+		END_IF
+	END_IF
+	
+ELSE
+	// Reset the alarm output if was true when sources mode was changed
+	bAlarm := FALSE;
+END_IF
+
+]]></ST>
+    </Implementation>
+    <LineIds Name="FB_HardwareCheck">
+      <LineId Id="36" Count="0" />
+      <LineId Id="53" Count="0" />
+      <LineId Id="32" Count="0" />
+      <LineId Id="17" Count="0" />
+      <LineId Id="9" Count="0" />
+      <LineId Id="13" Count="0" />
+      <LineId Id="15" Count="1" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="58" Count="0" />
+      <LineId Id="35" Count="0" />
+      <LineId Id="56" Count="1" />
+      <LineId Id="55" Count="0" />
+      <LineId Id="54" Count="0" />
+      <LineId Id="19" Count="0" />
+      <LineId Id="18" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

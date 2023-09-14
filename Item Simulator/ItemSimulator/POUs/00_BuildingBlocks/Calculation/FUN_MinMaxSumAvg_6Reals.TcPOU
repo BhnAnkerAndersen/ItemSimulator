@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FUN_MinMaxSumAvg_6Reals" Id="{b22ea15c-8da6-4160-92dc-c953a3d0e28c}" SpecialFunc="None">
+    <Declaration><![CDATA[//Last update: 2022-07-08/BJST
+FUNCTION FUN_MinMaxSumAvg_6Reals : REAL	//Return average value	
+VAR_INPUT
+	fVal_1	:REAL;
+	fVal_2	:REAL;
+	fVal_3	:REAL;
+	fVal_4	:REAL;
+	fVal_5	:REAL;
+	fVal_6	:REAL;
+END_VAR
+VAR
+	afVal	:ARRAY [1..6] OF REAL;
+END_VAR
+VAR_OUTPUT
+	n		:INT;
+	fMin	:REAL;
+	fMax	:REAL;
+	fSum	:REAL;
+	fAvg	:REAL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[//Read inputs
+
+//Read inputs
+afVal[1] := fVal_1;
+afVal[2] := fVal_2;
+afVal[3] := fVal_3;
+afVal[4] := fVal_4;
+afVal[5] := fVal_5;
+afVal[6] := fVal_6;
+
+//Initialize
+fSum := fAvg := 0;
+fMin := fMax := afVal[1];
+
+//Calculate
+FOR n:=1 TO 6 DO
+	fSum := fSum + afVal[n];
+	IF fMin > afVal[n] THEN	fMin := afVal[n];	END_IF
+	IF fMax < afVal[n] THEN	fMax := afVal[n];	END_IF
+END_FOR
+
+fAvg := fSum/6;
+]]></ST>
+    </Implementation>
+    <LineIds Name="FUN_MinMaxSumAvg_6Reals">
+      <LineId Id="71" Count="0" />
+      <LineId Id="78" Count="1" />
+      <LineId Id="90" Count="5" />
+      <LineId Id="80" Count="0" />
+      <LineId Id="25" Count="0" />
+      <LineId Id="18" Count="0" />
+      <LineId Id="61" Count="0" />
+      <LineId Id="51" Count="0" />
+      <LineId Id="50" Count="0" />
+      <LineId Id="54" Count="1" />
+      <LineId Id="62" Count="1" />
+      <LineId Id="56" Count="0" />
+      <LineId Id="60" Count="0" />
+      <LineId Id="59" Count="0" />
+      <LineId Id="58" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

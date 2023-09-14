@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FB_FormatStringExtended" Id="{768e14dc-3f9a-41c3-83ca-b43f2c9633ba}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_FormatStringExtended
+VAR_INPUT
+	pFormatString : POINTER TO STRING;
+    arg1      : T_Arg;
+    arg2      : T_Arg;
+    arg3      : T_Arg;
+    arg4      : T_Arg;
+    arg5      : T_Arg;
+    arg6      : T_Arg;
+    arg7      : T_Arg;
+    arg8      : T_Arg;
+    arg9      : T_Arg;
+    arg10     : T_Arg;
+	arg11      : T_Arg;
+    arg12      : T_Arg;
+    arg13      : T_Arg;
+    arg14      : T_Arg;
+    arg15      : T_Arg;
+    arg16      : T_Arg;
+    arg17      : T_Arg;
+    arg18      : T_Arg;
+    arg19      : T_Arg;
+    arg20     : T_Arg;
+	pDstString    : POINTER TO STRING;
+    nDstSize      : UDINT;
+END_VAR
+VAR_OUTPUT
+	bError : BOOL;
+    nErrId : UDINT;
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <LineIds Name="FB_FormatStringExtended">
+      <LineId Id="9" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,266 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FB_Queue" Id="{c5f56251-4456-43d5-80bc-17cb2949ea14}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_Queue
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+	bFull	 				:BOOL := FALSE;					// True if queue is full
+	iNoOfEntries			:UINT := 0;						// Number of entries in the queue
+	iNoOfFree				:UINT := cQueueSize; // Number of free entries
+END_VAR
+VAR
+	iInputIndex 			:UINT := 1;						// Points to next input entry in queue
+	iOutputIndex	 		:UINT := 1;						// Points to next output entry in queue
+ 	arrQueue	 			:ARRAY[1..cQueueSize] OF INT;	// Queue
+	bError					:BOOL;							// True if error occurs
+END_VAR
+VAR CONSTANT
+	cQueueSize				:UINT := 100;				
+END_VAR
+
+
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="M_Flush" Id="{ad25ed7e-5d54-42d6-af0d-2a50f2a396bf}">
+      <Declaration><![CDATA[METHOD M_Flush : BOOL
+VAR_INPUT
+END_VAR
+VAR
+	iEntryEmpty		:INT;			// Entry with zero content
+	iForIndex		:INT;			// Index used in for-loops	
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
+// Flush Queue. All entries are deleted. Index's and counters are reset.
+//----------------------------------------------------------------------
+
+// Initialize empty entry
+iEntryEmpty := 0;
+
+// Reset all entries in queue
+FOR iForIndex := 1 TO UINT_TO_INT(cQueueSize) BY 1 DO
+	arrQueue[iForIndex] := iEntryEmpty;
+END_FOR
+
+// Reset index's and counters
+iInputIndex 	:= 1;
+iOutputIndex	:= 1;
+iNoOfEntries	:= 0;
+iNoOfFree		:= cQueueSize;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_GetEntry" Id="{d55c21b4-2b5e-44b2-885f-261fd9358c6f}">
+      <Declaration><![CDATA[METHOD M_GetEntry : BOOL
+VAR_OUTPUT
+	iEntry 				:INT;			// Value for found entry in queue 
+	bNewEntry			:BOOL;			// True if new entry was foud in queue, False if queue is empty
+END_VAR
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
+// Check if there are any events in queue
+IF(iInputIndex <> iOutputIndex ) THEN							
+	// Min one event in queue, get next event
+	iEntry := arrQueue[iOutputIndex];		
+	bNewEntry := TRUE;
+											
+	// Update output index	
+  	IF(iOutputIndex > (cQueueSize-1)) THEN 									
+  		iOutputIndex := 1;
+  	ELSE
+		iOutputIndex := iOutputIndex + 1;
+	END_IF
+	
+	// Update the entry counter
+	iNoOfEntries := iNoOfEntries - 1;
+	
+	// Reset full flag if it was set
+	bFull := FALSE; 
+ELSE
+	// No events in queue
+	bNewEntry := FALSE;
+	iNoOfEntries := 0;
+END_IF;
+
+// Update count for number of free entires
+iNoOfFree := cQueueSize - iNoOfEntries;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_GetFullStatus" Id="{40ad2313-58bd-4dce-8544-9770ed6a1c62}">
+      <Declaration><![CDATA[METHOD M_GetFullStatus : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// Returns true if queue is full
+
+// Initialize to false
+M_GetFullStatus := FALSE;
+
+// Update signal
+IF((iInputIndex+1) > cQueueSize) THEN
+	// Input index will loop around at next entry. Make sure that output index is not occuping this place.
+	IF iOutputIndex = 0 THEN
+		M_GetFullStatus := TRUE;
+	END_IF
+ELSIF ((iInputIndex + 1) = iOutputIndex) THEN
+	// Output is occuping next entry. Queue full 
+	M_GetFullStatus := TRUE;
+END_IF
+
+// Check entry counter	
+IF iNoOfEntries >= cQueueSize THEN
+	M_GetFullStatus := TRUE;
+END_IF
+
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_PutEntry" Id="{e8c7d225-3dfb-4b80-a9e1-4e9eb329f4fd}">
+      <Declaration><![CDATA[METHOD M_PutEntry : BOOL
+VAR_INPUT
+	iEntry	 		:INT;			// Value to be stored in queue
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
+// Update Full flag
+IF iNoOfEntries >= cQueueSize THEN
+	bFull := TRUE;
+ELSE
+	bFull := FALSE;
+END_IF
+
+
+// Put entry into queue unless it is full
+IF NOT bFull THEN
+	arrQueue[iInputIndex] := iEntry;
+	iNoOfEntries := iNoOfEntries + 1;
+	IF iNoOfEntries > cQueueSize THEN
+		bError := TRUE;
+	END_IF 
+END_IF
+
+// Update input index and find out if queue is full
+// bFull := FALSE;
+IF((iInputIndex+1) > cQueueSize) THEN
+	// Input index has reached end of queue => loop back
+	IF(iOutputIndex <> 1 )  THEN
+		// Output index is NOT occuping the first index
+   		iInputIndex := 1;
+  	ELSE
+    	// Output index IS occuping the first index => Queue full
+		bFull := TRUE;
+	 END_IF
+ELSE
+	// Input index has NOT reach end of queue
+	IF((iInputIndex + 1) <> iOutputIndex) THEN
+		iInputIndex := iInputIndex + 1;
+  	ELSE
+		bFull := TRUE;
+	END_IF
+END_IF
+
+// Update count for number of free entires
+iNoOfFree := cQueueSize - iNoOfEntries;]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="FB_Queue">
+      <LineId Id="30" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Queue.M_Flush">
+      <LineId Id="6" Count="1" />
+      <LineId Id="9" Count="0" />
+      <LineId Id="31" Count="0" />
+      <LineId Id="13" Count="0" />
+      <LineId Id="16" Count="0" />
+      <LineId Id="19" Count="0" />
+      <LineId Id="8" Count="0" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="20" Count="1" />
+      <LineId Id="26" Count="0" />
+      <LineId Id="25" Count="0" />
+      <LineId Id="27" Count="3" />
+    </LineIds>
+    <LineIds Name="FB_Queue.M_GetEntry">
+      <LineId Id="30" Count="1" />
+      <LineId Id="18" Count="0" />
+      <LineId Id="32" Count="0" />
+      <LineId Id="19" Count="0" />
+      <LineId Id="39" Count="0" />
+      <LineId Id="38" Count="0" />
+      <LineId Id="35" Count="0" />
+      <LineId Id="22" Count="4" />
+      <LineId Id="40" Count="0" />
+      <LineId Id="42" Count="0" />
+      <LineId Id="41" Count="0" />
+      <LineId Id="48" Count="1" />
+      <LineId Id="47" Count="0" />
+      <LineId Id="27" Count="0" />
+      <LineId Id="37" Count="0" />
+      <LineId Id="28" Count="0" />
+      <LineId Id="50" Count="0" />
+      <LineId Id="46" Count="0" />
+      <LineId Id="45" Count="0" />
+      <LineId Id="44" Count="0" />
+      <LineId Id="43" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Queue.M_GetFullStatus">
+      <LineId Id="5" Count="0" />
+      <LineId Id="53" Count="0" />
+      <LineId Id="52" Count="0" />
+      <LineId Id="54" Count="0" />
+      <LineId Id="51" Count="0" />
+      <LineId Id="7" Count="0" />
+      <LineId Id="39" Count="0" />
+      <LineId Id="41" Count="0" />
+      <LineId Id="43" Count="3" />
+      <LineId Id="50" Count="0" />
+      <LineId Id="48" Count="0" />
+      <LineId Id="42" Count="0" />
+      <LineId Id="49" Count="0" />
+      <LineId Id="35" Count="0" />
+      <LineId Id="8" Count="1" />
+      <LineId Id="6" Count="0" />
+      <LineId Id="13" Count="0" />
+      <LineId Id="12" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Queue.M_PutEntry">
+      <LineId Id="54" Count="0" />
+      <LineId Id="47" Count="1" />
+      <LineId Id="50" Count="0" />
+      <LineId Id="52" Count="1" />
+      <LineId Id="51" Count="0" />
+      <LineId Id="49" Count="0" />
+      <LineId Id="27" Count="0" />
+      <LineId Id="26" Count="0" />
+      <LineId Id="24" Count="0" />
+      <LineId Id="22" Count="0" />
+      <LineId Id="39" Count="0" />
+      <LineId Id="44" Count="2" />
+      <LineId Id="25" Count="0" />
+      <LineId Id="23" Count="0" />
+      <LineId Id="6" Count="0" />
+      <LineId Id="55" Count="0" />
+      <LineId Id="9" Count="0" />
+      <LineId Id="29" Count="0" />
+      <LineId Id="10" Count="0" />
+      <LineId Id="28" Count="0" />
+      <LineId Id="11" Count="0" />
+      <LineId Id="33" Count="0" />
+      <LineId Id="13" Count="0" />
+      <LineId Id="34" Count="0" />
+      <LineId Id="14" Count="1" />
+      <LineId Id="40" Count="0" />
+      <LineId Id="16" Count="4" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="42" Count="1" />
+      <LineId Id="41" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

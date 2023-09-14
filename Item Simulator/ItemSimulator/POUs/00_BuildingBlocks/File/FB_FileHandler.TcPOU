@@ -1,0 +1,886 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FB_FileHandler" Id="{d8b3d63f-9f93-4f68-bfc3-606f8167ab29}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_FileHandler
+VAR_INPUT
+	bReset				:BOOL;						// Reset active error on rising edge
+END_VAR
+
+VAR_OUTPUT
+	bReady				:BOOL;						// True when FileHandler is ready for new cmd
+	bError				:BOOL;						// True if error occured during operation
+END_VAR
+
+VAR
+	// State variables
+	bInit				:BOOL:=TRUE;				// True in start of first scan, otherwise false
+	bEntry				:BOOL;						// True in first scan when entering a new state
+	eStep				:E_FileHandler_State;		// Active state
+	eStepPrevious			:E_FileHandler_State;		// State in previous scan	
+	bLocked				:BOOL;						// True if state machine is locked
+	bCmdReadFile		:BOOL;						// Command for read file
+	bCmdWriteFile		:BOOL;						// Command for write lines to file
+	bCmdCopyFile		:BOOL;						// Command for copying file
+	bCmdDelFile			:BOOL;						// Command for deleting file
+	bUseMountAndCopy	:BOOL;						// Signal for use of mount and copy batch script instead of just copy
+	
+	// FB's for file handling
+	fbFileOpen			:FB_FileOpen;				// Opens a file
+	fbFileRead			:FB_FileRead;				// Reads content of file and stores in byte array from file
+	fbFileWrite			:FB_FileWrite;				// Writes lines from array of strings to file
+	fbFileClose			:FB_FileClose;				// Closes a file
+
+	// Variables for file handling
+	sFileNameAndPath	:STRING(255);					// File name and path
+	uiFileHandle		:UINT;						// File handle
+	arrFileData			:ARRAY[0..cNoOfBytesMax] OF BYTE; // Array with all data from file
+	pFileLines			:POINTER TO ARRAY[1..GVL_Constants.cFileReadNoOfLines] OF STRING(80); // Pointer to array with one entry for each line in file 
+	pNoOfLines			:POINTER TO UDINT;			// Number of lines in file
+
+	// Write
+	iWriteNoOfLines		:INT;						// Number of lines to be written 
+	pWriteLines			:POINTER TO ARRAY[1..GVL_Constants.cFileWriteNoOfLines] OF STRING(500); // Pointer to array of lines that must be written to a file
+	sWriteLine			:STRING(500);				// String to be written to file
+	iWriteLineIndex		:INT;						// Index for number of written lines
+	iWriteLineLength	:UDINT;						// Length of line
+	
+	// Read
+	udiActiveByte		:UDINT;						// Active byte for processing
+	udiStartByte		:UDINT;						// Start byte during processing
+	iActiveLine			:UDINT;						// Active line for processing of data to strings
+	iScanLineCount		:UDINT;						// Counts the number of lines that has been read in one scan
+	iLineReturnCount	:INT;						// Counts the number of scans used to read the file
+
+	// Copy
+	fbBatchCopyExe		:NT_StartProcess;			// FB that starts the batch file which copies file from servers
+	sCopyFileName		:STRING(80);				// File to be copied
+	sCopyFromFolder		:STRING(175);				// Folder where file is copied from
+	sCopyToFolder		:STRING(175);				// Folder where file is copied to
+	sCopyCmdLine		:STRING(380);				// Command line 
+	sCopyDirName		:STRING(175) := 'C:\Epex2\Control\Batch\';
+	sCopyPathString		:STRING(255) := 'C:\Epex2\Control\Batch\CopyFile.bat';
+	
+	// Del
+	fbBatchDelExe		:NT_StartProcess;			// FB that starts the batch file which copies file from servers
+	sDelFileName		:STRING(80);				// File to be copied
+	sDelFromFolder		:STRING(175);				// Folder where file is copied from
+	sDelCmdLine			:STRING(380);				// Command line
+	sDelDirName			:STRING(175) := 'C:\Epex2\Control\Batch\';
+	sDelPathString		:STRING(255) := 'C:\Epex2\Control\Batch\DeleteFile.bat';
+	
+	// Error
+	bErrFileOpen		:BOOL;						// Error when file was opened
+	bErrFileRead		:BOOL;						// Error when file was read	
+	bErrFileWrite		:BOOL;						// Error when file was written
+	bErrFileClose		:BOOL;						// Error when file was closed
+	bErrFileCopy		:BOOL;						// Error when file was copied
+	bErrFileDel			:BOOL;						// Error when file was deleted
+END_VAR
+VAR CONSTANT
+	cNoOfBytesMax		:UDINT := 2000000;			// Maximum number of bytes in file
+	cLinesInOneScanMax	:UDINT := 150;				// Maximum number of lines read in one scan
+END_VAR
+
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// Initialization
+//-----------------------------------------
+IF bInit THEN
+	eStepPrevious := eStep;
+	bInit := FALSE;
+END_IF
+
+
+
+// Set ready flag
+//-----------------------------------------
+bReady := (eStep = E_FileHandler_State.eIdle) AND NOT bLocked;
+
+
+
+// Call file FB's
+//-----------------------------------------
+A_UpdateFileFBs();
+
+	
+	
+// State machine for file handler
+//-----------------------------------------
+// Set entry flag
+IF eStep <> eStepPrevious THEN
+	bEntry := TRUE;
+ELSE
+	bEntry := FALSE;
+END_IF
+eStepPrevious := eStep;
+
+
+CASE eStep OF
+
+// Initialization
+E_FileHandler_State.eReset:
+	// Entry
+	IF bEntry THEN
+		;
+	END_IF
+	eStep := E_FileHandler_State.eIdle;
+	
+// Idle
+E_FileHandler_State.eIdle:
+	// Entry
+	IF bEntry THEN
+		// Reset any errors
+		bError := FALSE;
+		bErrFileOpen := FALSE;
+		bErrFileRead := FALSE;
+		bErrFileWrite := FALSE;
+		bErrFileClose := FALSE;
+		bErrFileCopy := FALSE;	
+	END_IF
+	
+	// Check for new commands
+	IF bCmdReadFile OR bCmdWriteFile THEN
+		// Reset lock
+		bLocked := FALSE;
+		eStep := E_FileHandler_State.eOpenFilePre;
+	ELSIF bCmdCopyFile THEN
+		// Copy file
+		bLocked := FALSE;
+		eStep := E_FileHandler_State.eCopyFilePre;
+	ELSIF bCmdDelFile THEN
+		// Delete file
+		bLocked := FALSE;
+		eStep := E_FileHandler_State.eDelFilePre;
+	END_IF
+	
+	
+// Open file Pre
+E_FileHandler_State.eOpenFilePre:
+	// Entry
+	IF bEntry THEN
+		fbFileOpen(bExecute:=FALSE);
+		fbFileOpen.tTimeout := T#3S;
+		fbFileOpen.sPathName := sFileNameAndPath;
+		IF bCmdReadFile THEN
+			fbFileOpen.nMode := FOPEN_MODEREAD;		// Read only mode
+		ELSIF bCmdWriteFile THEN
+			fbFileOpen.nMode := FOPEN_MODEAPPEND;	
+		END_IF
+		fbFileOpen.tTimeout := T#3S;
+	END_IF
+	
+	// Start execute of file open and wait for busy flag
+	fbFileOpen.bExecute := TRUE;
+	IF fbFileOpen.bBusy THEN 
+		// Open is in progress go and wait for done
+		eStep := E_FileHandler_State.eOpenFilePeri;
+	END_IF
+	
+	
+	
+// Open file Peri
+E_FileHandler_State.eOpenFilePeri:
+	// Entry
+	IF bEntry THEN
+		;
+	END_IF
+	
+	// Wait for done
+	IF NOT fbFileOpen.bBusy AND NOT fbFileOpen.bError THEN
+		uiFileHandle := fbFileOpen.hFile;
+		IF bCmdReadFile THEN
+			eStep := E_FileHandler_State.eReadFilePre;
+		ELSIF bCmdWriteFile THEN
+			eStep := E_FileHandler_State.eWriteFilePre;
+		END_IF
+	ELSIF fbFileOpen.bError THEN
+		bErrFileOpen := TRUE;
+ 		eStep := E_FileHandler_State.eErrEntry;
+	END_IF
+
+
+
+// Read file Pre
+E_FileHandler_State.eReadFilePre:
+	// Entry
+	IF bEntry THEN
+		fbFileRead(bExecute:=FALSE);
+		fbFileRead.hFile := uiFileHandle;
+		fbFileRead.pReadBuff := ADR(arrFileData);
+		fbFileRead.cbReadLen := cNoOfBytesMax;
+	END_IF
+	
+	// Start file reading		
+	fbFileRead.bExecute:= TRUE;
+	IF fbFileRead.bBusy  THEN
+		// File reading has begun, Go and wait for it to finish
+		eStep := E_FileHandler_State.eReadFilePeri;
+	END_IF
+
+	
+	
+// Read file Peri
+E_FileHandler_State.eReadFilePeri:
+	// Entry
+	IF bEntry THEN
+		;
+	END_IF
+	
+	// Wait for done
+	IF NOT fbFileRead.bBusy AND NOT fbFileRead.bError THEN
+		// File was succesfulle read
+		eStep := E_FileHandler_State.eCloseFilePre;
+	ELSIF fbFileRead.bError THEN
+		// Error occured
+		bErrFileRead := TRUE;
+ 		eStep := E_FileHandler_State.eErrEntry;
+	END_IF
+
+	
+	
+// Write file Pre
+E_FileHandler_State.eWriteFilePre:
+	// Entry
+	IF bEntry THEN
+		fbFileWrite(bExecute:=FALSE);
+		fbFileWrite.hFile := uiFileHandle;
+		iWriteLineIndex := 1;
+	END_IF	
+	eStep := E_FileHandler_State.eWriteFileSetLine;
+
+	
+	
+// Write file, Set line
+E_FileHandler_State.eWriteFileSetLine:	
+	IF bEntry THEN
+		sWriteLine := '';
+		sWriteLine := pWriteLines^[iWriteLineIndex];
+		iWriteLineLength := LEN2(pSTRING:= ADR(sWriteLine));
+		fbFileWrite.pWriteBuff := ADR(sWriteLine);
+		fbFileWrite.cbWriteLen := iWriteLineLength;
+		fbFileWrite.bExecute:= TRUE;	
+	END_IF	
+	eStep := E_FileHandler_State.eWriteFilePeri;
+	
+
+	
+// Write file Peri
+E_FileHandler_State.eWriteFilePeri:
+	// Entry
+	IF bEntry THEN
+		;
+	END_IF	
+	
+	// Wait untill write operation is finished
+	IF NOT fbFileWrite.bBusy AND NOT fbFileWrite.bError THEN		
+		IF iWriteLineIndex < iWriteNoOfLines THEN 
+			// More lines must be written. Go back and write next line	   
+			eStep := E_FileHandler_State.eWriteFileSetLine;
+			iWriteLineIndex := iWriteLineIndex + 1;
+		ELSE
+			// All lines have been written => close file 
+			eStep := E_FileHandler_State.eCloseFilePre;
+		END_IF;
+		fbFileWrite(bExecute:=FALSE);	
+	ELSIF fbFileWrite.bError THEN
+		bErrFileWrite := TRUE;
+		eStep := E_FileHandler_State.eErrEntry;
+	END_IF
+
+	
+	
+// Close file Pre
+E_FileHandler_State.eCloseFilePre:
+	// Entry
+	IF bEntry THEN
+		fbFileClose(bExecute:=FALSE);
+		fbFileClose.hFile := uiFileHandle;
+	END_IF
+	
+	// Start file closing			
+	fbFileClose.bExecute:= TRUE;
+	IF fbFileClose.bBusy THEN
+		// Close has begun, Go and wait for close to end	
+		eStep := E_FileHandler_State.eCloseFilePeri;
+	END_IF
+
+	
+	
+// Close file Peri
+E_FileHandler_State.eCloseFilePeri:
+	// Entry
+	IF bEntry THEN
+		;
+	END_IF
+	
+	// Wait for done
+	IF NOT fbFileClose.bBusy AND NOT fbFileClose.bError THEN
+		// File was succesfulle closed
+		IF bCmdReadFile THEN
+			eStep := E_FileHandler_State.eProcessFile;
+		ELSIF bCmdWriteFile THEN
+			bCmdWriteFile := FALSE;
+			eStep := E_FileHandler_State.eIdle;
+		END_IF
+	ELSIF fbFileClose.bError THEN
+		bErrFileClose := TRUE;
+ 		eStep := E_FileHandler_State.eErrEntry;
+	END_IF
+
+	
+	
+// Process file content
+E_FileHandler_State.eProcessFile:	
+		// Entry
+	IF bEntry THEN
+		pNoOfLines^ := 0;
+		iActiveLine := 1;
+		pFileLines^[1] := ''; 
+		iScanLineCount := 0;
+		udiStartByte := 0;
+		iLineReturnCount := 1;
+	END_IF
+	
+	// Process data
+	FOR udiActiveByte := udiStartByte TO fbFileRead.cbRead DO
+		IF  F_ToCHR(arrFileData[udiActiveByte]) = '$N'  THEN;
+			// New line
+			iActiveLine := iActiveLine +1;
+			iScanLineCount := iScanLineCount +1;			
+			pFileLines^[iActiveLine] := '';
+			IF iScanLineCount >= cLinesInOneScanMax THEN
+				iScanLineCount := 0;
+				udiStartByte := udiActiveByte + 1;
+				iLineReturnCount := iLineReturnCount + 1;
+				RETURN;
+			END_IF
+		ELSIF NOT (F_ToCHR(arrFileData[udiActiveByte]) = '$R') THEN
+			// Return => store data up untill this point as a line
+			pFileLines^[iActiveLine] := CONCAT(pFileLines^[iActiveLine], F_ToCHR(arrFileData[udiActiveByte]));
+		END_IF
+	END_FOR
+
+	// Check if all data has been processed
+	IF udiActiveByte >= fbFileRead.cbRead THEN
+		pNoOfLines^ := iActiveLine-1;
+		bCmdReadFile := FALSE;
+		eStep := E_FileHandler_State.eIdle;
+	END_IF
+
+	
+// Copy file pre	
+E_FileHandler_State.eCopyFilePre:
+	// Entry
+	IF bEntry THEN
+		
+		// Check for backslah at end of string for "from" folder 
+		IF RIGHT(sCopyFromFolder,1) <> '\' THEN 
+			sCopyFromFolder := CONCAT(sCopyFromFolder,'\');
+		END_IF
+	
+		// Check for backslah at end of string for "to" folder
+		IF RIGHT(sCopyToFolder,1) <> '\' THEN 
+			sCopyToFolder := CONCAT(sCopyToFolder,'\');
+		END_IF
+		
+		// Check if copy to folder is on local or external drive
+		IF (MID(sCopyToFolder, 1, 1) <> 'c') AND (MID(sCopyToFolder, 1, 1) <> 'C') THEN
+			// Server (switch server drive letter to 'x')
+			sCopyToFolder := REPLACE(sCopyToFolder,'x', 1, 1);
+			bUseMountAndCopy := TRUE;
+		ELSE
+			bUseMountAndCopy := FALSE;
+		END_IF
+		
+		// Create command line
+		sCopyFromFolder := CONCAT('"',sCopyFromFolder);
+		sCopyFileName := CONCAT(sCopyFileName,'"');
+		sCopyCmdLine := CONCAT(sCopyFromFolder, sCopyFileName); 
+		sCopyCmdLine := CONCAT(sCopyCmdLine, ' ');
+		sCopyCmdLine := CONCAT(sCopyCmdLine, sCopyToFolder);
+		
+		// Check if copy is from local or external drive
+		IF ((MID(sCopyCmdLine, 1, 2) = 'c') OR (MID(sCopyCmdLine, 1, 2) = 'C')) AND NOT bUseMountAndCopy THEN
+			// From local to local drive
+			// Initialize fb that starts copy function
+			fbBatchCopyExe(START:= FALSE); 
+			fbBatchCopyExe.PATHSTR:= sCopyPathString; 
+			fbBatchCopyExe.DIRNAME:= sCopyDirName; 
+			fbBatchCopyExe.COMNDLINE:= sCopyCmdLine; 
+			fbBatchCopyExe.TMOUT:= T#5S;
+		ELSIF ((MID(sCopyCmdLine, 1, 2) = 'c') OR (MID(sCopyCmdLine, 1, 2) = 'C')) AND bUseMountAndCopy THEN
+			// To server from local drive
+			// Initialize fb that starts copy function
+			fbBatchCopyExe(START:= FALSE); 
+			fbBatchCopyExe.PATHSTR:= 'C:\Epex2\Control\Batch\MountAndCopyFile.bat'; 
+			fbBatchCopyExe.DIRNAME:= sCopyDirName; 
+			fbBatchCopyExe.COMNDLINE:= sCopyCmdLine; 
+			fbBatchCopyExe.TMOUT:= T#5S;
+		ELSE
+			// From server to local drive (switch server drive letter to 'x')
+			sCopyCmdLine := REPLACE(sCopyCmdLine,'x', 1, 2);
+			// Initialize fb that starts copy function
+			fbBatchCopyExe(START:= FALSE); 
+			fbBatchCopyExe.PATHSTR:= 'C:\Epex2\Control\Batch\MountAndCopyFile.bat'; 
+			fbBatchCopyExe.DIRNAME:= sCopyDirName; 
+			fbBatchCopyExe.COMNDLINE:= sCopyCmdLine; 
+			fbBatchCopyExe.TMOUT:= T#5S;
+		END_IF
+	END_IF
+	
+	// Start batch file for copy		
+	fbBatchCopyExe.START:= TRUE;
+	IF fbBatchCopyExe.BUSY THEN
+		fbBatchCopyExe.START:= FALSE; 
+		// Open is in progress go and wait for done
+		eStep := E_FileHandler_State.eCopyFilePeri;
+	END_IF
+
+	
+	
+// Copy file peri
+ E_FileHandler_State.eCopyFilePeri:
+ 	// Entry
+	IF bEntry THEN
+		;
+	END_IF
+ 
+	// Wait for done
+	IF NOT fbBatchCopyExe.BUSY AND NOT fbBatchCopyExe.ERR  THEN
+		// Copy process was succesfulle started
+		bCmdCopyFile := FALSE; 
+		eStep := E_FileHandler_State.eIdle;
+	ELSIF fbBatchCopyExe.ERR THEN
+		// Error occured
+		bCmdCopyFile := FALSE;
+		bErrFileCopy := TRUE;
+ 		eStep := E_FileHandler_State.eErrEntry;
+	END_IF
+	
+	
+	
+// Delete file pre	
+E_FileHandler_State.eDelFilePre:
+	// Entry
+	IF bEntry THEN
+		// Create command line
+		sDelFromFolder := CONCAT('"',sDelFromFolder);
+		sDelFileName := CONCAT(sDelFileName,'"');
+		sDelCmdLine := CONCAT(sDelFromFolder, sDelFileName); 
+		// Initialize fb that starts delete function
+		fbBatchDelExe(START:= FALSE); 
+		fbBatchDelExe.PATHSTR:= sDelPathString; 
+		fbBatchDelExe.DIRNAME:= sDelDirName; 
+		fbBatchDelExe.COMNDLINE:= sDelCmdLine; 
+		fbBatchDelExe.TMOUT:= T#5S;
+	END_IF
+	
+	// Start batch file for delete		
+	fbBatchDelExe.START:= TRUE;
+	IF fbBatchDelExe.BUSY THEN
+		fbBatchDelExe.START:= FALSE; 
+		// Open is in progress go and wait for done
+		eStep := E_FileHandler_State.eDelFilePeri;
+	END_IF
+
+	
+	
+// Delete file peri
+ E_FileHandler_State.eDelFilePeri:
+ 	// Entry
+	IF bEntry THEN
+		;
+	END_IF
+ 
+	// Wait for done
+	IF NOT fbBatchDelExe.BUSY AND NOT fbBatchDelExe.ERR  THEN
+		// Del process was succesfulle started
+		bCmdDelFile := FALSE; 
+		eStep := E_FileHandler_State.eIdle;
+	ELSIF fbBatchDelExe.ERR THEN
+		// Error occured
+		bCmdDelFile := FALSE;
+		bErrFileDel := TRUE;
+ 		eStep := E_FileHandler_State.eErrEntry;
+	END_IF	
+	
+	
+	
+	
+
+// Error states
+// Error entry state
+E_FileHandler_State.eErrEntry:
+	// Entry
+	IF bEntry THEN
+		bError := TRUE;
+	END_IF
+		
+	// Identify error
+	IF bErrFileOpen THEN
+		eStep := E_FileHandler_State.eErrOpen;
+	ELSIF bErrFileRead THEN
+		eStep := E_FileHandler_State.eErrRead;
+	ELSIF bErrFileWrite THEN
+		eStep := E_FileHandler_State.eErrWrite;
+	ELSIF bErrFileClose THEN
+		eStep := E_FileHandler_State.eErrClose;
+	ELSIF bErrFileCopy THEN
+		eStep := E_FileHandler_State.eErrCopy;
+	ELSIF bErrFileDel THEN
+		eStep := E_FileHandler_State.eErrDel;		
+	END_IF
+	
+	
+	
+// Error open file
+E_FileHandler_State.eErrOpen:
+	// Entry
+	IF bEntry THEN
+		bCmdReadFile := FALSE;
+	END_IF
+
+	// Reset => Go back and wait for new command
+	IF bReset THEN
+		eStep := E_FileHandler_State.eIdle;
+	END_IF
+	
+
+// Error read file
+E_FileHandler_State.eErrRead:
+	// Entry
+	IF bEntry THEN
+		bCmdReadFile := FALSE;
+	END_IF
+	
+	// Reset => Go back and wait for new command
+	IF bReset THEN
+		fbFileRead(bExecute := FALSE);
+		eStep := E_FileHandler_State.eIdle;
+	END_IF
+	
+
+
+// Error write file
+E_FileHandler_State.eErrWrite:
+	// Entry
+	IF bEntry THEN
+		bCmdWriteFile := FALSE;
+	END_IF
+		
+	// Reset => Go back and wait for new command
+	IF bReset THEN
+		fbFileWrite(bExecute:= FALSE);
+		eStep := E_FileHandler_State.eIdle;
+	END_IF
+	
+	
+	
+// Error close file
+E_FileHandler_State.eErrClose:
+	// Entry
+	IF bEntry THEN
+		;
+	END_IF
+		
+	// Reset => Go back and wait for new command
+	IF bReset THEN
+		fbFileClose(bExecute:= FALSE);
+		eStep := E_FileHandler_State.eIdle;
+	END_IF
+
+	
+	
+// Error copy file
+E_FileHandler_State.eErrCopy:
+	// Entry
+	IF bEntry THEN
+		;
+	END_IF
+		
+	// Reset => Go back and wait for new command
+	IF bReset THEN
+		fbBatchCopyExe(START:= FALSE);
+		eStep := E_FileHandler_State.eIdle;
+	END_IF
+
+	
+
+// Error copy file
+E_FileHandler_State.eErrDel:
+	// Entry
+	IF bEntry THEN
+		;
+	END_IF
+		
+	// Reset => Go back and wait for new command
+	IF bReset THEN
+		fbBatchDelExe(START:= FALSE);
+		eStep := E_FileHandler_State.eIdle;
+	END_IF
+END_CASE]]></ST>
+    </Implementation>
+    <Action Name="A_UpdateFileFBs" Id="{065f0d63-5bd4-4590-8a60-9dbc52c6b99c}">
+      <Implementation>
+        <ST><![CDATA[fbFileOpen(
+	sNetId:= , 
+	sPathName:= , 
+	nMode:= , 
+	ePath:= , 
+	bExecute:= , 
+	tTimeout:= , 
+	bBusy=> , 
+	bError=> , 
+	nErrId=> , 
+	hFile=> );
+	
+fbFileRead(
+	sNetId:= , 
+	hFile:= , 
+	pReadBuff:= , 
+	cbReadLen:= , 
+	bExecute:= , 
+	tTimeout:= , 
+	bBusy=> , 
+	bError=> , 
+	nErrId=> , 
+	cbRead=> , 
+	bEOF=> );
+	
+fbFileWrite(
+	sNetId:= , 
+	hFile:= , 
+	pWriteBuff:= , 
+	cbWriteLen:= , 
+	bExecute:= , 
+	tTimeout:= , 
+	bBusy=> , 
+	bError=> , 
+	nErrId=> , 
+	cbWrite=> );	
+	
+fbFileClose(
+	sNetId:= , 
+	hFile:= , 
+	bExecute:= , 
+	tTimeout:= , 
+	bBusy=> , 
+	bError=> , 
+	nErrId=> );
+	
+fbBatchCopyExe(
+	NETID:= , 
+	PATHSTR:= , 
+	DIRNAME:= , 
+	COMNDLINE:= , 
+	START:= , 
+	TMOUT:= , 
+	BUSY=> , 
+	ERR=> , 
+	ERRID=> );	
+	
+fbBatchDelExe(
+	NETID:= , 
+	PATHSTR:= , 
+	DIRNAME:= , 
+	COMNDLINE:= , 
+	START:= , 
+	TMOUT:= , 
+	BUSY=> , 
+	ERR=> , 
+	ERRID=> );	
+	]]></ST>
+      </Implementation>
+    </Action>
+    <Method Name="M_CopyFile" Id="{be3e0757-54ae-42f0-918a-a21f209d4942}">
+      <Declaration><![CDATA[METHOD M_CopyFile : BOOL
+VAR_INPUT
+	sFileName			:STRING(80);					// Filename
+	sFilePathFrom		:STRING(175);					// File path
+	sFilePathTo			:STRING(175);					// Local folder where file must be copied to
+END_VAR
+	]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
+// Set execute flag if it is a valid command
+IF eStep = E_FileHandler_State.eIdle AND NOT bLocked THEN
+	// State machine is idle => Copy is a valid command
+	sCopyFileName := sFileName;
+	sCopyFromFolder := sFilePathFrom;
+	sCopyToFolder := sFilePathTo;	
+	bLocked := TRUE;
+	bReady	:= FALSE;
+	bCmdCopyFile := TRUE;
+END_IF
+
+// Return boolean value for execution accept.
+IF bCmdCopyFile THEN
+	M_CopyFile := TRUE;
+ELSE
+	M_CopyFile := FALSE;
+END_IF
+
+
+
+
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_DeleteFile" Id="{cc9cf702-037b-401f-9a7d-ffd07463bdab}">
+      <Declaration><![CDATA[METHOD M_DeleteFile : BOOL
+VAR_INPUT
+	sFileName			:STRING(80);					// Filename
+	sFileFolder			:STRING(175);					// File path
+END_VAR
+	]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
+// Set execute flag if it is a valid command
+IF eStep = E_FileHandler_State.eIdle AND NOT bLocked THEN
+	// State machine is idle => Delete is a valid command
+	sDelFileName := sFileName;
+	sDelFromFolder := sFileFolder;
+	bLocked := TRUE;
+	bReady	:= FALSE;
+	bCmdDelFile := TRUE;
+END_IF
+
+// Return boolean value for execution accept.
+IF bCmdDelFile THEN
+	M_DeleteFile := TRUE;
+ELSE
+	M_DeleteFile := FALSE;
+END_IF
+
+
+
+
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_ReadFile" Id="{10ccabc4-3270-4953-97b8-553ca1bd57bd}">
+      <Declaration><![CDATA[METHOD M_ReadFile : BOOL
+VAR_INPUT
+	sFileName			:STRING(80);					// Filename
+	sFilePath			:STRING(175);					// File path
+	pArrLines			:POINTER TO ARRAY[1..GVL_Constants.cFileReadNoOfLines] OF STRING(80); // Pointer ot array with one entry for each line in file
+	pLinesInFile		:POINTER TO UDINT;			// Variable where no of lines is stored 
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// Set execute flag if it is a valid command
+IF eStep = E_FileHandler_State.eIdle AND NOT bLocked THEN
+	// State machine is idle => Read is a valid command
+	sFileNameAndPath := CONCAT(sFilePath,sFileName);
+	pFileLines := pArrLines;
+	pNoOfLines := pLinesInFile;
+	bLocked := TRUE;
+	bReady	:= FALSE;
+	bCmdReadFile := TRUE;
+END_IF
+
+// Return boolean value for execution accept.
+IF bCmdReadFile THEN
+	M_ReadFile := TRUE;
+ELSE
+	M_ReadFile := FALSE;
+END_IF
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_WriteFile" Id="{8a4aa396-f63f-4d34-834c-9f98bd1bd0df}">
+      <Declaration><![CDATA[METHOD M_WriteFile : BOOL
+VAR_INPUT
+	sFileName			:STRING(80);					// Filename
+	sFilePath			:STRING(175);					// File path
+	iLinesToWrite		:INT;						// Number of lines to written from array of strings				
+	pArrLines			:POINTER TO ARRAY[1..GVL_Constants.cFileWriteNoOfLines] OF STRING(500); // Pointer ot array with one entry for each line in file
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// Set execute flag if it is a valid command
+IF eStep = E_FileHandler_State.eIdle AND NOT bLocked AND iLinesToWrite > 0 THEN
+	// State machine is idle => Read is a valid command
+	sFileNameAndPath := CONCAT(sFilePath,sFileName);
+	iWriteNoOfLines	:= iLinesToWrite;
+	pWriteLines := pArrLines;
+	bLocked := TRUE;
+	bReady	:= FALSE;
+	bCmdWriteFile := TRUE;
+END_IF
+
+// Return boolean value for execution accept.
+IF bCmdWriteFile THEN
+	M_WriteFile := TRUE;
+ELSE
+	M_WriteFile := FALSE;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="FB_FileHandler">
+      <LineId Id="2444" Count="534" />
+      <LineId Id="31" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_FileHandler.A_UpdateFileFBs">
+      <LineId Id="2" Count="43" />
+      <LineId Id="1" Count="0" />
+      <LineId Id="46" Count="0" />
+      <LineId Id="50" Count="8" />
+      <LineId Id="48" Count="0" />
+      <LineId Id="59" Count="0" />
+      <LineId Id="61" Count="8" />
+      <LineId Id="60" Count="0" />
+      <LineId Id="49" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_FileHandler.M_CopyFile">
+      <LineId Id="13" Count="0" />
+      <LineId Id="65" Count="2" />
+      <LineId Id="86" Count="0" />
+      <LineId Id="84" Count="1" />
+      <LineId Id="71" Count="9" />
+      <LineId Id="26" Count="0" />
+      <LineId Id="54" Count="1" />
+      <LineId Id="51" Count="0" />
+      <LineId Id="30" Count="0" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_FileHandler.M_DeleteFile">
+      <LineId Id="13" Count="0" />
+      <LineId Id="65" Count="2" />
+      <LineId Id="86" Count="0" />
+      <LineId Id="84" Count="0" />
+      <LineId Id="71" Count="9" />
+      <LineId Id="26" Count="0" />
+      <LineId Id="54" Count="1" />
+      <LineId Id="51" Count="0" />
+      <LineId Id="30" Count="0" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_FileHandler.M_ReadFile">
+      <LineId Id="5" Count="0" />
+      <LineId Id="7" Count="1" />
+      <LineId Id="21" Count="0" />
+      <LineId Id="26" Count="0" />
+      <LineId Id="34" Count="0" />
+      <LineId Id="22" Count="0" />
+      <LineId Id="42" Count="0" />
+      <LineId Id="23" Count="0" />
+      <LineId Id="9" Count="0" />
+      <LineId Id="12" Count="0" />
+      <LineId Id="11" Count="0" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="16" Count="0" />
+      <LineId Id="18" Count="1" />
+      <LineId Id="17" Count="0" />
+      <LineId Id="13" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_FileHandler.M_WriteFile">
+      <LineId Id="11" Count="3" />
+      <LineId Id="26" Count="0" />
+      <LineId Id="16" Count="1" />
+      <LineId Id="27" Count="0" />
+      <LineId Id="18" Count="7" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

@@ -10,13 +10,77 @@ VAR
 	arrColorSensorStatus	AT %I*: ARRAY[0..3] OF BYTE;
 	arrColorSensorData		AT %I*: ARRAY[4..11] OF BYTE;
 	nChannelStatus			AT %I*: USINT;
+	
+	L_Value						  :UINT;
+	A_Value						  :UINT;
+	B_Value						  :UINT;
+	CMV_QL1						  :UINT;
+	
+	arrQint						  :ARRAY[1..24] OF BOOL;
+	QL1							  :BOOL;
+	QL2							  :BOOL;
+	QL3							  :BOOL;
+	QL4							  :BOOL;
+	QoRAlarm					  :BOOL;
+	PDInvalid					  :BOOL;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[]]></ST>
+      <ST><![CDATA[L_Value := FUN_ConvTwoByteToUInt16(nValue1 := arrColorSensorData[11], nValue2 := arrColorSensorData[10]); // LAB color space: L-value / RGB color space: R-value
+A_Value := FUN_ConvTwoByteToUInt16(nValue1 := arrColorSensorData[9], nValue2 := arrColorSensorData[8]);	// LAB color space: A-value / RGB color space: G-value
+B_Value := FUN_ConvTwoByteToUInt16(nValue1 := arrColorSensorData[7], nValue2 := arrColorSensorData[6]);	// LAB color space: B-value / RGB color space: B-value
+
+CMV_QL1 := FUN_ConvTwoByteToUInt16(nValue1 := arrColorSensorData[5], nValue2 := arrColorSensorData[4]);
+
+arrQint[1] := arrColorSensorStatus[1].0;
+arrQint[2] := arrColorSensorStatus[1].1;
+arrQint[3] := arrColorSensorStatus[1].2;
+arrQint[4] := arrColorSensorStatus[1].3;
+arrQint[5] := arrColorSensorStatus[1].4;
+arrQint[6] := arrColorSensorStatus[1].5;
+arrQint[7] := arrColorSensorStatus[1].6;
+arrQint[8] := arrColorSensorStatus[1].7;
+
+arrQint[9] := arrColorSensorStatus[2].0;
+arrQint[10] := arrColorSensorStatus[2].1;
+arrQint[11] := arrColorSensorStatus[2].2;
+arrQint[12] := arrColorSensorStatus[2].3;
+arrQint[13] := arrColorSensorStatus[2].4;
+arrQint[14] := arrColorSensorStatus[2].5;
+arrQint[15] := arrColorSensorStatus[2].6;
+arrQint[16] := arrColorSensorStatus[2].7;
+
+arrQint[17] := arrColorSensorStatus[3].0;
+arrQint[18] := arrColorSensorStatus[3].1;
+arrQint[19] := arrColorSensorStatus[3].2;
+arrQint[20] := arrColorSensorStatus[3].3;
+arrQint[21] := arrColorSensorStatus[3].4;
+arrQint[22] := arrColorSensorStatus[3].5;
+arrQint[23] := arrColorSensorStatus[3].6;
+arrQint[24] := arrColorSensorStatus[3].7;
+
+QL1 := arrColorSensorStatus[0].0;
+QL2 := arrColorSensorStatus[0].1;
+QL3 := arrColorSensorStatus[0].2;
+QL4 := arrColorSensorStatus[0].3;
+QoRAlarm := arrColorSensorStatus[0].4;
+PDInvalid := arrColorSensorStatus[0].5;]]></ST>
     </Implementation>
     <LineIds Name="FB_ColourSensor">
       <LineId Id="9" Count="0" />
+      <LineId Id="28" Count="2" />
+      <LineId Id="27" Count="0" />
+      <LineId Id="52" Count="0" />
+      <LineId Id="54" Count="6" />
+      <LineId Id="53" Count="0" />
+      <LineId Id="43" Count="0" />
+      <LineId Id="45" Count="6" />
+      <LineId Id="44" Count="0" />
+      <LineId Id="33" Count="0" />
+      <LineId Id="26" Count="0" />
+      <LineId Id="35" Count="7" />
+      <LineId Id="34" Count="0" />
+      <LineId Id="68" Count="4" />
     </LineIds>
   </POU>
 </TcPlcObject>

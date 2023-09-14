@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FUN_Saturation" Id="{e0b58b6e-3800-4b7e-91b5-a91876c7641d}" SpecialFunc="None">
+    <Declaration><![CDATA[/// Saturation function. Limits the input to a minimum and maximum value
+FUNCTION FUN_Saturation : REAL
+VAR_INPUT
+	rInputValue		:REAL;				// Input value before saturation				
+	rOutputMin		:REAL;				// Saturation min value
+	rOutputMax		:REAL;				// Saturation max value
+END_VAR
+VAR
+	rOutputValue	:REAL;				// Output value after saturation
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF rInputValue > rOutputMin THEN
+	IF rInputValue < rOutputMax THEN
+		rOutputValue := rInputValue;
+	ELSE
+		rOutputValue := rOutputMax;
+	END_IF
+ELSE
+	rOutputValue := rOutputMin;
+END_IF
+
+FUN_Saturation := rOutputValue;]]></ST>
+    </Implementation>
+    <LineIds Name="FUN_Saturation">
+      <LineId Id="3" Count="0" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="7" Count="7" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

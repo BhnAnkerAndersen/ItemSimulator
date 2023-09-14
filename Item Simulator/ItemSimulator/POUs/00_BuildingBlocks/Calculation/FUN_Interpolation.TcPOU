@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FUN_Interpolation" Id="{9a61d86e-6151-47a8-b5a9-cf9558845a37}" SpecialFunc="None">
+    <Declaration><![CDATA[///*****************************************************************************************
+///            Simple interpolation function for two points (X1,X2) and (Y1,Y2)                
+///*****************************************************************************************
+FUNCTION FUN_Interpolation : REAL
+VAR_INPUT
+	rInputValue: REAL;
+	rX1: REAL;
+	rY1: REAL;
+	rX2: REAL;
+	rY2: REAL;
+END_VAR
+VAR
+	rSlope: REAL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[(*The slope between the two points (X1,Y1) and (X2,Y2) is calculated*)
+IF (rX2-rX1) <> 0 THEN
+	rSlope := (rY2-rY1)/(rX2-rX1);
+ELSE
+	rSlope := 0;
+END_IF
+
+(*The output value is calculated from the slope and input*)
+FUN_Interpolation := rY1 + rSlope*(rInputValue-rX1);]]></ST>
+    </Implementation>
+    <LineIds Name="FUN_Interpolation">
+      <LineId Id="3" Count="7" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

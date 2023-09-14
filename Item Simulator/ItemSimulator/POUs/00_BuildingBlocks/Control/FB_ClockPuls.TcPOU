@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FB_ClockPuls" Id="{cd041058-cf9c-4c16-a757-8fa63082b002}" SpecialFunc="None">
+    <Declaration><![CDATA[// This vunction block creates a clock puls. The function block is useful when
+// somthing needs to be trigged with a fixed frequency. Note that the variable
+// tPulsLength defines the time between two rising edges in the clock puls
+FUNCTION_BLOCK FB_ClockPuls
+VAR_INPUT
+	bEnable				:BOOL;		// When TRUE a clock puls is generated. If set FALSE the bPuls output is always FALSE
+	tPulsLength			:TIME;		// Time for one complete clock puls. 											      
+END_VAR
+
+VAR_OUTPUT
+	bPuls				:BOOL;		// Clock Puls
+END_VAR
+
+VAR
+	fbTimer1			:TON;		// Internal timer
+	fbTimer2			:TON;		// Internal timer
+	tHalfPuls			:TIME;
+	bTimerOut			:BOOL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// Calculate the time for half a clock puls
+tHalfPuls := tPulsLength/2;
+
+// Generate clock puls
+IF bEnable THEN
+	fbTimer1(IN:= NOT fbTimer2.Q , PT:= tHalfPuls, Q=>bTimerOut , ET=> );
+	fbTimer2(IN:= fbTimer1.Q, PT:= tHalfPuls, Q=> , ET=> );
+	// Start with postive edge when enabled
+	bPuls := NOT bTimerOut;	
+ELSE
+	fbTimer1(IN:=FALSE);
+	fbTimer2(IN:=FALSE);
+	bPuls := FALSE;
+END_IF
+
+
+]]></ST>
+    </Implementation>
+    <LineIds Name="FB_ClockPuls">
+      <LineId Id="29" Count="6" />
+      <LineId Id="64" Count="0" />
+      <LineId Id="63" Count="0" />
+      <LineId Id="36" Count="3" />
+      <LineId Id="9" Count="0" />
+      <LineId Id="62" Count="0" />
+      <LineId Id="59" Count="0" />
+      <LineId Id="58" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FUN_RealToString" Id="{ead795ae-1d48-407f-887b-1f073309b68a}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION FUN_RealToString : STRING
+VAR_INPUT
+	rValue		:LREAL;			// Input value to be converted into a string
+	iNoOfDec	:INT;			// Number of decimals to be presented in the string
+END_VAR
+VAR
+	bNegative	:BOOL;			// True if value is negative
+	i			:INT;			// Index used in for-loop
+	iPos		:INT;			// Variable used to find position in string
+	iPos2		:INT;			// Variable used to find position in string
+	rTemp		:LREAL;			// Temporary value
+	sTemp		:STRING;		// String version of rTemp
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[(* Set flag for negative number *)
+(* If negative then multiply with -1. Function will then make conversion and insert - sign at the end *)
+IF rValue < 0 THEN
+	bNegative := TRUE;
+	rValue := rValue * -1;
+ELSE
+	bNegative := FALSE;
+END_IF
+
+
+(* Multiply input value so that decimal part can be handleded without e- syntax *)
+rTemp:= rValue;
+FOR i:= 1 TO iNoOfDec DO
+	rTemp := rTemp * 10;
+END_FOR
+
+IF rValue >= 1.0 THEN
+	(* Input value does not contain the e- character. Normal conversion is possible *)
+	sTemp := LREAL_TO_STRING(rTemp);
+
+	(* Remove round off error *)
+	IF MID(sTemp, 1, FIND(sTemp, '.')+1) = '9' THEN
+		rTemp := rTemp + 0.1;
+		FOR i:= 1 TO iNoOfDec DO
+			rTemp := rTemp / 10;
+		END_FOR
+		sTemp := LREAL_TO_STRING(rTemp);
+	ELSE
+		sTemp := LREAL_TO_STRING(rValue);
+	END_IF
+
+	(* Examine length of decimal part of sTemp, and insert zeroes if needed. *)
+	iPos := FIND(sTemp, '.');
+	sTemp := LEFT(sTemp, iPos+iNoOfDec);
+	iPos2 := LEN(sTemp);
+	IF iPos2-iPos < iNoOfDec THEN
+		(* Value is e.g. 1.0. Insert extra zero to get 1.0000 if number of decimals is 4 *)
+		FOR i:= 1 TO (iNoOfDec- (iPos2-iPos)) DO
+			sTemp := CONCAT(sTemp, '0');
+		END_FOR
+	END_IF
+ELSE
+	(* Input value does contain the e- character. Normal conversion is not possible *)
+	sTemp := LREAL_TO_STRING(rTemp);
+
+	(* Remove round off error *)
+	IF MID(sTemp, 1, FIND(sTemp, '.')+1) = '9' THEN
+		rTemp := rTemp + 0.1;
+		sTemp := LREAL_TO_STRING(rTemp);
+	END_IF
+
+	IF rTemp > 1.0 THEN
+		(* Value is greater than least significant decimal *)
+		iPos := FIND(sTemp, '.');
+		sTemp := DELETE(sTemp,1,iPos);
+		FOR i:= 1 TO (iNoOfDec+2-iPos) DO
+			sTemp := INSERT(sTemp, '0', 0);
+		END_FOR
+		sTemp := INSERT(sTemp, '.', 1);
+		sTemp := LEFT(sTemp, iNoOfDec+2);
+
+	ELSE
+		(* Value is less than least significat decimal. Return all zero value *)
+		sTemp := '0.0';
+		FOR i :=1 TO iNoOfDec-1 DO
+			sTemp := CONCAT(sTemp, '0');
+		END_FOR
+	END_IF
+END_IF
+
+(* Insert minus sign if input value was negative *)
+IF bNegative THEN
+	FUN_RealToString := CONCAT('-', sTemp);
+ELSE
+	FUN_RealToString := sTemp;
+END_IF]]></ST>
+    </Implementation>
+    <LineIds Name="FUN_RealToString">
+      <LineId Id="20" Count="74" />
+      <LineId Id="7" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

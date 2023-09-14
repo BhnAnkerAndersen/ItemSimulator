@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FB_SignalDead" Id="{d5e4edbf-007f-4b74-b176-82abd2c966e8}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_SignalDead
+VAR_INPUT
+	fSignal		:REAL;			// Input signal			
+	tDelay		:TIME;			// Time from no change in signal to set of output freeze signal
+END_VAR
+VAR_OUTPUT
+	bFreeze		:BOOL;			// Signal is set true if input signal has not changed value within specified time 
+END_VAR
+VAR
+	fSignalOld	:REAL;			// Signal value from previous scan
+	tonDelay	:TON;			// Delay from no change in signal to set of output freeze signal
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+// Check if signal has changed since last scan
+//--------------------------------------------------
+IF fSignal <> fSignalOld THEN
+	// Signal has changed => signal is NOT frozen
+	tonDelay(IN:= FALSE);
+	bFreeze := FALSE;
+ELSE
+	// Signal has NOT change => Update timer and evaluate if freeze signal must be set
+	tonDelay(IN:= TRUE, PT:=tDelay, Q=> , ET=> );
+	IF tonDelay.Q THEN
+		bFreeze := TRUE;
+	END_IF
+END_IF
+
+// Update "old" value
+fSignalOld := fSignal;]]></ST>
+    </Implementation>
+    <Method Name="M_ResetTime" Id="{cf2c50ab-3fbf-439c-9d3b-b64da43e71fb}">
+      <Declaration><![CDATA[METHOD M_ResetTime : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[tonDelay(IN:= FALSE);]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="FB_SignalDead">
+      <LineId Id="46" Count="0" />
+      <LineId Id="15" Count="0" />
+      <LineId Id="48" Count="0" />
+      <LineId Id="9" Count="0" />
+      <LineId Id="38" Count="0" />
+      <LineId Id="21" Count="0" />
+      <LineId Id="68" Count="0" />
+      <LineId Id="19" Count="0" />
+      <LineId Id="39" Count="0" />
+      <LineId Id="22" Count="3" />
+      <LineId Id="18" Count="0" />
+      <LineId Id="42" Count="0" />
+      <LineId Id="40" Count="0" />
+      <LineId Id="44" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_SignalDead.M_ResetTime">
+      <LineId Id="5" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

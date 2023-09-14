@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FUN_AngleChange" Id="{28cd0f83-2812-48e4-8c0a-a36627bc5fa3}" SpecialFunc="None">
+    <Declaration><![CDATA[//********************************************************************************
+// FUN_AngleChange.
+// -------------------------------------------------------------------------------
+// This function calculates the difference between to angles in degrees. Input and
+// output values are all defined as plus/minus 180 degrees. 
+//	
+// Version:
+//			- V1.00.00	HHL, 26/11-2019
+//********************************************************************************
+FUNCTION FUN_AngleChange : LREAL
+VAR_INPUT
+	rTheta1			:LREAL;			// [pm 180 deg] Theta angle from coordinate set 1
+	rTheta2			:LREAL;			// [pm 180 deg] Theta angle from coordinate set 2
+END_VAR
+VAR
+	rThetaChange	:LREAL;			// Change in angle between two points	
+END_VAR
+
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// Calculate change in theta angle
+IF rTheta1 >= 0 AND rTheta2 >= 0 THEN
+	// Both coordinates have a positive theta angle
+	rThetaChange := rTheta2 - rTheta1;
+ELSIF rTheta1 <= 0 AND rTheta2 <= 0 THEN
+	// Both coordinates have a negative thata angle
+	rThetaChange := rTheta2 - rTheta1;
+ELSE
+	// One coordinate set has a positive theta angle and the other has a negative
+	IF rTheta1 >= 0 THEN
+		// Coordinate set one has a positive coordinate set and coordinate 2 has a negative
+		// First find angle when passing through 0 deg.
+		rThetaChange := rTheta2 - rTheta1;
+		IF ABS(rThetaChange) > 180 THEN
+			// Angle is greather than 180 deg. Do not use angle that passes through 0 deg. 
+			// Calculate the angle when passing through p/m 180 deg
+			rThetaChange := 360 - ABS(rThetaChange);
+		END_IF
+	ELSE
+		// Coordinate set one has a negative coordinate set and coordinate 2 has a positive
+		// First find angle when passing through 0 deg.
+		rThetaChange := rTheta2 - rTheta1;
+		IF ABS(rThetaChange) > 180 THEN
+			// Angle is greather than 180 deg. Do not use angle that passes through 0 deg. 
+			// Calculate the angle when passing through p/m 180 deg
+			rThetaChange := -1 * (360 - ABS(rThetaChange));
+		END_IF
+	END_IF
+END_IF 
+
+// Return result
+FUN_AngleChange := rThetaChange;
+]]></ST>
+    </Implementation>
+    <LineIds Name="FUN_AngleChange">
+      <LineId Id="19" Count="32" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <DUT Name="U_Convert_REAL32" Id="{51dd0ca3-2382-418c-bce4-cb3cddcb5eae}">
+    <Declaration><![CDATA[TYPE U_Convert_REAL32 :
+UNION
+	fValue		:REAL;
+	arrByte		:ARRAY[1..4] OF BYTE;
+END_UNION
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

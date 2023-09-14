@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FUN_GetDateWithUnderscore" Id="{30a5affc-4f26-4895-955f-022c90f93fe7}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION FUN_GetDateWithUnderscore : STRING
+VAR_INPUT
+	stNtTime		:TIMESTRUCT;
+END_VAR
+VAR
+	sDate			:STRING;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// Initialize string
+sDate := '';
+
+// Add year to string
+sDate := UINT_TO_STRING(stNtTime.wYear);
+sDate := CONCAT(sDate,'_');
+
+// Add month to string
+IF stNtTime.wMonth < 10 THEN
+	sDate := CONCAT(sDate,'0');
+END_IF
+sDate := CONCAT(sDate,UINT_TO_STRING(stNtTime.wMonth));
+sDate := CONCAT(sDate,'_');
+
+// Add day to string
+IF stNtTime.wDay < 10 THEN
+	sDate := CONCAT(sDate, '0');
+END_IF
+sDate := CONCAT(sDate,UINT_TO_STRING(stNtTime.wDay));
+
+// Return result
+FUN_GetDateWithUnderscore := sDate;]]></ST>
+    </Implementation>
+    <LineIds Name="FUN_GetDateWithUnderscore">
+      <LineId Id="16" Count="1" />
+      <LineId Id="32" Count="0" />
+      <LineId Id="31" Count="0" />
+      <LineId Id="18" Count="0" />
+      <LineId Id="47" Count="0" />
+      <LineId Id="34" Count="0" />
+      <LineId Id="33" Count="0" />
+      <LineId Id="19" Count="3" />
+      <LineId Id="46" Count="0" />
+      <LineId Id="36" Count="0" />
+      <LineId Id="35" Count="0" />
+      <LineId Id="23" Count="3" />
+      <LineId Id="37" Count="0" />
+      <LineId Id="7" Count="0" />
+      <LineId Id="38" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

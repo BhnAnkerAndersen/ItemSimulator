@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <DUT Name="ST_PlcAdsReadHmi" Id="{e4448936-3824-4173-93a8-377416dbe88c}">
+    <Declaration><![CDATA[//********************************************************************************
+// ST_PlcAdsReadHmi
+// ------------------------------------------------------------------------------- 
+//
+//	V2.00.00, HHL
+// Baseline HST V1.01 10/4-16 (Valla V2.36)
+//********************************************************************************
+TYPE ST_PlcAdsReadHmi :
+STRUCT
+	sRemoteId 				:STRING; 			// Remote NetId
+	sRemoteSymbol 			:STRING;			// Remote variable
+	bC_Init 				:BOOL; 				// Init request
+	bS_Enable 				:BOOL; 				// Enable
+	bS_LinkOk 				:BOOL; 				// Link to remote plc is ok
+	bS_Error 				:BOOL; 				// Error
+	eS_Step 				:E_PlcAdsReadStep;	// Step
+	eS_ErrorStep		 	:E_PlcAdsReadStep;	// Error step
+	udiS_ErrorId 			:UDINT; 			// Error id (ads)
+	udiS_ReadCount 			:UDINT;  			// No of reads
+	udiS_ReadErrors 		:UDINT; 			// No of read errors
+	udiS_ReadIntervalErrors :UDINT;				// Read interval error
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

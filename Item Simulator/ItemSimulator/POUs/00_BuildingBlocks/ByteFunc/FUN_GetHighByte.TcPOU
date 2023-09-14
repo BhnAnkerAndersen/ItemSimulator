@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FUN_GetHighByte" Id="{67e627d9-9694-492f-8813-a4d6fd056bfe}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION FUN_GetHighByte : BYTE
+VAR_INPUT
+	wIn			:WORD;			
+END_VAR
+VAR
+	byHigh		:BYTE;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+// Get the high byte value from the word
+byHigh.0 := wIn.8;
+byHigh.1 := wIn.9;
+byHigh.2 := wIn.10;
+byHigh.3 := wIn.11;
+byHigh.4 := wIn.12;
+byHigh.5 := wIn.13;
+byHigh.6 := wIn.14;
+byHigh.7 := wIn.15;
+
+// Return value
+FUN_GetHighByte := byHigh;
+]]></ST>
+    </Implementation>
+    <LineIds Name="FUN_GetHighByte">
+      <LineId Id="21" Count="0" />
+      <LineId Id="11" Count="0" />
+      <LineId Id="7" Count="0" />
+      <LineId Id="12" Count="0" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="13" Count="0" />
+      <LineId Id="16" Count="0" />
+      <LineId Id="15" Count="0" />
+      <LineId Id="18" Count="0" />
+      <LineId Id="17" Count="0" />
+      <LineId Id="22" Count="0" />
+      <LineId Id="20" Count="0" />
+      <LineId Id="19" Count="0" />
+      <LineId Id="23" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

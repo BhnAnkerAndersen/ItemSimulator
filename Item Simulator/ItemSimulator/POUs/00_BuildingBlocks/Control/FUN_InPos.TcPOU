@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FUN_InPos" Id="{80d503b6-7171-4420-997b-2c3a1d36f194}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION FUN_InPos : BOOL
+VAR_INPUT
+	rAct_X		:LREAL;			// Actual X-axis position		
+	rAct_Y		:LREAL;			// Actual Y-axis position
+	rAct_Z		:LREAL;			// Actual Z-axis position
+	rSP_X		:LREAL;			// Setpoint X-axis position		
+	rSP_Y		:LREAL;			// Setpoint Y-axis position
+	rSP_Z		:LREAL;			// Setpoint Z-axis position
+	rHys_Mm		:LREAL;			// Hystereis limit for position
+	rHys_Deg	:LREAL;			// Hysteresis limit for angle
+END_VAR
+VAR
+	bInPosX		:BOOL;			// True if x-axis position is at setpoint
+	bInPosY		:BOOL;			// True if y-axis position is at setpoint
+	bInPosZ		:BOOL;			// True if z-axis angle is at setpoint
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+
+// Check x-axis position
+bInPosX := FUN_InsideHysteresis(rAct:= rAct_X, rSp:= rSP_X, rHys:= rHys_Mm);
+
+// Check y-axis position
+bInPosY := FUN_InsideHysteresis(rAct:= rAct_Y, rSp:= rSP_Y, rHys:= rHys_Mm);
+
+// Check z-axis angle
+bInPosZ := FALSE;
+// Find out if angle is close to switch between 180 and -179.9999 deg.
+IF (rSP_Z+rHys_Deg) > 180.0000 OR (rSP_Z-rHys_Deg) < -179.9999 THEN
+	// SP is close to switch
+	IF rSP_Z > 0 AND rAct_Z >= (rSP_Z-rHys_Deg) AND rAct_Z <= 180.0000 THEN
+		// Positive setpoint and actual position inside positve hysteresis area
+		bInPosZ := TRUE;
+	ELSIF rSP_Z > 0 AND rAct_Z <= (-179.9999 + rHys_Deg -(180-rSP_Z)) AND rAct_Z >= -179.9999 THEN
+		// Positive setpoint and actual position inside negative hysteresis area
+		bInPosZ := TRUE;
+	ELSIF  rSP_Z < 0 AND (rAct_Z <= (rSP_Z+rHys_Deg)) AND rAct_Z >= -179.9999 THEN
+		// Negative setpoint and actual position inside negative hysteresis area
+		bInPosZ := TRUE;
+	ELSIF rSP_Z < 0 AND rAct_Z >= (180- rHys_Deg + (179.9999+rSP_Z)) AND rAct_Z <= 180.0000 THEN
+		// Negative setpoint and actual position inside positive hysteresis area
+		bInPosZ := TRUE;
+	END_IF 
+ELSE
+	// SP is not close to switch angle
+	bInPosZ := FUN_InsideHysteresis(rAct:= rAct_Z, rSp:= rSP_Z, rHys:= rHys_Deg);
+END_IF
+
+// Set return value
+IF bInPosX AND bInPosY AND bInPosZ THEN
+	FUN_InPos := TRUE;
+ELSE
+	FUN_InPos := FALSE;
+END_IF
+]]></ST>
+    </Implementation>
+    <LineIds Name="FUN_InPos">
+      <LineId Id="17" Count="0" />
+      <LineId Id="22" Count="0" />
+      <LineId Id="18" Count="0" />
+      <LineId Id="23" Count="5" />
+      <LineId Id="53" Count="0" />
+      <LineId Id="7" Count="0" />
+      <LineId Id="31" Count="0" />
+      <LineId Id="34" Count="0" />
+      <LineId Id="37" Count="0" />
+      <LineId Id="39" Count="1" />
+      <LineId Id="50" Count="1" />
+      <LineId Id="48" Count="0" />
+      <LineId Id="41" Count="5" />
+      <LineId Id="38" Count="0" />
+      <LineId Id="32" Count="0" />
+      <LineId Id="35" Count="1" />
+      <LineId Id="33" Count="0" />
+      <LineId Id="54" Count="3" />
+      <LineId Id="59" Count="1" />
+      <LineId Id="58" Count="0" />
+      <LineId Id="29" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

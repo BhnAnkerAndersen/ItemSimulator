@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FUN_GetTimestamp" Id="{c06274ce-7779-4e68-93a2-10c83eefe47d}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION FUN_GetTimestamp : STRING
+VAR_INPUT
+	stNtTime		:TIMESTRUCT;
+END_VAR
+VAR
+	sTimestamp		:STRING;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// Add data
+sTimeStamp := FUN_GetDate(stNtTime);
+
+// Add time
+sTimestamp := CONCAT(sTimeStamp, ' ');
+sTimestamp := CONCAT(sTimeStamp, FUN_GetTime(stNtTime));
+
+// Return time stamp
+FUN_GetTimestamp := sTimestamp;
+]]></ST>
+    </Implementation>
+    <LineIds Name="FUN_GetTimestamp">
+      <LineId Id="80" Count="8" />
+      <LineId Id="7" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

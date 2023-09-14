@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FUN_InsideHysteresis" Id="{c727d9bd-dc87-4201-b9c4-45d398efdf9d}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION FUN_InsideHysteresis : BOOL
+VAR_INPUT
+	rAct		:LREAL;			// Actual value
+	rSp			:LREAL;			// Setpoint value
+	rHys		:LREAL;			// Hysteresis	
+END_VAR
+VAR
+	bInside		:BOOL;			// True if actual value is within setpoint plus minus hysteresis value
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+// Compare actual value with setpoint and hysteresis limit
+IF rAct >= (rSP-rHys) AND rACT <= (rSP+rHys) THEN
+	// Inside hysteresis limit
+	bInside := TRUE;
+ELSE
+	// Outside hysteresis limit
+	bInside := FALSE;
+END_IF
+
+// Set return value
+FUN_InsideHysteresis := bInside;]]></ST>
+    </Implementation>
+    <LineIds Name="FUN_InsideHysteresis">
+      <LineId Id="18" Count="0" />
+      <LineId Id="12" Count="0" />
+      <LineId Id="7" Count="0" />
+      <LineId Id="19" Count="0" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="16" Count="0" />
+      <LineId Id="20" Count="0" />
+      <LineId Id="17" Count="0" />
+      <LineId Id="15" Count="0" />
+      <LineId Id="22" Count="0" />
+      <LineId Id="21" Count="0" />
+      <LineId Id="23" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

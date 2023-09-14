@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <DUT Name="E_FileHandler_State" Id="{8ae01d9f-5e9d-4bbf-b8c6-545dbb63df57}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE E_FileHandler_State :
+(
+	eReset				:= 0,
+	eIdle				:= 10,
+	
+	eOpenFilePre		:= 20,
+	eOpenFilePeri		:= 30,
+	
+	eReadFilePre		:= 40,
+	eReadFilePeri		:= 50,
+
+	eWriteFilePre		:= 60,
+	eWriteFileSetLine	:= 65,
+	eWriteFilePeri		:= 70,
+	
+	eCloseFilePre		:= 80,
+	eCloseFilePeri		:= 90,
+
+	eProcessFile		:= 100,
+	
+	eCopyFilePre		:= 200,
+	eCopyFilePeri		:= 210,
+	
+	eDelFilePre			:= 220,
+	eDelFilePeri		:= 230,
+	
+	eErrEntry			:= 900,
+	eErrOpen			:= 910,
+	eErrRead			:= 920,
+	eErrWrite			:= 930,
+	eErrClose			:= 940,
+	eErrCopy			:= 950,
+	eErrDel				:= 960
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

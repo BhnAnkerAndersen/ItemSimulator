@@ -187,10 +187,16 @@
     <Compile Include="POUs\00_BuildingBlocks\Convert\FUN_ConvTwoByteToInt16.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\00_BuildingBlocks\Convert\FUN_ConvOneByteToInt8.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\00_BuildingBlocks\Convert\FUN_ConvTwoByteToUInt16.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\00_BuildingBlocks\Convert\U_Convert_INT16.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\00_BuildingBlocks\Convert\U_Convert_INT8.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\00_BuildingBlocks\Convert\U_Convert_INT32.TcDUT">

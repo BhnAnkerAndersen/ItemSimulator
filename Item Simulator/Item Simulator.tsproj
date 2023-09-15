@@ -20,42 +20,19 @@
 			</ArrayInfo>
 		</DataType>
 		<DataType>
-			<Name GUID="{18071995-0000-0000-0000-002000000004}" IecBaseType="true" BitType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..3] OF BIT</Name>
-			<BitSize>4</BitSize>
-			<BaseType GUID="{18071995-0000-0000-0000-000000000010}">BIT</BaseType>
-			<ArrayInfo>
-				<LBound>0</LBound>
-				<Elements>4</Elements>
-			</ArrayInfo>
-		</DataType>
-		<DataType>
-			<Name GUID="{18071995-0000-0000-0000-002000000001}" IecBaseType="true" BitType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..0] OF BIT</Name>
-			<BitSize>1</BitSize>
-			<BaseType GUID="{18071995-0000-0000-0000-000000000010}">BIT</BaseType>
-			<ArrayInfo>
-				<LBound>0</LBound>
-				<Elements>1</Elements>
-			</ArrayInfo>
-		</DataType>
-		<DataType>
-			<Name GUID="{18071995-0000-0000-0000-002000000008}" IecBaseType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..0] OF BYTE</Name>
-			<BitSize>8</BitSize>
+			<Name GUID="{AE579C3A-A9B9-0D41-C0A1-DC535F479232}" IecBaseType="true" AutoDeleteType="true">ARRAY [12..31] OF BYTE</Name>
+			<BitSize>160</BitSize>
 			<BaseType GUID="{18071995-0000-0000-0000-000000000001}">BYTE</BaseType>
 			<ArrayInfo>
-				<LBound>0</LBound>
-				<Elements>1</Elements>
+				<LBound>12</LBound>
+				<Elements>20</Elements>
 			</ArrayInfo>
 		</DataType>
 	</DataTypes>
 	<ImageDatas>
-		<ImageData Id="1000">424dd6020000000000003600000028000000100000000e0000000100180000000000a0020000c40e0000c40e00000000000000000000ff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080808080808080808080808080808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080c0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c000bfff00bfffc0c0c0808080c0c0c000ffffc0c0c000ffff808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c000bfff00bfffc0c0c0808080c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c000bfff00bfffc0c0c0808080c0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080c0c0c0ff0000c0c0c0ff0000808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c000bfff00bfffc0c0c0808080c0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c000bfff00bfffc0c0c0808080c0c0c00000ffc0c0c00000ff808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c000bfff00bfffc0c0c0808080c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0000000000000c0c0c0808080c0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ff000000c0c0c0c0c0c0000000808080c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0000000000000c0c0c0808080c0c0c0008000c0c0c0008000808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff</ImageData>
-		<ImageData Id="1001">424dd6020000000000003600000028000000100000000e0000000100180000000000a0020000120b0000120b00000000000000000000ff00ffff00ffff00ffff00ffff00ffff00ff808080808080808080808080808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c000ffffc0c0c000ffff808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0ff0000c0c0c0ff0000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff0000ff0000ff0000ff0000ff0000ff0000ffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ff0000ff0000ff0000ff0000ff0000ff0000ffc0c0c00000ffc0c0c00000ff808080ff00ffff00ffff00ffff00ffff00ff0000ff0000ff0000ff0000ff0000ff0000ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff0000ff0000ff0000ff0000ff0000ff0000ffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ff0000ff0000ff0000ff0000ff0000ff0000ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff0000ff0000ff0000ff0000ff0000ff0000ffc0c0c0008000c0c0c0008000808080ff00ffff00ffff00ffff00ffff00ff0000ff0000ff0000ff0000ff0000ff0000ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff</ImageData>
-		<ImageData Id="1002">424dd6020000000000003600000028000000100000000e0000000100180000000000a0020000c40e0000c40e00000000000000000000000000ff00ffff00ffff00ff000000ff00ff808080808080808080808080808080ff00ffff00ffff00ffff00ffff00ff000000ff00ffff00ffff00ff000000ff00ffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ff000000ff00ffff00ffff00ff000000ff00ffc0c0c000ffffc0c0c000ffff808080ff00ffff00ffff00ffff00ffff00ff000000ff00ff000000ff00ff000000ff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff000000000000ff00ff000000000000ff00ffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ff000000ff00ffff00ffff00ff000000ff00ffc0c0c0ff0000c0c0c0ff0000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c00000ffc0c0c00000ff808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0008000c0c0c0008000808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff</ImageData>
-		<ImageData Id="1003">424dd6020000000000003600000028000000100000000e0000000100180000000000a0020000c40e0000c40e00000000000000000000ff00ff000000000000ff00ffff00ffff00ff808080808080808080808080808080ff00ffff00ffff00ffff00ffff00ff000000ff00ffff00ff000000ff00ffff00ffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ff000000ff00ffff00ffff00ffff00ffff00ffc0c0c000ffffc0c0c000ffff808080ff00ffff00ffff00ffff00ffff00ff000000ff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff000000ff00ffff00ff000000ff00ffff00ffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ff000000000000ff00ffff00ffff00ffc0c0c0ff0000c0c0c0ff0000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c00000ffc0c0c00000ff808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0008000c0c0c0008000808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff</ImageData>
-		<ImageData Id="1004">424dd6020000000000003600000028000000100000000e0000000100180000000000a0020000c40e0000c40e00000000000000000000ff00ffff00ffff00ffff00ffff00ffff00ff808080808080808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ff</ImageData>
-		<ImageData Id="1005">424dd6020000000000003600000028000000100000000e000000010018000000000000000000c40e0000c40e0000000000000000000087a5008aa708a6bc45d6e0a8b9ca6a93ad1a87a50087a50087a50087a50087a50087a50087a5008aa70887a5008aa70887a5008aa708b1c459eef2dcc8d58b97b02287a50087a50087a50087a50087a50087a50087a5008aa70887a5008aa70887a5008aa708b2c55cf1f4e1cad68ec1d07cd9e2afe6eccbe6eccbe1e8c0c9d78e9fb73387a5008aa70887a5008aa70887a5008aa708b2c55cf1f4e1cad68ecbd892ebf0d5f3f6e7e9efd2e9efd2ebf0d6d2dea29bb42c8aa70887a5008aa70887a5008aa708b2c55cf1f4e1cad68ec0cf7ad3dea2cad790b1c45ab6c865dbe3b3ecf0d8aec1538ba70987a5008aa70887a5008aa708b2c55cf1f4e1dfe7bccfda9ad1db9dcbd791bfce78c7d58be7eccdecf0d7acc1508ba70887a5008aa70887a5008aa708aec252e6eccaeaefd3e2e9c3e0e7bde0e7bde0e7bee3eac5e4ebc7cad78f99b2278aa70887a5008aa70887a5008aa7089bb42ab8c969bece76cad790d4dea5ceda98c2d17fbccd73b3c65e9db53089a7068aa70887a5008aa70887a5008aa7088faa129bb42d9eb632bacb6fd1dd9fc3d281a8be479eb6329cb52d95af1f8aa7088aa70887a5008aa70887a5008aa708a0b837c6d486ceda98e3eac5f4f7e9eaefd3d5dfa7ceda98cbd892bccc7195af1f8aa70887a5008aa70887a5008aa708a7bd46d7e1ace2e9c2eef3dcf9faf2f3f6e5e7edcce3eac3dfe7bccbd7909ab3288aa70887a5008aa70887a5008aa70888a6048ba80a8ca90cbacc6ee5eccbd5dfa7abc04d9bb42b9bb32a96b0208ba7088aa70887a5008aa70887a5008aa70887a50087a50087a500a5bb40d9e2b0ecf1d8dee6bad6e0a9d2dda2c1d07c97b1238aa70887a5008aa70887a5008aa70887a50087a50087a5008ba809aabf4bd2dda2e9eed1edf1d8e9eed0d1dca09cb52d8aa70887a5008aa708</ImageData>
+		<ImageData Id="1000">424dd6020000000000003600000028000000100000000e000000010018000000000000000000c40e0000c40e0000000000000000000087a5008aa708a6bc45d6e0a8b9ca6a93ad1a87a50087a50087a50087a50087a50087a50087a5008aa70887a5008aa70887a5008aa708b1c459eef2dcc8d58b97b02287a50087a50087a50087a50087a50087a50087a5008aa70887a5008aa70887a5008aa708b2c55cf1f4e1cad68ec1d07cd9e2afe6eccbe6eccbe1e8c0c9d78e9fb73387a5008aa70887a5008aa70887a5008aa708b2c55cf1f4e1cad68ecbd892ebf0d5f3f6e7e9efd2e9efd2ebf0d6d2dea29bb42c8aa70887a5008aa70887a5008aa708b2c55cf1f4e1cad68ec0cf7ad3dea2cad790b1c45ab6c865dbe3b3ecf0d8aec1538ba70987a5008aa70887a5008aa708b2c55cf1f4e1dfe7bccfda9ad1db9dcbd791bfce78c7d58be7eccdecf0d7acc1508ba70887a5008aa70887a5008aa708aec252e6eccaeaefd3e2e9c3e0e7bde0e7bde0e7bee3eac5e4ebc7cad78f99b2278aa70887a5008aa70887a5008aa7089bb42ab8c969bece76cad790d4dea5ceda98c2d17fbccd73b3c65e9db53089a7068aa70887a5008aa70887a5008aa7088faa129bb42d9eb632bacb6fd1dd9fc3d281a8be479eb6329cb52d95af1f8aa7088aa70887a5008aa70887a5008aa708a0b837c6d486ceda98e3eac5f4f7e9eaefd3d5dfa7ceda98cbd892bccc7195af1f8aa70887a5008aa70887a5008aa708a7bd46d7e1ace2e9c2eef3dcf9faf2f3f6e5e7edcce3eac3dfe7bccbd7909ab3288aa70887a5008aa70887a5008aa70888a6048ba80a8ca90cbacc6ee5eccbd5dfa7abc04d9bb42b9bb32a96b0208ba7088aa70887a5008aa70887a5008aa70887a50087a50087a500a5bb40d9e2b0ecf1d8dee6bad6e0a9d2dda2c1d07c97b1238aa70887a5008aa70887a5008aa70887a50087a50087a5008ba809aabf4bd2dda2e9eed1edf1d8e9eed0d1dca09cb52d8aa70887a5008aa708</ImageData>
 	</ImageDatas>
-	<Project ProjectGUID="{A079A86B-D316-4F8A-990D-429A84007430}" TargetNetId="169.254.58.74.1.1" Target64Bit="true" ShowHideConfigurations="#x106">
+	<Project ProjectGUID="{A079A86B-D316-4F8A-990D-429A84007430}" Target64Bit="true" ShowHideConfigurations="#x106">
 		<System>
 			<Licenses>
 				<Target>
@@ -73,7 +50,7 @@
 		</System>
 		<Plc>
 			<Project GUID="{921AB191-9460-4D4F-B79D-2E5B7263E7DB}" Name="ItemSimulator" PrjFilePath="ItemSimulator\ItemSimulator.plcproj" TmcFilePath="ItemSimulator\ItemSimulator.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="ItemSimulator\ItemSimulator.tmc" TmcHash="{115F1E49-9B2F-A0F2-56B6-340CDECBF195}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="ItemSimulator\ItemSimulator.tmc" TmcHash="{1E06C3B9-BA4D-297F-71C9-ED81EE09DA67}">
 					<Name>ItemSimulator Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="2" AreaNo="1">
@@ -96,6 +73,10 @@
 						<Var>
 							<Name>PRG_IO_Link_Master.fbColorSensor.arrColorSensorData</Name>
 							<Type GUID="{178E0FFB-DF97-60CE-F32D-AF3C26E3CB1A}">ARRAY [4..11] OF BYTE</Type>
+						</Var>
+						<Var>
+							<Name>PRG_IO_Link_Master.fbColorSensor.arrRest</Name>
+							<Type GUID="{AE579C3A-A9B9-0D41-C0A1-DC535F479232}">ARRAY [12..31] OF BYTE</Type>
 						</Var>
 						<Var>
 							<Name>PRG_IO_Link_Master.fbColorSensor.nChannelStatus</Name>
@@ -149,1310 +130,153 @@
 			</Project>
 		</Plc>
 		<Io>
-			<Device Id="5" DevType="111" DevFlags="#x0003" AmsPort="28677" AmsNetId="169.254.58.74.6.1" RemoteName="Device 5 (EtherCAT)" InfoImageId="5">
+			<Device Id="5" DevType="111" DevFlags="#x0003" AmsPort="28677" AmsNetId="192.68.134.160.6.1" RemoteName="Device 5 (EtherCAT)" InfoImageId="5">
 				<Name>Device 5 (EtherCAT)</Name>
 				<AddressInfo>
 					<Pnp>
-						<DeviceDesc>X105-Ethercat (TwinCAT-Intel PCI Ethernet Adapter (</DeviceDesc>
-						<DeviceName>\DEVICE\{099DFB14-3513-464A-A3F5-E715646AA9F0}</DeviceName>
-						<DeviceData>0001056b869f</DeviceData>
+						<DeviceDesc>X103-LocalNetwork (TwinCAT-Intel PCI Ethernet Adapt</DeviceDesc>
+						<DeviceName>\DEVICE\{C7BB862B-1C61-49FF-BF13-66CF7358192E}</DeviceName>
+						<DeviceData>0001056b869d</DeviceData>
 					</Pnp>
 				</AddressInfo>
 				<Image Id="4" AddrType="9" ImageType="3">
 					<Name>Image</Name>
 				</Image>
-				<Box Id="1" Disabled="true" BoxType="9099">
-					<Name>Term 1 (EK1101)</Name>
+				<Box Id="1" BoxType="9099" BoxFlags="#x00000020">
+					<Name>Box 1 (ICE11-8IOL-G60L-V1D)</Name>
 					<ImageId>1000</ImageId>
-					<EtherCAT SlaveType="1" PdiType="#x0d04" CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x044d2c52" RevisionNo="#x00120000" PortPhys="305" IdentificationAdo="4096" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EK1101 EtherCAT Coupler (2A E-Bus, ID switch)" Desc="EK1101" PortABoxInfo="#x00ffffff">
-						<SyncMan>001002000000010004000000000000000000001000000000</SyncMan>
-						<Fmmu>0000000000000000001000010100000002000000000000000000000000000000</Fmmu>
-						<Pdo Name="ID" Index="#x1a00" Flags="#x0010" SyncMan="0">
-							<Entry Name="ID" Index="#x6000" Sub="#x01">
-								<Type>UINT</Type>
-							</Entry>
-						</Pdo>
-					</EtherCAT>
-					<Box Id="2" BoxType="9099">
-						<Name>Term 2 (EL1018)</Name>
-						<ImageId>7</ImageId>
-						<EtherCAT SlaveType="1" PdiType="#x0104" CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x03fa3052" RevisionNo="#x00120000" RepeatSupport="true" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL1018 8Ch. Dig. Input 24V, 10µs" Desc="EL1018" PortABoxInfo="#x01000001">
-							<SyncMan>001001000000010004000000000000000100001000010000</SyncMan>
-							<Fmmu>0000000000000000001000010100000002000000000000000000000000000000</Fmmu>
-							<Pdo Name="Channel 1" Index="#x1a00" Flags="#x0011" SyncMan="0">
-								<Entry Name="Input" Index="#x6000" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="Channel 2" Index="#x1a01" Flags="#x0011" SyncMan="0">
-								<Entry Name="Input" Index="#x6010" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="Channel 3" Index="#x1a02" Flags="#x0011" SyncMan="0">
-								<Entry Name="Input" Index="#x6020" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="Channel 4" Index="#x1a03" Flags="#x0011" SyncMan="0">
-								<Entry Name="Input" Index="#x6030" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="Channel 5" Index="#x1a04" Flags="#x0011" SyncMan="0">
-								<Entry Name="Input" Index="#x6040" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="Channel 6" Index="#x1a05" Flags="#x0011" SyncMan="0">
-								<Entry Name="Input" Index="#x6050" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="Channel 7" Index="#x1a06" Flags="#x0011" SyncMan="0">
-								<Entry Name="Input" Index="#x6060" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="Channel 8" Index="#x1a07" Flags="#x0011" SyncMan="0">
-								<Entry Name="Input" Index="#x6070" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-							</Pdo>
-						</EtherCAT>
-					</Box>
-					<Box Id="3" BoxType="9099">
-						<Name>Term 3 (EL2008)</Name>
-						<ImageId>1001</ImageId>
-						<EtherCAT SlaveType="1" PdiType="#x0104" CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x07d83052" RevisionNo="#x00120000" RepeatSupport="true" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL2008 8Ch. Dig. Output 24V, 0.5A" Desc="EL2008" PortABoxInfo="#x01000002">
-							<SyncMan>000f01004400010003000000000000000000000f44090000</SyncMan>
-							<Fmmu>0000000000000000000f00020100000001000000000000000000000000000000</Fmmu>
-							<Pdo Name="Channel 1" Index="#x1600" InOut="1" Flags="#x0011" SyncMan="0">
-								<Entry Name="Output" Index="#x7000" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="Channel 2" Index="#x1601" InOut="1" Flags="#x0011" SyncMan="0">
-								<Entry Name="Output" Index="#x7010" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="Channel 3" Index="#x1602" InOut="1" Flags="#x0011" SyncMan="0">
-								<Entry Name="Output" Index="#x7020" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="Channel 4" Index="#x1603" InOut="1" Flags="#x0011" SyncMan="0">
-								<Entry Name="Output" Index="#x7030" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="Channel 5" Index="#x1604" InOut="1" Flags="#x0011" SyncMan="0">
-								<Entry Name="Output" Index="#x7040" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="Channel 6" Index="#x1605" InOut="1" Flags="#x0011" SyncMan="0">
-								<Entry Name="Output" Index="#x7050" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="Channel 7" Index="#x1606" InOut="1" Flags="#x0011" SyncMan="0">
-								<Entry Name="Output" Index="#x7060" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="Channel 8" Index="#x1607" InOut="1" Flags="#x0011" SyncMan="0">
-								<Entry Name="Output" Index="#x7070" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-							</Pdo>
-						</EtherCAT>
-					</Box>
-					<Box Id="4" BoxType="9099">
-						<Name>Term 4 (EL1809)</Name>
-						<ImageId>7</ImageId>
-						<EtherCAT SlaveType="1" PdiType="#x0104" CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x07113052" RevisionNo="#x00120000" RepeatSupport="true" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL1809 16Ch. Dig. Input 24V, 3ms" Desc="EL1809" PortABoxInfo="#x01000003">
-							<SyncMan>001002000000010004000000000000000200001000010000</SyncMan>
-							<Fmmu>0000000000000000001000010100000002000000000000000000000000000000</Fmmu>
-							<Pdo Name="Channel 1" Index="#x1a00" Flags="#x0011" SyncMan="0">
-								<Entry Name="Input" Index="#x6000" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="Channel 2" Index="#x1a01" Flags="#x0011" SyncMan="0">
-								<Entry Name="Input" Index="#x6010" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="Channel 3" Index="#x1a02" Flags="#x0011" SyncMan="0">
-								<Entry Name="Input" Index="#x6020" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="Channel 4" Index="#x1a03" Flags="#x0011" SyncMan="0">
-								<Entry Name="Input" Index="#x6030" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="Channel 5" Index="#x1a04" Flags="#x0011" SyncMan="0">
-								<Entry Name="Input" Index="#x6040" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="Channel 6" Index="#x1a05" Flags="#x0011" SyncMan="0">
-								<Entry Name="Input" Index="#x6050" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="Channel 7" Index="#x1a06" Flags="#x0011" SyncMan="0">
-								<Entry Name="Input" Index="#x6060" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="Channel 8" Index="#x1a07" Flags="#x0011" SyncMan="0">
-								<Entry Name="Input" Index="#x6070" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="Channel 9" Index="#x1a08" Flags="#x0011" SyncMan="0">
-								<Entry Name="Input" Index="#x6080" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="Channel 10" Index="#x1a09" Flags="#x0011" SyncMan="0">
-								<Entry Name="Input" Index="#x6090" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="Channel 11" Index="#x1a0a" Flags="#x0011" SyncMan="0">
-								<Entry Name="Input" Index="#x60a0" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="Channel 12" Index="#x1a0b" Flags="#x0011" SyncMan="0">
-								<Entry Name="Input" Index="#x60b0" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="Channel 13" Index="#x1a0c" Flags="#x0011" SyncMan="0">
-								<Entry Name="Input" Index="#x60c0" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="Channel 14" Index="#x1a0d" Flags="#x0011" SyncMan="0">
-								<Entry Name="Input" Index="#x60d0" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="Channel 15" Index="#x1a0e" Flags="#x0011" SyncMan="0">
-								<Entry Name="Input" Index="#x60e0" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="Channel 16" Index="#x1a0f" Flags="#x0011" SyncMan="0">
-								<Entry Name="Input" Index="#x60f0" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-							</Pdo>
-						</EtherCAT>
-					</Box>
-					<Box Id="5" BoxType="9099" BoxFlags="#x00000020">
-						<Name>Term 5 (EL5151)</Name>
-						<ImageId>1002</ImageId>
-						<EtherCAT SlaveType="2" PdiType="#x0c05" MboxDataLinkLayer="true" StateMBoxPolling="true" CycleMBoxPollingTime="0" CoeType="7" FoeType="1" VendorId="#x00000002" ProductCode="#x141f3052" RevisionNo="#x001a0000" InfoDataAddr="true" TimeoutMailbox2="2000" CheckRevisionNoType="3" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL5151 1Ch. Inc. Encoder" Desc="EL5151" PortABoxInfo="#x01000004">
-							<SyncMan>001080002600010001000000800080008000001026010000</SyncMan>
-							<SyncMan>801080002200010002000000800080008000801022010000</SyncMan>
-							<SyncMan>001104002400010003000000000000000600001124010000</SyncMan>
-							<SyncMan>80110a002000010004000000000000000e00801120010000</SyncMan>
-							<Fmmu>0000000000000000001100020100000001000000000000000000000000000000</Fmmu>
-							<Fmmu>0000000000000000801100010100000002000000000000000000000000000000</Fmmu>
-							<Fmmu>00000000000000000d0800010100000003000000000000000000000000000000</Fmmu>
-							<BootStrapData>0010f400f410f400</BootStrapData>
-							<DcMode>53796e6368726f6e00000000000000004672656552756e2f534d2d53796e6368726f6e00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</DcMode>
-							<DcMode>4443000000000000000000000000000044432d53796e6368726f6e000000000000000000000000000000000000000000000000000000000000000000000020030100000000000000000000000000000000000000000000000000000000000000</DcMode>
-							<DcMode>4443494e00000000000000000000000044432d53796e6368726f6e2028696e7075742062617365642900000000000000000000000000000000000000000020030100000000000000000001000000000000000000000000000000000000000000</DcMode>
-							<Pdo Name="ENC Inputs" Index="#x1a00" Flags="#x0010">
-								<ExcludePdo>#x1a01</ExcludePdo>
-								<Entry Name="Status__Latch C valid" Index="#x6000" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__Latch extern valid" Index="#x6000" Sub="#x02">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__Set counter done" Index="#x6000" Sub="#x03">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__">
-									<Type GUID="{18071995-0000-0000-0000-002000000004}">ARRAY [0..3] OF BIT</Type>
-								</Entry>
-								<Entry Name="Status__Extrapolation stall" Index="#x6000" Sub="#x08">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__Status of input A" Index="#x6000" Sub="#x09">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__Status of input B" Index="#x6000" Sub="#x0a">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__Status of input C" Index="#x6000" Sub="#x0b">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__">
-									<Type GUID="{18071995-0000-0000-0000-002000000001}">ARRAY [0..0] OF BIT</Type>
-								</Entry>
-								<Entry Name="Status__Status of extern latch" Index="#x6000" Sub="#x0d">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__Sync error" Index="#x6000" Sub="#x0e">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__">
-									<Type GUID="{18071995-0000-0000-0000-002000000001}">ARRAY [0..0] OF BIT</Type>
-								</Entry>
-								<Entry Name="Status__TxPDO Toggle" Index="#x6000" Sub="#x10">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Counter value" Index="#x6000" Sub="#x11">
-									<Type>UDINT</Type>
-								</Entry>
-								<Entry Name="Latch value" Index="#x6000" Sub="#x12">
-									<Type>UDINT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="ENC Inputs" Index="#x1a01" Flags="#x0010" SyncMan="3">
-								<ExcludePdo>#x1a00</ExcludePdo>
-								<Entry Name="Status__Latch C valid" Index="#x6000" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__Latch extern valid" Index="#x6000" Sub="#x02">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__Set counter done" Index="#x6000" Sub="#x03">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__">
-									<Type GUID="{18071995-0000-0000-0000-002000000004}">ARRAY [0..3] OF BIT</Type>
-								</Entry>
-								<Entry Name="Status__Extrapolation stall" Index="#x6000" Sub="#x08">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__Status of input A" Index="#x6000" Sub="#x09">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__Status of input B" Index="#x6000" Sub="#x0a">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__Status of input C" Index="#x6000" Sub="#x0b">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__">
-									<Type GUID="{18071995-0000-0000-0000-002000000001}">ARRAY [0..0] OF BIT</Type>
-								</Entry>
-								<Entry Name="Status__Status of extern latch" Index="#x6000" Sub="#x0d">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__Sync error" Index="#x6000" Sub="#x0e">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__">
-									<Type GUID="{18071995-0000-0000-0000-002000000001}">ARRAY [0..0] OF BIT</Type>
-								</Entry>
-								<Entry Name="Status__TxPDO Toggle" Index="#x6000" Sub="#x10">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Counter value" Index="#x6000" Sub="#x11">
-									<Type>UINT</Type>
-								</Entry>
-								<Entry Name="Latch value" Index="#x6000" Sub="#x12">
-									<Type>UINT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="ENC Inputs" Index="#x1a02" Flags="#x0010" SyncMan="3">
-								<ExcludePdo>#x1a03</ExcludePdo>
-								<Entry Name="Period value" Index="#x6000" Sub="#x14">
-									<Type>UDINT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="ENC Inputs" Index="#x1a03" Flags="#x0010">
-								<ExcludePdo>#x1a02</ExcludePdo>
-								<Entry Name="Frequency value" Index="#x6000" Sub="#x13">
-									<Type>UDINT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="ENC Inputs" Index="#x1a04" Flags="#x0010">
-								<ExcludePdo>#x1a05</ExcludePdo>
-								<Entry Name="Timestamp" Index="#x6000" Sub="#x16">
-									<Type>ULINT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="ENC Inputs" Index="#x1a05" Flags="#x0010">
-								<ExcludePdo>#x1a04</ExcludePdo>
-								<Entry Name="Timestamp" Index="#x6000" Sub="#x16">
-									<Type>UDINT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="ENC Outputs" Index="#x1600" InOut="1" Flags="#x0010">
-								<ExcludePdo>#x1601</ExcludePdo>
-								<Entry Name="Control__Enable latch C" Index="#x7000" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Control__Enable latch extern on positive edge" Index="#x7000" Sub="#x02">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Control__Set counter" Index="#x7000" Sub="#x03">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Control__Enable latch extern on negative edge" Index="#x7000" Sub="#x04">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Control__">
-									<Type GUID="{18071995-0000-0000-0000-002000000004}">ARRAY [0..3] OF BIT</Type>
-								</Entry>
-								<Entry Name="Control__">
-									<Type GUID="{18071995-0000-0000-0000-002000000008}">ARRAY [0..0] OF BYTE</Type>
-								</Entry>
-								<Entry Name="Set counter value" Index="#x7000" Sub="#x11">
-									<Type>UDINT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="ENC Outputs" Index="#x1601" InOut="1" Flags="#x0010" SyncMan="2">
-								<ExcludePdo>#x1600</ExcludePdo>
-								<Entry Name="Control__Enable latch C" Index="#x7000" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Control__Enable latch extern on positive edge" Index="#x7000" Sub="#x02">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Control__Set counter" Index="#x7000" Sub="#x03">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Control__Enable latch extern on negative edge" Index="#x7000" Sub="#x04">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Control__">
-									<Type GUID="{18071995-0000-0000-0000-002000000004}">ARRAY [0..3] OF BIT</Type>
-								</Entry>
-								<Entry Name="Control__">
-									<Type GUID="{18071995-0000-0000-0000-002000000008}">ARRAY [0..0] OF BYTE</Type>
-								</Entry>
-								<Entry Name="Set counter value" Index="#x7000" Sub="#x11">
-									<Type>UINT</Type>
-								</Entry>
-							</Pdo>
-							<CoeProfile ProfileNo="33493897"/>
-						</EtherCAT>
-					</Box>
-					<Box Id="6" BoxType="9099">
-						<Name>Term 6 (EL2809)</Name>
-						<ImageId>1001</ImageId>
-						<EtherCAT SlaveType="1" PdiType="#x0104" CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x0af93052" RevisionNo="#x00120000" RepeatSupport="true" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL2809 16Ch. Dig. Output 24V, 0.5A" Desc="EL2809" PortABoxInfo="#x01000005">
-							<SyncMan>000f01004400010003000000000000000100000f44090000</SyncMan>
-							<SyncMan>010f01004400010003000000000000000100010f44090000</SyncMan>
-							<Fmmu>0000000000000000000f00020100000001000000000000000000000000000000</Fmmu>
-							<Pdo Name="Channel 1" Index="#x1600" InOut="1" Flags="#x0011" SyncMan="0">
-								<Entry Name="Output" Index="#x7000" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="Channel 2" Index="#x1601" InOut="1" Flags="#x0011" SyncMan="0">
-								<Entry Name="Output" Index="#x7010" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="Channel 3" Index="#x1602" InOut="1" Flags="#x0011" SyncMan="0">
-								<Entry Name="Output" Index="#x7020" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="Channel 4" Index="#x1603" InOut="1" Flags="#x0011" SyncMan="0">
-								<Entry Name="Output" Index="#x7030" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="Channel 5" Index="#x1604" InOut="1" Flags="#x0011" SyncMan="0">
-								<Entry Name="Output" Index="#x7040" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="Channel 6" Index="#x1605" InOut="1" Flags="#x0011" SyncMan="0">
-								<Entry Name="Output" Index="#x7050" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="Channel 7" Index="#x1606" InOut="1" Flags="#x0011" SyncMan="0">
-								<Entry Name="Output" Index="#x7060" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="Channel 8" Index="#x1607" InOut="1" Flags="#x0011" SyncMan="0">
-								<Entry Name="Output" Index="#x7070" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="Channel 9" Index="#x1608" InOut="1" Flags="#x0011" SyncMan="1">
-								<Entry Name="Output" Index="#x7080" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="Channel 10" Index="#x1609" InOut="1" Flags="#x0011" SyncMan="1">
-								<Entry Name="Output" Index="#x7090" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="Channel 11" Index="#x160a" InOut="1" Flags="#x0011" SyncMan="1">
-								<Entry Name="Output" Index="#x70a0" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="Channel 12" Index="#x160b" InOut="1" Flags="#x0011" SyncMan="1">
-								<Entry Name="Output" Index="#x70b0" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="Channel 13" Index="#x160c" InOut="1" Flags="#x0011" SyncMan="1">
-								<Entry Name="Output" Index="#x70c0" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="Channel 14" Index="#x160d" InOut="1" Flags="#x0011" SyncMan="1">
-								<Entry Name="Output" Index="#x70d0" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="Channel 15" Index="#x160e" InOut="1" Flags="#x0011" SyncMan="1">
-								<Entry Name="Output" Index="#x70e0" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="Channel 16" Index="#x160f" InOut="1" Flags="#x0011" SyncMan="1">
-								<Entry Name="Output" Index="#x70f0" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-							</Pdo>
-						</EtherCAT>
-					</Box>
-					<Box Id="7" BoxType="9099">
-						<Name>Term 7 (EL2798)</Name>
-						<ImageId>1001</ImageId>
-						<EtherCAT SlaveType="1" PdiType="#x0104" CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x0aee3052" RevisionNo="#x00120000" RepeatSupport="true" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL2798 8Ch. Dig. Output 24V AC/DC, 2A, potential-free" Desc="EL2798" PortABoxInfo="#x01000006">
-							<SyncMan>000f01004400010003000000000000000000000f44090000</SyncMan>
-							<Fmmu>0000000000000000000f00020100000001000000000000000000000000000000</Fmmu>
-							<Pdo Name="Channel 1" Index="#x1600" InOut="1" Flags="#x0011" SyncMan="0">
-								<Entry Name="Output" Index="#x7000" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="Channel 2" Index="#x1601" InOut="1" Flags="#x0011" SyncMan="0">
-								<Entry Name="Output" Index="#x7010" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="Channel 3" Index="#x1602" InOut="1" Flags="#x0011" SyncMan="0">
-								<Entry Name="Output" Index="#x7020" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="Channel 4" Index="#x1603" InOut="1" Flags="#x0011" SyncMan="0">
-								<Entry Name="Output" Index="#x7030" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="Channel 5" Index="#x1604" InOut="1" Flags="#x0011" SyncMan="0">
-								<Entry Name="Output" Index="#x7040" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="Channel 6" Index="#x1605" InOut="1" Flags="#x0011" SyncMan="0">
-								<Entry Name="Output" Index="#x7050" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="Channel 7" Index="#x1606" InOut="1" Flags="#x0011" SyncMan="0">
-								<Entry Name="Output" Index="#x7060" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="Channel 8" Index="#x1607" InOut="1" Flags="#x0011" SyncMan="0">
-								<Entry Name="Output" Index="#x7070" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-							</Pdo>
-						</EtherCAT>
-					</Box>
-					<Box Id="8" BoxType="9103" BoxFlags="#x00000020">
-						<Name>Term 8 (EL6022)</Name>
-						<ImageId>1003</ImageId>
-						<EtherCAT SlaveType="7" PdiType="#x0005" MboxDataLinkLayer="true" StateMBoxPolling="true" CycleMBoxPollingTime="0" CoeType="39" FoeType="1" VendorId="#x00000002" ProductCode="#x17863052" RevisionNo="#x00130000" InfoDataAddr="true" TimeoutMailbox2="2000" CheckRevisionNoType="3" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL6022 Interface 2Ch. (RS422/485)" Desc="EL6022" PortABoxInfo="#x01000007">
-							<SyncMan>001080002600010001000000400080008000001026010000</SyncMan>
-							<SyncMan>801080002200010002000000400080008000801022010000</SyncMan>
-							<SyncMan>001130002400010003000000000000003000001124010000</SyncMan>
-							<SyncMan>201230002000010004000000000000003000201220010000</SyncMan>
-							<Fmmu>0000000000000000001100020100000001000000000000000000000000000000</Fmmu>
-							<Fmmu>0000000000000000201200010100000002000000000000000000000000000000</Fmmu>
-							<Fmmu>00000000000000000d0800010100000003000000000000000000000000000000</Fmmu>
-							<BootStrapData>0010f400f410f400</BootStrapData>
-							<Pdo Name="COM Inputs Channel 1" Index="#x1a00" Flags="#x0010" SyncMan="3">
-								<ExcludePdo>#x1a04</ExcludePdo>
-								<Entry Name="Status__Transmit accepted" Index="#x6000" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__Receive request" Index="#x6000" Sub="#x02">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__Init accepted" Index="#x6000" Sub="#x03">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__Buffer full" Index="#x6000" Sub="#x04">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__Parity error" Index="#x6000" Sub="#x05">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__Framing error" Index="#x6000" Sub="#x06">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__Overrun error" Index="#x6000" Sub="#x07">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__">
-									<Type GUID="{18071995-0000-0000-0000-002000000001}">ARRAY [0..0] OF BIT</Type>
-								</Entry>
-								<Entry Name="Status__Input length" Index="#x6000" Sub="#x09">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 0" Index="#x6000" Sub="#x11">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 1" Index="#x6000" Sub="#x12">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 2" Index="#x6000" Sub="#x13">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 3" Index="#x6000" Sub="#x14">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 4" Index="#x6000" Sub="#x15">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 5" Index="#x6000" Sub="#x16">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 6" Index="#x6000" Sub="#x17">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 7" Index="#x6000" Sub="#x18">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 8" Index="#x6000" Sub="#x19">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 9" Index="#x6000" Sub="#x1a">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 10" Index="#x6000" Sub="#x1b">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 11" Index="#x6000" Sub="#x1c">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 12" Index="#x6000" Sub="#x1d">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 13" Index="#x6000" Sub="#x1e">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 14" Index="#x6000" Sub="#x1f">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 15" Index="#x6000" Sub="#x20">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 16" Index="#x6000" Sub="#x21">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 17" Index="#x6000" Sub="#x22">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 18" Index="#x6000" Sub="#x23">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 19" Index="#x6000" Sub="#x24">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 20" Index="#x6000" Sub="#x25">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 21" Index="#x6000" Sub="#x26">
-									<Type>USINT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="COM Inputs Channel 2" Index="#x1a01" Flags="#x0010" SyncMan="3">
-								<ExcludePdo>#x1a05</ExcludePdo>
-								<Entry Name="Status__Transmit accepted" Index="#x6010" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__Receive request" Index="#x6010" Sub="#x02">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__Init accepted" Index="#x6010" Sub="#x03">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__Buffer full" Index="#x6010" Sub="#x04">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__Parity error" Index="#x6010" Sub="#x05">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__Framing error" Index="#x6010" Sub="#x06">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__Overrun error" Index="#x6010" Sub="#x07">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__">
-									<Type GUID="{18071995-0000-0000-0000-002000000001}">ARRAY [0..0] OF BIT</Type>
-								</Entry>
-								<Entry Name="Status__Input length" Index="#x6010" Sub="#x09">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 0" Index="#x6010" Sub="#x11">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 1" Index="#x6010" Sub="#x12">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 2" Index="#x6010" Sub="#x13">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 3" Index="#x6010" Sub="#x14">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 4" Index="#x6010" Sub="#x15">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 5" Index="#x6010" Sub="#x16">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 6" Index="#x6010" Sub="#x17">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 7" Index="#x6010" Sub="#x18">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 8" Index="#x6010" Sub="#x19">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 9" Index="#x6010" Sub="#x1a">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 10" Index="#x6010" Sub="#x1b">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 11" Index="#x6010" Sub="#x1c">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 12" Index="#x6010" Sub="#x1d">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 13" Index="#x6010" Sub="#x1e">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 14" Index="#x6010" Sub="#x1f">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 15" Index="#x6010" Sub="#x20">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 16" Index="#x6010" Sub="#x21">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 17" Index="#x6010" Sub="#x22">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 18" Index="#x6010" Sub="#x23">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 19" Index="#x6010" Sub="#x24">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 20" Index="#x6010" Sub="#x25">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 21" Index="#x6010" Sub="#x26">
-									<Type>USINT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="COM Inputs Channel 1" Index="#x1a04" Flags="#x0010">
-								<ExcludePdo>#x1a00</ExcludePdo>
-								<Entry Name="Status" Index="#x6001" Sub="#x01">
-									<Type>WORD</Type>
-								</Entry>
-								<Entry Name="Data In 0" Index="#x6000" Sub="#x11">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 1" Index="#x6000" Sub="#x12">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 2" Index="#x6000" Sub="#x13">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 3" Index="#x6000" Sub="#x14">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 4" Index="#x6000" Sub="#x15">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 5" Index="#x6000" Sub="#x16">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 6" Index="#x6000" Sub="#x17">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 7" Index="#x6000" Sub="#x18">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 8" Index="#x6000" Sub="#x19">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 9" Index="#x6000" Sub="#x1a">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 10" Index="#x6000" Sub="#x1b">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 11" Index="#x6000" Sub="#x1c">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 12" Index="#x6000" Sub="#x1d">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 13" Index="#x6000" Sub="#x1e">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 14" Index="#x6000" Sub="#x1f">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 15" Index="#x6000" Sub="#x20">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 16" Index="#x6000" Sub="#x21">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 17" Index="#x6000" Sub="#x22">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 18" Index="#x6000" Sub="#x23">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 19" Index="#x6000" Sub="#x24">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 20" Index="#x6000" Sub="#x25">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 21" Index="#x6000" Sub="#x26">
-									<Type>USINT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="COM Inputs Channel 2" Index="#x1a05" Flags="#x0010">
-								<ExcludePdo>#x1a01</ExcludePdo>
-								<Entry Name="Status" Index="#x6011" Sub="#x01">
-									<Type>WORD</Type>
-								</Entry>
-								<Entry Name="Data In 0" Index="#x6010" Sub="#x11">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 1" Index="#x6010" Sub="#x12">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 2" Index="#x6010" Sub="#x13">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 3" Index="#x6010" Sub="#x14">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 4" Index="#x6010" Sub="#x15">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 5" Index="#x6010" Sub="#x16">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 6" Index="#x6010" Sub="#x17">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 7" Index="#x6010" Sub="#x18">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 8" Index="#x6010" Sub="#x19">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 9" Index="#x6010" Sub="#x1a">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 10" Index="#x6010" Sub="#x1b">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 11" Index="#x6010" Sub="#x1c">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 12" Index="#x6010" Sub="#x1d">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 13" Index="#x6010" Sub="#x1e">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 14" Index="#x6010" Sub="#x1f">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 15" Index="#x6010" Sub="#x20">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 16" Index="#x6010" Sub="#x21">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 17" Index="#x6010" Sub="#x22">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 18" Index="#x6010" Sub="#x23">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 19" Index="#x6010" Sub="#x24">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 20" Index="#x6010" Sub="#x25">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data In 21" Index="#x6010" Sub="#x26">
-									<Type>USINT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="COM Outputs Channel 1" Index="#x1600" InOut="1" Flags="#x0010" SyncMan="2">
-								<ExcludePdo>#x1604</ExcludePdo>
-								<Entry Name="Ctrl__Transmit request" Index="#x7000" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Ctrl__Receive accepted" Index="#x7000" Sub="#x02">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Ctrl__Init request" Index="#x7000" Sub="#x03">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Ctrl__Send continuous" Index="#x7000" Sub="#x04">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Ctrl__">
-									<Type GUID="{18071995-0000-0000-0000-002000000004}">ARRAY [0..3] OF BIT</Type>
-								</Entry>
-								<Entry Name="Ctrl__Output length" Index="#x7000" Sub="#x09">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 0" Index="#x7000" Sub="#x11">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 1" Index="#x7000" Sub="#x12">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 2" Index="#x7000" Sub="#x13">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 3" Index="#x7000" Sub="#x14">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 4" Index="#x7000" Sub="#x15">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 5" Index="#x7000" Sub="#x16">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 6" Index="#x7000" Sub="#x17">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 7" Index="#x7000" Sub="#x18">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 8" Index="#x7000" Sub="#x19">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 9" Index="#x7000" Sub="#x1a">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 10" Index="#x7000" Sub="#x1b">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 11" Index="#x7000" Sub="#x1c">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 12" Index="#x7000" Sub="#x1d">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 13" Index="#x7000" Sub="#x1e">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 14" Index="#x7000" Sub="#x1f">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 15" Index="#x7000" Sub="#x20">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 16" Index="#x7000" Sub="#x21">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 17" Index="#x7000" Sub="#x22">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 18" Index="#x7000" Sub="#x23">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 19" Index="#x7000" Sub="#x24">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 20" Index="#x7000" Sub="#x25">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 21" Index="#x7000" Sub="#x26">
-									<Type>USINT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="COM Outputs Channel 2" Index="#x1601" InOut="1" Flags="#x0010" SyncMan="2">
-								<ExcludePdo>#x1605</ExcludePdo>
-								<Entry Name="Ctrl__Transmit request" Index="#x7010" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Ctrl__Receive accepted" Index="#x7010" Sub="#x02">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Ctrl__Init request" Index="#x7010" Sub="#x03">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Ctrl__Send continuous" Index="#x7010" Sub="#x04">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Ctrl__">
-									<Type GUID="{18071995-0000-0000-0000-002000000004}">ARRAY [0..3] OF BIT</Type>
-								</Entry>
-								<Entry Name="Ctrl__Output length" Index="#x7010" Sub="#x09">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 0" Index="#x7010" Sub="#x11">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 1" Index="#x7010" Sub="#x12">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 2" Index="#x7010" Sub="#x13">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 3" Index="#x7010" Sub="#x14">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 4" Index="#x7010" Sub="#x15">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 5" Index="#x7010" Sub="#x16">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 6" Index="#x7010" Sub="#x17">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 7" Index="#x7010" Sub="#x18">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 8" Index="#x7010" Sub="#x19">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 9" Index="#x7010" Sub="#x1a">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 10" Index="#x7010" Sub="#x1b">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 11" Index="#x7010" Sub="#x1c">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 12" Index="#x7010" Sub="#x1d">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 13" Index="#x7010" Sub="#x1e">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 14" Index="#x7010" Sub="#x1f">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 15" Index="#x7010" Sub="#x20">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 16" Index="#x7010" Sub="#x21">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 17" Index="#x7010" Sub="#x22">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 18" Index="#x7010" Sub="#x23">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 19" Index="#x7010" Sub="#x24">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 20" Index="#x7010" Sub="#x25">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 21" Index="#x7010" Sub="#x26">
-									<Type>USINT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="COM Outputs Channel 1" Index="#x1604" InOut="1" Flags="#x0010">
-								<ExcludePdo>#x1600</ExcludePdo>
-								<Entry Name="Ctrl" Index="#x7001" Sub="#x01">
-									<Type>WORD</Type>
-								</Entry>
-								<Entry Name="Data Out 0" Index="#x7000" Sub="#x11">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 1" Index="#x7000" Sub="#x12">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 2" Index="#x7000" Sub="#x13">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 3" Index="#x7000" Sub="#x14">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 4" Index="#x7000" Sub="#x15">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 5" Index="#x7000" Sub="#x16">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 6" Index="#x7000" Sub="#x17">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 7" Index="#x7000" Sub="#x18">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 8" Index="#x7000" Sub="#x19">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 9" Index="#x7000" Sub="#x1a">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 10" Index="#x7000" Sub="#x1b">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 11" Index="#x7000" Sub="#x1c">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 12" Index="#x7000" Sub="#x1d">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 13" Index="#x7000" Sub="#x1e">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 14" Index="#x7000" Sub="#x1f">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 15" Index="#x7000" Sub="#x20">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 16" Index="#x7000" Sub="#x21">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 17" Index="#x7000" Sub="#x22">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 18" Index="#x7000" Sub="#x23">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 19" Index="#x7000" Sub="#x24">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 20" Index="#x7000" Sub="#x25">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 21" Index="#x7000" Sub="#x26">
-									<Type>USINT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="COM Outputs Channel 2" Index="#x1605" InOut="1" Flags="#x0010">
-								<ExcludePdo>#x1601</ExcludePdo>
-								<Entry Name="Ctrl" Index="#x7011" Sub="#x01">
-									<Type>WORD</Type>
-								</Entry>
-								<Entry Name="Data Out 0" Index="#x7010" Sub="#x11">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 1" Index="#x7010" Sub="#x12">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 2" Index="#x7010" Sub="#x13">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 3" Index="#x7010" Sub="#x14">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 4" Index="#x7010" Sub="#x15">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 5" Index="#x7010" Sub="#x16">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 6" Index="#x7010" Sub="#x17">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 7" Index="#x7010" Sub="#x18">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 8" Index="#x7010" Sub="#x19">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 9" Index="#x7010" Sub="#x1a">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 10" Index="#x7010" Sub="#x1b">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 11" Index="#x7010" Sub="#x1c">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 12" Index="#x7010" Sub="#x1d">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 13" Index="#x7010" Sub="#x1e">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 14" Index="#x7010" Sub="#x1f">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 15" Index="#x7010" Sub="#x20">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 16" Index="#x7010" Sub="#x21">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 17" Index="#x7010" Sub="#x22">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 18" Index="#x7010" Sub="#x23">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 19" Index="#x7010" Sub="#x24">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 20" Index="#x7010" Sub="#x25">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Data Out 21" Index="#x7010" Sub="#x26">
-									<Type>USINT</Type>
-								</Entry>
-							</Pdo>
-							<CoeProfile ProfileNo="39326601"/>
-							<CoeProfile ProfileNo="39326601"/>
-						</EtherCAT>
-					</Box>
-					<Box Id="9" BoxType="9099">
-						<Name>Term 9 (EL9011)</Name>
-						<ImageId>1004</ImageId>
-						<EtherCAT CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x23333050" InfoDataState="false" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL9011 End Terminal" Desc="EL9011" PortABoxInfo="#x01000008"/>
-					</Box>
-				</Box>
-				<Box Id="11" BoxType="9099" BoxFlags="#x00000020">
-					<Name>Box 11 (ICE11-8IOL-G60L-V1D)</Name>
-					<ImageId>1005</ImageId>
-					<EtherCAT SlaveType="3" AdsServerAddress="a9fe3a4a060ce903" PdiType="#x0006" MboxDataLinkLayer="true" StateMBoxPolling="true" CycleMBoxPollingTime="0" CoeType="15" EoeType="3" FoeType="1" VendorId="#x000000ad" ProductCode="#x042e59df" RevisionNo="#x00000001" InfoDataAddr="true" InfoDataNetId="true" TimeoutStateChange1="10000" TimeoutStateChange2="2000" TimeoutStateChange3="100" TimeoutStateChange4="100" GenerateOwnNetId="true" PortPhys="17" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="ICE11-8IOL-G60L-V1D" Desc="ICE11-8IOL-G60L-V1D" PortABoxInfo="#x00ffffff">
+					<EtherCAT SlaveType="3" AdsServerAddress="a9fe3a4a0602e903" FixedAdsServerNetId="true" PdiType="#x0006" MboxDataLinkLayer="true" StateMBoxPolling="true" CycleMBoxPollingTime="0" CoeType="15" EoeType="3" FoeType="1" VendorId="#x000000ad" ProductCode="#x042e59df" RevisionNo="#x00000001" InfoDataAddr="true" InfoDataNetId="true" TimeoutStateChange1="10000" TimeoutStateChange2="2000" TimeoutStateChange3="100" TimeoutStateChange4="100" GenerateOwnNetId="true" PortPhys="17" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="ICE11-8IOL-G60L-V1D" Desc="ICE11-8IOL-G60L-V1D" PortABoxInfo="#x00ffffff">
 						<SyncMan>001000043600010001000000000400040004001036010000</SyncMan>
 						<SyncMan>001400043200010002000000000400040004001432010000</SyncMan>
-						<SyncMan>001800007400000003000000000004010000001874010000</SyncMan>
-						<SyncMan>802018003000010004000000000015010800802030010000</SyncMan>
-						<Fmmu>0000000000000000000000020000000001000000000000000000000000000000</Fmmu>
+						<SyncMan>001804007400010003000000000004010000001874010000</SyncMan>
+						<SyncMan>8020a5003000010004000000000015010800802030010000</SyncMan>
+						<Fmmu>0000000000000000001800020100000001000000000000000000000000000000</Fmmu>
 						<Fmmu>0000000000000000802000010100000002000000000000000000000000000000</Fmmu>
 						<Fmmu>00000000000000000d0800010100000003000000000000000000000000000000</Fmmu>
-						<SwitchPortData>01000000e6050c0a00ffffff01050c0a00000000426f785f31315f5f49434531315f380000000000000000000000000000000000000000000000000000000000</SwitchPortData>
+						<SwitchPortData>01000000e6050c0a00ffffff0000000000000000426f785f315f5f49434531315f38490000000000000000000000000000000000000000000000000000000000</SwitchPortData>
 						<DcMode>4672656552756e000000000000000000467265652052756e000000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000</DcMode>
-						<MBoxUserCmdData>02000300090000002000000003000000110009030000000000000000000000002083230101000000014368616e6e656c20422850696e20322920446972656374696f6e20496e70757400</MBoxUserCmdData>
+						<MBoxUserCmdData>02000300090000002000000003000000010009030000000000000000000000002083230101000000014368616e6e656c20422850696e20322920446972656374696f6e20496e70757400</MBoxUserCmdData>
+						<MBoxUserCmdData>02000300090000002000000003000000020009030000000000000000000000002083230201000000014368616e6e656c20422850696e20322920446972656374696f6e20496e70757400</MBoxUserCmdData>
+						<MBoxUserCmdData>02000300090000002000000003000000030009030000000000000000000000002083230301000000014368616e6e656c20422850696e20322920446972656374696f6e20496e70757400</MBoxUserCmdData>
+						<MBoxUserCmdData>02000300090000002000000003000000040009030000000000000000000000002083230401000000014368616e6e656c20422850696e20322920446972656374696f6e20496e70757400</MBoxUserCmdData>
+						<MBoxUserCmdData>02000300090000002000000003000000050009030000000000000000000000002083230501000000014368616e6e656c20422850696e20322920446972656374696f6e20496e70757400</MBoxUserCmdData>
+						<MBoxUserCmdData>02000300090000002000000003000000060009030000000000000000000000002083230601000000014368616e6e656c20422850696e20322920446972656374696f6e20496e70757400</MBoxUserCmdData>
+						<MBoxUserCmdData>02000300090000002000000003000000070009030000000000000000000000002083230701000000014368616e6e656c20422850696e20322920446972656374696f6e20496e70757400</MBoxUserCmdData>
+						<MBoxUserCmdData>02000300090000002000000003000000080009030000000000000000000000002083230801000000014368616e6e656c20422850696e20322920446972656374696f6e20496e70757400</MBoxUserCmdData>
 						<MBoxUserCmdData>020003000c0000000d000000030000000000000000000000000000000000000020008004040000008e0280005365742044657669636520496400</MBoxUserCmdData>
 						<MBoxUserCmdData>020003000c0000000d000000030000000000000000000000000000000000000020008005040000001a0000005365742056656e646f7220496400</MBoxUserCmdData>
-						<MBoxUserCmdData>020003000900000009000000030000001900090300000000000000000000000020003001010000000053776170204d6f646500</MBoxUserCmdData>
-						<MBoxUserCmdData>02000300090000000b000000030000001900090300000000000000000000000020003002010000000053776170206c656e67746800</MBoxUserCmdData>
-						<MBoxUserCmdData>02000300090000000b000000030000001900090300000000000000000000000020003003010000000053776170206f666673657400</MBoxUserCmdData>
-						<MBoxUserCmdData>0200030009000000080000000300000019000903000000000000000000000000200030040100000001526573657276656400</MBoxUserCmdData>
-						<MBoxUserCmdData>020003000900000011000000030000001900090300000000000000000000000020003005010000000150696e2032204c454420456e61626c656400</MBoxUserCmdData>
-						<MBoxUserCmdData>0200030009000000160000000300000019000903000000000000000000000000200030060100000000537570707265737320416c6c20446961676e6f73697300</MBoxUserCmdData>
-						<MBoxUserCmdData>020003000900000014000000030000001900090300000000000000000000000020008020010000000053657420494f2d4c696e6b205265766973696f6e00</MBoxUserCmdData>
-						<MBoxUserCmdData>0200030009000000140000000300000019000903000000000000000000000000200080210100000000536574204672616d65204361706162696c69747900</MBoxUserCmdData>
-						<MBoxUserCmdData>0200030009000000120000000300000019000903000000000000000000000000200080220100000000536574204d696e204379636c652054696d6500</MBoxUserCmdData>
-						<MBoxUserCmdData>02000300090000001a000000030000001900090300000000000000000000000020008024010000008f5365742050726f63657373204461746120496e204c656e67746800</MBoxUserCmdData>
-						<MBoxUserCmdData>02000300090000001b00000003000000190009030000000000000000000000002000802501000000005365742050726f636573732044617461204f7574204c656e67746800</MBoxUserCmdData>
-						<MBoxUserCmdData>020003000a00000012000000030000001900090300000000000000000000000020008028020000000300536574204d617374657220436f6e74726f6c00</MBoxUserCmdData>
-						<MBoxUserCmdData>020003000900000009000000030000001a00090300000000000000000000000020103001010000000053776170204d6f646500</MBoxUserCmdData>
-						<MBoxUserCmdData>02000300090000000b000000030000001a00090300000000000000000000000020103002010000000053776170206c656e67746800</MBoxUserCmdData>
-						<MBoxUserCmdData>02000300090000000b000000030000001a00090300000000000000000000000020103003010000000053776170206f666673657400</MBoxUserCmdData>
-						<MBoxUserCmdData>020003000900000008000000030000001a000903000000000000000000000000201030040100000001526573657276656400</MBoxUserCmdData>
-						<MBoxUserCmdData>020003000900000011000000030000001a00090300000000000000000000000020103005010000000150696e2032204c454420456e61626c656400</MBoxUserCmdData>
-						<MBoxUserCmdData>020003000900000016000000030000001a000903000000000000000000000000201030060100000000537570707265737320416c6c20446961676e6f73697300</MBoxUserCmdData>
-						<MBoxUserCmdData>02000300090000001a000000030000001a0009030000000000000000000000002010802401000000005365742050726f63657373204461746120496e204c656e67746800</MBoxUserCmdData>
-						<MBoxUserCmdData>02000300090000001b000000030000001a0009030000000000000000000000002010802501000000005365742050726f636573732044617461204f7574204c656e67746800</MBoxUserCmdData>
-						<MBoxUserCmdData>020003000a00000012000000030000001a00090300000000000000000000000020108028020000000000536574204d617374657220436f6e74726f6c00</MBoxUserCmdData>
-						<MBoxUserCmdData>020003000900000009000000030000001b00090300000000000000000000000020203001010000000053776170204d6f646500</MBoxUserCmdData>
-						<MBoxUserCmdData>02000300090000000b000000030000001b00090300000000000000000000000020203002010000000053776170206c656e67746800</MBoxUserCmdData>
-						<MBoxUserCmdData>02000300090000000b000000030000001b00090300000000000000000000000020203003010000000053776170206f666673657400</MBoxUserCmdData>
-						<MBoxUserCmdData>020003000900000008000000030000001b000903000000000000000000000000202030040100000001526573657276656400</MBoxUserCmdData>
-						<MBoxUserCmdData>020003000900000011000000030000001b00090300000000000000000000000020203005010000000150696e2032204c454420456e61626c656400</MBoxUserCmdData>
-						<MBoxUserCmdData>020003000900000016000000030000001b000903000000000000000000000000202030060100000000537570707265737320416c6c20446961676e6f73697300</MBoxUserCmdData>
-						<MBoxUserCmdData>02000300090000001a000000030000001b0009030000000000000000000000002020802401000000005365742050726f63657373204461746120496e204c656e67746800</MBoxUserCmdData>
-						<MBoxUserCmdData>02000300090000001b000000030000001b0009030000000000000000000000002020802501000000005365742050726f636573732044617461204f7574204c656e67746800</MBoxUserCmdData>
-						<MBoxUserCmdData>020003000a00000012000000030000001b00090300000000000000000000000020208028020000000000536574204d617374657220436f6e74726f6c00</MBoxUserCmdData>
-						<MBoxUserCmdData>020003000900000009000000030000001c00090300000000000000000000000020303001010000000053776170204d6f646500</MBoxUserCmdData>
-						<MBoxUserCmdData>02000300090000000b000000030000001c00090300000000000000000000000020303002010000000053776170206c656e67746800</MBoxUserCmdData>
-						<MBoxUserCmdData>02000300090000000b000000030000001c00090300000000000000000000000020303003010000000053776170206f666673657400</MBoxUserCmdData>
-						<MBoxUserCmdData>020003000900000008000000030000001c000903000000000000000000000000203030040100000001526573657276656400</MBoxUserCmdData>
-						<MBoxUserCmdData>020003000900000011000000030000001c00090300000000000000000000000020303005010000000150696e2032204c454420456e61626c656400</MBoxUserCmdData>
-						<MBoxUserCmdData>020003000900000016000000030000001c000903000000000000000000000000203030060100000000537570707265737320416c6c20446961676e6f73697300</MBoxUserCmdData>
-						<MBoxUserCmdData>02000300090000001a000000030000001c0009030000000000000000000000002030802401000000005365742050726f63657373204461746120496e204c656e67746800</MBoxUserCmdData>
-						<MBoxUserCmdData>02000300090000001b000000030000001c0009030000000000000000000000002030802501000000005365742050726f636573732044617461204f7574204c656e67746800</MBoxUserCmdData>
-						<MBoxUserCmdData>020003000a00000012000000030000001c00090300000000000000000000000020308028020000000000536574204d617374657220436f6e74726f6c00</MBoxUserCmdData>
-						<MBoxUserCmdData>020003000900000009000000030000001d00090300000000000000000000000020403001010000000053776170204d6f646500</MBoxUserCmdData>
-						<MBoxUserCmdData>02000300090000000b000000030000001d00090300000000000000000000000020403002010000000053776170206c656e67746800</MBoxUserCmdData>
-						<MBoxUserCmdData>02000300090000000b000000030000001d00090300000000000000000000000020403003010000000053776170206f666673657400</MBoxUserCmdData>
-						<MBoxUserCmdData>020003000900000008000000030000001d000903000000000000000000000000204030040100000001526573657276656400</MBoxUserCmdData>
-						<MBoxUserCmdData>020003000900000011000000030000001d00090300000000000000000000000020403005010000000150696e2032204c454420456e61626c656400</MBoxUserCmdData>
-						<MBoxUserCmdData>020003000900000016000000030000001d000903000000000000000000000000204030060100000000537570707265737320416c6c20446961676e6f73697300</MBoxUserCmdData>
-						<MBoxUserCmdData>02000300090000001a000000030000001d0009030000000000000000000000002040802401000000005365742050726f63657373204461746120496e204c656e67746800</MBoxUserCmdData>
-						<MBoxUserCmdData>02000300090000001b000000030000001d0009030000000000000000000000002040802501000000005365742050726f636573732044617461204f7574204c656e67746800</MBoxUserCmdData>
-						<MBoxUserCmdData>020003000a00000012000000030000001d00090300000000000000000000000020408028020000000000536574204d617374657220436f6e74726f6c00</MBoxUserCmdData>
-						<MBoxUserCmdData>020003000900000009000000030000001e00090300000000000000000000000020503001010000000053776170204d6f646500</MBoxUserCmdData>
-						<MBoxUserCmdData>02000300090000000b000000030000001e00090300000000000000000000000020503002010000000053776170206c656e67746800</MBoxUserCmdData>
-						<MBoxUserCmdData>02000300090000000b000000030000001e00090300000000000000000000000020503003010000000053776170206f666673657400</MBoxUserCmdData>
-						<MBoxUserCmdData>020003000900000008000000030000001e000903000000000000000000000000205030040100000001526573657276656400</MBoxUserCmdData>
-						<MBoxUserCmdData>020003000900000011000000030000001e00090300000000000000000000000020503005010000000150696e2032204c454420456e61626c656400</MBoxUserCmdData>
-						<MBoxUserCmdData>020003000900000016000000030000001e000903000000000000000000000000205030060100000000537570707265737320416c6c20446961676e6f73697300</MBoxUserCmdData>
-						<MBoxUserCmdData>02000300090000001a000000030000001e0009030000000000000000000000002050802401000000005365742050726f63657373204461746120496e204c656e67746800</MBoxUserCmdData>
-						<MBoxUserCmdData>02000300090000001b000000030000001e0009030000000000000000000000002050802501000000005365742050726f636573732044617461204f7574204c656e67746800</MBoxUserCmdData>
-						<MBoxUserCmdData>020003000a00000012000000030000001e00090300000000000000000000000020508028020000000000536574204d617374657220436f6e74726f6c00</MBoxUserCmdData>
-						<MBoxUserCmdData>020003000900000009000000030000001f00090300000000000000000000000020603001010000000053776170204d6f646500</MBoxUserCmdData>
-						<MBoxUserCmdData>02000300090000000b000000030000001f00090300000000000000000000000020603002010000000053776170206c656e67746800</MBoxUserCmdData>
-						<MBoxUserCmdData>02000300090000000b000000030000001f00090300000000000000000000000020603003010000000053776170206f666673657400</MBoxUserCmdData>
-						<MBoxUserCmdData>020003000900000008000000030000001f000903000000000000000000000000206030040100000001526573657276656400</MBoxUserCmdData>
-						<MBoxUserCmdData>020003000900000011000000030000001f00090300000000000000000000000020603005010000000150696e2032204c454420456e61626c656400</MBoxUserCmdData>
-						<MBoxUserCmdData>020003000900000016000000030000001f000903000000000000000000000000206030060100000000537570707265737320416c6c20446961676e6f73697300</MBoxUserCmdData>
-						<MBoxUserCmdData>02000300090000001a000000030000001f0009030000000000000000000000002060802401000000005365742050726f63657373204461746120496e204c656e67746800</MBoxUserCmdData>
-						<MBoxUserCmdData>02000300090000001b000000030000001f0009030000000000000000000000002060802501000000005365742050726f636573732044617461204f7574204c656e67746800</MBoxUserCmdData>
-						<MBoxUserCmdData>020003000a00000012000000030000001f00090300000000000000000000000020608028020000000000536574204d617374657220436f6e74726f6c00</MBoxUserCmdData>
-						<MBoxUserCmdData>020003000900000009000000030000002000090300000000000000000000000020703001010000000053776170204d6f646500</MBoxUserCmdData>
-						<MBoxUserCmdData>02000300090000000b000000030000002000090300000000000000000000000020703002010000000053776170206c656e67746800</MBoxUserCmdData>
-						<MBoxUserCmdData>02000300090000000b000000030000002000090300000000000000000000000020703003010000000053776170206f666673657400</MBoxUserCmdData>
-						<MBoxUserCmdData>0200030009000000080000000300000020000903000000000000000000000000207030040100000001526573657276656400</MBoxUserCmdData>
-						<MBoxUserCmdData>020003000900000011000000030000002000090300000000000000000000000020703005010000000150696e2032204c454420456e61626c656400</MBoxUserCmdData>
-						<MBoxUserCmdData>0200030009000000160000000300000020000903000000000000000000000000207030060100000000537570707265737320416c6c20446961676e6f73697300</MBoxUserCmdData>
-						<MBoxUserCmdData>02000300090000001a00000003000000200009030000000000000000000000002070802401000000005365742050726f63657373204461746120496e204c656e67746800</MBoxUserCmdData>
-						<MBoxUserCmdData>02000300090000001b00000003000000200009030000000000000000000000002070802501000000005365742050726f636573732044617461204f7574204c656e67746800</MBoxUserCmdData>
-						<MBoxUserCmdData>020003000a00000012000000030000002000090300000000000000000000000020708028020000000000536574204d617374657220436f6e74726f6c00</MBoxUserCmdData>
-						<MBoxUserCmdData>02000300090000001900000003000000020009030000000000000000000000002083230301000000004368616e6e656c20422850696e20322920446561637469766500</MBoxUserCmdData>
-						<MBoxUserCmdData>02000300090000001900000003000000030009030000000000000000000000002083230401000000004368616e6e656c20422850696e20322920446561637469766500</MBoxUserCmdData>
-						<MBoxUserCmdData>02000300090000001900000003000000040009030000000000000000000000002083230501000000004368616e6e656c20422850696e20322920446561637469766500</MBoxUserCmdData>
-						<MBoxUserCmdData>02000300090000001900000003000000050009030000000000000000000000002083230601000000004368616e6e656c20422850696e20322920446561637469766500</MBoxUserCmdData>
-						<MBoxUserCmdData>02000300090000001900000003000000060009030000000000000000000000002083230701000000004368616e6e656c20422850696e20322920446561637469766500</MBoxUserCmdData>
-						<MBoxUserCmdData>02000300090000001900000003000000070009030000000000000000000000002083230801000000004368616e6e656c20422850696e20322920446561637469766500</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000c0000000d000000030000000a0009030000000000000000000000002010800404000000000000005365742044657669636520496400</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000c0000000d000000030000000a0009030000000000000000000000002010800504000000000000005365742056656e646f7220496400</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000900000009000000030000000a00090300000000000000000000000020103001010000000053776170204d6f646500</MBoxUserCmdData>
+						<MBoxUserCmdData>02000300090000000b000000030000000a00090300000000000000000000000020103002010000000053776170206c656e67746800</MBoxUserCmdData>
+						<MBoxUserCmdData>02000300090000000b000000030000000a00090300000000000000000000000020103003010000000053776170206f666673657400</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000900000008000000030000000a000903000000000000000000000000201030040100000001526573657276656400</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000900000011000000030000000a00090300000000000000000000000020103005010000000150696e2032204c454420456e61626c656400</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000900000016000000030000000a000903000000000000000000000000201030060100000000537570707265737320416c6c20446961676e6f73697300</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000900000014000000030000000a00090300000000000000000000000020108020010000000053657420494f2d4c696e6b205265766973696f6e00</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000900000014000000030000000a000903000000000000000000000000201080210100000000536574204672616d65204361706162696c69747900</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000900000012000000030000000a000903000000000000000000000000201080220100000000536574204d696e204379636c652054696d6500</MBoxUserCmdData>
+						<MBoxUserCmdData>02000300090000001a000000030000000a00090300000000000000000000000020108024010000008f5365742050726f63657373204461746120496e204c656e67746800</MBoxUserCmdData>
+						<MBoxUserCmdData>02000300090000001b000000030000000a0009030000000000000000000000002010802501000000005365742050726f636573732044617461204f7574204c656e67746800</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000a00000012000000030000000a00090300000000000000000000000020108028020000000300536574204d617374657220436f6e74726f6c00</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000c0000000d000000030000000b0009030000000000000000000000002020800404000000000000005365742044657669636520496400</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000c0000000d000000030000000b0009030000000000000000000000002020800504000000000000005365742056656e646f7220496400</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000900000009000000030000000b00090300000000000000000000000020203001010000000053776170204d6f646500</MBoxUserCmdData>
+						<MBoxUserCmdData>02000300090000000b000000030000000b00090300000000000000000000000020203002010000000053776170206c656e67746800</MBoxUserCmdData>
+						<MBoxUserCmdData>02000300090000000b000000030000000b00090300000000000000000000000020203003010000000053776170206f666673657400</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000900000008000000030000000b000903000000000000000000000000202030040100000001526573657276656400</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000900000011000000030000000b00090300000000000000000000000020203005010000000150696e2032204c454420456e61626c656400</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000900000016000000030000000b000903000000000000000000000000202030060100000000537570707265737320416c6c20446961676e6f73697300</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000900000014000000030000000b00090300000000000000000000000020208020010000000053657420494f2d4c696e6b205265766973696f6e00</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000900000014000000030000000b000903000000000000000000000000202080210100000000536574204672616d65204361706162696c69747900</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000900000012000000030000000b000903000000000000000000000000202080220100000000536574204d696e204379636c652054696d6500</MBoxUserCmdData>
+						<MBoxUserCmdData>02000300090000001a000000030000000b00090300000000000000000000000020208024010000008f5365742050726f63657373204461746120496e204c656e67746800</MBoxUserCmdData>
+						<MBoxUserCmdData>02000300090000001b000000030000000b0009030000000000000000000000002020802501000000005365742050726f636573732044617461204f7574204c656e67746800</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000a00000012000000030000000b00090300000000000000000000000020208028020000000300536574204d617374657220436f6e74726f6c00</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000c0000000d000000030000000c0009030000000000000000000000002030800404000000000000005365742044657669636520496400</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000c0000000d000000030000000c0009030000000000000000000000002030800504000000000000005365742056656e646f7220496400</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000900000009000000030000000c00090300000000000000000000000020303001010000000053776170204d6f646500</MBoxUserCmdData>
+						<MBoxUserCmdData>02000300090000000b000000030000000c00090300000000000000000000000020303002010000000053776170206c656e67746800</MBoxUserCmdData>
+						<MBoxUserCmdData>02000300090000000b000000030000000c00090300000000000000000000000020303003010000000053776170206f666673657400</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000900000008000000030000000c000903000000000000000000000000203030040100000001526573657276656400</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000900000011000000030000000c00090300000000000000000000000020303005010000000150696e2032204c454420456e61626c656400</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000900000016000000030000000c000903000000000000000000000000203030060100000000537570707265737320416c6c20446961676e6f73697300</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000900000014000000030000000c00090300000000000000000000000020308020010000000053657420494f2d4c696e6b205265766973696f6e00</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000900000014000000030000000c000903000000000000000000000000203080210100000000536574204672616d65204361706162696c69747900</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000900000012000000030000000c000903000000000000000000000000203080220100000000536574204d696e204379636c652054696d6500</MBoxUserCmdData>
+						<MBoxUserCmdData>02000300090000001a000000030000000c00090300000000000000000000000020308024010000008f5365742050726f63657373204461746120496e204c656e67746800</MBoxUserCmdData>
+						<MBoxUserCmdData>02000300090000001b000000030000000c0009030000000000000000000000002030802501000000005365742050726f636573732044617461204f7574204c656e67746800</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000a00000012000000030000000c00090300000000000000000000000020308028020000000300536574204d617374657220436f6e74726f6c00</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000c0000000d000000030000000d0009030000000000000000000000002040800404000000000000005365742044657669636520496400</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000c0000000d000000030000000d0009030000000000000000000000002040800504000000000000005365742056656e646f7220496400</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000900000009000000030000000d00090300000000000000000000000020403001010000000053776170204d6f646500</MBoxUserCmdData>
+						<MBoxUserCmdData>02000300090000000b000000030000000d00090300000000000000000000000020403002010000000053776170206c656e67746800</MBoxUserCmdData>
+						<MBoxUserCmdData>02000300090000000b000000030000000d00090300000000000000000000000020403003010000000053776170206f666673657400</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000900000008000000030000000d000903000000000000000000000000204030040100000001526573657276656400</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000900000011000000030000000d00090300000000000000000000000020403005010000000150696e2032204c454420456e61626c656400</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000900000016000000030000000d000903000000000000000000000000204030060100000000537570707265737320416c6c20446961676e6f73697300</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000900000014000000030000000d00090300000000000000000000000020408020010000000053657420494f2d4c696e6b205265766973696f6e00</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000900000014000000030000000d000903000000000000000000000000204080210100000000536574204672616d65204361706162696c69747900</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000900000012000000030000000d000903000000000000000000000000204080220100000000536574204d696e204379636c652054696d6500</MBoxUserCmdData>
+						<MBoxUserCmdData>02000300090000001a000000030000000d00090300000000000000000000000020408024010000008f5365742050726f63657373204461746120496e204c656e67746800</MBoxUserCmdData>
+						<MBoxUserCmdData>02000300090000001b000000030000000d0009030000000000000000000000002040802501000000005365742050726f636573732044617461204f7574204c656e67746800</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000a00000012000000030000000d00090300000000000000000000000020408028020000000300536574204d617374657220436f6e74726f6c00</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000c0000000d000000030000000e0009030000000000000000000000002050800404000000000000005365742044657669636520496400</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000c0000000d000000030000000e0009030000000000000000000000002050800504000000000000005365742056656e646f7220496400</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000900000009000000030000000e00090300000000000000000000000020503001010000000053776170204d6f646500</MBoxUserCmdData>
+						<MBoxUserCmdData>02000300090000000b000000030000000e00090300000000000000000000000020503002010000000053776170206c656e67746800</MBoxUserCmdData>
+						<MBoxUserCmdData>02000300090000000b000000030000000e00090300000000000000000000000020503003010000000053776170206f666673657400</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000900000008000000030000000e000903000000000000000000000000205030040100000001526573657276656400</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000900000011000000030000000e00090300000000000000000000000020503005010000000150696e2032204c454420456e61626c656400</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000900000016000000030000000e000903000000000000000000000000205030060100000000537570707265737320416c6c20446961676e6f73697300</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000900000014000000030000000e00090300000000000000000000000020508020010000000053657420494f2d4c696e6b205265766973696f6e00</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000900000014000000030000000e000903000000000000000000000000205080210100000000536574204672616d65204361706162696c69747900</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000900000012000000030000000e000903000000000000000000000000205080220100000000536574204d696e204379636c652054696d6500</MBoxUserCmdData>
+						<MBoxUserCmdData>02000300090000001a000000030000000e00090300000000000000000000000020508024010000008f5365742050726f63657373204461746120496e204c656e67746800</MBoxUserCmdData>
+						<MBoxUserCmdData>02000300090000001b000000030000000e0009030000000000000000000000002050802501000000005365742050726f636573732044617461204f7574204c656e67746800</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000a00000012000000030000000e00090300000000000000000000000020508028020000000300536574204d617374657220436f6e74726f6c00</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000c0000000d000000030000000f0009030000000000000000000000002060800404000000000000005365742044657669636520496400</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000c0000000d000000030000000f0009030000000000000000000000002060800504000000000000005365742056656e646f7220496400</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000900000009000000030000000f00090300000000000000000000000020603001010000000053776170204d6f646500</MBoxUserCmdData>
+						<MBoxUserCmdData>02000300090000000b000000030000000f00090300000000000000000000000020603002010000000053776170206c656e67746800</MBoxUserCmdData>
+						<MBoxUserCmdData>02000300090000000b000000030000000f00090300000000000000000000000020603003010000000053776170206f666673657400</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000900000008000000030000000f000903000000000000000000000000206030040100000001526573657276656400</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000900000011000000030000000f00090300000000000000000000000020603005010000000150696e2032204c454420456e61626c656400</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000900000016000000030000000f000903000000000000000000000000206030060100000000537570707265737320416c6c20446961676e6f73697300</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000900000014000000030000000f00090300000000000000000000000020608020010000000053657420494f2d4c696e6b205265766973696f6e00</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000900000014000000030000000f000903000000000000000000000000206080210100000000536574204672616d65204361706162696c69747900</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000900000012000000030000000f000903000000000000000000000000206080220100000000536574204d696e204379636c652054696d6500</MBoxUserCmdData>
+						<MBoxUserCmdData>02000300090000001a000000030000000f00090300000000000000000000000020608024010000008f5365742050726f63657373204461746120496e204c656e67746800</MBoxUserCmdData>
+						<MBoxUserCmdData>02000300090000001b000000030000000f0009030000000000000000000000002060802501000000005365742050726f636573732044617461204f7574204c656e67746800</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000a00000012000000030000000f00090300000000000000000000000020608028020000000300536574204d617374657220436f6e74726f6c00</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000c0000000d00000003000000100009030000000000000000000000002070800404000000000000005365742044657669636520496400</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000c0000000d00000003000000100009030000000000000000000000002070800504000000000000005365742056656e646f7220496400</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000900000009000000030000001000090300000000000000000000000020703001010000000053776170204d6f646500</MBoxUserCmdData>
+						<MBoxUserCmdData>02000300090000000b000000030000001000090300000000000000000000000020703002010000000053776170206c656e67746800</MBoxUserCmdData>
+						<MBoxUserCmdData>02000300090000000b000000030000001000090300000000000000000000000020703003010000000053776170206f666673657400</MBoxUserCmdData>
+						<MBoxUserCmdData>0200030009000000080000000300000010000903000000000000000000000000207030040100000001526573657276656400</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000900000011000000030000001000090300000000000000000000000020703005010000000150696e2032204c454420456e61626c656400</MBoxUserCmdData>
+						<MBoxUserCmdData>0200030009000000160000000300000010000903000000000000000000000000207030060100000000537570707265737320416c6c20446961676e6f73697300</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000900000014000000030000001000090300000000000000000000000020708020010000000053657420494f2d4c696e6b205265766973696f6e00</MBoxUserCmdData>
+						<MBoxUserCmdData>0200030009000000140000000300000010000903000000000000000000000000207080210100000000536574204672616d65204361706162696c69747900</MBoxUserCmdData>
+						<MBoxUserCmdData>0200030009000000120000000300000010000903000000000000000000000000207080220100000000536574204d696e204379636c652054696d6500</MBoxUserCmdData>
+						<MBoxUserCmdData>02000300090000001a000000030000001000090300000000000000000000000020708024010000008f5365742050726f63657373204461746120496e204c656e67746800</MBoxUserCmdData>
+						<MBoxUserCmdData>02000300090000001b00000003000000100009030000000000000000000000002070802501000000005365742050726f636573732044617461204f7574204c656e67746800</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000a00000012000000030000001000090300000000000000000000000020708028020000000300536574204d617374657220436f6e74726f6c00</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000c0000000d00000003000000090009030000000000000000000000002000800404000000000000005365742044657669636520496400</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000c0000000d00000003000000090009030000000000000000000000002000800504000000000000005365742056656e646f7220496400</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000900000009000000030000000900090300000000000000000000000020003001010000000053776170204d6f646500</MBoxUserCmdData>
+						<MBoxUserCmdData>02000300090000000b000000030000000900090300000000000000000000000020003002010000000053776170206c656e67746800</MBoxUserCmdData>
+						<MBoxUserCmdData>02000300090000000b000000030000000900090300000000000000000000000020003003010000000053776170206f666673657400</MBoxUserCmdData>
+						<MBoxUserCmdData>0200030009000000080000000300000009000903000000000000000000000000200030040100000001526573657276656400</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000900000011000000030000000900090300000000000000000000000020003005010000000150696e2032204c454420456e61626c656400</MBoxUserCmdData>
+						<MBoxUserCmdData>0200030009000000160000000300000009000903000000000000000000000000200030060100000000537570707265737320416c6c20446961676e6f73697300</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000900000014000000030000000900090300000000000000000000000020008020010000000053657420494f2d4c696e6b205265766973696f6e00</MBoxUserCmdData>
+						<MBoxUserCmdData>0200030009000000140000000300000009000903000000000000000000000000200080210100000000536574204672616d65204361706162696c69747900</MBoxUserCmdData>
+						<MBoxUserCmdData>0200030009000000120000000300000009000903000000000000000000000000200080220100000000536574204d696e204379636c652054696d6500</MBoxUserCmdData>
+						<MBoxUserCmdData>02000300090000001a000000030000000900090300000000000000000000000020008024010000009f5365742050726f63657373204461746120496e204c656e67746800</MBoxUserCmdData>
+						<MBoxUserCmdData>02000300090000001b00000003000000090009030000000000000000000000002000802501000000005365742050726f636573732044617461204f7574204c656e67746800</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000a00000012000000030000000900090300000000000000000000000020008028020000000300536574204d617374657220436f6e74726f6c00</MBoxUserCmdData>
 						<Pdo Name="IO-Link Port Status" Index="#x1a80" Flags="#x0011" SyncMan="3">
 							<Entry Name="Status of IO-Link Port 1" Index="#xf100" Sub="#x01">
 								<Type>USINT</Type>
@@ -1664,6 +488,442 @@
 							<Entry Name="input byte 15" Index="#x6000" Sub="#x10" Flags="#x00001000">
 								<Type>BITARR8</Type>
 							</Entry>
+							<Entry Name="input byte 16" Index="#x6000" Sub="#x11" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 17" Index="#x6000" Sub="#x12" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 18" Index="#x6000" Sub="#x13" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 19" Index="#x6000" Sub="#x14" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 20" Index="#x6000" Sub="#x15" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 21" Index="#x6000" Sub="#x16" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 22" Index="#x6000" Sub="#x17" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 23" Index="#x6000" Sub="#x18" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 24" Index="#x6000" Sub="#x19" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 25" Index="#x6000" Sub="#x1a" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 26" Index="#x6000" Sub="#x1b" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 27" Index="#x6000" Sub="#x1c" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 28" Index="#x6000" Sub="#x1d" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 29" Index="#x6000" Sub="#x1e" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 30" Index="#x6000" Sub="#x1f" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 31" Index="#x6000" Sub="#x20" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+						</Pdo>
+						<Pdo Name="TxPDO" Index="#x1a01" Flags="#x0280" SyncMan="3">
+							<Entry Name="input byte 0" Index="#x6010" Sub="#x01" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 1" Index="#x6010" Sub="#x02" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 2" Index="#x6010" Sub="#x03" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 3" Index="#x6010" Sub="#x04" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 4" Index="#x6010" Sub="#x05" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 5" Index="#x6010" Sub="#x06" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 6" Index="#x6010" Sub="#x07" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 7" Index="#x6010" Sub="#x08" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 8" Index="#x6010" Sub="#x09" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 9" Index="#x6010" Sub="#x0a" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 10" Index="#x6010" Sub="#x0b" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 11" Index="#x6010" Sub="#x0c" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 12" Index="#x6010" Sub="#x0d" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 13" Index="#x6010" Sub="#x0e" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 14" Index="#x6010" Sub="#x0f" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 15" Index="#x6010" Sub="#x10" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+						</Pdo>
+						<Pdo Name="TxPDO" Index="#x1a02" Flags="#x0280" SyncMan="3">
+							<Entry Name="input byte 0" Index="#x6020" Sub="#x01" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 1" Index="#x6020" Sub="#x02" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 2" Index="#x6020" Sub="#x03" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 3" Index="#x6020" Sub="#x04" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 4" Index="#x6020" Sub="#x05" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 5" Index="#x6020" Sub="#x06" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 6" Index="#x6020" Sub="#x07" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 7" Index="#x6020" Sub="#x08" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 8" Index="#x6020" Sub="#x09" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 9" Index="#x6020" Sub="#x0a" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 10" Index="#x6020" Sub="#x0b" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 11" Index="#x6020" Sub="#x0c" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 12" Index="#x6020" Sub="#x0d" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 13" Index="#x6020" Sub="#x0e" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 14" Index="#x6020" Sub="#x0f" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 15" Index="#x6020" Sub="#x10" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+						</Pdo>
+						<Pdo Name="TxPDO" Index="#x1a03" Flags="#x0280" SyncMan="3">
+							<Entry Name="input byte 0" Index="#x6030" Sub="#x01" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 1" Index="#x6030" Sub="#x02" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 2" Index="#x6030" Sub="#x03" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 3" Index="#x6030" Sub="#x04" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 4" Index="#x6030" Sub="#x05" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 5" Index="#x6030" Sub="#x06" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 6" Index="#x6030" Sub="#x07" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 7" Index="#x6030" Sub="#x08" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 8" Index="#x6030" Sub="#x09" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 9" Index="#x6030" Sub="#x0a" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 10" Index="#x6030" Sub="#x0b" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 11" Index="#x6030" Sub="#x0c" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 12" Index="#x6030" Sub="#x0d" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 13" Index="#x6030" Sub="#x0e" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 14" Index="#x6030" Sub="#x0f" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 15" Index="#x6030" Sub="#x10" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+						</Pdo>
+						<Pdo Name="TxPDO" Index="#x1a04" Flags="#x0280" SyncMan="3">
+							<Entry Name="input byte 0" Index="#x6040" Sub="#x01" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 1" Index="#x6040" Sub="#x02" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 2" Index="#x6040" Sub="#x03" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 3" Index="#x6040" Sub="#x04" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 4" Index="#x6040" Sub="#x05" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 5" Index="#x6040" Sub="#x06" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 6" Index="#x6040" Sub="#x07" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 7" Index="#x6040" Sub="#x08" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 8" Index="#x6040" Sub="#x09" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 9" Index="#x6040" Sub="#x0a" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 10" Index="#x6040" Sub="#x0b" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 11" Index="#x6040" Sub="#x0c" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 12" Index="#x6040" Sub="#x0d" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 13" Index="#x6040" Sub="#x0e" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 14" Index="#x6040" Sub="#x0f" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 15" Index="#x6040" Sub="#x10" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+						</Pdo>
+						<Pdo Name="TxPDO" Index="#x1a05" Flags="#x0280" SyncMan="3">
+							<Entry Name="input byte 0" Index="#x6050" Sub="#x01" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 1" Index="#x6050" Sub="#x02" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 2" Index="#x6050" Sub="#x03" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 3" Index="#x6050" Sub="#x04" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 4" Index="#x6050" Sub="#x05" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 5" Index="#x6050" Sub="#x06" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 6" Index="#x6050" Sub="#x07" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 7" Index="#x6050" Sub="#x08" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 8" Index="#x6050" Sub="#x09" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 9" Index="#x6050" Sub="#x0a" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 10" Index="#x6050" Sub="#x0b" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 11" Index="#x6050" Sub="#x0c" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 12" Index="#x6050" Sub="#x0d" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 13" Index="#x6050" Sub="#x0e" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 14" Index="#x6050" Sub="#x0f" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 15" Index="#x6050" Sub="#x10" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+						</Pdo>
+						<Pdo Name="TxPDO" Index="#x1a06" Flags="#x0280" SyncMan="3">
+							<Entry Name="input byte 0" Index="#x6060" Sub="#x01" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 1" Index="#x6060" Sub="#x02" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 2" Index="#x6060" Sub="#x03" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 3" Index="#x6060" Sub="#x04" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 4" Index="#x6060" Sub="#x05" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 5" Index="#x6060" Sub="#x06" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 6" Index="#x6060" Sub="#x07" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 7" Index="#x6060" Sub="#x08" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 8" Index="#x6060" Sub="#x09" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 9" Index="#x6060" Sub="#x0a" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 10" Index="#x6060" Sub="#x0b" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 11" Index="#x6060" Sub="#x0c" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 12" Index="#x6060" Sub="#x0d" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 13" Index="#x6060" Sub="#x0e" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 14" Index="#x6060" Sub="#x0f" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 15" Index="#x6060" Sub="#x10" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+						</Pdo>
+						<Pdo Name="TxPDO" Index="#x1a07" Flags="#x0280" SyncMan="3">
+							<Entry Name="input byte 0" Index="#x6070" Sub="#x01" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 1" Index="#x6070" Sub="#x02" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 2" Index="#x6070" Sub="#x03" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 3" Index="#x6070" Sub="#x04" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 4" Index="#x6070" Sub="#x05" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 5" Index="#x6070" Sub="#x06" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 6" Index="#x6070" Sub="#x07" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 7" Index="#x6070" Sub="#x08" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 8" Index="#x6070" Sub="#x09" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 9" Index="#x6070" Sub="#x0a" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 10" Index="#x6070" Sub="#x0b" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 11" Index="#x6070" Sub="#x0c" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 12" Index="#x6070" Sub="#x0d" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 13" Index="#x6070" Sub="#x0e" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 14" Index="#x6070" Sub="#x0f" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 15" Index="#x6070" Sub="#x10" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+						</Pdo>
+						<Pdo Name="TxPDO DI/IOL status" Index="#x1a08" Flags="#x0090" SyncMan="3">
+							<Entry Name="&gt;Digital Inputs X1-X4" Index="#x2080" Sub="#x01">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="&gt;Digital Inputs X5-X8" Index="#x2080" Sub="#x02">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="IO-Link COM State" Index="#x2080" Sub="#x03">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="IO-Link PD valid" Index="#x2080" Sub="#x04">
+								<Type>BITARR8</Type>
+							</Entry>
+						</Pdo>
+						<Pdo Name="TxPDO New Diag Messages flag" Index="#x1a09" Flags="#x0090" SyncMan="3">
+							<Entry Name="New Messages Available " Index="#x10f3" Sub="#x01">
+								<Type>BYTE</Type>
+							</Entry>
+						</Pdo>
+						<Pdo Name="TxPDO Timestamp" Index="#x1a0a" Flags="#x0090" SyncMan="3">
+							<Entry Name="Timestamp" Index="#x10f8">
+								<Type>ULINT</Type>
+							</Entry>
+						</Pdo>
+						<Pdo Name="RxPDO DO/IOL control" Index="#x1608" InOut="1" Flags="#x0090" SyncMan="2">
+							<Entry Name="Digital Outputs X1-X4" Index="#x2280" Sub="#x01">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="Digital Outputs X5-X8" Index="#x2280" Sub="#x02">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="IO-Link COM Mode" Index="#x2280" Sub="#x03">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="Reserved" Index="#x2280" Sub="#x04">
+								<Type>BITARR8</Type>
+							</Entry>
 						</Pdo>
 						<CoeProfile ProfileNo="407638921"/>
 						<CoeProfile ProfileNo="407638921"/>
@@ -1673,7 +933,7 @@
 						<CoeProfile ProfileNo="407638921"/>
 						<CoeProfile ProfileNo="407638921"/>
 						<CoeProfile ProfileNo="407638921"/>
-						<Slot Name="IO-Link Ch.1" ImageId="1005">
+						<Slot Name="IO-Link Ch.1" ImageId="1000">
 							<SlotData>0000010001000000010000001000000000000000000000000000000000000000</SlotData>
 							<ModuleIdent>4353</ModuleIdent>
 							<ModuleIdent>4354</ModuleIdent>
@@ -1711,14 +971,14 @@
 							<ModuleIdent>4879</ModuleIdent>
 							<ModuleIdent>4880</ModuleIdent>
 							<ModuleIdent>4881</ModuleIdent>
-							<Module Id="#x03090019" Type="IOL_I_16byte" Class="">
-								<Name>Module 1 (IOL_I_16byte)</Name>
-								<ImageId>1005</ImageId>
-								<ModuleData>ad00000008110000000000000000000000000000000000000000000000000000</ModuleData>
+							<Module Id="#x03090009" Type="IOL_I_32byte" Class="">
+								<Name>Module 1 (IOL_I_32byte)</Name>
+								<ImageId>1000</ImageId>
+								<ModuleData>ad0000000a110000000000000000000000000000000000000000000000000000</ModuleData>
 								<PdoIndex>6656</PdoIndex>
 							</Module>
 						</Slot>
-						<Slot Name="IO-Link Ch.2" ImageId="1005">
+						<Slot Name="IO-Link Ch.2" ImageId="1000">
 							<SlotData>0000010001000000010000001000000000000000000000000000000000000000</SlotData>
 							<ModuleIdent>4353</ModuleIdent>
 							<ModuleIdent>4354</ModuleIdent>
@@ -1756,13 +1016,14 @@
 							<ModuleIdent>4879</ModuleIdent>
 							<ModuleIdent>4880</ModuleIdent>
 							<ModuleIdent>4881</ModuleIdent>
-							<Module Id="#x03090009" Type="Deactive" Class="">
-								<Name>Module 2 (Deactive)</Name>
-								<ImageId>1005</ImageId>
-								<ModuleData>ad00000011130000000000000000000000000000000000000000000000000000</ModuleData>
+							<Module Id="#x0309000a" Type="IOL_I_16byte" Class="">
+								<Name>Module 2 (IOL_I_16byte)</Name>
+								<ImageId>1000</ImageId>
+								<ModuleData>ad00000008110000000000000000000000000000000000000000000000000000</ModuleData>
+								<PdoIndex>6657</PdoIndex>
 							</Module>
 						</Slot>
-						<Slot Name="IO-Link Ch.3" ImageId="1005">
+						<Slot Name="IO-Link Ch.3" ImageId="1000">
 							<SlotData>0000010001000000010000001000000000000000000000000000000000000000</SlotData>
 							<ModuleIdent>4353</ModuleIdent>
 							<ModuleIdent>4354</ModuleIdent>
@@ -1800,13 +1061,14 @@
 							<ModuleIdent>4879</ModuleIdent>
 							<ModuleIdent>4880</ModuleIdent>
 							<ModuleIdent>4881</ModuleIdent>
-							<Module Id="#x0309000a" Type="Deactive" Class="">
-								<Name>Module 3 (Deactive)</Name>
-								<ImageId>1005</ImageId>
-								<ModuleData>ad00000011130000000000000000000000000000000000000000000000000000</ModuleData>
+							<Module Id="#x0309000b" Type="IOL_I_16byte" Class="">
+								<Name>Module 3 (IOL_I_16byte)</Name>
+								<ImageId>1000</ImageId>
+								<ModuleData>ad00000008110000000000000000000000000000000000000000000000000000</ModuleData>
+								<PdoIndex>6658</PdoIndex>
 							</Module>
 						</Slot>
-						<Slot Name="IO-Link Ch.4" ImageId="1005">
+						<Slot Name="IO-Link Ch.4" ImageId="1000">
 							<SlotData>0000010001000000010000001000000000000000000000000000000000000000</SlotData>
 							<ModuleIdent>4353</ModuleIdent>
 							<ModuleIdent>4354</ModuleIdent>
@@ -1844,13 +1106,14 @@
 							<ModuleIdent>4879</ModuleIdent>
 							<ModuleIdent>4880</ModuleIdent>
 							<ModuleIdent>4881</ModuleIdent>
-							<Module Id="#x0309000b" Type="Deactive" Class="">
-								<Name>Module 4 (Deactive)</Name>
-								<ImageId>1005</ImageId>
-								<ModuleData>ad00000011130000000000000000000000000000000000000000000000000000</ModuleData>
+							<Module Id="#x0309000c" Type="IOL_I_16byte" Class="">
+								<Name>Module 4 (IOL_I_16byte)</Name>
+								<ImageId>1000</ImageId>
+								<ModuleData>ad00000008110000000000000000000000000000000000000000000000000000</ModuleData>
+								<PdoIndex>6659</PdoIndex>
 							</Module>
 						</Slot>
-						<Slot Name="IO-Link Ch.5" ImageId="1005">
+						<Slot Name="IO-Link Ch.5" ImageId="1000">
 							<SlotData>0000010001000000010000001000000000000000000000000000000000000000</SlotData>
 							<ModuleIdent>4353</ModuleIdent>
 							<ModuleIdent>4354</ModuleIdent>
@@ -1888,13 +1151,14 @@
 							<ModuleIdent>4879</ModuleIdent>
 							<ModuleIdent>4880</ModuleIdent>
 							<ModuleIdent>4881</ModuleIdent>
-							<Module Id="#x0309000c" Type="Deactive" Class="">
-								<Name>Module 5 (Deactive)</Name>
-								<ImageId>1005</ImageId>
-								<ModuleData>ad00000011130000000000000000000000000000000000000000000000000000</ModuleData>
+							<Module Id="#x0309000d" Type="IOL_I_16byte" Class="">
+								<Name>Module 5 (IOL_I_16byte)</Name>
+								<ImageId>1000</ImageId>
+								<ModuleData>ad00000008110000000000000000000000000000000000000000000000000000</ModuleData>
+								<PdoIndex>6660</PdoIndex>
 							</Module>
 						</Slot>
-						<Slot Name="IO-Link Ch.6" ImageId="1005">
+						<Slot Name="IO-Link Ch.6" ImageId="1000">
 							<SlotData>0000010001000000010000001000000000000000000000000000000000000000</SlotData>
 							<ModuleIdent>4353</ModuleIdent>
 							<ModuleIdent>4354</ModuleIdent>
@@ -1932,13 +1196,14 @@
 							<ModuleIdent>4879</ModuleIdent>
 							<ModuleIdent>4880</ModuleIdent>
 							<ModuleIdent>4881</ModuleIdent>
-							<Module Id="#x0309000d" Type="Deactive" Class="">
-								<Name>Module 6 (Deactive)</Name>
-								<ImageId>1005</ImageId>
-								<ModuleData>ad00000011130000000000000000000000000000000000000000000000000000</ModuleData>
+							<Module Id="#x0309000e" Type="IOL_I_16byte" Class="">
+								<Name>Module 6 (IOL_I_16byte)</Name>
+								<ImageId>1000</ImageId>
+								<ModuleData>ad00000008110000000000000000000000000000000000000000000000000000</ModuleData>
+								<PdoIndex>6661</PdoIndex>
 							</Module>
 						</Slot>
-						<Slot Name="IO-Link Ch.7" ImageId="1005">
+						<Slot Name="IO-Link Ch.7" ImageId="1000">
 							<SlotData>0000010001000000010000001000000000000000000000000000000000000000</SlotData>
 							<ModuleIdent>4353</ModuleIdent>
 							<ModuleIdent>4354</ModuleIdent>
@@ -1976,13 +1241,14 @@
 							<ModuleIdent>4879</ModuleIdent>
 							<ModuleIdent>4880</ModuleIdent>
 							<ModuleIdent>4881</ModuleIdent>
-							<Module Id="#x0309000e" Type="Deactive" Class="">
-								<Name>Module 7 (Deactive)</Name>
-								<ImageId>1005</ImageId>
-								<ModuleData>ad00000011130000000000000000000000000000000000000000000000000000</ModuleData>
+							<Module Id="#x0309000f" Type="IOL_I_16byte" Class="">
+								<Name>Module 7 (IOL_I_16byte)</Name>
+								<ImageId>1000</ImageId>
+								<ModuleData>ad00000008110000000000000000000000000000000000000000000000000000</ModuleData>
+								<PdoIndex>6662</PdoIndex>
 							</Module>
 						</Slot>
-						<Slot Name="IO-Link Ch.8" ImageId="1005">
+						<Slot Name="IO-Link Ch.8" ImageId="1000">
 							<SlotData>0000010001000000010000001000000000000000000000000000000000000000</SlotData>
 							<ModuleIdent>4353</ModuleIdent>
 							<ModuleIdent>4354</ModuleIdent>
@@ -2020,115 +1286,140 @@
 							<ModuleIdent>4879</ModuleIdent>
 							<ModuleIdent>4880</ModuleIdent>
 							<ModuleIdent>4881</ModuleIdent>
-							<Module Id="#x0309000f" Type="Deactive" Class="">
-								<Name>Module 8 (Deactive)</Name>
-								<ImageId>1005</ImageId>
-								<ModuleData>ad00000011130000000000000000000000000000000000000000000000000000</ModuleData>
+							<Module Id="#x03090010" Type="IOL_I_16byte" Class="">
+								<Name>Module 8 (IOL_I_16byte)</Name>
+								<ImageId>1000</ImageId>
+								<ModuleData>ad00000008110000000000000000000000000000000000000000000000000000</ModuleData>
+								<PdoIndex>6663</PdoIndex>
 							</Module>
 						</Slot>
-						<Slot Name="IO-Link Ch.1 PIN-2" ImageId="1005">
+						<Slot Name="IO-Link Ch.1 PIN-2" ImageId="1000">
 							<SlotData>0000010001000000010000001000000000000000000000000000000000000000</SlotData>
 							<ModuleIdent>5377</ModuleIdent>
 							<ModuleIdent>5378</ModuleIdent>
 							<ModuleIdent>5413</ModuleIdent>
-							<Module Id="#x03090010" Type="STD_IN_1bit_Ch.B" Class="">
+							<Module Id="#x03090001" Type="STD_IN_1bit_Ch.B" Class="">
 								<Name>Module 9 (STD_IN_1bit_Ch.B)</Name>
-								<ImageId>1005</ImageId>
+								<ImageId>1000</ImageId>
 								<ModuleData>ad00000001150000000000000000000000000000000000000000000000000000</ModuleData>
 							</Module>
 						</Slot>
-						<Slot Name="IO-Link Ch.2 PIN-2" ImageId="1005">
+						<Slot Name="IO-Link Ch.2 PIN-2" ImageId="1000">
 							<SlotData>0000010001000000010000001000000000000000000000000000000000000000</SlotData>
 							<ModuleIdent>5380</ModuleIdent>
 							<ModuleIdent>5381</ModuleIdent>
 							<ModuleIdent>5414</ModuleIdent>
-							<Module Id="#x03090012" Type="Deactive" Class="">
-								<Name>Module 10 (Deactive)</Name>
-								<ImageId>1005</ImageId>
-								<ModuleData>ad00000026150000000000000000000000000000000000000000000000000000</ModuleData>
+							<Module Id="#x03090002" Type="STD_IN_1bit_Ch.B" Class="">
+								<Name>Module 10 (STD_IN_1bit_Ch.B)</Name>
+								<ImageId>1000</ImageId>
+								<ModuleData>ad00000004150000000000000000000000000000000000000000000000000000</ModuleData>
 							</Module>
 						</Slot>
-						<Slot Name="IO-Link Ch.3 PIN-2" ImageId="1005">
+						<Slot Name="IO-Link Ch.3 PIN-2" ImageId="1000">
 							<SlotData>0000010001000000010000001000000000000000000000000000000000000000</SlotData>
 							<ModuleIdent>5383</ModuleIdent>
 							<ModuleIdent>5384</ModuleIdent>
 							<ModuleIdent>5415</ModuleIdent>
-							<Module Id="#x03090013" Type="Deactive" Class="">
-								<Name>Module 11 (Deactive)</Name>
-								<ImageId>1005</ImageId>
-								<ModuleData>ad00000027150000000000000000000000000000000000000000000000000000</ModuleData>
+							<Module Id="#x03090003" Type="STD_IN_1bit_Ch.B" Class="">
+								<Name>Module 11 (STD_IN_1bit_Ch.B)</Name>
+								<ImageId>1000</ImageId>
+								<ModuleData>ad00000007150000000000000000000000000000000000000000000000000000</ModuleData>
 							</Module>
 						</Slot>
-						<Slot Name="IO-Link Ch.4 PIN-2" ImageId="1005">
+						<Slot Name="IO-Link Ch.4 PIN-2" ImageId="1000">
 							<SlotData>0000010001000000010000001000000000000000000000000000000000000000</SlotData>
 							<ModuleIdent>5392</ModuleIdent>
 							<ModuleIdent>5393</ModuleIdent>
 							<ModuleIdent>5416</ModuleIdent>
-							<Module Id="#x03090014" Type="Deactive" Class="">
-								<Name>Module 12 (Deactive)</Name>
-								<ImageId>1005</ImageId>
-								<ModuleData>ad00000028150000000000000000000000000000000000000000000000000000</ModuleData>
+							<Module Id="#x03090004" Type="STD_IN_1bit_Ch.B" Class="">
+								<Name>Module 12 (STD_IN_1bit_Ch.B)</Name>
+								<ImageId>1000</ImageId>
+								<ModuleData>ad00000010150000000000000000000000000000000000000000000000000000</ModuleData>
 							</Module>
 						</Slot>
-						<Slot Name="IO-Link Ch.5 PIN-2" ImageId="1005">
+						<Slot Name="IO-Link Ch.5 PIN-2" ImageId="1000">
 							<SlotData>0000010001000000010000001000000000000000000000000000000000000000</SlotData>
 							<ModuleIdent>5395</ModuleIdent>
 							<ModuleIdent>5396</ModuleIdent>
 							<ModuleIdent>5417</ModuleIdent>
-							<Module Id="#x03090015" Type="Deactive" Class="">
-								<Name>Module 13 (Deactive)</Name>
-								<ImageId>1005</ImageId>
-								<ModuleData>ad00000029150000000000000000000000000000000000000000000000000000</ModuleData>
+							<Module Id="#x03090005" Type="STD_IN_1bit_Ch.B" Class="">
+								<Name>Module 13 (STD_IN_1bit_Ch.B)</Name>
+								<ImageId>1000</ImageId>
+								<ModuleData>ad00000013150000000000000000000000000000000000000000000000000000</ModuleData>
 							</Module>
 						</Slot>
-						<Slot Name="IO-Link Ch.6 PIN-2" ImageId="1005">
+						<Slot Name="IO-Link Ch.6 PIN-2" ImageId="1000">
 							<SlotData>0000010001000000010000001000000000000000000000000000000000000000</SlotData>
 							<ModuleIdent>5398</ModuleIdent>
 							<ModuleIdent>5399</ModuleIdent>
 							<ModuleIdent>5424</ModuleIdent>
-							<Module Id="#x03090016" Type="Deactive" Class="">
-								<Name>Module 14 (Deactive)</Name>
-								<ImageId>1005</ImageId>
-								<ModuleData>ad00000030150000000000000000000000000000000000000000000000000000</ModuleData>
+							<Module Id="#x03090006" Type="STD_IN_1bit_Ch.B" Class="">
+								<Name>Module 14 (STD_IN_1bit_Ch.B)</Name>
+								<ImageId>1000</ImageId>
+								<ModuleData>ad00000016150000000000000000000000000000000000000000000000000000</ModuleData>
 							</Module>
 						</Slot>
-						<Slot Name="IO-Link Ch.7 PIN-2" ImageId="1005">
+						<Slot Name="IO-Link Ch.7 PIN-2" ImageId="1000">
 							<SlotData>0000010001000000010000001000000000000000000000000000000000000000</SlotData>
 							<ModuleIdent>5401</ModuleIdent>
 							<ModuleIdent>5408</ModuleIdent>
 							<ModuleIdent>5425</ModuleIdent>
-							<Module Id="#x03090017" Type="Deactive" Class="">
-								<Name>Module 15 (Deactive)</Name>
-								<ImageId>1005</ImageId>
-								<ModuleData>ad00000031150000000000000000000000000000000000000000000000000000</ModuleData>
+							<Module Id="#x03090007" Type="STD_IN_1bit_Ch.B" Class="">
+								<Name>Module 15 (STD_IN_1bit_Ch.B)</Name>
+								<ImageId>1000</ImageId>
+								<ModuleData>ad00000019150000000000000000000000000000000000000000000000000000</ModuleData>
 							</Module>
 						</Slot>
-						<Slot Name="IO-Link Ch.8 PIN-2" ImageId="1005">
+						<Slot Name="IO-Link Ch.8 PIN-2" ImageId="1000">
 							<SlotData>0000010001000000010000001000000000000000000000000000000000000000</SlotData>
 							<ModuleIdent>5410</ModuleIdent>
 							<ModuleIdent>5411</ModuleIdent>
 							<ModuleIdent>5426</ModuleIdent>
-							<Module Id="#x03090018" Type="Deactive" Class="">
-								<Name>Module 16 (Deactive)</Name>
-								<ImageId>1005</ImageId>
-								<ModuleData>ad00000032150000000000000000000000000000000000000000000000000000</ModuleData>
+							<Module Id="#x03090008" Type="STD_IN_1bit_Ch.B" Class="">
+								<Name>Module 16 (STD_IN_1bit_Ch.B)</Name>
+								<ImageId>1000</ImageId>
+								<ModuleData>ad00000022150000000000000000000000000000000000000000000000000000</ModuleData>
 							</Module>
 						</Slot>
-						<Slot Name="TxPDO DI/IOL status" ImageId="1005">
+						<Slot Name="TxPDO DI/IOL status" ImageId="1000">
 							<SlotData>0000000001000000010000001000000000000000000000000000000000000000</SlotData>
 							<ModuleIdent>13428</ModuleIdent>
+							<Module Id="#x03090011" Type="TxPDO DI/IOL status" Class="">
+								<Name>Module 17 (TxPDO DI/IOL status)</Name>
+								<ImageId>1000</ImageId>
+								<ModuleData>ad00000074340000000000000000000000000000000000000000000000000000</ModuleData>
+								<PdoIndex>6664</PdoIndex>
+							</Module>
 						</Slot>
-						<Slot Name="TxPDO New Diag Messages flag" ImageId="1005">
+						<Slot Name="TxPDO New Diag Messages flag" ImageId="1000">
 							<SlotData>0000000001000000010000001000000000000000000000000000000000000000</SlotData>
 							<ModuleIdent>13429</ModuleIdent>
+							<Module Id="#x03090012" Type="TxPDO New Diag Messages flag" Class="">
+								<Name>Module 18 (TxPDO New Diag Messages flag)</Name>
+								<ImageId>1000</ImageId>
+								<ModuleData>ad00000075340000000000000000000000000000000000000000000000000000</ModuleData>
+								<PdoIndex>6665</PdoIndex>
+							</Module>
 						</Slot>
-						<Slot Name="TxPDO Timestamp" ImageId="1005">
+						<Slot Name="TxPDO Timestamp" ImageId="1000">
 							<SlotData>0000000001000000010000001000000000000000000000000000000000000000</SlotData>
 							<ModuleIdent>13430</ModuleIdent>
+							<Module Id="#x03090013" Type="TxPDO Timestamp" Class="">
+								<Name>Module 19 (TxPDO Timestamp)</Name>
+								<ImageId>1000</ImageId>
+								<ModuleData>ad00000076340000000000000000000000000000000000000000000000000000</ModuleData>
+								<PdoIndex>6666</PdoIndex>
+							</Module>
 						</Slot>
-						<Slot Name="RxPDO DO/IOL control" ImageId="1005">
+						<Slot Name="RxPDO DO/IOL control" ImageId="1000">
 							<SlotData>0000000001000000010000001000000000000000000000000000000000000000</SlotData>
 							<ModuleIdent>13431</ModuleIdent>
+							<Module Id="#x03090014" Type="RxPDO DO/IOL control" Class="">
+								<Name>Module 20 (RxPDO DO/IOL control)</Name>
+								<ImageId>1000</ImageId>
+								<ModuleData>ad00000077340000000000000000000000000000000000000000000000000000</ModuleData>
+								<PdoIndex>5640</PdoIndex>
+							</Module>
 						</Slot>
 					</EtherCAT>
 				</Box>
@@ -2139,25 +1430,40 @@
 	<Mappings>
 		<MappingInfo Identifier="{00000000-2001-0850-0120-500840000403}" Id="#x02030010"/>
 		<OwnerA Name="TIPC^ItemSimulator^ItemSimulator Instance">
-			<OwnerB Name="TIID^Device 5 (EtherCAT)^Box 11 (ICE11-8IOL-G60L-V1D)">
-				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrColorSensorData" VarB="Module 1 (IOL_I_16byte)^TxPDO^input byte 10" Size="8" OffsA="48"/>
-				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrColorSensorData" VarB="Module 1 (IOL_I_16byte)^TxPDO^input byte 11" Size="8" OffsA="56"/>
-				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrColorSensorData" VarB="Module 1 (IOL_I_16byte)^TxPDO^input byte 4"/>
-				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrColorSensorData" VarB="Module 1 (IOL_I_16byte)^TxPDO^input byte 5" Size="8" OffsA="8"/>
-				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrColorSensorData" VarB="Module 1 (IOL_I_16byte)^TxPDO^input byte 6" Size="8" OffsA="16"/>
-				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrColorSensorData" VarB="Module 1 (IOL_I_16byte)^TxPDO^input byte 7" Size="8" OffsA="24"/>
-				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrColorSensorData" VarB="Module 1 (IOL_I_16byte)^TxPDO^input byte 8" Size="8" OffsA="32"/>
-				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrColorSensorData" VarB="Module 1 (IOL_I_16byte)^TxPDO^input byte 9" Size="8" OffsA="40"/>
-				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrColorSensorStatus" VarB="Module 1 (IOL_I_16byte)^TxPDO^input byte 0"/>
-				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrColorSensorStatus" VarB="Module 1 (IOL_I_16byte)^TxPDO^input byte 1" Size="8" OffsA="8"/>
-				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrColorSensorStatus" VarB="Module 1 (IOL_I_16byte)^TxPDO^input byte 2" Size="8" OffsA="16"/>
-				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrColorSensorStatus" VarB="Module 1 (IOL_I_16byte)^TxPDO^input byte 3" Size="8" OffsA="24"/>
-			</OwnerB>
-			<OwnerB Name="TIID^Device 5 (EtherCAT)^Term 1 (EK1101)^Term 2 (EL1018)">
-				<Link VarA="PlcTask Inputs^GVL_IO.stItemSimulator.bSignalIn" VarB="Channel 1^Input"/>
-			</OwnerB>
-			<OwnerB Name="TIID^Device 5 (EtherCAT)^Term 1 (EK1101)^Term 3 (EL2008)">
-				<Link VarA="TCPTask Outputs^GVL_IO.stItemSimulator.bSignalOut" VarB="Channel 1^Output"/>
+			<OwnerB Name="TIID^Device 5 (EtherCAT)^Box 1 (ICE11-8IOL-G60L-V1D)">
+				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrColorSensorData" VarB="Module 1 (IOL_I_32byte)^TxPDO^input byte 10" Size="8" OffsA="48"/>
+				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrColorSensorData" VarB="Module 1 (IOL_I_32byte)^TxPDO^input byte 11" Size="8" OffsA="56"/>
+				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrColorSensorData" VarB="Module 1 (IOL_I_32byte)^TxPDO^input byte 4"/>
+				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrColorSensorData" VarB="Module 1 (IOL_I_32byte)^TxPDO^input byte 5" Size="8" OffsA="8"/>
+				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrColorSensorData" VarB="Module 1 (IOL_I_32byte)^TxPDO^input byte 6" Size="8" OffsA="16"/>
+				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrColorSensorData" VarB="Module 1 (IOL_I_32byte)^TxPDO^input byte 7" Size="8" OffsA="24"/>
+				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrColorSensorData" VarB="Module 1 (IOL_I_32byte)^TxPDO^input byte 8" Size="8" OffsA="32"/>
+				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrColorSensorData" VarB="Module 1 (IOL_I_32byte)^TxPDO^input byte 9" Size="8" OffsA="40"/>
+				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrColorSensorStatus" VarB="Module 1 (IOL_I_32byte)^TxPDO^input byte 0"/>
+				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrColorSensorStatus" VarB="Module 1 (IOL_I_32byte)^TxPDO^input byte 1" Size="8" OffsA="8"/>
+				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrColorSensorStatus" VarB="Module 1 (IOL_I_32byte)^TxPDO^input byte 2" Size="8" OffsA="16"/>
+				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrColorSensorStatus" VarB="Module 1 (IOL_I_32byte)^TxPDO^input byte 3" Size="8" OffsA="24"/>
+				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrRest" VarB="Module 1 (IOL_I_32byte)^TxPDO^input byte 12"/>
+				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrRest" VarB="Module 1 (IOL_I_32byte)^TxPDO^input byte 13" Size="8" OffsA="8"/>
+				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrRest" VarB="Module 1 (IOL_I_32byte)^TxPDO^input byte 14" Size="8" OffsA="16"/>
+				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrRest" VarB="Module 1 (IOL_I_32byte)^TxPDO^input byte 15" Size="8" OffsA="24"/>
+				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrRest" VarB="Module 1 (IOL_I_32byte)^TxPDO^input byte 16" Size="8" OffsA="32"/>
+				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrRest" VarB="Module 1 (IOL_I_32byte)^TxPDO^input byte 17" Size="8" OffsA="40"/>
+				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrRest" VarB="Module 1 (IOL_I_32byte)^TxPDO^input byte 18" Size="8" OffsA="48"/>
+				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrRest" VarB="Module 1 (IOL_I_32byte)^TxPDO^input byte 19" Size="8" OffsA="56"/>
+				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrRest" VarB="Module 1 (IOL_I_32byte)^TxPDO^input byte 20" Size="8" OffsA="64"/>
+				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrRest" VarB="Module 1 (IOL_I_32byte)^TxPDO^input byte 21" Size="8" OffsA="72"/>
+				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrRest" VarB="Module 1 (IOL_I_32byte)^TxPDO^input byte 22" Size="8" OffsA="80"/>
+				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrRest" VarB="Module 1 (IOL_I_32byte)^TxPDO^input byte 23" Size="8" OffsA="88"/>
+				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrRest" VarB="Module 1 (IOL_I_32byte)^TxPDO^input byte 24" Size="8" OffsA="96"/>
+				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrRest" VarB="Module 1 (IOL_I_32byte)^TxPDO^input byte 25" Size="8" OffsA="104"/>
+				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrRest" VarB="Module 1 (IOL_I_32byte)^TxPDO^input byte 26" Size="8" OffsA="112"/>
+				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrRest" VarB="Module 1 (IOL_I_32byte)^TxPDO^input byte 27" Size="8" OffsA="120"/>
+				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrRest" VarB="Module 1 (IOL_I_32byte)^TxPDO^input byte 28" Size="8" OffsA="128"/>
+				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrRest" VarB="Module 1 (IOL_I_32byte)^TxPDO^input byte 29" Size="8" OffsA="136"/>
+				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrRest" VarB="Module 1 (IOL_I_32byte)^TxPDO^input byte 30" Size="8" OffsA="144"/>
+				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrRest" VarB="Module 1 (IOL_I_32byte)^TxPDO^input byte 31" Size="8" OffsA="152"/>
+				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.nChannelStatus" VarB="IO-Link Port Status^Status of IO-Link Port 1"/>
 			</OwnerB>
 		</OwnerA>
 	</Mappings>

@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <DUT Name="U_Convert_INT8" Id="{fc9aa775-5002-48e5-bdb1-66ac5602549d}">
+    <Declaration><![CDATA[TYPE U_Convert_INT8 :
+UNION
+	nValue		:INT;
+	nBYTE		:BYTE;
+END_UNION
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

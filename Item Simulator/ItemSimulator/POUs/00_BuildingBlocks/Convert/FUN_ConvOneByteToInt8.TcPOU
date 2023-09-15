@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FUN_ConvOneByteToInt8" Id="{f828b272-e539-4f8d-9b4b-d0b5524e0d05}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION FUN_ConvOneByteToInt8 : INT
+VAR_INPUT
+	nValue1		:BYTE;				// Input Byte no 1
+
+END_VAR
+VAR
+	uData		:U_Convert_INT8;		// Data variable used for conversion
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// Save input bytes in data union
+uData.nBYTE := nValue1;
+
+
+// Return value
+FUN_ConvOneByteToInt8 := uData.nValue;]]></ST>
+    </Implementation>
+    <LineIds Name="FUN_ConvOneByteToInt8">
+      <LineId Id="69" Count="4" />
+      <LineId Id="16" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

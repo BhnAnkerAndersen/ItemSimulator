@@ -9,29 +9,39 @@ END_VAR
 VAR
 	arrColorSensorStatus	AT %I*: ARRAY[0..3] OF BYTE;
 	arrColorSensorData		AT %I*: ARRAY[4..11] OF BYTE;
+	arrRest					AT %I*: ARRAY[12..31] OF BYTE;
+	nQL1						  :UINT;
+	nQL2						  :UINT;
+	nQL3						  :UINT;
+	nQL4						  :UINT;
 	nChannelStatus			AT %I*: USINT;
 	
-	L_Value						  :UINT;
-	A_Value						  :UINT;
-	B_Value						  :UINT;
+	L_ValueLab					  :UINT;
+	A_ValueLab					  :UINT;
+	B_ValueLab					  :UINT;
 	CMV_QL1						  :UINT;
 	
 	arrQint						  :ARRAY[1..24] OF BOOL;
-	QL1							  :BOOL;
-	QL2							  :BOOL;
-	QL3							  :BOOL;
-	QL4							  :BOOL;
+	bQL1						  :BOOL;
+	bQL2						  :BOOL;
+	bQL3						  :BOOL;
+	bQL4						  :BOOL;
 	QoRAlarm					  :BOOL;
 	PDInvalid					  :BOOL;
+	
+	R_Value						  :INT;
+	G_Value						  :INT;
+	B_Value						  :INT;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[L_Value := FUN_ConvTwoByteToUInt16(nValue1 := arrColorSensorData[11], nValue2 := arrColorSensorData[10]); // LAB color space: L-value / RGB color space: R-value
-A_Value := FUN_ConvTwoByteToUInt16(nValue1 := arrColorSensorData[9], nValue2 := arrColorSensorData[8]);	// LAB color space: A-value / RGB color space: G-value
-B_Value := FUN_ConvTwoByteToUInt16(nValue1 := arrColorSensorData[7], nValue2 := arrColorSensorData[6]);	// LAB color space: B-value / RGB color space: B-value
+      <ST><![CDATA[L_ValueLab := FUN_ConvTwoByteToUInt16(nValue1 := arrColorSensorData[11], nValue2 := arrColorSensorData[10]); // LAB color space: L-value / RGB color space: R-value
+A_ValueLab := FUN_ConvTwoByteToUInt16(nValue1 := arrColorSensorData[9], nValue2 := arrColorSensorData[8]);	// LAB color space: A-value / RGB color space: G-value
+B_ValueLab := FUN_ConvTwoByteToUInt16(nValue1 := arrColorSensorData[7], nValue2 := arrColorSensorData[6]);	// LAB color space: B-value / RGB color space: B-value
 
 CMV_QL1 := FUN_ConvTwoByteToUInt16(nValue1 := arrColorSensorData[5], nValue2 := arrColorSensorData[4]);
 
+//R Value
 arrQint[1] := arrColorSensorStatus[1].0;
 arrQint[2] := arrColorSensorStatus[1].1;
 arrQint[3] := arrColorSensorStatus[1].2;
@@ -50,6 +60,7 @@ arrQint[14] := arrColorSensorStatus[2].5;
 arrQint[15] := arrColorSensorStatus[2].6;
 arrQint[16] := arrColorSensorStatus[2].7;
 
+//G Value
 arrQint[17] := arrColorSensorStatus[3].0;
 arrQint[18] := arrColorSensorStatus[3].1;
 arrQint[19] := arrColorSensorStatus[3].2;
@@ -59,28 +70,46 @@ arrQint[22] := arrColorSensorStatus[3].5;
 arrQint[23] := arrColorSensorStatus[3].6;
 arrQint[24] := arrColorSensorStatus[3].7;
 
-QL1 := arrColorSensorStatus[0].0;
-QL2 := arrColorSensorStatus[0].1;
-QL3 := arrColorSensorStatus[0].2;
-QL4 := arrColorSensorStatus[0].3;
+nQL1 := FUN_ConvTwoByteToUInt16(nValue1 := arrColorSensorData[11], nValue2 := arrColorSensorData[10]); // LAB color space: L-value / RGB color space: R-value
+nQL2 := FUN_ConvTwoByteToUInt16(nValue1 := arrColorSensorData[9], nValue2 := arrColorSensorData[8]);	// LAB color space: A-value / RGB color space: G-value
+nQL3 := FUN_ConvTwoByteToUInt16(nValue1 := arrColorSensorData[7], nValue2 := arrColorSensorData[6]);	// LAB color space: B-value / RGB color space: B-value
+nQL4 := FUN_ConvTwoByteToUInt16(nValue1 := arrColorSensorData[5], nValue2 := arrColorSensorData[4]);
+
+bQL1 := arrColorSensorStatus[0].0;
+bQL2 := arrColorSensorStatus[0].1;
+bQL3 := arrColorSensorStatus[0].2;
+bQL4 := arrColorSensorStatus[0].3;
 QoRAlarm := arrColorSensorStatus[0].4;
-PDInvalid := arrColorSensorStatus[0].5;]]></ST>
+PDInvalid := arrColorSensorStatus[0].5;
+
+R_Value := FUN_ConvOneByteToInt8(nValue1:= arrColorSensorStatus[1]);
+G_Value := FUN_ConvOneByteToInt8(nValue1:= arrColorSensorStatus[3]);
+B_Value := FUN_ConvOneByteToInt8(nValue1:= arrColorSensorStatus[2]);]]></ST>
     </Implementation>
     <LineIds Name="FB_ColourSensor">
       <LineId Id="9" Count="0" />
       <LineId Id="28" Count="2" />
       <LineId Id="27" Count="0" />
+      <LineId Id="101" Count="0" />
       <LineId Id="52" Count="0" />
       <LineId Id="54" Count="6" />
       <LineId Id="53" Count="0" />
       <LineId Id="43" Count="0" />
       <LineId Id="45" Count="6" />
       <LineId Id="44" Count="0" />
+      <LineId Id="102" Count="0" />
       <LineId Id="33" Count="0" />
       <LineId Id="26" Count="0" />
-      <LineId Id="35" Count="7" />
+      <LineId Id="35" Count="6" />
+      <LineId Id="113" Count="3" />
+      <LineId Id="112" Count="0" />
+      <LineId Id="42" Count="0" />
       <LineId Id="34" Count="0" />
       <LineId Id="68" Count="4" />
+      <LineId Id="105" Count="0" />
+      <LineId Id="100" Count="0" />
+      <LineId Id="99" Count="0" />
+      <LineId Id="107" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>

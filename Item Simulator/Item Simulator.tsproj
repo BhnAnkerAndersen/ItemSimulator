@@ -2,30 +2,12 @@
 <TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.35">
 	<DataTypes>
 		<DataType>
-			<Name GUID="{527C5C5C-1CF8-1963-ACDC-85B7B3E5B586}" IecBaseType="true" AutoDeleteType="true">ARRAY [0..3] OF BYTE</Name>
-			<BitSize>32</BitSize>
+			<Name GUID="{FDC5107F-76C5-2D41-91DE-B4FF0E4C5970}" IecBaseType="true" AutoDeleteType="true">ARRAY [0..11] OF BYTE</Name>
+			<BitSize>96</BitSize>
 			<BaseType GUID="{18071995-0000-0000-0000-000000000001}">BYTE</BaseType>
 			<ArrayInfo>
 				<LBound>0</LBound>
-				<Elements>4</Elements>
-			</ArrayInfo>
-		</DataType>
-		<DataType>
-			<Name GUID="{178E0FFB-DF97-60CE-F32D-AF3C26E3CB1A}" IecBaseType="true" AutoDeleteType="true">ARRAY [4..11] OF BYTE</Name>
-			<BitSize>64</BitSize>
-			<BaseType GUID="{18071995-0000-0000-0000-000000000001}">BYTE</BaseType>
-			<ArrayInfo>
-				<LBound>4</LBound>
-				<Elements>8</Elements>
-			</ArrayInfo>
-		</DataType>
-		<DataType>
-			<Name GUID="{AE579C3A-A9B9-0D41-C0A1-DC535F479232}" IecBaseType="true" AutoDeleteType="true">ARRAY [12..31] OF BYTE</Name>
-			<BitSize>160</BitSize>
-			<BaseType GUID="{18071995-0000-0000-0000-000000000001}">BYTE</BaseType>
-			<ArrayInfo>
-				<LBound>12</LBound>
-				<Elements>20</Elements>
+				<Elements>12</Elements>
 			</ArrayInfo>
 		</DataType>
 	</DataTypes>
@@ -50,7 +32,7 @@
 		</System>
 		<Plc>
 			<Project GUID="{921AB191-9460-4D4F-B79D-2E5B7263E7DB}" Name="ItemSimulator" PrjFilePath="ItemSimulator\ItemSimulator.plcproj" TmcFilePath="ItemSimulator\ItemSimulator.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="ItemSimulator\ItemSimulator.tmc" TmcHash="{1E06C3B9-BA4D-297F-71C9-ED81EE09DA67}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="ItemSimulator\ItemSimulator.tmc" TmcHash="{8C925CBD-EA1D-93D8-4A17-FFA607C2F187}">
 					<Name>ItemSimulator Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="2" AreaNo="1">
@@ -67,16 +49,8 @@
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>PRG_IO_Link_Master.fbColorSensor.arrColorSensorStatus</Name>
-							<Type GUID="{527C5C5C-1CF8-1963-ACDC-85B7B3E5B586}">ARRAY [0..3] OF BYTE</Type>
-						</Var>
-						<Var>
 							<Name>PRG_IO_Link_Master.fbColorSensor.arrColorSensorData</Name>
-							<Type GUID="{178E0FFB-DF97-60CE-F32D-AF3C26E3CB1A}">ARRAY [4..11] OF BYTE</Type>
-						</Var>
-						<Var>
-							<Name>PRG_IO_Link_Master.fbColorSensor.arrRest</Name>
-							<Type GUID="{AE579C3A-A9B9-0D41-C0A1-DC535F479232}">ARRAY [12..31] OF BYTE</Type>
+							<Type GUID="{FDC5107F-76C5-2D41-91DE-B4FF0E4C5970}">ARRAY [0..11] OF BYTE</Type>
 						</Var>
 						<Var>
 							<Name>PRG_IO_Link_Master.fbColorSensor.nChannelStatus</Name>
@@ -1431,38 +1405,18 @@
 		<MappingInfo Identifier="{00000000-2001-0850-0120-500840000403}" Id="#x02030010"/>
 		<OwnerA Name="TIPC^ItemSimulator^ItemSimulator Instance">
 			<OwnerB Name="TIID^Device 5 (EtherCAT)^Box 1 (ICE11-8IOL-G60L-V1D)">
-				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrColorSensorData" VarB="Module 1 (IOL_I_32byte)^TxPDO^input byte 10" Size="8" OffsA="48"/>
-				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrColorSensorData" VarB="Module 1 (IOL_I_32byte)^TxPDO^input byte 11" Size="8" OffsA="56"/>
-				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrColorSensorData" VarB="Module 1 (IOL_I_32byte)^TxPDO^input byte 4"/>
-				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrColorSensorData" VarB="Module 1 (IOL_I_32byte)^TxPDO^input byte 5" Size="8" OffsA="8"/>
-				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrColorSensorData" VarB="Module 1 (IOL_I_32byte)^TxPDO^input byte 6" Size="8" OffsA="16"/>
-				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrColorSensorData" VarB="Module 1 (IOL_I_32byte)^TxPDO^input byte 7" Size="8" OffsA="24"/>
-				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrColorSensorData" VarB="Module 1 (IOL_I_32byte)^TxPDO^input byte 8" Size="8" OffsA="32"/>
-				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrColorSensorData" VarB="Module 1 (IOL_I_32byte)^TxPDO^input byte 9" Size="8" OffsA="40"/>
-				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrColorSensorStatus" VarB="Module 1 (IOL_I_32byte)^TxPDO^input byte 0"/>
-				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrColorSensorStatus" VarB="Module 1 (IOL_I_32byte)^TxPDO^input byte 1" Size="8" OffsA="8"/>
-				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrColorSensorStatus" VarB="Module 1 (IOL_I_32byte)^TxPDO^input byte 2" Size="8" OffsA="16"/>
-				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrColorSensorStatus" VarB="Module 1 (IOL_I_32byte)^TxPDO^input byte 3" Size="8" OffsA="24"/>
-				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrRest" VarB="Module 1 (IOL_I_32byte)^TxPDO^input byte 12"/>
-				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrRest" VarB="Module 1 (IOL_I_32byte)^TxPDO^input byte 13" Size="8" OffsA="8"/>
-				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrRest" VarB="Module 1 (IOL_I_32byte)^TxPDO^input byte 14" Size="8" OffsA="16"/>
-				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrRest" VarB="Module 1 (IOL_I_32byte)^TxPDO^input byte 15" Size="8" OffsA="24"/>
-				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrRest" VarB="Module 1 (IOL_I_32byte)^TxPDO^input byte 16" Size="8" OffsA="32"/>
-				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrRest" VarB="Module 1 (IOL_I_32byte)^TxPDO^input byte 17" Size="8" OffsA="40"/>
-				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrRest" VarB="Module 1 (IOL_I_32byte)^TxPDO^input byte 18" Size="8" OffsA="48"/>
-				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrRest" VarB="Module 1 (IOL_I_32byte)^TxPDO^input byte 19" Size="8" OffsA="56"/>
-				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrRest" VarB="Module 1 (IOL_I_32byte)^TxPDO^input byte 20" Size="8" OffsA="64"/>
-				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrRest" VarB="Module 1 (IOL_I_32byte)^TxPDO^input byte 21" Size="8" OffsA="72"/>
-				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrRest" VarB="Module 1 (IOL_I_32byte)^TxPDO^input byte 22" Size="8" OffsA="80"/>
-				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrRest" VarB="Module 1 (IOL_I_32byte)^TxPDO^input byte 23" Size="8" OffsA="88"/>
-				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrRest" VarB="Module 1 (IOL_I_32byte)^TxPDO^input byte 24" Size="8" OffsA="96"/>
-				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrRest" VarB="Module 1 (IOL_I_32byte)^TxPDO^input byte 25" Size="8" OffsA="104"/>
-				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrRest" VarB="Module 1 (IOL_I_32byte)^TxPDO^input byte 26" Size="8" OffsA="112"/>
-				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrRest" VarB="Module 1 (IOL_I_32byte)^TxPDO^input byte 27" Size="8" OffsA="120"/>
-				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrRest" VarB="Module 1 (IOL_I_32byte)^TxPDO^input byte 28" Size="8" OffsA="128"/>
-				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrRest" VarB="Module 1 (IOL_I_32byte)^TxPDO^input byte 29" Size="8" OffsA="136"/>
-				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrRest" VarB="Module 1 (IOL_I_32byte)^TxPDO^input byte 30" Size="8" OffsA="144"/>
-				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrRest" VarB="Module 1 (IOL_I_32byte)^TxPDO^input byte 31" Size="8" OffsA="152"/>
+				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrColorSensorData" VarB="Module 1 (IOL_I_32byte)^TxPDO^input byte 0"/>
+				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrColorSensorData" VarB="Module 1 (IOL_I_32byte)^TxPDO^input byte 1" Size="8" OffsA="8"/>
+				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrColorSensorData" VarB="Module 1 (IOL_I_32byte)^TxPDO^input byte 10" Size="8" OffsA="80"/>
+				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrColorSensorData" VarB="Module 1 (IOL_I_32byte)^TxPDO^input byte 11" Size="8" OffsA="88"/>
+				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrColorSensorData" VarB="Module 1 (IOL_I_32byte)^TxPDO^input byte 2" Size="8" OffsA="16"/>
+				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrColorSensorData" VarB="Module 1 (IOL_I_32byte)^TxPDO^input byte 3" Size="8" OffsA="24"/>
+				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrColorSensorData" VarB="Module 1 (IOL_I_32byte)^TxPDO^input byte 4" Size="8" OffsA="32"/>
+				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrColorSensorData" VarB="Module 1 (IOL_I_32byte)^TxPDO^input byte 5" Size="8" OffsA="40"/>
+				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrColorSensorData" VarB="Module 1 (IOL_I_32byte)^TxPDO^input byte 6" Size="8" OffsA="48"/>
+				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrColorSensorData" VarB="Module 1 (IOL_I_32byte)^TxPDO^input byte 7" Size="8" OffsA="56"/>
+				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrColorSensorData" VarB="Module 1 (IOL_I_32byte)^TxPDO^input byte 8" Size="8" OffsA="64"/>
+				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrColorSensorData" VarB="Module 1 (IOL_I_32byte)^TxPDO^input byte 9" Size="8" OffsA="72"/>
 				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.nChannelStatus" VarB="IO-Link Port Status^Status of IO-Link Port 1"/>
 			</OwnerB>
 		</OwnerA>

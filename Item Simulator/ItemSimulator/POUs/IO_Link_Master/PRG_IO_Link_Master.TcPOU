@@ -4,13 +4,16 @@
     <Declaration><![CDATA[PROGRAM PRG_IO_Link_Master
 VAR
 	fbColorSensor			:FB_ColourSensor;
+	fbCMS					:FB_CMS;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[fbColorSensor();]]></ST>
+      <ST><![CDATA[fbColorSensor();
+fbCMS();]]></ST>
     </Implementation>
     <LineIds Name="PRG_IO_Link_Master">
       <LineId Id="5" Count="0" />
+      <LineId Id="10" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>

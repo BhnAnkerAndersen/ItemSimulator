@@ -10,11 +10,20 @@
 				<Elements>12</Elements>
 			</ArrayInfo>
 		</DataType>
+		<DataType>
+			<Name GUID="{C7179B92-BD8E-352C-BFA9-A6C36FD2744B}" IecBaseType="true" AutoDeleteType="true">ARRAY [0..19] OF BYTE</Name>
+			<BitSize>160</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-000000000001}">BYTE</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>20</Elements>
+			</ArrayInfo>
+		</DataType>
 	</DataTypes>
 	<ImageDatas>
 		<ImageData Id="1000">424dd6020000000000003600000028000000100000000e000000010018000000000000000000c40e0000c40e0000000000000000000087a5008aa708a6bc45d6e0a8b9ca6a93ad1a87a50087a50087a50087a50087a50087a50087a5008aa70887a5008aa70887a5008aa708b1c459eef2dcc8d58b97b02287a50087a50087a50087a50087a50087a50087a5008aa70887a5008aa70887a5008aa708b2c55cf1f4e1cad68ec1d07cd9e2afe6eccbe6eccbe1e8c0c9d78e9fb73387a5008aa70887a5008aa70887a5008aa708b2c55cf1f4e1cad68ecbd892ebf0d5f3f6e7e9efd2e9efd2ebf0d6d2dea29bb42c8aa70887a5008aa70887a5008aa708b2c55cf1f4e1cad68ec0cf7ad3dea2cad790b1c45ab6c865dbe3b3ecf0d8aec1538ba70987a5008aa70887a5008aa708b2c55cf1f4e1dfe7bccfda9ad1db9dcbd791bfce78c7d58be7eccdecf0d7acc1508ba70887a5008aa70887a5008aa708aec252e6eccaeaefd3e2e9c3e0e7bde0e7bde0e7bee3eac5e4ebc7cad78f99b2278aa70887a5008aa70887a5008aa7089bb42ab8c969bece76cad790d4dea5ceda98c2d17fbccd73b3c65e9db53089a7068aa70887a5008aa70887a5008aa7088faa129bb42d9eb632bacb6fd1dd9fc3d281a8be479eb6329cb52d95af1f8aa7088aa70887a5008aa70887a5008aa708a0b837c6d486ceda98e3eac5f4f7e9eaefd3d5dfa7ceda98cbd892bccc7195af1f8aa70887a5008aa70887a5008aa708a7bd46d7e1ace2e9c2eef3dcf9faf2f3f6e5e7edcce3eac3dfe7bccbd7909ab3288aa70887a5008aa70887a5008aa70888a6048ba80a8ca90cbacc6ee5eccbd5dfa7abc04d9bb42b9bb32a96b0208ba7088aa70887a5008aa70887a5008aa70887a50087a50087a500a5bb40d9e2b0ecf1d8dee6bad6e0a9d2dda2c1d07c97b1238aa70887a5008aa70887a5008aa70887a50087a50087a5008ba809aabf4bd2dda2e9eed1edf1d8e9eed0d1dca09cb52d8aa70887a5008aa708</ImageData>
 	</ImageDatas>
-	<Project ProjectGUID="{A079A86B-D316-4F8A-990D-429A84007430}" Target64Bit="true" ShowHideConfigurations="#x106">
+	<Project ProjectGUID="{A079A86B-D316-4F8A-990D-429A84007430}" TargetNetId="169.254.58.74.1.1" Target64Bit="true" ShowHideConfigurations="#x106">
 		<System>
 			<Licenses>
 				<Target>
@@ -32,7 +41,7 @@
 		</System>
 		<Plc>
 			<Project GUID="{921AB191-9460-4D4F-B79D-2E5B7263E7DB}" Name="ItemSimulator" PrjFilePath="ItemSimulator\ItemSimulator.plcproj" TmcFilePath="ItemSimulator\ItemSimulator.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="ItemSimulator\ItemSimulator.tmc" TmcHash="{8C925CBD-EA1D-93D8-4A17-FFA607C2F187}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="ItemSimulator\ItemSimulator.tmc" TmcHash="{F98CF070-6778-25AB-5D21-6CC7ACBEC4BA}">
 					<Name>ItemSimulator Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="2" AreaNo="1">
@@ -45,15 +54,23 @@
 					<Vars VarGrpType="1" ContextId="1" AreaNo="16">
 						<Name>PlcTask Inputs</Name>
 						<Var>
-							<Name>GVL_IO.stItemSimulator.bSignalIn</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
 							<Name>PRG_IO_Link_Master.fbColorSensor.arrColorSensorData</Name>
 							<Type GUID="{FDC5107F-76C5-2D41-91DE-B4FF0E4C5970}">ARRAY [0..11] OF BYTE</Type>
 						</Var>
 						<Var>
 							<Name>PRG_IO_Link_Master.fbColorSensor.nChannelStatus</Name>
+							<Type>USINT</Type>
+						</Var>
+						<Var>
+							<Name>GVL_IO.stItemSimulator.bSignalIn</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>PRG_IO_Link_Master.fbCMS.arrCMSData</Name>
+							<Type GUID="{C7179B92-BD8E-352C-BFA9-A6C36FD2744B}">ARRAY [0..19] OF BYTE</Type>
+						</Var>
+						<Var>
+							<Name>PRG_IO_Link_Master.fbCMS.nChannelStatus</Name>
 							<Type>USINT</Type>
 						</Var>
 					</Vars>
@@ -104,7 +121,7 @@
 			</Project>
 		</Plc>
 		<Io>
-			<Device Id="5" DevType="111" DevFlags="#x0003" AmsPort="28677" AmsNetId="192.68.134.160.6.1" RemoteName="Device 5 (EtherCAT)" InfoImageId="5">
+			<Device Id="5" DevType="111" DevFlags="#x0003" AmsPort="28677" AmsNetId="169.254.58.74.6.1" RemoteName="Device 5 (EtherCAT)" InfoImageId="5">
 				<Name>Device 5 (EtherCAT)</Name>
 				<AddressInfo>
 					<Pnp>
@@ -119,11 +136,11 @@
 				<Box Id="1" BoxType="9099" BoxFlags="#x00000020">
 					<Name>Box 1 (ICE11-8IOL-G60L-V1D)</Name>
 					<ImageId>1000</ImageId>
-					<EtherCAT SlaveType="3" AdsServerAddress="a9fe3a4a0602e903" FixedAdsServerNetId="true" PdiType="#x0006" MboxDataLinkLayer="true" StateMBoxPolling="true" CycleMBoxPollingTime="0" CoeType="15" EoeType="3" FoeType="1" VendorId="#x000000ad" ProductCode="#x042e59df" RevisionNo="#x00000001" InfoDataAddr="true" InfoDataNetId="true" TimeoutStateChange1="10000" TimeoutStateChange2="2000" TimeoutStateChange3="100" TimeoutStateChange4="100" GenerateOwnNetId="true" PortPhys="17" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="ICE11-8IOL-G60L-V1D" Desc="ICE11-8IOL-G60L-V1D" PortABoxInfo="#x00ffffff">
+					<EtherCAT SlaveType="3" AdsServerAddress="a9fe3a4a0602e903" PdiType="#x0006" MboxDataLinkLayer="true" StateMBoxPolling="true" CycleMBoxPollingTime="0" CoeType="15" EoeType="3" FoeType="1" VendorId="#x000000ad" ProductCode="#x042e59df" RevisionNo="#x00000001" InfoDataAddr="true" InfoDataNetId="true" TimeoutStateChange1="10000" TimeoutStateChange2="2000" TimeoutStateChange3="100" TimeoutStateChange4="100" GenerateOwnNetId="true" PortPhys="17" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="ICE11-8IOL-G60L-V1D" Desc="ICE11-8IOL-G60L-V1D" PortABoxInfo="#x00ffffff">
 						<SyncMan>001000043600010001000000000400040004001036010000</SyncMan>
 						<SyncMan>001400043200010002000000000400040004001432010000</SyncMan>
 						<SyncMan>001804007400010003000000000004010000001874010000</SyncMan>
-						<SyncMan>8020a5003000010004000000000015010800802030010000</SyncMan>
+						<SyncMan>8020b5003000010004000000000015010800802030010000</SyncMan>
 						<Fmmu>0000000000000000001800020100000001000000000000000000000000000000</Fmmu>
 						<Fmmu>0000000000000000802000010100000002000000000000000000000000000000</Fmmu>
 						<Fmmu>00000000000000000d0800010100000003000000000000000000000000000000</Fmmu>
@@ -139,22 +156,8 @@
 						<MBoxUserCmdData>02000300090000002000000003000000080009030000000000000000000000002083230801000000014368616e6e656c20422850696e20322920446972656374696f6e20496e70757400</MBoxUserCmdData>
 						<MBoxUserCmdData>020003000c0000000d000000030000000000000000000000000000000000000020008004040000008e0280005365742044657669636520496400</MBoxUserCmdData>
 						<MBoxUserCmdData>020003000c0000000d000000030000000000000000000000000000000000000020008005040000001a0000005365742056656e646f7220496400</MBoxUserCmdData>
-						<MBoxUserCmdData>020003000c0000000d000000030000000a0009030000000000000000000000002010800404000000000000005365742044657669636520496400</MBoxUserCmdData>
-						<MBoxUserCmdData>020003000c0000000d000000030000000a0009030000000000000000000000002010800504000000000000005365742056656e646f7220496400</MBoxUserCmdData>
-						<MBoxUserCmdData>020003000900000009000000030000000a00090300000000000000000000000020103001010000000053776170204d6f646500</MBoxUserCmdData>
-						<MBoxUserCmdData>02000300090000000b000000030000000a00090300000000000000000000000020103002010000000053776170206c656e67746800</MBoxUserCmdData>
-						<MBoxUserCmdData>02000300090000000b000000030000000a00090300000000000000000000000020103003010000000053776170206f666673657400</MBoxUserCmdData>
-						<MBoxUserCmdData>020003000900000008000000030000000a000903000000000000000000000000201030040100000001526573657276656400</MBoxUserCmdData>
-						<MBoxUserCmdData>020003000900000011000000030000000a00090300000000000000000000000020103005010000000150696e2032204c454420456e61626c656400</MBoxUserCmdData>
-						<MBoxUserCmdData>020003000900000016000000030000000a000903000000000000000000000000201030060100000000537570707265737320416c6c20446961676e6f73697300</MBoxUserCmdData>
-						<MBoxUserCmdData>020003000900000014000000030000000a00090300000000000000000000000020108020010000000053657420494f2d4c696e6b205265766973696f6e00</MBoxUserCmdData>
-						<MBoxUserCmdData>020003000900000014000000030000000a000903000000000000000000000000201080210100000000536574204672616d65204361706162696c69747900</MBoxUserCmdData>
-						<MBoxUserCmdData>020003000900000012000000030000000a000903000000000000000000000000201080220100000000536574204d696e204379636c652054696d6500</MBoxUserCmdData>
-						<MBoxUserCmdData>02000300090000001a000000030000000a00090300000000000000000000000020108024010000008f5365742050726f63657373204461746120496e204c656e67746800</MBoxUserCmdData>
-						<MBoxUserCmdData>02000300090000001b000000030000000a0009030000000000000000000000002010802501000000005365742050726f636573732044617461204f7574204c656e67746800</MBoxUserCmdData>
-						<MBoxUserCmdData>020003000a00000012000000030000000a00090300000000000000000000000020108028020000000300536574204d617374657220436f6e74726f6c00</MBoxUserCmdData>
-						<MBoxUserCmdData>020003000c0000000d000000030000000b0009030000000000000000000000002020800404000000000000005365742044657669636520496400</MBoxUserCmdData>
-						<MBoxUserCmdData>020003000c0000000d000000030000000b0009030000000000000000000000002020800504000000000000005365742056656e646f7220496400</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000c0000000d00000003000000000000000000000000000000000000002020800404000000f60280005365742044657669636520496400</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000c0000000d000000030000000000000000000000000000000000000020208005040000001a0000005365742056656e646f7220496400</MBoxUserCmdData>
 						<MBoxUserCmdData>020003000900000009000000030000000b00090300000000000000000000000020203001010000000053776170204d6f646500</MBoxUserCmdData>
 						<MBoxUserCmdData>02000300090000000b000000030000000b00090300000000000000000000000020203002010000000053776170206c656e67746800</MBoxUserCmdData>
 						<MBoxUserCmdData>02000300090000000b000000030000000b00090300000000000000000000000020203003010000000053776170206f666673657400</MBoxUserCmdData>
@@ -251,6 +254,20 @@
 						<MBoxUserCmdData>02000300090000001a000000030000000900090300000000000000000000000020008024010000009f5365742050726f63657373204461746120496e204c656e67746800</MBoxUserCmdData>
 						<MBoxUserCmdData>02000300090000001b00000003000000090009030000000000000000000000002000802501000000005365742050726f636573732044617461204f7574204c656e67746800</MBoxUserCmdData>
 						<MBoxUserCmdData>020003000a00000012000000030000000900090300000000000000000000000020008028020000000300536574204d617374657220436f6e74726f6c00</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000c0000000d000000030000000a0009030000000000000000000000002010800404000000000000005365742044657669636520496400</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000c0000000d000000030000000a0009030000000000000000000000002010800504000000000000005365742056656e646f7220496400</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000900000009000000030000000a00090300000000000000000000000020103001010000000053776170204d6f646500</MBoxUserCmdData>
+						<MBoxUserCmdData>02000300090000000b000000030000000a00090300000000000000000000000020103002010000000053776170206c656e67746800</MBoxUserCmdData>
+						<MBoxUserCmdData>02000300090000000b000000030000000a00090300000000000000000000000020103003010000000053776170206f666673657400</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000900000008000000030000000a000903000000000000000000000000201030040100000001526573657276656400</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000900000011000000030000000a00090300000000000000000000000020103005010000000150696e2032204c454420456e61626c656400</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000900000016000000030000000a000903000000000000000000000000201030060100000000537570707265737320416c6c20446961676e6f73697300</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000900000014000000030000000a00090300000000000000000000000020108020010000000053657420494f2d4c696e6b205265766973696f6e00</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000900000014000000030000000a000903000000000000000000000000201080210100000000536574204672616d65204361706162696c69747900</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000900000012000000030000000a000903000000000000000000000000201080220100000000536574204d696e204379636c652054696d6500</MBoxUserCmdData>
+						<MBoxUserCmdData>02000300090000001a000000030000000a00090300000000000000000000000020108024010000009f5365742050726f63657373204461746120496e204c656e67746800</MBoxUserCmdData>
+						<MBoxUserCmdData>02000300090000001b000000030000000a0009030000000000000000000000002010802501000000005365742050726f636573732044617461204f7574204c656e67746800</MBoxUserCmdData>
+						<MBoxUserCmdData>020003000a00000012000000030000000a00090300000000000000000000000020108028020000000300536574204d617374657220436f6e74726f6c00</MBoxUserCmdData>
 						<Pdo Name="IO-Link Port Status" Index="#x1a80" Flags="#x0011" SyncMan="3">
 							<Entry Name="Status of IO-Link Port 1" Index="#xf100" Sub="#x01">
 								<Type>USINT</Type>
@@ -558,6 +575,54 @@
 								<Type>BITARR8</Type>
 							</Entry>
 							<Entry Name="input byte 15" Index="#x6010" Sub="#x10" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 16" Index="#x6010" Sub="#x11" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 17" Index="#x6010" Sub="#x12" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 18" Index="#x6010" Sub="#x13" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 19" Index="#x6010" Sub="#x14" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 20" Index="#x6010" Sub="#x15" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 21" Index="#x6010" Sub="#x16" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 22" Index="#x6010" Sub="#x17" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 23" Index="#x6010" Sub="#x18" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 24" Index="#x6010" Sub="#x19" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 25" Index="#x6010" Sub="#x1a" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 26" Index="#x6010" Sub="#x1b" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 27" Index="#x6010" Sub="#x1c" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 28" Index="#x6010" Sub="#x1d" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 29" Index="#x6010" Sub="#x1e" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 30" Index="#x6010" Sub="#x1f" Flags="#x00001000">
+								<Type>BITARR8</Type>
+							</Entry>
+							<Entry Name="input byte 31" Index="#x6010" Sub="#x20" Flags="#x00001000">
 								<Type>BITARR8</Type>
 							</Entry>
 						</Pdo>
@@ -990,10 +1055,10 @@
 							<ModuleIdent>4879</ModuleIdent>
 							<ModuleIdent>4880</ModuleIdent>
 							<ModuleIdent>4881</ModuleIdent>
-							<Module Id="#x0309000a" Type="IOL_I_16byte" Class="">
-								<Name>Module 2 (IOL_I_16byte)</Name>
+							<Module Id="#x0309000a" Type="IOL_I_32byte" Class="">
+								<Name>Module 2 (IOL_I_32byte)</Name>
 								<ImageId>1000</ImageId>
-								<ModuleData>ad00000008110000000000000000000000000000000000000000000000000000</ModuleData>
+								<ModuleData>ad0000000a110000000000000000000000000000000000000000000000000000</ModuleData>
 								<PdoIndex>6657</PdoIndex>
 							</Module>
 						</Slot>
@@ -1405,6 +1470,26 @@
 		<MappingInfo Identifier="{00000000-2001-0850-0120-500840000403}" Id="#x02030010"/>
 		<OwnerA Name="TIPC^ItemSimulator^ItemSimulator Instance">
 			<OwnerB Name="TIID^Device 5 (EtherCAT)^Box 1 (ICE11-8IOL-G60L-V1D)">
+				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbCMS.arrCMSData" VarB="Module 2 (IOL_I_32byte)^TxPDO^input byte 0"/>
+				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbCMS.arrCMSData" VarB="Module 2 (IOL_I_32byte)^TxPDO^input byte 1" Size="8" OffsA="8"/>
+				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbCMS.arrCMSData" VarB="Module 2 (IOL_I_32byte)^TxPDO^input byte 10" Size="8" OffsA="80"/>
+				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbCMS.arrCMSData" VarB="Module 2 (IOL_I_32byte)^TxPDO^input byte 11" Size="8" OffsA="88"/>
+				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbCMS.arrCMSData" VarB="Module 2 (IOL_I_32byte)^TxPDO^input byte 12" Size="8" OffsA="96"/>
+				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbCMS.arrCMSData" VarB="Module 2 (IOL_I_32byte)^TxPDO^input byte 13" Size="8" OffsA="104"/>
+				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbCMS.arrCMSData" VarB="Module 2 (IOL_I_32byte)^TxPDO^input byte 14" Size="8" OffsA="112"/>
+				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbCMS.arrCMSData" VarB="Module 2 (IOL_I_32byte)^TxPDO^input byte 15" Size="8" OffsA="120"/>
+				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbCMS.arrCMSData" VarB="Module 2 (IOL_I_32byte)^TxPDO^input byte 16" Size="8" OffsA="128"/>
+				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbCMS.arrCMSData" VarB="Module 2 (IOL_I_32byte)^TxPDO^input byte 17" Size="8" OffsA="136"/>
+				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbCMS.arrCMSData" VarB="Module 2 (IOL_I_32byte)^TxPDO^input byte 18" Size="8" OffsA="144"/>
+				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbCMS.arrCMSData" VarB="Module 2 (IOL_I_32byte)^TxPDO^input byte 19" Size="8" OffsA="152"/>
+				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbCMS.arrCMSData" VarB="Module 2 (IOL_I_32byte)^TxPDO^input byte 2" Size="8" OffsA="16"/>
+				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbCMS.arrCMSData" VarB="Module 2 (IOL_I_32byte)^TxPDO^input byte 3" Size="8" OffsA="24"/>
+				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbCMS.arrCMSData" VarB="Module 2 (IOL_I_32byte)^TxPDO^input byte 4" Size="8" OffsA="32"/>
+				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbCMS.arrCMSData" VarB="Module 2 (IOL_I_32byte)^TxPDO^input byte 5" Size="8" OffsA="40"/>
+				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbCMS.arrCMSData" VarB="Module 2 (IOL_I_32byte)^TxPDO^input byte 6" Size="8" OffsA="48"/>
+				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbCMS.arrCMSData" VarB="Module 2 (IOL_I_32byte)^TxPDO^input byte 7" Size="8" OffsA="56"/>
+				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbCMS.arrCMSData" VarB="Module 2 (IOL_I_32byte)^TxPDO^input byte 8" Size="8" OffsA="64"/>
+				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbCMS.arrCMSData" VarB="Module 2 (IOL_I_32byte)^TxPDO^input byte 9" Size="8" OffsA="72"/>
 				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrColorSensorData" VarB="Module 1 (IOL_I_32byte)^TxPDO^input byte 0"/>
 				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrColorSensorData" VarB="Module 1 (IOL_I_32byte)^TxPDO^input byte 1" Size="8" OffsA="8"/>
 				<Link VarA="PlcTask Inputs^PRG_IO_Link_Master.fbColorSensor.arrColorSensorData" VarB="Module 1 (IOL_I_32byte)^TxPDO^input byte 10" Size="8" OffsA="80"/>

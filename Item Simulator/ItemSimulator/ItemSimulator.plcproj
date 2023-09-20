@@ -187,7 +187,7 @@
     <Compile Include="POUs\00_BuildingBlocks\Convert\FUN_ConvTwoByteToInt16.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\00_BuildingBlocks\Convert\FUN_ConvOneByteToInt8.TcPOU">
+    <Compile Include="POUs\00_BuildingBlocks\Convert\FUN_ConvOneByteToUint8.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\00_BuildingBlocks\Convert\FUN_ConvTwoByteToUInt16.TcPOU">
@@ -196,7 +196,7 @@
     <Compile Include="POUs\00_BuildingBlocks\Convert\U_Convert_INT16.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\00_BuildingBlocks\Convert\U_Convert_INT8.TcDUT">
+    <Compile Include="POUs\00_BuildingBlocks\Convert\U_Convert_UINT8.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\00_BuildingBlocks\Convert\U_Convert_INT32.TcDUT">
@@ -318,6 +318,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\IO_Link_Master\FB_ColourSensor.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\IO_Link_Master\FB_CMS.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\IO_Link_Master\PRG_IO_Link_Master.TcPOU">

@@ -5,15 +5,70 @@
 VAR
 	fbColorSensor			:FB_ColourSensor;
 	fbCMS					:FB_CMS;
+	
+	bQL1					:BOOL; // Background
+	bQL2					:BOOL; // Blue
+	bQL3					:BOOL; // Green	
+	bQL4					:BOOL; // None
+	nQL1					:UINT;
+	nQL2					:UINT;
+	nQL3					:UINT;
+	nQL4					:UINT;
+	nValue					:INT;
+	
+	bEnable					:BOOL;
+	bClear					:BOOL;
+	arrColors				:ARRAY[0..GVL_Constant.ITEM_ARRAY_SIZE] OF INT;
+	nI						:INT;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[fbColorSensor();
-fbCMS();]]></ST>
+      <ST><![CDATA[fbColorSensor(
+	bQL1=>bQL1, 
+	bQL2=>bQL2, 
+	bQL3=>bQL3, 
+	bQL4=>bQL4,
+	nQL1=>nQL1,
+	nQL2=>nQL2,
+	nQL3=>nQL3,
+	nQL4=>nQL4);
+	
+	
+fbCMS();
+
+nValue := fbColorSensor.nHighQLx;
+IF NOT bQL1 AND NOT bClear THEN
+	FOR nI := 0 TO GVL_Constant.ITEM_ARRAY_SIZE DO
+		arrColors[nI] := fbColorSensor.nHighQLx;
+	END_FOR
+	
+END_IF
+
+
+IF bClear THEN
+	FOR nI := 0 TO GVL_Constant.ITEM_ARRAY_SIZE DO
+		arrColors[nI] := 0;
+	END_FOR
+END_IF]]></ST>
     </Implementation>
     <LineIds Name="PRG_IO_Link_Master">
       <LineId Id="5" Count="0" />
+      <LineId Id="40" Count="3" />
+      <LineId Id="51" Count="3" />
+      <LineId Id="49" Count="1" />
       <LineId Id="10" Count="0" />
+      <LineId Id="15" Count="1" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="27" Count="1" />
+      <LineId Id="20" Count="0" />
+      <LineId Id="63" Count="0" />
+      <LineId Id="18" Count="0" />
+      <LineId Id="56" Count="0" />
+      <LineId Id="58" Count="0" />
+      <LineId Id="55" Count="0" />
+      <LineId Id="59" Count="0" />
+      <LineId Id="61" Count="1" />
+      <LineId Id="60" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>

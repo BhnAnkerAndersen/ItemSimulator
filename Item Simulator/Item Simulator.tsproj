@@ -31,7 +31,7 @@
 				</Target>
 			</Licenses>
 			<Tasks>
-				<Task Id="3" Priority="20" CycleTime="10000" AmsPort="350" AdtTasks="true">
+				<Task Id="3" Priority="20" CycleTime="100000" AmsPort="350" AdtTasks="true">
 					<Name>PlcTask</Name>
 				</Task>
 				<Task Id="4" Priority="1" CycleTime="20000" AmsPort="351" AdtTasks="true">
@@ -41,7 +41,7 @@
 		</System>
 		<Plc>
 			<Project GUID="{921AB191-9460-4D4F-B79D-2E5B7263E7DB}" Name="ItemSimulator" PrjFilePath="ItemSimulator\ItemSimulator.plcproj" TmcFilePath="ItemSimulator\ItemSimulator.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="ItemSimulator\ItemSimulator.tmc" TmcHash="{F98CF070-6778-25AB-5D21-6CC7ACBEC4BA}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="ItemSimulator\ItemSimulator.tmc" TmcHash="{BD26E7DD-3DE8-121B-2486-711C1B20F356}">
 					<Name>ItemSimulator Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="2" AreaNo="1">
@@ -54,16 +54,16 @@
 					<Vars VarGrpType="1" ContextId="1" AreaNo="16">
 						<Name>PlcTask Inputs</Name>
 						<Var>
+							<Name>GVL_IO.stItemSimulator.bSignalIn</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
 							<Name>PRG_IO_Link_Master.fbColorSensor.arrColorSensorData</Name>
 							<Type GUID="{FDC5107F-76C5-2D41-91DE-B4FF0E4C5970}">ARRAY [0..11] OF BYTE</Type>
 						</Var>
 						<Var>
 							<Name>PRG_IO_Link_Master.fbColorSensor.nChannelStatus</Name>
 							<Type>USINT</Type>
-						</Var>
-						<Var>
-							<Name>GVL_IO.stItemSimulator.bSignalIn</Name>
-							<Type>BOOL</Type>
 						</Var>
 						<Var>
 							<Name>PRG_IO_Link_Master.fbCMS.arrCMSData</Name>
@@ -110,7 +110,7 @@
 								<OTCID>#x02010030</OTCID>
 							</ManualConfig>
 							<Priority>20</Priority>
-							<CycleTime>1000000</CycleTime>
+							<CycleTime>10000000</CycleTime>
 						</Context>
 					</Contexts>
 					<TaskPouOids>

@@ -172,6 +172,9 @@
     <Compile Include="POUs\00_BuildingBlocks\Control\FUN_RangeOutside.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\00_BuildingBlocks\Control\FUN_GetHighLowValue.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\00_BuildingBlocks\Convert\FUN_ConvFourByteToInt32.TcPOU">
       <SubType>Code</SubType>
     </Compile>

@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FUN_GetHighLowValue" Id="{524f67de-7bae-4d99-b66a-b211763d7c75}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION FUN_GetHighLowValue : UINT
+VAR_INPUT
+	nValue		:UINT;			// Actual value
+END_VAR
+VAR_OUTPUT
+	nHigh		:UINT;			// True if value is greater than rLimitHigh
+	nLow		:UINT;			// True if value is lower than rLimitLow	
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF nValue > nHigh THEN
+	nHigh := nValue;
+END_IF
+
+IF nValue < nLow THEN
+	nLow := nValue;
+END_IF
+
+]]></ST>
+    </Implementation>
+    <LineIds Name="FUN_GetHighLowValue">
+      <LineId Id="23" Count="0" />
+      <LineId Id="72" Count="1" />
+      <LineId Id="75" Count="0" />
+      <LineId Id="74" Count="0" />
+      <LineId Id="76" Count="1" />
+      <LineId Id="79" Count="0" />
+      <LineId Id="78" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

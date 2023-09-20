@@ -9,16 +9,20 @@ VAR_OUTPUT
 	nQL2					:UINT;
 	nQL3					:UINT;
 	nQL4					:UINT;
+	
+	bQL1					:BOOL;
+	bQL2					:BOOL;
+	bQL3					:BOOL;
+	bQL4					:BOOL;
+	
+	nHighQLx				:INT;
 END_VAR
 VAR
 	arrColorSensorData		AT %I*: ARRAY[0..11] OF BYTE;
 	nChannelStatus			AT %I*: USINT;	
 	
 	arrQint					:ARRAY[1..24] OF BOOL;
-	bQL1					:BOOL;
-	bQL2					:BOOL;
-	bQL3					:BOOL;
-	bQL4					:BOOL;
+	
 	
 	QoRAlarm				:BOOL;
 	PDInvalid				:BOOL;
@@ -32,6 +36,17 @@ nQL1 := FUN_ConvTwoByteToUInt16(nValue1 := arrColorSensorData[7], nValue2 := arr
 nQL2 := FUN_ConvTwoByteToUInt16(nValue1 := arrColorSensorData[5], nValue2 := arrColorSensorData[4]); // CMV QL2 
 nQL3 := FUN_ConvTwoByteToUInt16(nValue1 := arrColorSensorData[3], nValue2 := arrColorSensorData[2]); // CMV QL3	
 nQL4 := FUN_ConvTwoByteToUInt16(nValue1 := arrColorSensorData[1], nValue2 := arrColorSensorData[0]); // CMV QL4
+
+IF bQL1 THEN
+	nHighQLx := 1;
+ELSIF bQL2 THEN
+	nHighQLx := 2;
+ELSIF bQL3 THEN
+	nHighQLx := 3;
+ELSIF bQL4 THEN
+	nHighQLx := 4;
+END_IF
+
 
 // Qint 1 - 8
 arrQint[1] := arrColorSensorData[10].0; //Not adjusted
@@ -84,6 +99,12 @@ bQL4 := arrColorSensorData[11].3;
       <LineId Id="157" Count="0" />
       <LineId Id="159" Count="2" />
       <LineId Id="158" Count="0" />
+      <LineId Id="237" Count="0" />
+      <LineId Id="234" Count="0" />
+      <LineId Id="238" Count="0" />
+      <LineId Id="240" Count="5" />
+      <LineId Id="239" Count="0" />
+      <LineId Id="233" Count="0" />
       <LineId Id="165" Count="1" />
       <LineId Id="170" Count="7" />
       <LineId Id="207" Count="0" />

@@ -15,7 +15,9 @@ END_VAR
 PRG_Simulator();
 PRG_TimestampRegistry();
 
-PRG_IO_Link_Master();]]></ST>
+PRG_IO_Link_Master();
+
+]]></ST>
     </Implementation>
     <LineIds Name="MAIN">
       <LineId Id="40" Count="0" />
@@ -25,6 +27,8 @@ PRG_IO_Link_Master();]]></ST>
       <LineId Id="74" Count="0" />
       <LineId Id="79" Count="0" />
       <LineId Id="87" Count="0" />
+      <LineId Id="93" Count="0" />
+      <LineId Id="92" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>

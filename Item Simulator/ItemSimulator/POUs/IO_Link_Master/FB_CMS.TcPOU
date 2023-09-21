@@ -5,9 +5,9 @@
 VAR_INPUT
 END_VAR
 VAR_OUTPUT
-	RMS_X					:REAL;
-	RMS_Y					:REAL;
-	RMS_Z					:REAL;
+	Impulse_X				:REAL;
+	Impulse_Y				:REAL;
+	Impulse_Z				:REAL;
 	Temperature				:REAL;
 END_VAR
 VAR
@@ -24,10 +24,9 @@ END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[
-// RMS
-RMS_X := FUN_ConvFourByteToReal32(nValue1 := arrCMSData[15], nValue2 := arrCMSData[14], nValue3 := arrCMSData[13], nValue4 := arrCMSData[12]); 
-RMS_Y := FUN_ConvFourByteToReal32(nValue1 := arrCMSData[11], nValue2 := arrCMSData[10], nValue3 := arrCMSData[9], nValue4 := arrCMSData[8]); 
-RMS_Z := FUN_ConvFourByteToReal32(nValue1 := arrCMSData[7], nValue2 := arrCMSData[6], nValue3 := arrCMSData[5], nValue4 := arrCMSData[4]); 
+Impulse_X := FUN_ConvFourByteToReal32(nValue1 := arrCMSData[15], nValue2 := arrCMSData[14], nValue3 := arrCMSData[13], nValue4 := arrCMSData[12]); 
+Impulse_Y := FUN_ConvFourByteToReal32(nValue1 := arrCMSData[11], nValue2 := arrCMSData[10], nValue3 := arrCMSData[9], nValue4 := arrCMSData[8]); 
+Impulse_Z := FUN_ConvFourByteToReal32(nValue1 := arrCMSData[7], nValue2 := arrCMSData[6], nValue3 := arrCMSData[5], nValue4 := arrCMSData[4]); 
 Temperature := FUN_ConvFourByteToReal32(nValue1 := arrCMSData[3], nValue2 := arrCMSData[2], nValue3 := arrCMSData[1], nValue4 := arrCMSData[0]); 
 
 
@@ -57,7 +56,6 @@ AlarmRMS_Max := arrCMSData[19].7;
 ]]></ST>
     </Implementation>
     <LineIds Name="FB_CMS">
-      <LineId Id="208" Count="0" />
       <LineId Id="157" Count="0" />
       <LineId Id="159" Count="2" />
       <LineId Id="158" Count="0" />

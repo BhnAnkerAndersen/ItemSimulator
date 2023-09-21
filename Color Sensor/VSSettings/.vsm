@@ -76,6 +76,24 @@
               <Children />
             </Node>
             <Node>
+              <Title>Impulse_X</Title>
+              <Expanded>False</Expanded>
+              <FileName></FileName>
+              <Children />
+            </Node>
+            <Node>
+              <Title>Impulse_Y</Title>
+              <Expanded>False</Expanded>
+              <FileName></FileName>
+              <Children />
+            </Node>
+            <Node>
+              <Title>Impulse_Z</Title>
+              <Expanded>False</Expanded>
+              <FileName></FileName>
+              <Children />
+            </Node>
+            <Node>
               <Title>nQL1</Title>
               <Expanded>False</Expanded>
               <FileName></FileName>
@@ -101,24 +119,6 @@
             </Node>
             <Node>
               <Title>nValue</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>RMS_X</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>RMS_Y</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>RMS_Z</Title>
               <Expanded>False</Expanded>
               <FileName></FileName>
               <Children />
@@ -225,30 +225,24 @@
               <FileName></FileName>
               <Children>
                 <Node>
-                  <Title>RMS_Z</Title>
+                  <Title>Impulse_Z</Title>
                   <Expanded>False</Expanded>
                   <FileName></FileName>
                   <Children />
                 </Node>
                 <Node>
-                  <Title>RMS_X</Title>
+                  <Title>Impulse_X</Title>
                   <Expanded>False</Expanded>
                   <FileName></FileName>
                   <Children />
                 </Node>
                 <Node>
-                  <Title>RMS_Y</Title>
+                  <Title>Impulse_Y</Title>
                   <Expanded>False</Expanded>
                   <FileName></FileName>
                   <Children />
                 </Node>
               </Children>
-            </Node>
-            <Node>
-              <Title>Axis Group (2)</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
             </Node>
           </Children>
         </Node>

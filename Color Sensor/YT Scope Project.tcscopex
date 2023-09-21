@@ -26,7 +26,7 @@
   <ImagesDeleteMode>Disabled</ImagesDeleteMode>
   <Layout>&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;Layout&gt;
-  &lt;Window Guid="687fb7b8-dad0-448f-9d48-e24679ceba9b" LastFocused="133396925884949844" DockedSize="200" PopupSize="0" FloatingLocation="-1, -1" FloatingSize="550, 400" LastOpenDockSituation="Document" LastFixedDockSituation="Document" LastFixedDockLocation="Right" LastFloatingWindowGuid="00000000-0000-0000-0000-000000000000" LastDockContainerCount="0" LastDockContainerIndex="0" DockedWorkingSize="250, 400" DockedWindowGroupGuid="00000000-0000-0000-0000-000000000000" DockedIndexInWindowGroup="0" DockedSplitPath="0" DocumentWorkingSize="250, 400" DocumentWindowGroupGuid="d8fe3180-e3ea-4fcb-ac98-9b36231c74c5" DocumentIndexInWindowGroup="2" DocumentSplitPath="0" FloatingWorkingSize="250, 400" FloatingWindowGroupGuid="00000000-0000-0000-0000-000000000000" FloatingIndexInWindowGroup="0" FloatingSplitPath="0" /&gt;
+  &lt;Window Guid="687fb7b8-dad0-448f-9d48-e24679ceba9b" LastFocused="133397726663690713" DockedSize="200" PopupSize="0" FloatingLocation="-1, -1" FloatingSize="550, 400" LastOpenDockSituation="Document" LastFixedDockSituation="Document" LastFixedDockLocation="Right" LastFloatingWindowGuid="00000000-0000-0000-0000-000000000000" LastDockContainerCount="0" LastDockContainerIndex="0" DockedWorkingSize="250, 400" DockedWindowGroupGuid="00000000-0000-0000-0000-000000000000" DockedIndexInWindowGroup="0" DockedSplitPath="0" DocumentWorkingSize="250, 400" DocumentWindowGroupGuid="d8fe3180-e3ea-4fcb-ac98-9b36231c74c5" DocumentIndexInWindowGroup="2" DocumentSplitPath="0" FloatingWorkingSize="250, 400" FloatingWindowGroupGuid="00000000-0000-0000-0000-000000000000" FloatingIndexInWindowGroup="0" FloatingSplitPath="0" /&gt;
   &lt;Window Guid="ab04c5b3-8877-46f2-8b0b-e8dfada53add" LastFocused="133396908196935992" DockedSize="200" PopupSize="0" FloatingLocation="-1, -1" FloatingSize="550, 400" LastOpenDockSituation="Document" LastFixedDockSituation="Document" LastFixedDockLocation="Right" LastFloatingWindowGuid="00000000-0000-0000-0000-000000000000" LastDockContainerCount="0" LastDockContainerIndex="0" DockedWorkingSize="250, 400" DockedWindowGroupGuid="00000000-0000-0000-0000-000000000000" DockedIndexInWindowGroup="0" DockedSplitPath="0" DocumentWorkingSize="250, 400" DocumentWindowGroupGuid="d8fe3180-e3ea-4fcb-ac98-9b36231c74c5" DocumentIndexInWindowGroup="0" DocumentSplitPath="0" FloatingWorkingSize="250, 400" FloatingWindowGroupGuid="00000000-0000-0000-0000-000000000000" FloatingIndexInWindowGroup="0" FloatingSplitPath="0" /&gt;
   &lt;Window Guid="b69781f3-6ab2-4cf8-bb75-d2dda15575d0" LastFocused="133396916832570794" DockedSize="200" PopupSize="0" FloatingLocation="-1, -1" FloatingSize="550, 400" LastOpenDockSituation="Document" LastFixedDockSituation="Document" LastFixedDockLocation="Right" LastFloatingWindowGuid="00000000-0000-0000-0000-000000000000" LastDockContainerCount="0" LastDockContainerIndex="0" DockedWorkingSize="250, 400" DockedWindowGroupGuid="00000000-0000-0000-0000-000000000000" DockedIndexInWindowGroup="0" DockedSplitPath="0" DocumentWorkingSize="250, 400" DocumentWindowGroupGuid="d8fe3180-e3ea-4fcb-ac98-9b36231c74c5" DocumentIndexInWindowGroup="1" DocumentSplitPath="0" FloatingWorkingSize="250, 400" FloatingWindowGroupGuid="00000000-0000-0000-0000-000000000000" FloatingIndexInWindowGroup="0" FloatingSplitPath="0" /&gt;
   &lt;DocumentContainer Dock="5"&gt;
@@ -823,9 +823,9 @@
           <ForceOversampling>false</ForceOversampling>
           <Guid>75391855-ac92-4692-95ee-a12ed3da41b1</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>90691688</IndexOffset>
+          <IndexOffset>90609424</IndexOffset>
           <IsHistorical>false</IsHistorical>
-          <Name>RMS_Z</Name>
+          <Name>Impulse_Z</Name>
           <Oversample>0</Oversample>
           <RawUnit>
             <Transformation>
@@ -868,7 +868,7 @@
           <SortPriority>10</SortPriority>
           <SubMember />
           <SymbolBased>true</SymbolBased>
-          <SymbolName>PRG_IO_Link_Master.fbCMS.RMS_Z</SymbolName>
+          <SymbolName>PRG_IO_Link_Master.fbCMS.Impulse_Z</SymbolName>
           <TargetPort>851</TargetPort>
           <TimeOffset>0</TimeOffset>
           <Title>AdsAcquisition_32</Title>
@@ -905,7 +905,7 @@
           <ForceOversampling>false</ForceOversampling>
           <Guid>d41e6589-a4cc-491b-8066-25ed3afec4c5</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>90691723</IndexOffset>
+          <IndexOffset>90609454</IndexOffset>
           <IsHistorical>false</IsHistorical>
           <Name>AlarmShock</Name>
           <Oversample>0</Oversample>
@@ -915,15 +915,15 @@
               <Name>None</Name>
               <ScaleFactor>1</ScaleFactor>
               <SourceUnitPrefix>none</SourceUnitPrefix>
-              <SourceUnitString />
+              <SourceUnitString></SourceUnitString>
               <Symbol>1</Symbol>
-              <TargetUnitString />
+              <TargetUnitString></TargetUnitString>
               <TargetUnitValue>0</TargetUnitValue>
             </Transformation>
             <Unit>
-              <BaseUnitString />
+              <BaseUnitString></BaseUnitString>
               <BaseUnitValue>0</BaseUnitValue>
-              <NameExtension />
+              <NameExtension></NameExtension>
               <Offset>0</Offset>
               <Prefix>none</Prefix>
               <ReturnText> (None) </ReturnText>
@@ -934,10 +934,10 @@
             <UnitScaleResult>1</UnitScaleResult>
             <UserUnit>
               <BaseName>UnitOfOne</BaseName>
-              <BaseUnitString />
+              <BaseUnitString></BaseUnitString>
               <BaseUnitValue>0</BaseUnitValue>
               <Name>None</Name>
-              <NameExtension />
+              <NameExtension></NameExtension>
               <Offset>0</Offset>
               <Prefix>none</Prefix>
               <ScaleFactor>1</ScaleFactor>
@@ -987,9 +987,9 @@
           <ForceOversampling>false</ForceOversampling>
           <Guid>34508925-933a-48e3-bb44-5da58c9796c9</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>90691680</IndexOffset>
+          <IndexOffset>90609416</IndexOffset>
           <IsHistorical>false</IsHistorical>
-          <Name>RMS_X</Name>
+          <Name>Impulse_X</Name>
           <Oversample>0</Oversample>
           <RawUnit>
             <Transformation>
@@ -997,15 +997,15 @@
               <Name>None</Name>
               <ScaleFactor>1</ScaleFactor>
               <SourceUnitPrefix>none</SourceUnitPrefix>
-              <SourceUnitString />
+              <SourceUnitString></SourceUnitString>
               <Symbol>1</Symbol>
-              <TargetUnitString />
+              <TargetUnitString></TargetUnitString>
               <TargetUnitValue>0</TargetUnitValue>
             </Transformation>
             <Unit>
-              <BaseUnitString />
+              <BaseUnitString></BaseUnitString>
               <BaseUnitValue>0</BaseUnitValue>
-              <NameExtension />
+              <NameExtension></NameExtension>
               <Offset>0</Offset>
               <Prefix>none</Prefix>
               <ReturnText> (None) </ReturnText>
@@ -1016,10 +1016,10 @@
             <UnitScaleResult>1</UnitScaleResult>
             <UserUnit>
               <BaseName>UnitOfOne</BaseName>
-              <BaseUnitString />
+              <BaseUnitString></BaseUnitString>
               <BaseUnitValue>0</BaseUnitValue>
               <Name>None</Name>
-              <NameExtension />
+              <NameExtension></NameExtension>
               <Offset>0</Offset>
               <Prefix>none</Prefix>
               <ScaleFactor>1</ScaleFactor>
@@ -1032,7 +1032,7 @@
           <SortPriority>10</SortPriority>
           <SubMember />
           <SymbolBased>true</SymbolBased>
-          <SymbolName>PRG_IO_Link_Master.fbCMS.RMS_X</SymbolName>
+          <SymbolName>PRG_IO_Link_Master.fbCMS.Impulse_X</SymbolName>
           <TargetPort>851</TargetPort>
           <TimeOffset>0</TimeOffset>
           <Title>AdsAcquisition_142</Title>
@@ -1069,9 +1069,9 @@
           <ForceOversampling>false</ForceOversampling>
           <Guid>654b3fd9-a1d0-4d77-81ef-855b09c65d45</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>90691684</IndexOffset>
+          <IndexOffset>90609420</IndexOffset>
           <IsHistorical>false</IsHistorical>
-          <Name>RMS_Y</Name>
+          <Name>Impulse_Y</Name>
           <Oversample>0</Oversample>
           <RawUnit>
             <Transformation>
@@ -1079,15 +1079,15 @@
               <Name>None</Name>
               <ScaleFactor>1</ScaleFactor>
               <SourceUnitPrefix>none</SourceUnitPrefix>
-              <SourceUnitString />
+              <SourceUnitString></SourceUnitString>
               <Symbol>1</Symbol>
-              <TargetUnitString />
+              <TargetUnitString></TargetUnitString>
               <TargetUnitValue>0</TargetUnitValue>
             </Transformation>
             <Unit>
-              <BaseUnitString />
+              <BaseUnitString></BaseUnitString>
               <BaseUnitValue>0</BaseUnitValue>
-              <NameExtension />
+              <NameExtension></NameExtension>
               <Offset>0</Offset>
               <Prefix>none</Prefix>
               <ReturnText> (None) </ReturnText>
@@ -1098,10 +1098,10 @@
             <UnitScaleResult>1</UnitScaleResult>
             <UserUnit>
               <BaseName>UnitOfOne</BaseName>
-              <BaseUnitString />
+              <BaseUnitString></BaseUnitString>
               <BaseUnitValue>0</BaseUnitValue>
               <Name>None</Name>
-              <NameExtension />
+              <NameExtension></NameExtension>
               <Offset>0</Offset>
               <Prefix>none</Prefix>
               <ScaleFactor>1</ScaleFactor>
@@ -1114,7 +1114,7 @@
           <SortPriority>10</SortPriority>
           <SubMember />
           <SymbolBased>true</SymbolBased>
-          <SymbolName>PRG_IO_Link_Master.fbCMS.RMS_Y</SymbolName>
+          <SymbolName>PRG_IO_Link_Master.fbCMS.Impulse_Y</SymbolName>
           <TargetPort>851</TargetPort>
           <TimeOffset>0</TimeOffset>
           <Title>AdsAcquisition_142</Title>
@@ -2563,7 +2563,7 @@
               <DisplayColor>-9728477</DisplayColor>
               <Enabled>true</Enabled>
               <Guid>811b94f5-f6f4-4e21-ba33-f1cc5ca16376</Guid>
-              <Name>RMS_Z</Name>
+              <Name>Impulse_Z</Name>
               <SortPriority>10</SortPriority>
               <SubMember>
                 <AcquisitionInterpreter AssemblyName="TwinCAT.Measurement.Scope.API.Model">
@@ -2572,7 +2572,7 @@
                   <Comment />
                   <DisplayColor>Black</DisplayColor>
                   <Guid>a2ed11be-c0ff-4788-8858-f3a52943d3e7</Guid>
-                  <Name>Y: RMS_Z</Name>
+                  <Name>Y: Impulse_Z</Name>
                   <Offset>0</Offset>
                   <ResultingUnit>
                     <Transformation>
@@ -2754,7 +2754,7 @@
               <DisplayColor>Red</DisplayColor>
               <Enabled>true</Enabled>
               <Guid>0da0e4e5-b323-463c-a6fe-e415d17fa676</Guid>
-              <Name>RMS_X</Name>
+              <Name>Impulse_X</Name>
               <SortPriority>11</SortPriority>
               <SubMember>
                 <AcquisitionInterpreter AssemblyName="TwinCAT.Measurement.Scope.API.Model">
@@ -2763,7 +2763,7 @@
                   <Comment />
                   <DisplayColor>Black</DisplayColor>
                   <Guid>44ce92ba-cdc0-4554-b4ab-15f3f07478df</Guid>
-                  <Name>Y: RMS_X</Name>
+                  <Name>Y: Impulse_X</Name>
                   <Offset>0</Offset>
                   <ResultingUnit>
                     <Transformation>
@@ -2771,15 +2771,15 @@
                       <Name>None</Name>
                       <ScaleFactor>1</ScaleFactor>
                       <SourceUnitPrefix>none</SourceUnitPrefix>
-                      <SourceUnitString />
+                      <SourceUnitString></SourceUnitString>
                       <Symbol>1</Symbol>
-                      <TargetUnitString />
+                      <TargetUnitString></TargetUnitString>
                       <TargetUnitValue>0</TargetUnitValue>
                     </Transformation>
                     <Unit>
-                      <BaseUnitString />
+                      <BaseUnitString></BaseUnitString>
                       <BaseUnitValue>0</BaseUnitValue>
-                      <NameExtension />
+                      <NameExtension></NameExtension>
                       <Offset>0</Offset>
                       <Prefix>none</Prefix>
                       <ReturnText> (None) </ReturnText>
@@ -2790,10 +2790,10 @@
                     <UnitScaleResult>1</UnitScaleResult>
                     <UserUnit>
                       <BaseName>UnitOfOne</BaseName>
-                      <BaseUnitString />
+                      <BaseUnitString></BaseUnitString>
                       <BaseUnitValue>0</BaseUnitValue>
                       <Name>None</Name>
-                      <NameExtension />
+                      <NameExtension></NameExtension>
                       <Offset>0</Offset>
                       <Prefix>none</Prefix>
                       <ScaleFactor>1</ScaleFactor>
@@ -2862,7 +2862,7 @@
               <DisplayColor>-4419697</DisplayColor>
               <Enabled>true</Enabled>
               <Guid>2f2ff128-8478-456a-a908-59516873c601</Guid>
-              <Name>RMS_Y</Name>
+              <Name>Impulse_Y</Name>
               <SortPriority>12</SortPriority>
               <SubMember>
                 <AcquisitionInterpreter AssemblyName="TwinCAT.Measurement.Scope.API.Model">
@@ -2871,7 +2871,7 @@
                   <Comment />
                   <DisplayColor>Black</DisplayColor>
                   <Guid>8de4a655-cb8f-4115-9f10-64f799abd398</Guid>
-                  <Name>Y: RMS_Y</Name>
+                  <Name>Y: Impulse_Y</Name>
                   <Offset>0</Offset>
                   <ResultingUnit>
                     <Transformation>
@@ -2879,15 +2879,15 @@
                       <Name>None</Name>
                       <ScaleFactor>1</ScaleFactor>
                       <SourceUnitPrefix>none</SourceUnitPrefix>
-                      <SourceUnitString />
+                      <SourceUnitString></SourceUnitString>
                       <Symbol>1</Symbol>
-                      <TargetUnitString />
+                      <TargetUnitString></TargetUnitString>
                       <TargetUnitValue>0</TargetUnitValue>
                     </Transformation>
                     <Unit>
-                      <BaseUnitString />
+                      <BaseUnitString></BaseUnitString>
                       <BaseUnitValue>0</BaseUnitValue>
-                      <NameExtension />
+                      <NameExtension></NameExtension>
                       <Offset>0</Offset>
                       <Prefix>none</Prefix>
                       <ReturnText> (None) </ReturnText>
@@ -2898,10 +2898,10 @@
                     <UnitScaleResult>1</UnitScaleResult>
                     <UserUnit>
                       <BaseName>UnitOfOne</BaseName>
-                      <BaseUnitString />
+                      <BaseUnitString></BaseUnitString>
                       <BaseUnitValue>0</BaseUnitValue>
                       <Name>None</Name>
-                      <NameExtension />
+                      <NameExtension></NameExtension>
                       <Offset>0</Offset>
                       <Prefix>none</Prefix>
                       <ScaleFactor>1</ScaleFactor>
@@ -2974,7 +2974,7 @@
           <ForeColor>-16777216</ForeColor>
           <Guid>406732f5-c36d-447f-bb5d-798be05f5121</Guid>
           <Name>Overview Chart (2)</Name>
-          <OverviewVisible>false</OverviewVisible>
+          <OverviewVisible>true</OverviewVisible>
           <SortPriority>100</SortPriority>
           <Title>OverviewChart_338</Title>
         </OverviewChart>
@@ -3031,66 +3031,6 @@
           <SubMember />
           <Title>MarkerContainer_342</Title>
         </MarkerContainer>
-        <AxisGroup AssemblyName="TwinCAT.Measurement.Scope.API.Model">
-          <ChannelRelatedGuid>00000000-0000-0000-0000-000000000000</ChannelRelatedGuid>
-          <Comment />
-          <DisplayColor>-1</DisplayColor>
-          <Enabled>true</Enabled>
-          <Guid>6b9fc0ae-20f8-4939-b527-80720078b10e</Guid>
-          <Name>Axis Group (2)</Name>
-          <ShowTitle>False</ShowTitle>
-          <SortPriority>11</SortPriority>
-          <SubMember>
-            <RefGuid-TimeAxis>b87d0646-2ca8-457e-8096-9a6738bffccc</RefGuid-TimeAxis>
-            <ValueAxis AssemblyName="TwinCAT.Measurement.Scope.API.Model">
-              <Comment />
-              <DisplayColor>Black</DisplayColor>
-              <Guid>53f508fa-f218-49c7-a47f-24ae98f2fe8c</Guid>
-              <Inverted>false</Inverted>
-              <Logarithmic>false</Logarithmic>
-              <ManualMax>0.5</ManualMax>
-              <ManualMin>-0.5</ManualMin>
-              <Name>Value Axis (4)</Name>
-              <Orientation>Y</Orientation>
-              <ScalingMode>AutoGrowOnly</ScalingMode>
-              <SortPriority>100</SortPriority>
-              <SubMember>
-                <AxisStyle AssemblyName="TwinCAT.Measurement.Scope.API.Model">
-                  <ChannelRelatedGuid>00000000-0000-0000-0000-000000000000</ChannelRelatedGuid>
-                  <ColorMode>CustomColor</ColorMode>
-                  <Comment />
-                  <DisplayColor>-16777216</DisplayColor>
-                  <Grid>true</Grid>
-                  <GridColor>-16777216</GridColor>
-                  <GridDivisions>10</GridDivisions>
-                  <GridLineWidth>1</GridLineWidth>
-                  <Guid>c7d9d8ee-b51f-445a-a31c-28d6558f8f18</Guid>
-                  <LineWidth>1</LineWidth>
-                  <Name>Axis Style (7)</Name>
-                  <Precision>6</Precision>
-                  <ShowName>False</ShowName>
-                  <SortPriority>100</SortPriority>
-                  <SubGrid>false</SubGrid>
-                  <SubGridDivisions>5</SubGridDivisions>
-                  <Title>AxisStyle_150</Title>
-                  <UseScientificNotation>true</UseScientificNotation>
-                  <Visible>true</Visible>
-                </AxisStyle>
-              </SubMember>
-              <Title>Value Axis</Title>
-            </ValueAxis>
-            <MarkerContainer AssemblyName="TwinCAT.Measurement.Scope.API.Model">
-              <Comment />
-              <DisplayColor>Black</DisplayColor>
-              <Guid>f518df40-8d95-4d53-8457-1f4dc87c4dc4</Guid>
-              <Name>Marker Container (8)</Name>
-              <SortPriority>100</SortPriority>
-              <SubMember />
-              <Title>MarkerContainer_151</Title>
-            </MarkerContainer>
-          </SubMember>
-          <Title>Axis Group</Title>
-        </AxisGroup>
       </SubMember>
       <TimeOffset>0</TimeOffset>
       <TimeRefreshMode>Explicit</TimeRefreshMode>
